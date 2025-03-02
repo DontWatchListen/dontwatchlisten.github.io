@@ -6,8 +6,15 @@
     <description>Recent content on Royal Chickens Interactive</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 01 Jan 0001 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 19 Feb 2025 19:26:21 -0800</lastBuildDate>
     <atom:link href="https://dontwatchlisten.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Breaking Down Interpolation (Lerp)</title>
+      <link>https://dontwatchlisten.github.io/posts/breaking-down-interpolation-lerp/</link>
+      <pubDate>Wed, 19 Feb 2025 19:26:21 -0800</pubDate>
+      <guid>https://dontwatchlisten.github.io/posts/breaking-down-interpolation-lerp/</guid>
+      <description>&lt;h3 id=&#34;what-is-interpolation-lerpabt&#34;&gt;&lt;strong&gt;What is Interpolation (&lt;em&gt;Lerp(A,B,t)&lt;/em&gt;)?&lt;/strong&gt;&lt;/h3&gt;&#xA;&lt;p&gt;Interpolation is a way to estimate values between two known points. Think of it like filling in the gaps between two numbers, positions, or colors smoothly instead of jumping straight from one to the other.&lt;/p&gt;&#xA;&lt;p&gt;Another way of interpreting interpolation is to try, &lt;strong&gt;&amp;ldquo;guessing the values in between two known points.&amp;rdquo;&lt;/strong&gt; If you have two points on a graph, interpolation helps you estimate what lies between them based on patterns.&lt;/p&gt;</description>
+    </item>
     <item>
       <title></title>
       <link>https://dontwatchlisten.github.io/posts/using-python-3-to-convert-webp-to-png/</link>
