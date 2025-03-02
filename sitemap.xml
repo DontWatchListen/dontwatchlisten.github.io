@@ -2,16 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>http://localhost:1313/posts/</loc>
+    <loc>https://dontwatchlisten.github.io/posts/</loc>
     <lastmod>2025-03-01T21:09:09-08:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/</loc>
+    <loc>https://dontwatchlisten.github.io/</loc>
     <lastmod>2025-03-01T21:09:09-08:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/posts/using-python-3-to-convert-webp-to-png/</loc>
+    <loc>https://dontwatchlisten.github.io/posts/using-python-3-to-convert-webp-to-png/</loc>
   </url><url>
-    <loc>http://localhost:1313/categories/</loc>
+    <loc>https://dontwatchlisten.github.io/categories/</loc>
   </url><url>
-    <loc>http://localhost:1313/tags/</loc>
+    <loc>https://dontwatchlisten.github.io/tags/</loc>
   </url>
 </urlset>

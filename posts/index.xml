@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Posts on Royal Chickens Interactive</title>
-    <link>http://localhost:1313/posts/</link>
+    <link>https://dontwatchlisten.github.io/posts/</link>
     <description>Recent content in Posts on Royal Chickens Interactive</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Mon, 01 Jan 0001 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://localhost:1313/posts/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://dontwatchlisten.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title></title>
-      <link>http://localhost:1313/posts/using-python-3-to-convert-webp-to-png/</link>
+      <link>https://dontwatchlisten.github.io/posts/using-python-3-to-convert-webp-to-png/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/using-python-3-to-convert-webp-to-png/</guid>
+      <guid>https://dontwatchlisten.github.io/posts/using-python-3-to-convert-webp-to-png/</guid>
       <description>&lt;h1 id=&#34;how-to-convert-webp-files-to-png-using-vs-code-in-python&#34;&gt;How to Convert WEBP Files to PNG Using VS Code in Python&lt;/h1&gt;&#xA;&lt;p&gt;If you have a set of &lt;code&gt;.webp&lt;/code&gt; images that need to be converted to &lt;code&gt;.png&lt;/code&gt;, Python makes the process simple and efficient. In this guide, I’ll walk you through how to convert WebP files to PNG using &lt;strong&gt;Visual Studio Code (VS Code)&lt;/strong&gt; and Python.&lt;/p&gt;&#xA;&lt;h2 id=&#34;prerequisites&#34;&gt;Prerequisites&lt;/h2&gt;&#xA;&lt;p&gt;Before we begin, ensure you have the following:&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;&lt;strong&gt;Python Installed&lt;/strong&gt;&lt;br&gt;&#xA;If you don’t have Python installed, download it from &lt;a href=&#34;https://www.python.org/&#34;&gt;python.org&lt;/a&gt; and install it.&lt;/p&gt;</description>
     </item>
   </channel>
