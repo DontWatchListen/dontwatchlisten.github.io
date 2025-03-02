@@ -1,0 +1,7 @@
+code {
+    color: lightgreen; /* Adjust to any color for better readability */
+    background-color: #2e2e2e; /* A dark background to create contrast */
+    padding: 2px 4px; /* Adds space inside the block for readability */
+    border-radius: 4px; /* Rounds the edges slightly for a smoother look */
+    font-family: monospace; /* Ensures the inline code looks distinct */
+}

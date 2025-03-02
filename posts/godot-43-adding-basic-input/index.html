@@ -1,0 +1,394 @@
+<!doctype html>
+<html lang="en-us">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <title>Godot 4.3 Adding Basic Keyboard Input // Royal Chickens Interactive</title>
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <meta charset="utf-8" />
+    <meta name="generator" content="Hugo 0.143.1">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="John Doe" />
+    <meta name="description" content="" />
+    <link rel="stylesheet" href="/css/main.min.5b1fcc8902588589c4767187402a3c29f8b8d7a6fdef6d9f8f77045bb0d14fee.css" />
+    
+
+    
+    
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Godot 4.3 Adding Basic Keyboard Input">
+  <meta name="twitter:description" content="Godot 4.3: Adding Basic Input - Making the Model Jump with Spacebar Now that we’ve successfully set up a 3D scene, imported a custom 3D model, and made it rotate, it’s time to add user input. In this guide, we’ll modify our script so that pressing the spacebar makes the model jump.
+Final Code Structure Project/ ├── Models/ │ └── 000_Snowpuff.glb # Custom 3D Model ├── Scripts/ │ ├── main.gd # Root scene script │ └── skybox.gd # Skybox configuration ├── Textures/ │ └── default_sky.hdr # HDRI skybox texture └── project.godot 1. Understanding Input in Godot 4.3 Before writing code, let’s discuss how Godot handles input.">
+
+    <meta property="og:url" content="http://localhost:1313/posts/godot-43-adding-basic-input/">
+  <meta property="og:site_name" content="Royal Chickens Interactive">
+  <meta property="og:title" content="Godot 4.3 Adding Basic Keyboard Input">
+  <meta property="og:description" content="Godot 4.3: Adding Basic Input - Making the Model Jump with Spacebar Now that we’ve successfully set up a 3D scene, imported a custom 3D model, and made it rotate, it’s time to add user input. In this guide, we’ll modify our script so that pressing the spacebar makes the model jump.
+Final Code Structure Project/ ├── Models/ │ └── 000_Snowpuff.glb # Custom 3D Model ├── Scripts/ │ ├── main.gd # Root scene script │ └── skybox.gd # Skybox configuration ├── Textures/ │ └── default_sky.hdr # HDRI skybox texture └── project.godot 1. Understanding Input in Godot 4.3 Before writing code, let’s discuss how Godot handles input.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2025-02-16T13:58:24-08:00">
+    <meta property="article:modified_time" content="2025-02-16T13:58:24-08:00">
+
+
+  </head>
+  <body>
+    <header class="app-header">
+      <a href="/"><img class="app-header-avatar" src="/avatar.jpg" alt="John Doe" /></a>
+      <span class="app-header-title">Royal Chickens Interactive</span>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vehicula turpis sit amet elit pretium.</p>
+    </header>
+    <main class="app-container">
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class ="post-title">Godot 4.3 Adding Basic Keyboard Input</h1>
+      <div class="post-meta">
+        <div>
+          <svg class="icon icon-calendar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><title>calendar</title><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+          Feb 16, 2025
+        </div>
+        <div>
+          <svg class="icon icon-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><title>clock</title><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+          7 min read
+        </div>
+      </div>
+    </header>
+    <div class="post-content">
+      <h1 id="godot-43-adding-basic-input---making-the-model-jump-with-spacebar"><strong>Godot 4.3: Adding Basic Input - Making the Model Jump with Spacebar</strong></h1>
+<p>Now that we’ve successfully set up a <strong>3D scene</strong>, imported a <strong>custom 3D model</strong>, and made it <strong>rotate</strong>, it&rsquo;s time to <strong>add user input</strong>. In this guide, we’ll modify our script so that <strong>pressing the spacebar makes the model jump</strong>.</p>
+<hr>
+<h2 id="final-code-structure"><strong>Final Code Structure</strong></h2>
+<pre tabindex="0"><code>Project/
+├── Models/
+│   └── 000_Snowpuff.glb   # Custom 3D Model
+├── Scripts/
+│   ├── main.gd       # Root scene script
+│   └── skybox.gd     # Skybox configuration
+├── Textures/
+│   └── default_sky.hdr  # HDRI skybox texture
+└── project.godot
+</code></pre><hr>
+<h2 id="1-understanding-input-in-godot-43"><strong>1. Understanding Input in Godot 4.3</strong></h2>
+<p>Before writing code, let&rsquo;s discuss <strong>how Godot handles input</strong>.</p>
+<h3 id="-using-inputis_action_just_pressed">🔹 <strong>Using <code>Input.is_action_just_pressed()</code></strong></h3>
+<p>Godot processes input using the <code>Input</code> singleton. The function:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-gdscript" data-lang="gdscript"><span style="display:flex;"><span><span style="color:#a6e22e">Input</span><span style="color:#f92672">.</span><span style="color:#a6e22e">is_action_just_pressed</span>(<span style="color:#e6db74">&#34;jump&#34;</span>)
+</span></span></code></pre></div><ul>
+<li>Returns <code>true</code> <strong>only on the frame</strong> the key is pressed.</li>
+<li>Does <strong>not</strong> return <code>true</code> if the key is held.</li>
+</ul>
+<p>By default, Godot doesn’t have a <strong>&ldquo;jump&rdquo;</strong> action, so we need to <strong>set it up</strong> in the Input Map.</p>
+<hr>
+<h2 id="2-setting-up-input-actions-in-godot"><strong>2. Setting Up Input Actions in Godot</strong></h2>
+<h3 id="step-1-open-the-input-map"><strong>Step 1: Open the Input Map</strong></h3>
+<ol>
+<li>Go to <strong>Project &gt; Project Settings</strong>.</li>
+<li>Navigate to the <strong>Input Map</strong> tab.</li>
+<li>In the <strong>Action</strong> box, type <code>&quot;jump&quot;</code> and press <strong>Add</strong>.</li>
+</ol>
+<h3 id="step-2-assign-a-key"><strong>Step 2: Assign a Key</strong></h3>
+<ol start="4">
+<li>Select <code>&quot;jump&quot;</code> in the list.</li>
+<li>Click <strong>Add Event &gt; Key</strong>.</li>
+<li>Press <strong>Spacebar</strong> and confirm.</li>
+</ol>
+<p>Now, Godot recognizes <code>&quot;jump&quot;</code> when <strong>Space</strong> is pressed.</p>
+<hr>
+<h2 id="3-create-a-player-class-playergd"><strong>3. Create a Player Class (<code>player.gd</code>)</strong></h2>
+<p>Instead of directly controlling the model inside <code>main.gd</code>, we will encapsulate movement logic inside a dedicated <strong><code>Player</code> class</strong>.</p>
+<h3 id="-file-structure-after-modularization"><strong>🔹 File Structure After Modularization</strong></h3>
+<pre tabindex="0"><code>Project/
+├── Models/
+│   └── 000_Snowpuff.glb   # Custom 3D Model
+├── Scripts/
+│   ├── main.gd       # Root scene script
+│   ├── player.gd     # Player class (handles input &amp; movement)
+│   └── skybox.gd     # Skybox configuration
+├── Textures/
+│   └── default_sky.hdr
+└── project.godot
+</code></pre><hr>
+<h3 id="-playergd-player-class"><strong>📝 <code>player.gd</code> (Player Class)</strong></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-gdscript" data-lang="gdscript"><span style="display:flex;"><span><span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">Node3D</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class_name</span> <span style="color:#a6e22e">Player</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">var</span> jump_force: <span style="color:#66d9ef">float</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">5.0</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">var</span> gravity: <span style="color:#66d9ef">float</span> <span style="color:#f92672">=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">9.8</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">var</span> rotation_speed: <span style="color:#66d9ef">float</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.5</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">var</span> velocity: <span style="color:#a6e22e">Vector3</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">Vector3</span><span style="color:#f92672">.</span>ZERO
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">var</span> is_jumping: <span style="color:#66d9ef">bool</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">false</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">var</span> snowpuff: <span style="color:#a6e22e">Node3D</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">_init</span>():
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Add a rotating snowpuff</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">var</span> snowpuff_model <span style="color:#f92672">=</span> load(<span style="color:#e6db74">&#34;res://Models/000_Snowpuff.glb&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> snowpuff_model:
+</span></span><span style="display:flex;"><span>        snowpuff <span style="color:#f92672">=</span> snowpuff_model<span style="color:#f92672">.</span><span style="color:#a6e22e">instantiate</span>()
+</span></span><span style="display:flex;"><span>        snowpuff<span style="color:#f92672">.</span>transform<span style="color:#f92672">.</span>origin <span style="color:#f92672">=</span> <span style="color:#a6e22e">Vector3</span>(<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">add_child</span>(snowpuff)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">_process</span>(delta):
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Continuously rotate the model</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">rotate_y</span>(delta <span style="color:#f92672">*</span> rotation_speed)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Apply gravity if jumping</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> is_jumping:
+</span></span><span style="display:flex;"><span>        velocity<span style="color:#f92672">.</span>y <span style="color:#f92672">+=</span> gravity <span style="color:#f92672">*</span> delta
+</span></span><span style="display:flex;"><span>        transform<span style="color:#f92672">.</span>origin <span style="color:#f92672">+=</span> velocity <span style="color:#f92672">*</span> delta
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># Stop at the ground level</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> transform<span style="color:#f92672">.</span>origin<span style="color:#f92672">.</span>y <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">0</span>:
+</span></span><span style="display:flex;"><span>            transform<span style="color:#f92672">.</span>origin<span style="color:#f92672">.</span>y <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>            velocity<span style="color:#f92672">.</span>y <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>            is_jumping <span style="color:#f92672">=</span> <span style="color:#66d9ef">false</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Handle jump input</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">Input</span><span style="color:#f92672">.</span><span style="color:#a6e22e">is_action_just_released</span>(<span style="color:#e6db74">&#34;Jump&#34;</span>) <span style="color:#f92672">and</span> <span style="color:#f92672">not</span> is_jumping:
+</span></span><span style="display:flex;"><span>        is_jumping <span style="color:#f92672">=</span> <span style="color:#66d9ef">true</span>
+</span></span><span style="display:flex;"><span>        velocity<span style="color:#f92672">.</span>y <span style="color:#f92672">=</span> jump_force
+</span></span></code></pre></div><h3 id="-explanation-of-playergd"><strong>🔹 Explanation of <code>player.gd</code></strong></h3>
+<ol>
+<li>
+<p><strong>Modular Class</strong>:</p>
+<ul>
+<li>We define <code>Player</code> using <code>class_name Player</code>, which <strong>turns it into a reusable class</strong>. This means that instead of just being a script attached to a single object, we can now instantiate it multiple times, just like a built-in Godot class.</li>
+<li>This modular approach makes it easier to organize our project, since <code>Player.gd</code> handles <strong>only</strong> player-specific logic, while <code>main.gd</code> is responsible for the <strong>scene setup</strong>.</li>
+<li>Because of this, <code>Player</code> can now be created and used in <strong>multiple scenes</strong> without needing to rewrite movement logic every time.</li>
+</ul>
+</li>
+<li>
+<p><strong>Exported Variables</strong>:</p>
+<ul>
+<li>The variables <code>jump_force</code>, <code>gravity</code>, and <code>rotation_speed</code> are defined using the <code>@export</code> keyword.</li>
+<li><strong>What does <code>@export</code> do?</strong>
+<ul>
+<li>It makes these variables adjustable from the <strong>Godot Editor</strong>, allowing us to tweak values like <strong>jump height</strong> or <strong>gravity strength</strong> without modifying code.</li>
+<li>This is useful for balancing gameplay—if the jump is too weak or too strong, we can simply adjust <code>jump_force</code> in the <strong>Inspector</strong> without reopening the script.</li>
+</ul>
+</li>
+<li><strong>How did we determine these values?</strong>
+<ul>
+<li><code>jump_force = 5.0</code> → A reasonable jump height based on typical platformer physics. If set too low, the jump would barely be visible.</li>
+<li><code>gravity = -9.8</code> → Mimics <strong>real-world gravity</strong> (Earth’s gravity is <strong>~9.8 m/s²</strong>). This makes falling feel <strong>natural</strong> and consistent.</li>
+<li><code>rotation_speed = 0.5</code> → A slow, smooth rotation for <strong>visual appeal</strong>. If too fast, it could feel jarring.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Jump Logic &amp; Gravity</strong>:</p>
+<ul>
+<li>We <strong>separate the jump logic from <code>main.gd</code></strong> to keep things organized and <strong>self-contained</strong>.</li>
+<li><strong>How does gravity work in our script?</strong>
+<ul>
+<li>When the player jumps, an <strong>upward velocity (<code>jump_force</code>) is applied</strong>.</li>
+<li>Each frame, the velocity is adjusted downward by <code>gravity</code>, causing a <strong>realistic falling effect</strong>.</li>
+<li>Once the character reaches the ground (<code>y = 0</code>), we <strong>reset the velocity</strong> and allow another jump.</li>
+</ul>
+</li>
+<li>This setup prevents <strong>&ldquo;infinite jumping&rdquo;</strong>, since the character must land before jumping again.</li>
+</ul>
+</li>
+<li>
+<p><strong>Rotation</strong>:</p>
+<ul>
+<li>The function <code>rotate_y(delta * rotation_speed)</code> makes the player <strong>spin continuously</strong> along the Y-axis.</li>
+<li><strong>Why is <code>delta</code> used?</strong>
+<ul>
+<li><code>delta</code> represents <strong>the time passed since the last frame</strong>.</li>
+<li>Without <code>delta</code>, the rotation would be <strong>dependent on frame rate</strong>, meaning faster computers would spin the player more quickly.</li>
+<li>Multiplying by <code>delta</code> ensures <strong>smooth and consistent rotation</strong> across all devices.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Understanding <code>_process()</code></strong>:</p>
+<ul>
+<li>The <code>_process(delta)</code> function is a <strong>built-in Godot function</strong> that runs <strong>every frame</strong>.</li>
+<li>This makes it ideal for <strong>continuous actions</strong>, like checking for input (<code>is_action_just_pressed()</code>) or applying gravity.</li>
+<li><strong>Why not use <code>_ready()</code> instead?</strong>
+<ul>
+<li><code>_ready()</code> only runs <strong>once</strong> when the object is created.</li>
+<li><code>_process()</code> runs <strong>constantly</strong>, making it necessary for things like movement and physics updates.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h2 id="4-updating-maingd"><strong>4. Updating <code>main.gd</code></strong></h2>
+<p>Now that we’ve moved the player logic into <code>player.gd</code>, our <code>main.gd</code> will <strong>only handle scene setup</strong>.</p>
+<h3 id="-maingd-root-scene"><strong>📝 <code>main.gd</code> (Root Scene)</strong></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-gdscript" data-lang="gdscript"><span style="display:flex;"><span><span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">Node3D</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">var</span> snowpuff: <span style="color:#a6e22e">Node3D</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">var</span> player: Player
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">_ready</span>():
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Configure camera</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">var</span> camera <span style="color:#f92672">=</span> <span style="color:#a6e22e">Camera3D</span><span style="color:#f92672">.</span><span style="color:#a6e22e">new</span>()
+</span></span><span style="display:flex;"><span>    camera<span style="color:#f92672">.</span>position <span style="color:#f92672">=</span> <span style="color:#a6e22e">Vector3</span>(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">3</span>)
+</span></span><span style="display:flex;"><span>    camera<span style="color:#f92672">.</span><span style="color:#a6e22e">look_at</span>(<span style="color:#a6e22e">Vector3</span><span style="color:#f92672">.</span>ZERO)
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">add_child</span>(camera)
+</span></span><span style="display:flex;"><span>    camera<span style="color:#f92672">.</span><span style="color:#a6e22e">make_current</span>()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Add world environment</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">var</span> skybox <span style="color:#f92672">=</span> load(<span style="color:#e6db74">&#34;res://Scripts/skybox.gd&#34;</span>)<span style="color:#f92672">.</span><span style="color:#a6e22e">new</span>()
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">add_child</span>(skybox)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Add player</span>
+</span></span><span style="display:flex;"><span>    player <span style="color:#f92672">=</span> Player<span style="color:#f92672">.</span><span style="color:#a6e22e">new</span>()
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">add_child</span>(player)
+</span></span></code></pre></div><hr>
+<h1 id="fixing-input-delay-understanding-input-actions--jump-logic"><strong>Fixing Input Delay: Understanding Input Actions &amp; Jump Logic</strong></h1>
+<p>At this point, you may have noticed that jumping feels <strong>delayed</strong> or <strong>unresponsive</strong>. This is likely because we’re currently detecting input using:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-gdscript" data-lang="gdscript"><span style="display:flex;"><span><span style="color:#66d9ef">if</span> <span style="color:#a6e22e">Input</span><span style="color:#f92672">.</span><span style="color:#a6e22e">is_action_just_released</span>(<span style="color:#e6db74">&#34;jump&#34;</span>) <span style="color:#f92672">and</span> <span style="color:#f92672">not</span> is_jumping:
+</span></span></code></pre></div><p>Since <code>is_action_just_released()</code> only triggers <strong>when the spacebar is lifted</strong>, it introduces a slight <strong>delay</strong> between when you press the key and when the jump occurs. This might feel sluggish, especially in fast-paced gameplay.</p>
+<hr>
+<h2 id="5-exploring-input-detection-options-in-godot"><strong>5. Exploring Input Detection Options in Godot</strong></h2>
+<p>Godot provides multiple ways to detect input, each with its own use case. Let&rsquo;s go through them:</p>
+<h3 id="-inputis_action_pressedjump"><strong>🔹 <code>Input.is_action_pressed(&quot;jump&quot;)</code></strong></h3>
+<ul>
+<li>
+<p><strong>Triggers every frame</strong> as long as the key is held down.</p>
+</li>
+<li>
+<p>Good for <strong>holding to charge a jump</strong>, flying mechanics, or continuous movement.</p>
+</li>
+<li>
+<p><strong>Example use case</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-gdscript" data-lang="gdscript"><span style="display:flex;"><span><span style="color:#66d9ef">if</span> <span style="color:#a6e22e">Input</span><span style="color:#f92672">.</span><span style="color:#a6e22e">is_action_pressed</span>(<span style="color:#e6db74">&#34;jump&#34;</span>):
+</span></span><span style="display:flex;"><span>    velocity<span style="color:#f92672">.</span>y <span style="color:#f92672">+=</span> jump_force <span style="color:#f92672">*</span> delta  <span style="color:#75715e"># Keep rising as long as the key is held</span>
+</span></span></code></pre></div></li>
+</ul>
+<h3 id="-inputis_action_just_pressedjump"><strong>🔹 <code>Input.is_action_just_pressed(&quot;jump&quot;)</code></strong></h3>
+<ul>
+<li>
+<p><strong>Triggers only once when the key is initially pressed</strong>.</p>
+</li>
+<li>
+<p>More responsive than <code>is_action_just_released()</code> since it <strong>activates the moment the key is pressed</strong>.</p>
+</li>
+<li>
+<p><strong>Best for jumping mechanics</strong> to ensure instant responsiveness.</p>
+</li>
+<li>
+<p><strong>Fixing our delay issue</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-gdscript" data-lang="gdscript"><span style="display:flex;"><span><span style="color:#66d9ef">if</span> <span style="color:#a6e22e">Input</span><span style="color:#f92672">.</span><span style="color:#a6e22e">is_action_just_pressed</span>(<span style="color:#e6db74">&#34;jump&#34;</span>) <span style="color:#f92672">and</span> <span style="color:#f92672">not</span> is_jumping:
+</span></span><span style="display:flex;"><span>    is_jumping <span style="color:#f92672">=</span> <span style="color:#66d9ef">true</span>
+</span></span><span style="display:flex;"><span>    velocity<span style="color:#f92672">.</span>y <span style="color:#f92672">=</span> jump_force
+</span></span></code></pre></div></li>
+<li>
+<p>This makes jumping <strong>feel immediate</strong>, fixing the sluggish input issue.</p>
+</li>
+</ul>
+<h3 id="-inputis_action_just_releasedjump"><strong>🔹 <code>Input.is_action_just_released(&quot;jump&quot;)</code></strong></h3>
+<ul>
+<li>
+<p><strong>Triggers only once when the key is released</strong>.</p>
+</li>
+<li>
+<p>Good for <strong>jump charging mechanics</strong> (e.g., the longer you hold, the higher you jump).</p>
+</li>
+<li>
+<p><strong>Example use case</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-gdscript" data-lang="gdscript"><span style="display:flex;"><span><span style="color:#66d9ef">if</span> <span style="color:#a6e22e">Input</span><span style="color:#f92672">.</span><span style="color:#a6e22e">is_action_just_released</span>(<span style="color:#e6db74">&#34;jump&#34;</span>):
+</span></span><span style="display:flex;"><span>    velocity<span style="color:#f92672">.</span>y <span style="color:#f92672">=</span> charge_amount  <span style="color:#75715e"># Jump strength depends on hold duration</span>
+</span></span></code></pre></div></li>
+</ul>
+<hr>
+<h2 id="6-implementing-double-jumping"><strong>6. Implementing Double Jumping</strong></h2>
+<p>Now, what if we want the player to <strong>double jump</strong>? We need to <strong>track jumps</strong> and allow one extra jump mid-air.</p>
+<h3 id="-adding-double-jump-logic"><strong>🔹 Adding Double Jump Logic</strong></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-gdscript" data-lang="gdscript"><span style="display:flex;"><span><span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">Node3D</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class_name</span> <span style="color:#a6e22e">Player</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">var</span> jump_force: <span style="color:#66d9ef">float</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">5.0</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">var</span> gravity: <span style="color:#66d9ef">float</span> <span style="color:#f92672">=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">9.8</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">var</span> rotation_speed: <span style="color:#66d9ef">float</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.5</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">var</span> velocity: <span style="color:#a6e22e">Vector3</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">Vector3</span><span style="color:#f92672">.</span>ZERO
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">var</span> max_jumps: <span style="color:#66d9ef">int</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">var</span> jump_count: <span style="color:#66d9ef">int</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">var</span> snowpuff: <span style="color:#a6e22e">Node3D</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">_init</span>():
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e"># Add a rotating snowpuff</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">var</span> snowpuff_model <span style="color:#f92672">=</span> load(<span style="color:#e6db74">&#34;res://Models/000_Snowpuff.glb&#34;</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">if</span> snowpuff_model:
+</span></span><span style="display:flex;"><span>		snowpuff <span style="color:#f92672">=</span> snowpuff_model<span style="color:#f92672">.</span><span style="color:#a6e22e">instantiate</span>()
+</span></span><span style="display:flex;"><span>		snowpuff<span style="color:#f92672">.</span>transform<span style="color:#f92672">.</span>origin <span style="color:#f92672">=</span> <span style="color:#a6e22e">Vector3</span>(<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">add_child</span>(snowpuff)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">_process</span>(delta):
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e"># Rotate the model continuously</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">rotate_y</span>(delta <span style="color:#f92672">*</span> rotation_speed)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e"># Apply gravity</span>
+</span></span><span style="display:flex;"><span>	velocity<span style="color:#f92672">.</span>y <span style="color:#f92672">+=</span> gravity <span style="color:#f92672">*</span> delta
+</span></span><span style="display:flex;"><span>	transform<span style="color:#f92672">.</span>origin <span style="color:#f92672">+=</span> velocity <span style="color:#f92672">*</span> delta
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e"># Detect when the player hits the ground</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">if</span> transform<span style="color:#f92672">.</span>origin<span style="color:#f92672">.</span>y <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">0</span>:
+</span></span><span style="display:flex;"><span>		transform<span style="color:#f92672">.</span>origin<span style="color:#f92672">.</span>y <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>		velocity<span style="color:#f92672">.</span>y <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>		jump_count <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>  <span style="color:#75715e"># Reset jumps when landing</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e"># Handle jump input</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">Input</span><span style="color:#f92672">.</span><span style="color:#a6e22e">is_action_just_pressed</span>(<span style="color:#e6db74">&#34;Jump&#34;</span>) <span style="color:#f92672">and</span> jump_count <span style="color:#f92672">&lt;</span> max_jumps:
+</span></span><span style="display:flex;"><span>		velocity<span style="color:#f92672">.</span>y <span style="color:#f92672">=</span> jump_force
+</span></span><span style="display:flex;"><span>		jump_count <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
+</span></span></code></pre></div><h3 id="-how-this-works"><strong>🔹 How This Works</strong></h3>
+<ul>
+<li><strong><code>max_jumps = 2</code></strong> → The player can jump twice before landing.</li>
+<li><strong><code>jump_count</code></strong> → Tracks how many jumps have been used.</li>
+<li><strong>Resets <code>jump_count = 0</code> on landing</strong> → So the player can jump again.</li>
+</ul>
+<hr>
+<h2 id="7-what-if-we-want-infinite-jumps"><strong>7. What If We Want Infinite Jumps?</strong></h2>
+<p>If we want <strong>infinite jumps</strong> (e.g., a flying mechanic), we simply <strong>remove the jump limit</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-gdscript" data-lang="gdscript"><span style="display:flex;"><span><span style="color:#66d9ef">if</span> <span style="color:#a6e22e">Input</span><span style="color:#f92672">.</span><span style="color:#a6e22e">is_action_pressed</span>(<span style="color:#e6db74">&#34;jump&#34;</span>):
+</span></span><span style="display:flex;"><span>    velocity<span style="color:#f92672">.</span>y <span style="color:#f92672">=</span> jump_force  <span style="color:#75715e"># Continuously jump while space is held</span>
+</span></span></code></pre></div><p>This creates a <strong>flappy-bird-style flying</strong> effect.</p>
+<hr>
+<h2 id="8-choosing-the-right-input-method"><strong>8. Choosing the Right Input Method</strong></h2>
+<table>
+  <thead>
+      <tr>
+          <th><strong>Input Method</strong></th>
+          <th><strong>Use Case</strong></th>
+          <th><strong>Example</strong></th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>is_action_pressed(&quot;jump&quot;)</code></td>
+          <td>Holding the key for <strong>continuous</strong> movement or flying</td>
+          <td>Holding jump to fly</td>
+      </tr>
+      <tr>
+          <td><code>is_action_just_pressed(&quot;jump&quot;)</code></td>
+          <td><strong>Instant</strong> jump response when pressing space</td>
+          <td>Most platformer games</td>
+      </tr>
+      <tr>
+          <td><code>is_action_just_released(&quot;jump&quot;)</code></td>
+          <td>Charge-based jumps (higher jump when holding longer)</td>
+          <td>Super Mario 64</td>
+      </tr>
+  </tbody>
+</table>
+<hr>
+
+    </div>
+    <div class="post-footer">
+      
+    </div>
+  </article>
+
+    </main>
+  </body>
+</html>

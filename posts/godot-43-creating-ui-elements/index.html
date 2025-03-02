@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en-us">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <title>Godot 43 Creating UI Elements // Royal Chickens Interactive</title>
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <meta charset="utf-8" />
+    <meta name="generator" content="Hugo 0.143.1">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="John Doe" />
+    <meta name="description" content="" />
+    <link rel="stylesheet" href="/css/main.min.5b1fcc8902588589c4767187402a3c29f8b8d7a6fdef6d9f8f77045bb0d14fee.css" />
+    
+
+    
+    
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Godot 43 Creating UI Elements">
+  <meta name="twitter:description" content="Building a Dynamic UI System in Godot Using Visual Studio Code If you’re coding exclusively in Visual Studio Code (VSC) and developing a game in Godot, you’ll need to create and manage UI elements like Labels, Buttons, Health Bars, and Score Counters entirely through GDScript. This guide will walk you through setting up a fully script-driven UI system, ensuring it scales properly and remains organized.
+1. Setting Up UI Elements with Code Since we’re not using the scene editor, we must instantiate UI elements programmatically. UI nodes in Godot fall under the Control class and include elements like:">
+
+    <meta property="og:url" content="http://localhost:1313/posts/godot-43-creating-ui-elements/">
+  <meta property="og:site_name" content="Royal Chickens Interactive">
+  <meta property="og:title" content="Godot 43 Creating UI Elements">
+  <meta property="og:description" content="Building a Dynamic UI System in Godot Using Visual Studio Code If you’re coding exclusively in Visual Studio Code (VSC) and developing a game in Godot, you’ll need to create and manage UI elements like Labels, Buttons, Health Bars, and Score Counters entirely through GDScript. This guide will walk you through setting up a fully script-driven UI system, ensuring it scales properly and remains organized.
+1. Setting Up UI Elements with Code Since we’re not using the scene editor, we must instantiate UI elements programmatically. UI nodes in Godot fall under the Control class and include elements like:">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2025-02-16T14:58:21-08:00">
+    <meta property="article:modified_time" content="2025-02-16T14:58:21-08:00">
+
+
+  </head>
+  <body>
+    <header class="app-header">
+      <a href="/"><img class="app-header-avatar" src="/avatar.jpg" alt="John Doe" /></a>
+      <span class="app-header-title">Royal Chickens Interactive</span>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vehicula turpis sit amet elit pretium.</p>
+    </header>
+    <main class="app-container">
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class ="post-title">Godot 43 Creating UI Elements</h1>
+      <div class="post-meta">
+        <div>
+          <svg class="icon icon-calendar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><title>calendar</title><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+          Feb 16, 2025
+        </div>
+        <div>
+          <svg class="icon icon-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><title>clock</title><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+          3 min read
+        </div>
+      </div>
+    </header>
+    <div class="post-content">
+      <h1 id="building-a-dynamic-ui-system-in-godot-using-visual-studio-code"><strong>Building a Dynamic UI System in Godot Using Visual Studio Code</strong></h1>
+<p>If you’re coding exclusively in <strong>Visual Studio Code (VSC)</strong> and developing a game in <strong>Godot</strong>, you’ll need to create and manage <strong>UI elements</strong> like <strong>Labels, Buttons, Health Bars, and Score Counters</strong> entirely through GDScript. This guide will walk you through setting up a fully <strong>script-driven UI system</strong>, ensuring it scales properly and remains organized.</p>
+<hr>
+<h2 id="1-setting-up-ui-elements-with-code"><strong>1. Setting Up UI Elements with Code</strong></h2>
+<p>Since we&rsquo;re not using the scene editor, we must instantiate UI elements programmatically. UI nodes in Godot fall under the <strong>Control</strong> class and include elements like:</p>
+<ul>
+<li><strong>Label</strong> – Displays text (e.g., score, notifications).</li>
+<li><strong>Button</strong> – Interactive elements for user input.</li>
+<li><strong>TextureRect</strong> – Displays images/icons.</li>
+<li><strong>ProgressBar</strong> – Represents health, loading, or energy.</li>
+<li><strong>Containers</strong> (VBoxContainer, HBoxContainer) – Helps organize UI automatically.</li>
+</ul>
+<hr>
+<h2 id="2-creating-a-ui-manager"><strong>2. Creating a UI Manager</strong></h2>
+<p>We need a <strong>UIManager</strong> script that will create and manage our UI elements dynamically.</p>
+<h3 id="steps"><strong>Steps:</strong></h3>
+<ol>
+<li>In your <strong>Scripts/UI/</strong> folder, create a new script called <strong><code>UIManager.gd</code></strong>.</li>
+<li>Extend <code>CanvasLayer</code> to ensure our UI is drawn <strong>above</strong> everything else.</li>
+<li>Store UI elements in a dictionary so we can <strong>reference and update them easily</strong>.</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-gdscript" data-lang="gdscript"><span style="display:flex;"><span><span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">CanvasLayer</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Dictionary to store UI elements for easy access</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">var</span> ui_elements <span style="color:#f92672">:=</span> {}  <span style="color:#75715e"># The &#39;:=&#39; is shorthand for var ui_elements = {}, inferring the type dynamically.</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">_ready</span>():
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">create_ui</span>()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">create_ui</span>():
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Create a Label (Score Display)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">var</span> label <span style="color:#f92672">=</span> <span style="color:#a6e22e">Label</span><span style="color:#f92672">.</span><span style="color:#a6e22e">new</span>()
+</span></span><span style="display:flex;"><span>    label<span style="color:#f92672">.</span>text <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Score: 0&#34;</span>
+</span></span><span style="display:flex;"><span>    label<span style="color:#f92672">.</span><span style="color:#a6e22e">set_position</span>(<span style="color:#a6e22e">Vector2</span>(<span style="color:#ae81ff">50</span>, <span style="color:#ae81ff">50</span>))
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">add_child</span>(label)
+</span></span><span style="display:flex;"><span>    ui_elements[<span style="color:#e6db74">&#34;score&#34;</span>] <span style="color:#f92672">=</span> label  <span style="color:#75715e"># Store reference for easy access later</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Create a Button</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">var</span> button <span style="color:#f92672">=</span> <span style="color:#a6e22e">Button</span><span style="color:#f92672">.</span><span style="color:#a6e22e">new</span>()
+</span></span><span style="display:flex;"><span>    button<span style="color:#f92672">.</span>text <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Click Me!&#34;</span>
+</span></span><span style="display:flex;"><span>    button<span style="color:#f92672">.</span><span style="color:#a6e22e">set_position</span>(<span style="color:#a6e22e">Vector2</span>(<span style="color:#ae81ff">50</span>, <span style="color:#ae81ff">100</span>))
+</span></span><span style="display:flex;"><span>    button<span style="color:#f92672">.</span><span style="color:#a6e22e">connect</span>(<span style="color:#e6db74">&#34;pressed&#34;</span>, _on_button_pressed)
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">add_child</span>(button)
+</span></span><span style="display:flex;"><span>    ui_elements[<span style="color:#e6db74">&#34;button&#34;</span>] <span style="color:#f92672">=</span> button  <span style="color:#75715e"># Store reference so we can modify it later</span>
+</span></span></code></pre></div><h3 id="what-does--do"><strong>What Does <code>:=</code> Do?</strong></h3>
+<p>In GDScript, <code>:=</code> is a shorthand <strong>type inference operator</strong>. It automatically infers the variable type based on its value.<br>
+For example:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-gdscript" data-lang="gdscript"><span style="display:flex;"><span><span style="color:#66d9ef">var</span> ui_elements <span style="color:#f92672">:=</span> {}  <span style="color:#75715e"># Infers that this is a Dictionary</span>
+</span></span></code></pre></div><p>This is the same as:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-gdscript" data-lang="gdscript"><span style="display:flex;"><span><span style="color:#66d9ef">var</span> ui_elements: <span style="color:#a6e22e">Dictionary</span> <span style="color:#f92672">=</span> {}
+</span></span></code></pre></div><p>Using <code>:=</code> makes the code cleaner and allows Godot to enforce type safety <strong>without</strong> explicitly stating it.</p>
+<h3 id="why-store-references-in-a-dictionary"><strong>Why Store References in a Dictionary?</strong></h3>
+<p>We store UI elements in <code>ui_elements</code> so we can easily <strong>access and modify</strong> them later without searching through the scene tree. Instead of using:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-gdscript" data-lang="gdscript"><span style="display:flex;"><span><span style="color:#66d9ef">var</span> label <span style="color:#f92672">=</span> <span style="color:#a6e22e">get_node</span>(<span style="color:#e6db74">&#34;Path/To/Label&#34;</span>)
+</span></span></code></pre></div><p>We can just do:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-gdscript" data-lang="gdscript"><span style="display:flex;"><span>ui_elements[<span style="color:#e6db74">&#34;score&#34;</span>]<span style="color:#f92672">.</span>text <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Score: 100&#34;</span>
+</span></span></code></pre></div><p>This keeps our code modular, <strong>avoiding hardcoded node paths</strong>.</p>
+<hr>
+<h2 id="3-connecting-ui-manager-to-the-game"><strong>3. Connecting UI Manager to the Game</strong></h2>
+<p>Right now, <code>UIManager.gd</code> isn’t being used because it isn’t added to the scene. We need to <strong>instantiate it in <code>main.gd</code></strong>.</p>
+<h3 id="modify-maingd-to-use-uimanagergd"><strong>Modify <code>main.gd</code> to Use <code>UIManager.gd</code>:</strong></h3>
+<ol start="4">
+<li>Open <code>main.gd</code> in your <strong>Scripts/</strong> directory.</li>
+<li>Instantiate and add the UI manager at runtime.</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-gdscript" data-lang="gdscript"><span style="display:flex;"><span><span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">Node</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">var</span> ui_manager  <span style="color:#75715e"># Declare variable to store the UI Manager</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">_ready</span>():
+</span></span><span style="display:flex;"><span>    ui_manager <span style="color:#f92672">=</span> load(<span style="color:#e6db74">&#34;res://Scripts/UI/UIManager.gd&#34;</span>)<span style="color:#f92672">.</span><span style="color:#a6e22e">new</span>()
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">add_child</span>(ui_manager)  <span style="color:#75715e"># Add it to the scene so it renders</span>
+</span></span></code></pre></div><p>Now the <strong>UIManager</strong> will automatically create and manage UI elements when the game starts.</p>
+<hr>
+<h2 id="4-handling-button-clicks"><strong>4. Handling Button Clicks</strong></h2>
+<p>Let’s make our button <strong>update the score label when clicked</strong>.</p>
+<h3 id="modify-uimanagergd-to-handle-button-clicks"><strong>Modify <code>UIManager.gd</code> to Handle Button Clicks:</strong></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-gdscript" data-lang="gdscript"><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">_on_button_pressed</span>():
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">var</span> label <span style="color:#f92672">=</span> ui_elements<span style="color:#f92672">.</span><span style="color:#a6e22e">get</span>(<span style="color:#e6db74">&#34;score&#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> label:
+</span></span><span style="display:flex;"><span>        label<span style="color:#f92672">.</span>text <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Button Clicked!&#34;</span>
+</span></span></code></pre></div><p>Now clicking the button updates the <strong>Label</strong> dynamically.</p>
+
+    </div>
+    <div class="post-footer">
+      
+    </div>
+  </article>
+
+    </main>
+  </body>
+</html>

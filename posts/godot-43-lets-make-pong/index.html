@@ -1,0 +1,890 @@
+<!doctype html>
+<html lang="en-us">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <title>Godot 43 Lets Make Pong // Royal Chickens Interactive</title>
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <meta charset="utf-8" />
+    <meta name="generator" content="Hugo 0.143.1">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="John Doe" />
+    <meta name="description" content="" />
+    <link rel="stylesheet" href="/css/main.min.5b1fcc8902588589c4767187402a3c29f8b8d7a6fdef6d9f8f77045bb0d14fee.css" />
+    
+
+    
+    
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Godot 43 Lets Make Pong">
+  <meta name="twitter:description" content="Comprehensive Guide: Building Pong in Godot 4 with GDScript Introduction In this tutorial, we will build Pong from scratch using Godot 4 and GDScript, without using the Godot Editor for scene creation. We will write everything in code inside VS Code. This guide is aimed at complete beginners, so we will introduce basic programming concepts, math principles, and step-by-step explanations for every part.
+By the end of this tutorial, you will have a fully functional Pong game and an understanding of physics, object-oriented programming (OOP), and collision handling in Godot.">
+
+    <meta property="og:url" content="http://localhost:1313/posts/godot-43-lets-make-pong/">
+  <meta property="og:site_name" content="Royal Chickens Interactive">
+  <meta property="og:title" content="Godot 43 Lets Make Pong">
+  <meta property="og:description" content="Comprehensive Guide: Building Pong in Godot 4 with GDScript Introduction In this tutorial, we will build Pong from scratch using Godot 4 and GDScript, without using the Godot Editor for scene creation. We will write everything in code inside VS Code. This guide is aimed at complete beginners, so we will introduce basic programming concepts, math principles, and step-by-step explanations for every part.
+By the end of this tutorial, you will have a fully functional Pong game and an understanding of physics, object-oriented programming (OOP), and collision handling in Godot.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2025-02-16T15:45:34-08:00">
+    <meta property="article:modified_time" content="2025-02-16T15:45:34-08:00">
+
+
+  </head>
+  <body>
+    <header class="app-header">
+      <a href="/"><img class="app-header-avatar" src="/avatar.jpg" alt="John Doe" /></a>
+      <span class="app-header-title">Royal Chickens Interactive</span>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vehicula turpis sit amet elit pretium.</p>
+    </header>
+    <main class="app-container">
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class ="post-title">Godot 43 Lets Make Pong</h1>
+      <div class="post-meta">
+        <div>
+          <svg class="icon icon-calendar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><title>calendar</title><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+          Feb 16, 2025
+        </div>
+        <div>
+          <svg class="icon icon-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><title>clock</title><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+          21 min read
+        </div>
+      </div>
+    </header>
+    <div class="post-content">
+      <h1 id="comprehensive-guide-building-pong-in-godot-4-with-gdscript"><strong>Comprehensive Guide: Building Pong in Godot 4 with GDScript</strong></h1>
+<h2 id="introduction"><strong>Introduction</strong></h2>
+<p>In this tutorial, we will build <strong>Pong</strong> from scratch using <strong>Godot 4 and GDScript</strong>, without using the Godot Editor for scene creation. We will <strong>write everything in code</strong> inside <strong>VS Code</strong>. This guide is aimed at <strong>complete beginners</strong>, so we will introduce <strong>basic programming concepts</strong>, <strong>math principles</strong>, and <strong>step-by-step explanations</strong> for every part.</p>
+<p>By the end of this tutorial, you will have a <strong>fully functional Pong game</strong> and an understanding of <strong>physics, object-oriented programming (OOP), and collision handling</strong> in Godot.</p>
+<hr>
+<h2 id="project-overview"><strong>Project Overview</strong></h2>
+<p>Our game will consist of <strong>three main components</strong>, written in separate scripts:</p>
+<ol>
+<li><strong>Paddle</strong> (<code>paddle.gd</code>) – Handles both <strong>player and AI movement</strong>.</li>
+<li><strong>Ball</strong> (<code>ball.gd</code>) – Controls <strong>movement, collisions, and scoring</strong>.</li>
+<li><strong>GameManager</strong> (<code>main.gd</code>) – Manages <strong>game setup and rules</strong>.</li>
+</ol>
+<p>Everything will be <strong>instantiated in code</strong>—there will be <strong>no manually created <code>.tscn</code> files</strong> except for the <code>main.tscn</code>, which serves as the game’s entry point.</p>
+<hr>
+<h1 id="step-1-creating-the-paddle-paddlegd--a-beginner-friendly-breakdown"><strong>Step 1: Creating the Paddle (<code>paddle.gd</code>) – A Beginner-Friendly Breakdown</strong></h1>
+<p>In this step, we will <strong>create the paddle</strong> for our Pong game. The paddle is a <strong>rectangular object that moves up and down</strong>, controlled either by the <strong>player</strong> or <strong>an AI</strong> (computer opponent). Since we are writing everything in <strong>GDScript within VS Code</strong>, this guide will <strong>explain every concept</strong> in detail so that even someone new to programming can understand what’s happening.</p>
+<hr>
+<h2 id="-11-what-is-a-paddle-in-pong"><strong>📌 1.1: What is a Paddle in Pong?</strong></h2>
+<p>Before writing code, let’s break down <strong>what the paddle does</strong>:</p>
+<ul>
+<li>It <strong>moves up and down</strong> when controlled by the player.</li>
+<li>It can also be controlled by <strong>AI</strong>, which will react to the ball’s movement.</li>
+<li>It has a <strong>physical presence</strong> (so the ball bounces off it).</li>
+</ul>
+<hr>
+<h2 id="-12-setting-up-the-paddle-class-paddlegd"><strong>📌 1.2: Setting Up the Paddle Class (<code>paddle.gd</code>)</strong></h2>
+<p>In Godot, everything is an <strong>object</strong>. To create an object in code, we define a <strong>class</strong>.</p>
+<h3 id="-writing-our-first-paddle-class"><strong>🖥️ Writing Our First Paddle Class</strong></h3>
+<p>Create a new file called <strong><code>paddle.gd</code></strong> inside your project folder. Add the following code:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-gdscript" data-lang="gdscript"><span style="display:flex;"><span><span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">CharacterBody2D</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class_name</span> <span style="color:#a6e22e">Paddle</span>
+</span></span></code></pre></div><h3 id="-whats-happening-here"><strong>🔹 What’s Happening Here?</strong></h3>
+<ul>
+<li><strong><code>extends CharacterBody2D</code></strong> → This tells Godot that our paddle is a <strong>movable object</strong> that can interact with physics.</li>
+<li><strong><code>class_name Paddle</code></strong> → This registers <strong>&ldquo;Paddle&rdquo;</strong> as a reusable class, allowing us to create multiple paddles later.</li>
+</ul>
+<p>✅ <strong>At this point, we have defined a Paddle class, but it does nothing yet. Let’s continue!</strong></p>
+<hr>
+<h2 id="-13-understanding-constants-const"><strong>📌 1.3: Understanding Constants (<code>const</code>)</strong></h2>
+<p>To make sure <strong>every paddle</strong> has a <strong>fixed size and speed</strong>, we define some <strong>constants</strong> at the top of our script.</p>
+<h3 id="-adding-constants-to-our-paddle-class"><strong>✍️ Adding Constants to Our Paddle Class</strong></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-gdscript" data-lang="gdscript"><span style="display:flex;"><span><span style="color:#66d9ef">const</span> HEIGHT <span style="color:#f92672">:=</span> <span style="color:#ae81ff">100.0</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> WIDTH <span style="color:#f92672">:=</span> <span style="color:#ae81ff">20.0</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> SPEED <span style="color:#f92672">:=</span> <span style="color:#ae81ff">400.0</span>
+</span></span></code></pre></div><h3 id="-whats-happening-here-1"><strong>🔹 What’s Happening Here?</strong></h3>
+<ul>
+<li><strong><code>const HEIGHT := 100.0</code></strong> → The paddle’s height is always <strong>100 pixels</strong>.</li>
+<li><strong><code>const WIDTH := 20.0</code></strong> → The paddle’s width is always <strong>20 pixels</strong>.</li>
+<li><strong><code>const SPEED := 400.0</code></strong> → The paddle moves <strong>400 pixels per second</strong> when the player presses a key.</li>
+</ul>
+<p>🚀 <strong>Why use constants?</strong></p>
+<ul>
+<li>Constants <strong>never change</strong> while the game is running.</li>
+<li>They make the code <strong>easier to read and modify</strong> later.</li>
+</ul>
+<p>✅ <strong>At this point, we have defined the paddle’s basic properties!</strong></p>
+<hr>
+<h2 id="-14-how-do-we-know-if-its-a-player-or-ai-is_ai"><strong>📌 1.4: How Do We Know If It’s a Player or AI? (<code>is_ai</code>)</strong></h2>
+<p>Each paddle needs to know <strong>whether it is controlled by the player or AI</strong>.</p>
+<h3 id="-adding-a-variable-to-identify-ai"><strong>✍️ Adding a Variable to Identify AI</strong></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-gdscript" data-lang="gdscript"><span style="display:flex;"><span><span style="color:#66d9ef">var</span> is_ai <span style="color:#f92672">:=</span> <span style="color:#66d9ef">false</span>
+</span></span></code></pre></div><h3 id="-whats-happening-here-2"><strong>🔹 What’s Happening Here?</strong></h3>
+<ul>
+<li><strong><code>var is_ai := false</code></strong> → By default, the paddle assumes it <strong>belongs to the player</strong>.</li>
+<li>Later, when we <strong>create the AI paddle</strong>, we will set <code>is_ai = true</code> to make it follow the ball instead of waiting for player input.</li>
+</ul>
+<p>✅ <strong>Now, our paddle &ldquo;knows&rdquo; whether it&rsquo;s a player or an AI!</strong></p>
+<hr>
+<h2 id="-15-making-the-paddle-appear-on-screen"><strong>📌 1.5: Making the Paddle Appear on Screen</strong></h2>
+<p>So far, our paddle <strong>exists in code</strong> but has <strong>no visible shape</strong>. Let’s fix that!</p>
+<h3 id="-adding-a-rectangle-to-represent-the-paddle"><strong>✍️ Adding a Rectangle to Represent the Paddle</strong></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-gdscript" data-lang="gdscript"><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">_init</span>(start_position: <span style="color:#a6e22e">Vector2</span>, ai: <span style="color:#66d9ef">bool</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">false</span>):
+</span></span><span style="display:flex;"><span>    self<span style="color:#f92672">.</span>is_ai <span style="color:#f92672">=</span> ai
+</span></span><span style="display:flex;"><span>    self<span style="color:#f92672">.</span>position <span style="color:#f92672">=</span> start_position
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">var</span> rect <span style="color:#f92672">=</span> <span style="color:#a6e22e">ColorRect</span><span style="color:#f92672">.</span><span style="color:#a6e22e">new</span>()
+</span></span><span style="display:flex;"><span>    rect<span style="color:#f92672">.</span>color <span style="color:#f92672">=</span> <span style="color:#a6e22e">Color</span><span style="color:#f92672">.</span>WHITE
+</span></span><span style="display:flex;"><span>    rect<span style="color:#f92672">.</span>size <span style="color:#f92672">=</span> <span style="color:#a6e22e">Vector2</span>(WIDTH, HEIGHT)
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">add_child</span>(rect)
+</span></span></code></pre></div><h3 id="-whats-happening-here-3"><strong>🔹 What’s Happening Here?</strong></h3>
+<ul>
+<li><strong><code>_init(start_position: Vector2, ai: bool = false)</code></strong>
+<ul>
+<li>This function runs <strong>when the paddle is created</strong>.</li>
+<li>It <strong>sets the position</strong> and <strong>determines if the paddle is AI-controlled</strong>.</li>
+</ul>
+</li>
+<li><strong><code>var rect = ColorRect.new()</code></strong>
+<ul>
+<li>This creates a <strong>rectangle shape</strong> that we can see on the screen.</li>
+</ul>
+</li>
+<li><strong><code>rect.size = Vector2(WIDTH, HEIGHT)</code></strong>
+<ul>
+<li>We set the rectangle’s <strong>size</strong> based on the constants we created earlier.</li>
+</ul>
+</li>
+<li><strong><code>add_child(rect)</code></strong>
+<ul>
+<li>This tells Godot: <strong>&ldquo;Attach this rectangle to the paddle so it appears in the game.&rdquo;</strong></li>
+</ul>
+</li>
+</ul>
+<p>✅ <strong>At this point, we now have a visible paddle!</strong></p>
+<hr>
+<h2 id="-16-preventing-the-paddle-from-passing-through-walls-collisions"><strong>📌 1.6: Preventing the Paddle from Passing Through Walls (Collisions)</strong></h2>
+<p>Right now, our paddle <strong>has no physical properties</strong>—it can <strong>move through anything</strong>. We need to <strong>add a collision shape</strong> to <strong>stop the ball from passing through it</strong>.</p>
+<h3 id="-adding-a-collision-box"><strong>✍️ Adding a Collision Box</strong></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-gdscript" data-lang="gdscript"><span style="display:flex;"><span><span style="color:#66d9ef">var</span> collider <span style="color:#f92672">=</span> <span style="color:#a6e22e">CollisionShape2D</span><span style="color:#f92672">.</span><span style="color:#a6e22e">new</span>()
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">var</span> shape <span style="color:#f92672">=</span> <span style="color:#a6e22e">RectangleShape2D</span><span style="color:#f92672">.</span><span style="color:#a6e22e">new</span>()
+</span></span><span style="display:flex;"><span>shape<span style="color:#f92672">.</span>size <span style="color:#f92672">=</span> <span style="color:#a6e22e">Vector2</span>(WIDTH, HEIGHT)
+</span></span><span style="display:flex;"><span>collider<span style="color:#f92672">.</span>shape <span style="color:#f92672">=</span> shape
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">add_child</span>(collider)
+</span></span></code></pre></div><hr>
+<h3 id="understanding-collisionshape2d-in-godot-16-expanded-explanation"><strong>Understanding <code>CollisionShape2D</code> in Godot (1.6 Expanded Explanation)</strong></h3>
+<p>In <strong>1.6: Preventing the Paddle from Passing Through Walls (Collisions)</strong>, we introduced the following code snippet:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-gdscript" data-lang="gdscript"><span style="display:flex;"><span><span style="color:#66d9ef">var</span> collider <span style="color:#f92672">=</span> <span style="color:#a6e22e">CollisionShape2D</span><span style="color:#f92672">.</span><span style="color:#a6e22e">new</span>()
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">var</span> shape <span style="color:#f92672">=</span> <span style="color:#a6e22e">RectangleShape2D</span><span style="color:#f92672">.</span><span style="color:#a6e22e">new</span>()
+</span></span><span style="display:flex;"><span>shape<span style="color:#f92672">.</span>size <span style="color:#f92672">=</span> <span style="color:#a6e22e">Vector2</span>(WIDTH, HEIGHT)
+</span></span><span style="display:flex;"><span>collider<span style="color:#f92672">.</span>shape <span style="color:#f92672">=</span> shape
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">add_child</span>(collider)
+</span></span></code></pre></div><p>At a high level, this <strong>creates a collision box</strong> for the paddle. However, this process involves multiple steps that must be understood individually.</p>
+<hr>
+<h3 id="what-is-collisionshape2d"><strong>What is <code>CollisionShape2D</code>?</strong></h3>
+<p><code>CollisionShape2D</code> is an <strong>abstract container</strong> for a <strong>physical shape</strong> in a 2D game.</p>
+<ul>
+<li>It does not <strong>do</strong> anything on its own.</li>
+<li>It <strong>cannot</strong> detect collisions until it has a <strong>defined shape</strong> inside it.</li>
+<li>It serves as an <strong>interface</strong> between physics objects (like paddles) and the Godot physics engine.</li>
+</ul>
+<hr>
+<h3 id="why-does-collisionshape2d-need-a-shape"><strong>Why Does <code>CollisionShape2D</code> Need a Shape?</strong></h3>
+<p>A <code>CollisionShape2D</code> is an <strong>empty object</strong> until we assign it a <strong>specific shape</strong> (such as a rectangle, circle, or polygon). This shape determines <strong>how the object interacts with other objects</strong> in the game world.</p>
+<p>Godot <strong>requires</strong> a shape because:</p>
+<ol>
+<li><strong>Shapes define the object’s physical boundaries</strong>—Without a shape, there is no way to determine where the paddle &ldquo;begins&rdquo; and &ldquo;ends.&rdquo;</li>
+<li><strong>The physics engine needs a defined space</strong> to calculate collisions—Without a shape, the engine does not know where to apply collision responses.</li>
+<li><strong>Different shapes provide different collision behaviors</strong>—A rectangle is good for walls and paddles, a circle is good for balls, and a polygon allows custom shapes.</li>
+</ol>
+<p>This means that simply adding a <code>CollisionShape2D</code> to an object <strong>does not create collision detection</strong>. We <strong>must</strong> define a shape and assign it to the <code>CollisionShape2D</code> for it to work.</p>
+<hr>
+<h3 id="step-by-step-breakdown-of-collision-setup"><strong>Step-by-Step Breakdown of Collision Setup</strong></h3>
+<p>Let’s examine <strong>each line of code</strong> and explain why it is necessary.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-gdscript" data-lang="gdscript"><span style="display:flex;"><span><span style="color:#66d9ef">var</span> collider <span style="color:#f92672">=</span> <span style="color:#a6e22e">CollisionShape2D</span><span style="color:#f92672">.</span><span style="color:#a6e22e">new</span>()
+</span></span></code></pre></div><ul>
+<li><strong>Creates a new <code>CollisionShape2D</code> object</strong>.</li>
+<li>This is an <strong>empty</strong> collision object—it has no defined size or shape yet.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-gdscript" data-lang="gdscript"><span style="display:flex;"><span><span style="color:#66d9ef">var</span> shape <span style="color:#f92672">=</span> <span style="color:#a6e22e">RectangleShape2D</span><span style="color:#f92672">.</span><span style="color:#a6e22e">new</span>()
+</span></span></code></pre></div><ul>
+<li>Creates a <strong>rectangle shape</strong> (a subclass of <code>Shape2D</code>).</li>
+<li>This is a <strong>physical definition</strong> of what the paddle should look like to the physics engine.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-gdscript" data-lang="gdscript"><span style="display:flex;"><span>shape<span style="color:#f92672">.</span>size <span style="color:#f92672">=</span> <span style="color:#a6e22e">Vector2</span>(WIDTH, HEIGHT)
+</span></span></code></pre></div><ul>
+<li><strong>Defines the size of the shape</strong> based on the paddle&rsquo;s constants (<code>WIDTH</code> and <code>HEIGHT</code>).</li>
+<li>This ensures that the collision box <strong>matches the paddle&rsquo;s visual representation</strong>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-gdscript" data-lang="gdscript"><span style="display:flex;"><span>collider<span style="color:#f92672">.</span>shape <span style="color:#f92672">=</span> shape
+</span></span></code></pre></div><ul>
+<li><strong>Assigns the shape to the collider</strong> so it has a physical presence.</li>
+<li>Now, the physics engine <strong>recognizes this as a solid object</strong>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-gdscript" data-lang="gdscript"><span style="display:flex;"><span><span style="color:#a6e22e">add_child</span>(collider)
+</span></span></code></pre></div><ul>
+<li><strong>Attaches the collider to the paddle</strong> so that it moves with the paddle.</li>
+<li>Without this, the paddle would move, but its collision box would remain in place.</li>
+</ul>
+<hr>
+<h1 id="17-moving-the-paddle-player-input--ai-logic"><strong>1.7: Moving the Paddle (Player Input &amp; AI Logic)</strong></h1>
+<p>At this point, our paddle <strong>exists, has a visual representation, and has a collision shape</strong> that prevents other objects from passing through it. However, the paddle <strong>does not move yet</strong>. In this step, we will implement <strong>player-controlled movement</strong> and <strong>AI-controlled movement</strong>, while explaining new concepts like <strong>inherited physics properties (<code>velocity.y</code>)</strong>, <strong>movement handling (<code>move_and_collide()</code>)</strong>, and <strong>basic math functions (<code>sign()</code>)</strong>.</p>
+<hr>
+<h3 id="-171-how-do-we-move-the-paddle"><strong>📌 1.7.1: How Do We Move the Paddle?</strong></h3>
+<p>In Godot, <strong>movement in a 2D game is controlled by modifying an object’s position over time</strong>. Because our paddle <strong>extends <code>CharacterBody2D</code></strong>, it automatically inherits some useful built-in physics properties.</p>
+<p>One of these properties is:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-gdscript" data-lang="gdscript"><span style="display:flex;"><span>velocity: <span style="color:#a6e22e">Vector2</span>
+</span></span></code></pre></div><p>This represents the <strong>speed and direction of movement</strong> for a <code>CharacterBody2D</code> object.</p>
+<ul>
+<li><strong><code>velocity.x</code></strong> → Controls <strong>horizontal movement</strong> (left/right).</li>
+<li><strong><code>velocity.y</code></strong> → Controls <strong>vertical movement</strong> (up/down).</li>
+</ul>
+<p>Since our paddle <strong>only moves up and down</strong>, we will modify <strong><code>velocity.y</code></strong> to determine the paddle’s movement speed.</p>
+<hr>
+<h3 id="-172-understanding-move_and_collide"><strong>📌 1.7.2: Understanding <code>move_and_collide()</code></strong></h3>
+<p>Godot provides a built-in function for moving physics objects:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-gdscript" data-lang="gdscript"><span style="display:flex;"><span><span style="color:#a6e22e">move_and_collide</span>(velocity <span style="color:#f92672">*</span> delta)
+</span></span></code></pre></div><p>This function moves the object <strong>by the specified velocity</strong> and <strong>checks for collisions along the way</strong>.</p>
+<ul>
+<li>If <strong>no collision occurs</strong>, the object moves freely.</li>
+<li>If <strong>a collision occurs</strong>, the object <strong>stops at the collision point</strong>, preventing it from passing through other objects.</li>
+</ul>
+<p>This function is essential for <strong>ensuring that the paddle stops when it reaches a wall</strong> instead of continuing through it.</p>
+<hr>
+<h3 id="-173-implementing-player-controlled-movement"><strong>📌 1.7.3: Implementing Player-Controlled Movement</strong></h3>
+<p>We want the <strong>player</strong> to move the paddle <strong>up and down</strong> using the keyboard. In Godot, we retrieve player input using:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-gdscript" data-lang="gdscript"><span style="display:flex;"><span><span style="color:#a6e22e">Input</span><span style="color:#f92672">.</span><span style="color:#a6e22e">get_axis</span>(<span style="color:#e6db74">&#34;ui_up&#34;</span>, <span style="color:#e6db74">&#34;ui_down&#34;</span>)
+</span></span></code></pre></div><ul>
+<li><strong>Returns <code>1</code> if &ldquo;ui_up&rdquo; is pressed</strong> (moving up).</li>
+<li><strong>Returns <code>-1</code> if &ldquo;ui_down&rdquo; is pressed</strong> (moving down).</li>
+<li><strong>Returns <code>0</code> if neither key is pressed</strong> (no movement).</li>
+</ul>
+<h3 id="adding-player-movement-to-paddlegd"><strong>Adding Player Movement to <code>paddle.gd</code></strong></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-gdscript" data-lang="gdscript"><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">_player_move</span>(delta):
+</span></span><span style="display:flex;"><span>    velocity<span style="color:#f92672">.</span>y <span style="color:#f92672">=</span> <span style="color:#a6e22e">Input</span><span style="color:#f92672">.</span><span style="color:#a6e22e">get_axis</span>(<span style="color:#e6db74">&#34;ui_up&#34;</span>, <span style="color:#e6db74">&#34;ui_down&#34;</span>) <span style="color:#f92672">*</span> SPEED
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">move_and_collide</span>(velocity <span style="color:#f92672">*</span> delta)
+</span></span></code></pre></div><h3 id="breaking-it-down"><strong>Breaking It Down</strong></h3>
+<ol>
+<li>
+<p><strong><code>velocity.y = Input.get_axis(&quot;ui_up&quot;, &quot;ui_down&quot;) * SPEED</code></strong></p>
+<ul>
+<li>If the player presses <strong>&ldquo;ui_up&rdquo;</strong>, velocity becomes <strong>negative</strong>, moving the paddle <strong>up</strong>.</li>
+<li>If the player presses <strong>&ldquo;ui_down&rdquo;</strong>, velocity becomes <strong>positive</strong>, moving the paddle <strong>down</strong>.</li>
+<li>If no keys are pressed, velocity is <strong>zero</strong>, and the paddle does not move.</li>
+<li>Multiplying by <code>SPEED</code> ensures the paddle moves at a consistent rate.</li>
+</ul>
+</li>
+<li>
+<p><strong><code>move_and_collide(velocity * delta)</code></strong></p>
+<ul>
+<li>Moves the paddle <strong>based on velocity</strong>.</li>
+<li><code>delta</code> scales the movement to match the game’s frame rate, ensuring <strong>smooth movement</strong>.</li>
+</ul>
+</li>
+</ol>
+<p>At this point, <strong>the player can now control the paddle using the keyboard</strong>.</p>
+<hr>
+<h3 id="-174-implementing-ai-controlled-movement"><strong>📌 1.7.4: Implementing AI-Controlled Movement</strong></h3>
+<p>The <strong>AI paddle</strong> needs to track the <strong>ball’s Y position</strong> and move accordingly. To ensure fairness, the AI should have a <strong>reaction delay</strong> so it does not immediately respond to every ball movement.</p>
+<h4 id="introducing-sign"><strong>Introducing <code>sign()</code></strong></h4>
+<p>The AI will use the <code>sign()</code> function:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-gdscript" data-lang="gdscript"><span style="display:flex;"><span>sign(value)
+</span></span></code></pre></div><ul>
+<li>Returns <strong>1</strong> if <code>value</code> is positive.</li>
+<li>Returns <strong>-1</strong> if <code>value</code> is negative.</li>
+<li>Returns <strong>0</strong> if <code>value</code> is zero.</li>
+</ul>
+<p>This function helps determine <strong>which direction the AI should move</strong>.<br>
+For example:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-gdscript" data-lang="gdscript"><span style="display:flex;"><span>sign(ball<span style="color:#f92672">.</span>position<span style="color:#f92672">.</span>y <span style="color:#f92672">-</span> position<span style="color:#f92672">.</span>y)
+</span></span></code></pre></div><ul>
+<li><strong>If the ball is above the paddle</strong> → Returns <code>-1</code>, meaning &ldquo;move up&rdquo;.</li>
+<li><strong>If the ball is below the paddle</strong> → Returns <code>1</code>, meaning &ldquo;move down&rdquo;.</li>
+<li><strong>If the ball is at the same height</strong> → Returns <code>0</code>, meaning &ldquo;do nothing&rdquo;.</li>
+</ul>
+<h4 id="adding-ai-movement-to-paddlegd"><strong>Adding AI Movement to <code>paddle.gd</code></strong></h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-gdscript" data-lang="gdscript"><span style="display:flex;"><span><span style="color:#66d9ef">var</span> ai_reaction_delay <span style="color:#f92672">:=</span> <span style="color:#ae81ff">0.1</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">var</span> _reaction_timer <span style="color:#f92672">:=</span> <span style="color:#ae81ff">0.0</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">_ai_move</span>(delta):
+</span></span><span style="display:flex;"><span>    _reaction_timer <span style="color:#f92672">+=</span> delta
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> _reaction_timer <span style="color:#f92672">&gt;=</span> ai_reaction_delay:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">var</span> ball <span style="color:#f92672">=</span> <span style="color:#a6e22e">get_tree</span>()<span style="color:#f92672">.</span><span style="color:#a6e22e">get_first_node_in_group</span>(<span style="color:#e6db74">&#34;ball&#34;</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> ball:
+</span></span><span style="display:flex;"><span>            velocity<span style="color:#f92672">.</span>y <span style="color:#f92672">=</span> sign(ball<span style="color:#f92672">.</span>position<span style="color:#f92672">.</span>y <span style="color:#f92672">-</span> position<span style="color:#f92672">.</span>y) <span style="color:#f92672">*</span> SPEED <span style="color:#f92672">*</span> <span style="color:#ae81ff">0.8</span>
+</span></span><span style="display:flex;"><span>        _reaction_timer <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">move_and_collide</span>(velocity <span style="color:#f92672">*</span> delta)
+</span></span></code></pre></div><h4 id="breaking-it-down-1"><strong>Breaking It Down</strong></h4>
+<ol>
+<li>
+<p><strong><code>_reaction_timer += delta</code></strong></p>
+<ul>
+<li>Increases the timer based on the time that has passed since the last frame.</li>
+<li>This ensures the AI <strong>only updates its movement at fixed intervals</strong>, making it more natural.</li>
+</ul>
+</li>
+<li>
+<p><strong><code>if _reaction_timer &gt;= ai_reaction_delay:</code></strong></p>
+<ul>
+<li>Only moves the AI after a <strong>minimum delay</strong>, preventing it from reacting too quickly.</li>
+</ul>
+</li>
+<li>
+<p><strong><code>var ball = get_tree().get_first_node_in_group(&quot;ball&quot;)</code></strong></p>
+<ul>
+<li>Finds the ball in the game and stores it in a variable.</li>
+</ul>
+</li>
+<li>
+<p><strong><code>velocity.y = sign(ball.position.y - position.y) * SPEED * 0.8</code></strong></p>
+<ul>
+<li>Uses <code>sign()</code> to <strong>move the AI toward the ball</strong>.</li>
+<li>Multiplies by <code>SPEED * 0.8</code> so the AI <strong>moves slightly slower than the player</strong>.</li>
+</ul>
+</li>
+</ol>
+<h4 id="understanding-sign-and-how-it-helps-ai-movement"><strong>Understanding <code>sign()</code> and How It Helps AI Movement</strong></h4>
+<p>In this section, we introduce <code>sign()</code>, a mathematical function that helps determine <strong>direction</strong>. However, we have not yet explained <strong>why</strong> it works or <strong>how to think about it</strong> in other situations. This section will break down the <strong>math behind <code>sign()</code></strong>, explain how it <strong>conceptualizes movement</strong>, and compare it to alternative approaches.</p>
+<hr>
+<h4 id="-what-does-signvalue-do"><strong>📌 What Does <code>sign(value)</code> Do?</strong></h4>
+<p>The <code>sign()</code> function is a <strong>basic mathematical function</strong> that returns:</p>
+<table>
+  <thead>
+      <tr>
+          <th>Input Value</th>
+          <th>Output of <code>sign(value)</code></th>
+          <th>Meaning</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>value &gt; 0</code></td>
+          <td><code>1</code></td>
+          <td>Positive direction (move up/down/right)</td>
+      </tr>
+      <tr>
+          <td><code>value &lt; 0</code></td>
+          <td><code>-1</code></td>
+          <td>Negative direction (move down/up/left)</td>
+      </tr>
+      <tr>
+          <td><code>value == 0</code></td>
+          <td><code>0</code></td>
+          <td>No movement</td>
+      </tr>
+  </tbody>
+</table>
+<p>Instead of checking if a value is <strong>greater than or less than another value manually</strong>, <code>sign()</code> tells us <strong>which direction the difference is pointing</strong>.</p>
+<hr>
+<h4 id="-how-do-we-use-sign-to-move-the-ai-paddle"><strong>📌 How Do We Use <code>sign()</code> to Move the AI Paddle?</strong></h4>
+<p>In our AI movement function, we determine <strong>whether the paddle should move up or down</strong> using:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-gdscript" data-lang="gdscript"><span style="display:flex;"><span>velocity<span style="color:#f92672">.</span>y <span style="color:#f92672">=</span> sign(ball<span style="color:#f92672">.</span>position<span style="color:#f92672">.</span>y <span style="color:#f92672">-</span> position<span style="color:#f92672">.</span>y) <span style="color:#f92672">*</span> SPEED <span style="color:#f92672">*</span> <span style="color:#ae81ff">0.8</span>
+</span></span></code></pre></div><p>Let’s break this expression into <strong>parts</strong>:</p>
+<ol>
+<li>
+<p><strong><code>ball.position.y - position.y</code></strong></p>
+<ul>
+<li>This finds the <strong>vertical distance</strong> between the ball and the paddle.</li>
+<li>If the result is <strong>positive</strong>, the ball is <strong>below the paddle</strong>.</li>
+<li>If the result is <strong>negative</strong>, the ball is <strong>above the paddle</strong>.</li>
+</ul>
+</li>
+<li>
+<p><strong><code>sign(ball.position.y - position.y)</code></strong></p>
+<ul>
+<li>This converts the difference into a <strong>directional value</strong> (<code>1</code>, <code>-1</code>, or <code>0</code>).</li>
+<li>If the ball is <strong>below the paddle</strong>, it returns <code>1</code> (move down).</li>
+<li>If the ball is <strong>above the paddle</strong>, it returns <code>-1</code> (move up).</li>
+<li>If the ball is perfectly aligned, it returns <code>0</code> (stay still).</li>
+</ul>
+</li>
+<li>
+<p><strong><code>* SPEED * 0.8</code></strong></p>
+<ul>
+<li>This scales the movement so that the paddle moves at <strong>80% of the player’s speed</strong>.</li>
+</ul>
+</li>
+</ol>
+<p>Thus, <strong><code>velocity.y = sign(ball.position.y - position.y) * SPEED * 0.8</code></strong> allows the AI to <strong>automatically adjust its direction without any if-statements</strong>.</p>
+<hr>
+<h4 id="-alternative-approach-using-if-statements-instead-of-sign"><strong>📌 Alternative Approach: Using If-Statements Instead of <code>sign()</code></strong></h4>
+<p>If we <strong>did not use <code>sign()</code></strong>, we would have to write <strong>manual conditions</strong> like this:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-gdscript" data-lang="gdscript"><span style="display:flex;"><span><span style="color:#66d9ef">if</span> ball<span style="color:#f92672">.</span>position<span style="color:#f92672">.</span>y <span style="color:#f92672">&gt;</span> position<span style="color:#f92672">.</span>y:
+</span></span><span style="display:flex;"><span>    velocity<span style="color:#f92672">.</span>y <span style="color:#f92672">=</span> SPEED <span style="color:#f92672">*</span> <span style="color:#ae81ff">0.8</span>  <span style="color:#75715e"># Move down</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">elif</span> ball<span style="color:#f92672">.</span>position<span style="color:#f92672">.</span>y <span style="color:#f92672">&lt;</span> position<span style="color:#f92672">.</span>y:
+</span></span><span style="display:flex;"><span>    velocity<span style="color:#f92672">.</span>y <span style="color:#f92672">=</span> <span style="color:#f92672">-</span>SPEED <span style="color:#f92672">*</span> <span style="color:#ae81ff">0.8</span>  <span style="color:#75715e"># Move up</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>    velocity<span style="color:#f92672">.</span>y <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>  <span style="color:#75715e"># Stay still</span>
+</span></span></code></pre></div><p>This is a <strong>valid</strong> approach but has <strong>downsides</strong>:</p>
+<ul>
+<li>Requires <strong>multiple lines</strong> of code.</li>
+<li>Harder to <strong>read and modify</strong> later.</li>
+<li>More difficult to use in <strong>other scenarios</strong> (requires additional logic for left/right movement).</li>
+</ul>
+<p>Using <code>sign()</code> makes the logic <strong>simpler</strong>, more <strong>scalable</strong>, and easier to <strong>reuse</strong>.</p>
+<hr>
+<h4 id="-conceptualizing-sign-for-future-use"><strong>📌 Conceptualizing <code>sign()</code> for Future Use</strong></h4>
+<p>Whenever you need to <strong>determine direction</strong>, consider using <code>sign()</code>.</p>
+<p><strong>Examples of When to Use <code>sign()</code></strong>:</p>
+<ol start="4">
+<li>
+<p><strong>Moving toward a target position</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-gdscript" data-lang="gdscript"><span style="display:flex;"><span><span style="color:#66d9ef">var</span> direction <span style="color:#f92672">=</span> sign(target_position <span style="color:#f92672">-</span> current_position)
+</span></span><span style="display:flex;"><span>velocity <span style="color:#f92672">=</span> direction <span style="color:#f92672">*</span> speed
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Checking if an object is to the left or right of another object</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-gdscript" data-lang="gdscript"><span style="display:flex;"><span><span style="color:#66d9ef">var</span> x_direction <span style="color:#f92672">=</span> sign(object2<span style="color:#f92672">.</span>x <span style="color:#f92672">-</span> object1<span style="color:#f92672">.</span>x)  <span style="color:#75715e"># -1 if left, 1 if right</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Applying a force in the correct direction</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-gdscript" data-lang="gdscript"><span style="display:flex;"><span><span style="color:#a6e22e">apply_impulse</span>(<span style="color:#a6e22e">Vector2</span>(sign(player_position<span style="color:#f92672">.</span>x <span style="color:#f92672">-</span> enemy_position<span style="color:#f92672">.</span>x) <span style="color:#f92672">*</span> force, <span style="color:#ae81ff">0</span>))
+</span></span></code></pre></div></li>
+</ol>
+<p>Using <code>sign()</code> simplifies many movement and AI behaviors where <strong>direction needs to be determined dynamically</strong>.</p>
+<hr>
+<ol>
+<li>
+<p><strong><code>_reaction_timer = 0</code></strong></p>
+<ul>
+<li>Resets the timer so the AI will wait before updating its movement again.</li>
+</ul>
+</li>
+<li>
+<p><strong><code>move_and_collide(velocity * delta)</code></strong></p>
+<ul>
+<li>Moves the AI paddle and stops it if it collides with something.</li>
+</ul>
+</li>
+</ol>
+<p>At this point, the <strong>AI paddle is functional and follows the ball with a natural reaction delay</strong>.</p>
+<hr>
+<h3 id="-175-calling-the-movement-functions"><strong>📌 1.7.5: Calling the Movement Functions</strong></h3>
+<p>We now need to call the correct movement function based on whether the paddle is <strong>player-controlled or AI-controlled</strong>.</p>
+<h4 id="adding-movement-logic-to-_physics_process"><strong>Adding Movement Logic to <code>_physics_process()</code></strong></h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-gdscript" data-lang="gdscript"><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">_physics_process</span>(delta):
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> is_ai:
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">_ai_move</span>(delta)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">_player_move</span>(delta)
+</span></span></code></pre></div><h4 id="breaking-it-down-2"><strong>Breaking It Down</strong></h4>
+<ul>
+<li><strong>If <code>is_ai</code> is <code>true</code></strong>, the AI movement function runs.</li>
+<li><strong>If <code>is_ai</code> is <code>false</code></strong>, the player movement function runs.</li>
+</ul>
+<p>Now, each paddle <strong>knows whether it should listen to player input or follow the ball</strong>.</p>
+<hr>
+<h3 id="-176-final-code-for-movement"><strong>📌 1.7.6: Final Code for Movement</strong></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-gdscript" data-lang="gdscript"><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">_physics_process</span>(delta):
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">if</span> is_ai:
+</span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">_ai_move</span>(delta)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">_player_move</span>(delta)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">_player_move</span>(delta):
+</span></span><span style="display:flex;"><span>	velocity<span style="color:#f92672">.</span>y <span style="color:#f92672">=</span> <span style="color:#a6e22e">Input</span><span style="color:#f92672">.</span><span style="color:#a6e22e">get_axis</span>(<span style="color:#e6db74">&#34;ui_up&#34;</span>, <span style="color:#e6db74">&#34;ui_down&#34;</span>) <span style="color:#f92672">*</span> speed
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">move_and_collide</span>(velocity <span style="color:#f92672">*</span> delta)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">_ai_move</span>(delta):
+</span></span><span style="display:flex;"><span>	_reaction_timer <span style="color:#f92672">+=</span> delta
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">if</span> _reaction_timer <span style="color:#f92672">&gt;=</span> ai_reaction_delay:
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">var</span> ball <span style="color:#f92672">=</span> <span style="color:#a6e22e">get_tree</span>()<span style="color:#f92672">.</span><span style="color:#a6e22e">get_first_node_in_group</span>(<span style="color:#e6db74">&#34;ball&#34;</span>)
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">if</span> ball:
+</span></span><span style="display:flex;"><span>			velocity<span style="color:#f92672">.</span>y <span style="color:#f92672">=</span> sign(ball<span style="color:#f92672">.</span>position<span style="color:#f92672">.</span>y <span style="color:#f92672">-</span> position<span style="color:#f92672">.</span>y) <span style="color:#f92672">*</span> speed <span style="color:#f92672">*</span> <span style="color:#ae81ff">0.8</span>
+</span></span><span style="display:flex;"><span>		_reaction_timer <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">move_and_collide</span>(velocity <span style="color:#f92672">*</span> delta)
+</span></span></code></pre></div><hr>
+<h3 id="final-paddle-code"><strong>Final Paddle Code</strong></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-gdscript" data-lang="gdscript"><span style="display:flex;"><span><span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">CharacterBody2D</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class_name</span> <span style="color:#a6e22e">Paddle</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">var</span> height <span style="color:#f92672">:=</span> <span style="color:#ae81ff">100</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">var</span> width <span style="color:#f92672">:=</span> <span style="color:#ae81ff">20</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">var</span> speed <span style="color:#f92672">:=</span> <span style="color:#ae81ff">400.0</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">var</span> is_ai <span style="color:#f92672">:=</span> <span style="color:#66d9ef">false</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">var</span> ai_reaction_delay <span style="color:#f92672">:=</span> <span style="color:#ae81ff">0.1</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">var</span> _reaction_timer <span style="color:#f92672">:=</span> <span style="color:#ae81ff">0.0</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">_init</span>(start_position: <span style="color:#a6e22e">Vector2</span>, ai: <span style="color:#66d9ef">bool</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">false</span>):
+</span></span><span style="display:flex;"><span>	self<span style="color:#f92672">.</span>is_ai <span style="color:#f92672">=</span> ai
+</span></span><span style="display:flex;"><span>	self<span style="color:#f92672">.</span>position <span style="color:#f92672">=</span> start_position
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e"># Paddle</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">var</span> rect <span style="color:#f92672">=</span> <span style="color:#a6e22e">ColorRect</span><span style="color:#f92672">.</span><span style="color:#a6e22e">new</span>()
+</span></span><span style="display:flex;"><span>	rect<span style="color:#f92672">.</span>color <span style="color:#f92672">=</span> <span style="color:#a6e22e">Color</span><span style="color:#f92672">.</span>WHITE
+</span></span><span style="display:flex;"><span>	rect<span style="color:#f92672">.</span>size <span style="color:#f92672">=</span> <span style="color:#a6e22e">Vector2</span>(width, height)
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">add_child</span>(rect)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e"># Collision box for the paddle</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">var</span> collider <span style="color:#f92672">=</span> <span style="color:#a6e22e">CollisionShape2D</span><span style="color:#f92672">.</span><span style="color:#a6e22e">new</span>()
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">var</span> shape <span style="color:#f92672">=</span> <span style="color:#a6e22e">RectangleShape2D</span><span style="color:#f92672">.</span><span style="color:#a6e22e">new</span>()
+</span></span><span style="display:flex;"><span>	shape<span style="color:#f92672">.</span>size <span style="color:#f92672">=</span> <span style="color:#a6e22e">Vector2</span>(width, height)
+</span></span><span style="display:flex;"><span>	collider<span style="color:#f92672">.</span>shape <span style="color:#f92672">=</span> shape
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">add_child</span>(collider)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">_physics_process</span>(delta):
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">if</span> is_ai:
+</span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">_ai_move</span>(delta)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">_player_move</span>(delta)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">_player_move</span>(delta):
+</span></span><span style="display:flex;"><span>	velocity<span style="color:#f92672">.</span>y <span style="color:#f92672">=</span> <span style="color:#a6e22e">Input</span><span style="color:#f92672">.</span><span style="color:#a6e22e">get_axis</span>(<span style="color:#e6db74">&#34;ui_up&#34;</span>, <span style="color:#e6db74">&#34;ui_down&#34;</span>) <span style="color:#f92672">*</span> speed
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">move_and_collide</span>(velocity <span style="color:#f92672">*</span> delta)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">_ai_move</span>(delta):
+</span></span><span style="display:flex;"><span>	_reaction_timer <span style="color:#f92672">+=</span> delta
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">if</span> _reaction_timer <span style="color:#f92672">&gt;=</span> ai_reaction_delay:
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">var</span> ball <span style="color:#f92672">=</span> <span style="color:#a6e22e">get_tree</span>()<span style="color:#f92672">.</span><span style="color:#a6e22e">get_first_node_in_group</span>(<span style="color:#e6db74">&#34;ball&#34;</span>)
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">if</span> ball:
+</span></span><span style="display:flex;"><span>			velocity<span style="color:#f92672">.</span>y <span style="color:#f92672">=</span> sign(ball<span style="color:#f92672">.</span>position<span style="color:#f92672">.</span>y <span style="color:#f92672">-</span> position<span style="color:#f92672">.</span>y) <span style="color:#f92672">*</span> speed <span style="color:#f92672">*</span> <span style="color:#ae81ff">0.8</span>
+</span></span><span style="display:flex;"><span>		_reaction_timer <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">move_and_collide</span>(velocity <span style="color:#f92672">*</span> delta)
+</span></span></code></pre></div><hr>
+<h1 id="step-2-creating-the-ball-ballgd--a-beginner-friendly-breakdown"><strong>Step 2: Creating the Ball (<code>ball.gd</code>) – A Beginner-Friendly Breakdown</strong></h1>
+<p>Now that we have created our <strong>paddle</strong>, it&rsquo;s time to add the <strong>ball</strong>. The ball is the <strong>core of the game</strong>, responsible for <strong>movement, bouncing, and scoring points</strong> when it crosses the screen boundaries. In this section, we will <strong>break everything down step by step</strong>, ensuring that <strong>even a complete beginner</strong> can understand every part of the code.</p>
+<hr>
+<h3 id="-21-what-is-the-balls-role-in-pong"><strong>📌 2.1: What is the Ball&rsquo;s Role in Pong?</strong></h3>
+<p>Before we write any code, let&rsquo;s understand what the <strong>ball needs to do</strong>:</p>
+<ul>
+<li><strong>Move continuously</strong> in a straight line</li>
+<li><strong>Bounce</strong> off walls and paddles</li>
+<li><strong>Detect when a player scores</strong> and reset its position</li>
+</ul>
+<p>We will implement this behavior using <strong>GDScript</strong> and <strong>Godot&rsquo;s physics system</strong>.</p>
+<hr>
+<h3 id="-22-setting-up-the-ball-class-ballgd"><strong>📌 2.2: Setting Up the Ball Class (<code>ball.gd</code>)</strong></h3>
+<p>Like the paddle, the ball needs to be an <strong>object</strong> in our game. In Godot, we define objects using <strong>classes</strong>.</p>
+<h4 id="-writing-our-ball-class"><strong>🖥️ Writing Our Ball Class</strong></h4>
+<p>Create a new file called <strong><code>ball.gd</code></strong> and add the following code:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-gdscript" data-lang="gdscript"><span style="display:flex;"><span><span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">CharacterBody2D</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class_name</span> <span style="color:#a6e22e">Ball</span>
+</span></span></code></pre></div><h4 id="-whats-happening-here-4"><strong>🔹 What&rsquo;s Happening Here?</strong></h4>
+<ul>
+<li><strong><code>extends CharacterBody2D</code></strong> → This means the ball is a <strong>physics-based object</strong> that can move and collide with other objects.</li>
+<li><strong><code>class_name Ball</code></strong> → This registers <strong>&ldquo;Ball&rdquo;</strong> as a reusable class, allowing us to create and manage the ball easily later.</li>
+</ul>
+<hr>
+<h3 id="-23-defining-the-balls-properties"><strong>📌 2.3: Defining the Ball&rsquo;s Properties</strong></h3>
+<p>To control how the ball behaves, we define some <strong>variables</strong> at the top of the script.</p>
+<h4 id="-adding-properties-to-our-ball-class"><strong>✍️ Adding Properties to Our Ball Class</strong></h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-gdscript" data-lang="gdscript"><span style="display:flex;"><span><span style="color:#66d9ef">var</span> size <span style="color:#f92672">:=</span> <span style="color:#a6e22e">Vector2</span>(<span style="color:#ae81ff">20</span>, <span style="color:#ae81ff">20</span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">var</span> initial_speed <span style="color:#f92672">:=</span> <span style="color:#ae81ff">300</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">var</span> viewport
+</span></span></code></pre></div><h4 id="-whats-happening-here-5"><strong>🔹 What&rsquo;s Happening Here?</strong></h4>
+<ul>
+<li><strong><code>var size := Vector2(20, 20)</code></strong> → The ball will be <strong>20x20 pixels</strong> in size.</li>
+<li><strong><code>var initial_speed := 300</code></strong> → The ball moves at a speed of <strong>300 pixels per second</strong>.</li>
+<li><strong><code>var viewport</code></strong> → We&rsquo;ll store the viewport size for boundary checking.</li>
+</ul>
+<p>🚀 <strong>Why use these properties?</strong></p>
+<ul>
+<li>They make it <strong>easy to tweak the game&rsquo;s difficulty</strong> by adjusting the speed.</li>
+<li>The size variable ensures <strong>consistent dimensions</strong> across the ball&rsquo;s visuals and collision.</li>
+</ul>
+<hr>
+<h3 id="-24-making-the-ball-visible"><strong>📌 2.4: Making the Ball Visible</strong></h3>
+<p>We need to create the ball&rsquo;s visual representation and set up its initial position.</p>
+<h4 id="-adding-a-visual-representation"><strong>✍️ Adding a Visual Representation</strong></h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-gdscript" data-lang="gdscript"><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">_init</span>(start_position: <span style="color:#a6e22e">Vector2</span>):
+</span></span><span style="display:flex;"><span>    self<span style="color:#f92672">.</span>position <span style="color:#f92672">=</span> start_position
+</span></span><span style="display:flex;"><span>    viewport <span style="color:#f92672">=</span> <span style="color:#a6e22e">get_viewport_rect</span>()<span style="color:#f92672">.</span>size
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">add_to_group</span>(<span style="color:#e6db74">&#34;ball&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">var</span> rect <span style="color:#f92672">=</span> <span style="color:#a6e22e">ColorRect</span><span style="color:#f92672">.</span><span style="color:#a6e22e">new</span>()
+</span></span><span style="display:flex;"><span>    rect<span style="color:#f92672">.</span>color <span style="color:#f92672">=</span> <span style="color:#a6e22e">Color</span>(<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">1</span>)  <span style="color:#75715e"># Black color</span>
+</span></span><span style="display:flex;"><span>    rect<span style="color:#f92672">.</span>size <span style="color:#f92672">=</span> size
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">add_child</span>(rect)
+</span></span></code></pre></div><h4 id="-whats-happening-here-6"><strong>🔹 What&rsquo;s Happening Here?</strong></h4>
+<ul>
+<li>
+<p><strong><code>_init(start_position: Vector2)</code></strong></p>
+<ul>
+<li>This function <strong>runs when the ball is created</strong></li>
+<li>It places the ball at the specified <code>start_position</code></li>
+<li>Gets the viewport size for boundary checking</li>
+</ul>
+</li>
+<li>
+<p><strong><code>add_to_group(&quot;ball&quot;)</code></strong></p>
+<ul>
+<li>Groups all balls together so <strong>AI paddles can detect the ball&rsquo;s position</strong></li>
+</ul>
+</li>
+<li>
+<p><strong>Creating the visual square</strong></p>
+<ul>
+<li>Uses a <code>ColorRect</code> for the ball&rsquo;s appearance</li>
+<li>Sets it to black (<code>Color(0,0,0,1)</code>)</li>
+<li>Matches the size to our <code>size</code> variable</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="-25-adding-collision-detection"><strong>📌 2.5: Adding Collision Detection</strong></h3>
+<p>To make the ball interact with paddles and walls, we need to add collision detection.</p>
+<h4 id="-adding-collision-to-the-ball"><strong>✍️ Adding Collision to the Ball</strong></h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-gdscript" data-lang="gdscript"><span style="display:flex;"><span><span style="color:#66d9ef">var</span> collider <span style="color:#f92672">=</span> <span style="color:#a6e22e">CollisionShape2D</span><span style="color:#f92672">.</span><span style="color:#a6e22e">new</span>()
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">var</span> shape <span style="color:#f92672">=</span> <span style="color:#a6e22e">CircleShape2D</span><span style="color:#f92672">.</span><span style="color:#a6e22e">new</span>()
+</span></span><span style="display:flex;"><span>shape<span style="color:#f92672">.</span>radius <span style="color:#f92672">=</span> size<span style="color:#f92672">.</span>x <span style="color:#f92672">/</span> <span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span>collider<span style="color:#f92672">.</span>shape <span style="color:#f92672">=</span> shape
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">add_child</span>(collider)
+</span></span></code></pre></div><h4 id="-whats-happening-here-7"><strong>🔹 What&rsquo;s Happening Here?</strong></h4>
+<ul>
+<li>Creates a <strong>circular collision shape</strong> for smoother physics</li>
+<li>Sets the radius to <strong>half the ball&rsquo;s width</strong> (<code>size.x / 2</code>)</li>
+<li>Attaches the collision shape to the ball</li>
+</ul>
+<hr>
+<h3 id="-26-implementing-ball-movement-and-bouncing"><strong>📌 2.6: Implementing Ball Movement and Bouncing</strong></h3>
+<p>Now we&rsquo;ll make the ball move and handle collisions with paddles and walls.</p>
+<h4 id="-adding-movement-logic"><strong>✍️ Adding Movement Logic</strong></h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-gdscript" data-lang="gdscript"><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">_physics_process</span>(delta):
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">var</span> collision <span style="color:#f92672">=</span> <span style="color:#a6e22e">move_and_collide</span>(velocity <span style="color:#f92672">*</span> delta)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Check paddle collisions</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> collision:
+</span></span><span style="display:flex;"><span>        velocity <span style="color:#f92672">=</span> velocity<span style="color:#f92672">.</span><span style="color:#a6e22e">bounce</span>(collision<span style="color:#f92672">.</span><span style="color:#a6e22e">get_normal</span>())
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Manually handle viewport bouncing if walls are not being detected</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> position<span style="color:#f92672">.</span>y <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">0</span>:  <span style="color:#75715e"># Top of screen</span>
+</span></span><span style="display:flex;"><span>        velocity<span style="color:#f92672">.</span>y <span style="color:#f92672">=</span> abs(velocity<span style="color:#f92672">.</span>y)  <span style="color:#75715e"># Force positive y-velocity</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">elif</span> position<span style="color:#f92672">.</span>y <span style="color:#f92672">&gt;=</span> viewport<span style="color:#f92672">.</span>y:  <span style="color:#75715e"># Bottom of screen</span>
+</span></span><span style="display:flex;"><span>        velocity<span style="color:#f92672">.</span>y <span style="color:#f92672">=</span> <span style="color:#f92672">-</span>abs(velocity<span style="color:#f92672">.</span>y)  <span style="color:#75715e"># Force negative y-velocity</span>
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">_check_scoring</span>()
+</span></span></code></pre></div><h4 id="-whats-happening-here-8"><strong>🔹 What&rsquo;s Happening Here?</strong></h4>
+<ul>
+<li><strong><code>_physics_process(delta)</code></strong> runs every frame to update physics</li>
+<li><strong>Paddle collisions</strong> use Godot&rsquo;s built-in collision system</li>
+<li><strong>Wall collisions</strong> are handled manually by checking screen boundaries</li>
+<li><strong>Score checking</strong> happens after movement is processed</li>
+</ul>
+<hr>
+<h3 id="-27-resetting-the-ball"><strong>📌 2.7: Resetting the Ball</strong></h3>
+<p>When a point is scored, we need to reset the ball to the center with a random direction.</p>
+<h4 id="-implementing-reset-logic"><strong>✍️ Implementing Reset Logic</strong></h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-gdscript" data-lang="gdscript"><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">reset</span>():
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">var</span> x_direction <span style="color:#f92672">=</span> [<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>][randi() <span style="color:#f92672">%</span> <span style="color:#ae81ff">2</span>]  <span style="color:#75715e"># Randomly choose -1 (left) or 1 (right)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">var</span> y_direction <span style="color:#f92672">=</span> randf_range(<span style="color:#f92672">-</span><span style="color:#ae81ff">1.0</span>, <span style="color:#ae81ff">1.0</span>)  <span style="color:#75715e"># Ensure a wider range of angles</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    velocity <span style="color:#f92672">=</span> <span style="color:#a6e22e">Vector2</span>(x_direction, y_direction)<span style="color:#f92672">.</span><span style="color:#a6e22e">normalized</span>() <span style="color:#f92672">*</span> initial_speed
+</span></span><span style="display:flex;"><span>    position <span style="color:#f92672">=</span> <span style="color:#a6e22e">get_viewport_rect</span>()<span style="color:#f92672">.</span>size <span style="color:#f92672">/</span> <span style="color:#ae81ff">2</span>
+</span></span></code></pre></div><h4 id="-whats-happening-here-9"><strong>🔹 What&rsquo;s Happening Here?</strong></h4>
+<ul>
+<li><strong>Random horizontal direction</strong> using array selection</li>
+<li><strong>Random vertical angle</strong> using <code>randf_range</code></li>
+<li><strong>Normalized velocity</strong> ensures consistent speed</li>
+<li><strong>Centers the ball</strong> on the screen</li>
+</ul>
+<hr>
+<h3 id="-28-handling-scoring"><strong>📌 2.8: Handling Scoring</strong></h3>
+<p>Finally, we need to detect when a player scores and update the game accordingly.</p>
+<h4 id="-adding-score-detection"><strong>✍️ Adding Score Detection</strong></h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-gdscript" data-lang="gdscript"><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">_check_scoring</span>():
+</span></span><span style="display:flex;"><span>    viewport <span style="color:#f92672">=</span> <span style="color:#a6e22e">get_viewport_rect</span>()<span style="color:#f92672">.</span>size
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> position<span style="color:#f92672">.</span>x <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">0</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">get_parent</span>()<span style="color:#f92672">.</span>player2_score <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">reset</span>()
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">elif</span> position<span style="color:#f92672">.</span>x <span style="color:#f92672">&gt;</span> viewport<span style="color:#f92672">.</span>x:
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">get_parent</span>()<span style="color:#f92672">.</span>player1_score <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">reset</span>()
+</span></span></code></pre></div><h4 id="-whats-happening-here-10"><strong>🔹 What&rsquo;s Happening Here?</strong></h4>
+<ul>
+<li>Updates viewport size (in case of window resizing)</li>
+<li>Checks if ball goes past left or right boundaries</li>
+<li>Updates appropriate player&rsquo;s score</li>
+<li>Calls <code>reset()</code> to start new round</li>
+</ul>
+<hr>
+<h3 id="-29-initializing-the-ball"><strong>📌 2.9: Initializing the Ball</strong></h3>
+<p>Don&rsquo;t forget to add the <code>_ready</code> function to initialize the ball when it&rsquo;s added to the scene!</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-gdscript" data-lang="gdscript"><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">_ready</span>():
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">reset</span>()
+</span></span></code></pre></div><p>This ensures the ball starts moving as soon as the game begins.</p>
+<hr>
+<p>That&rsquo;s it! You now have a fully functional ball for your Pong game. The ball will move, bounce off paddles and walls, and handle scoring. Next, we&rsquo;ll look at implementing the scoring display and game management.</p>
+<h1 id="step-3-creating-the-game-manager-maingd"><strong>Step 3: Creating the Game Manager (<code>main.gd</code>)</strong></h1>
+<p>With the <strong>Paddle</strong> and <strong>Ball</strong> classes completed, we now need a central system to manage the game. The <strong>Game Manager</strong> is responsible for <strong>creating and positioning the game objects</strong>, keeping track of scores, and ensuring the game runs correctly.</p>
+<p>This step will focus on <strong>object instantiation</strong>, <strong>score tracking</strong>, and <strong>viewport-aware positioning</strong> so that the paddles and ball appear in the correct locations.</p>
+<hr>
+<h2 id="31-the-role-of-the-game-manager"><strong>3.1: The Role of the Game Manager</strong></h2>
+<p>The Game Manager will:</p>
+<ol start="10">
+<li><strong>Create the paddles</strong> – One for the player and one for the AI.</li>
+<li><strong>Create the ball</strong> – It will start in the center of the screen.</li>
+<li><strong>Track the score</strong> – It will update when a player scores a point.</li>
+<li><strong>Position all objects correctly</strong> based on the screen size.</li>
+</ol>
+<p>Unlike the Paddle and Ball classes, which <strong>represent individual objects</strong>, the Game Manager is <strong>not a physical object</strong> in the game. It is a <strong>controller</strong> that manages the creation and behavior of other objects.</p>
+<hr>
+<h2 id="32-creating-the-game-manager-class-maingd"><strong>3.2: Creating the Game Manager Class (<code>main.gd</code>)</strong></h2>
+<p>In Godot, every game requires an <strong>entry point</strong> where the game starts. For this tutorial, <strong><code>main.gd</code></strong> serves as the <strong>game&rsquo;s root script</strong>.</p>
+<h3 id="defining-the-game-manager-class"><strong>Defining the Game Manager Class</strong></h3>
+<p>Create a new file called <strong><code>main.gd</code></strong> and attach it to the root node in <code>main.tscn</code>. Then, define the class:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-gdscript" data-lang="gdscript"><span style="display:flex;"><span><span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">Node2D</span>
+</span></span></code></pre></div><h3 id="what-this-does"><strong>What This Does</strong></h3>
+<ul>
+<li><strong><code>extends Node2D</code></strong> → This means the Game Manager is a <strong>non-physical object</strong> that can manage other objects.</li>
+<li>Unlike <code>CharacterBody2D</code>, which is used for moving objects, <code>Node2D</code> is appropriate for objects that do <strong>not</strong> require physics.</li>
+</ul>
+<p>At this stage, the <strong>Game Manager exists but does nothing</strong>. Next, we will define <strong>game variables</strong>.</p>
+<hr>
+<h2 id="33-tracking-the-score"><strong>3.3: Tracking the Score</strong></h2>
+<p>In Pong, each time the ball <strong>crosses the left or right boundary</strong>, a player scores. We need to store and update these scores.</p>
+<h3 id="adding-score-variables"><strong>Adding Score Variables</strong></h3>
+<p>Inside <code>main.gd</code>, add the following variables:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-gdscript" data-lang="gdscript"><span style="display:flex;"><span><span style="color:#66d9ef">var</span> player1_score <span style="color:#f92672">:=</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">var</span> player2_score <span style="color:#f92672">:=</span> <span style="color:#ae81ff">0</span>
+</span></span></code></pre></div><h3 id="what-this-does-1"><strong>What This Does</strong></h3>
+<ul>
+<li><strong><code>var player1_score := 0</code></strong> → Stores <strong>Player 1’s score</strong> (left side).</li>
+<li><strong><code>var player2_score := 0</code></strong> → Stores <strong>Player 2’s score</strong> (right side).</li>
+</ul>
+<p>By default, both scores are <strong>set to zero</strong> when the game begins. These variables will be updated in the Ball class when a player scores.</p>
+<hr>
+<h2 id="34-creating-the-paddles"><strong>3.4: Creating the Paddles</strong></h2>
+<p>Now that the game can track scores, we need to <strong>spawn the paddles</strong> and position them correctly.</p>
+<h3 id="defining-paddle-variables"><strong>Defining Paddle Variables</strong></h3>
+<p>At the top of <code>main.gd</code>, add:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-gdscript" data-lang="gdscript"><span style="display:flex;"><span><span style="color:#66d9ef">var</span> player
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">var</span> ai
+</span></span></code></pre></div><p>These variables will <strong>store references</strong> to the paddles so they can be accessed later.</p>
+<h3 id="instantiating-the-paddles"><strong>Instantiating the Paddles</strong></h3>
+<p>Add the following function:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-gdscript" data-lang="gdscript"><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">_create_paddles</span>():
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">var</span> viewport <span style="color:#f92672">=</span> <span style="color:#a6e22e">get_viewport_rect</span>()<span style="color:#f92672">.</span>size
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    player <span style="color:#f92672">=</span> Paddle<span style="color:#f92672">.</span><span style="color:#a6e22e">new</span>(<span style="color:#a6e22e">Vector2</span>(<span style="color:#ae81ff">50</span>, viewport<span style="color:#f92672">.</span>y <span style="color:#f92672">/</span> <span style="color:#ae81ff">2</span>), <span style="color:#66d9ef">false</span>)
+</span></span><span style="display:flex;"><span>    ai <span style="color:#f92672">=</span> Paddle<span style="color:#f92672">.</span><span style="color:#a6e22e">new</span>(<span style="color:#a6e22e">Vector2</span>(viewport<span style="color:#f92672">.</span>x <span style="color:#f92672">-</span> <span style="color:#ae81ff">50</span>, viewport<span style="color:#f92672">.</span>y <span style="color:#f92672">/</span> <span style="color:#ae81ff">2</span>), <span style="color:#66d9ef">true</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">add_child</span>(player)
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">add_child</span>(ai)
+</span></span></code></pre></div><h3 id="what-this-does-2"><strong>What This Does</strong></h3>
+<ol start="14">
+<li>
+<p><strong><code>var viewport = get_viewport_rect().size</code></strong></p>
+<ul>
+<li>Retrieves the <strong>screen size</strong> so we can position the paddles dynamically.</li>
+</ul>
+</li>
+<li>
+<p><strong><code>player = Paddle.new(Vector2(50, viewport.y / 2), false)</code></strong></p>
+<ul>
+<li>Creates a <strong>player-controlled paddle</strong>.</li>
+<li>Positions it <strong>50 pixels from the left</strong> and <strong>centered vertically</strong>.</li>
+<li><code>false</code> indicates <strong>this is a player paddle, not AI</strong>.</li>
+</ul>
+</li>
+<li>
+<p><strong><code>ai = Paddle.new(Vector2(viewport.x - 50, viewport.y / 2), true)</code></strong></p>
+<ul>
+<li>Creates an <strong>AI-controlled paddle</strong>.</li>
+<li>Positions it <strong>50 pixels from the right</strong> and <strong>centered vertically</strong>.</li>
+<li><code>true</code> indicates <strong>this is an AI paddle</strong>.</li>
+</ul>
+</li>
+<li>
+<p><strong><code>add_child(player)</code> and <code>add_child(ai)</code></strong></p>
+<ul>
+<li>Adds both paddles to the <strong>game world</strong>, making them visible and functional.</li>
+</ul>
+</li>
+</ol>
+<p>Now, when <code>_create_paddles()</code> is called, the paddles will be <strong>created and positioned correctly</strong>.</p>
+<hr>
+<h2 id="35-creating-the-ball"><strong>3.5: Creating the Ball</strong></h2>
+<p>Like the paddles, we need to <strong>create and position the ball</strong> at the start of the game.</p>
+<h3 id="defining-a-ball-variable"><strong>Defining a Ball Variable</strong></h3>
+<p>At the top of <code>main.gd</code>, add:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-gdscript" data-lang="gdscript"><span style="display:flex;"><span><span style="color:#66d9ef">var</span> ball
+</span></span></code></pre></div><p>This stores the ball instance so we can access it later.</p>
+<h3 id="instantiating-the-ball"><strong>Instantiating the Ball</strong></h3>
+<p>Add the following function:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-gdscript" data-lang="gdscript"><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">_create_ball</span>():
+</span></span><span style="display:flex;"><span>    ball <span style="color:#f92672">=</span> Ball<span style="color:#f92672">.</span><span style="color:#a6e22e">new</span>(<span style="color:#a6e22e">get_viewport_rect</span>()<span style="color:#f92672">.</span>size <span style="color:#f92672">/</span> <span style="color:#ae81ff">2</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">add_child</span>(ball)
+</span></span></code></pre></div><h3 id="what-this-does-3"><strong>What This Does</strong></h3>
+<ol start="18">
+<li>
+<p><strong><code>ball = Ball.new(get_viewport_rect().size / 2)</code></strong></p>
+<ul>
+<li>Creates the ball and places it at <strong>the center of the screen</strong>.</li>
+</ul>
+</li>
+<li>
+<p><strong><code>add_child(ball)</code></strong></p>
+<ul>
+<li>Adds the ball to the game world, making it appear on screen.</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h2 id="36-running-the-game-on-start"><strong>3.6: Running the Game on Start</strong></h2>
+<p>We need to ensure the paddles and ball are <strong>created automatically</strong> when the game starts.</p>
+<h3 id="calling-setup-functions-in-_ready"><strong>Calling Setup Functions in <code>_ready()</code></strong></h3>
+<p>Add the following function:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-gdscript" data-lang="gdscript"><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">_ready</span>():
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">_create_paddles</span>()
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">_create_ball</span>()
+</span></span></code></pre></div><h3 id="what-this-does-4"><strong>What This Does</strong></h3>
+<ul>
+<li><strong><code>_ready()</code></strong> runs when the game <strong>starts</strong>.</li>
+<li>Calls <code>_create_paddles()</code> and <code>_create_ball()</code> to <strong>spawn the game objects</strong>.</li>
+</ul>
+<p>At this point, the <strong>Game Manager initializes all game objects when the game starts</strong>.</p>
+<hr>
+<h2 id="37-final-code-for-maingd"><strong>3.7: Final Code for <code>main.gd</code></strong></h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-gdscript" data-lang="gdscript"><span style="display:flex;"><span><span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">Node2D</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Score tracking</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">var</span> player1_score <span style="color:#f92672">:=</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">var</span> player2_score <span style="color:#f92672">:=</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Game objects</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">var</span> player
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">var</span> ai
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">var</span> ball
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">_ready</span>():
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">_create_paddles</span>()
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">_create_ball</span>()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">_create_paddles</span>():
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">var</span> viewport <span style="color:#f92672">=</span> <span style="color:#a6e22e">get_viewport_rect</span>()<span style="color:#f92672">.</span>size
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    player <span style="color:#f92672">=</span> Paddle<span style="color:#f92672">.</span><span style="color:#a6e22e">new</span>(<span style="color:#a6e22e">Vector2</span>(<span style="color:#ae81ff">50</span>, viewport<span style="color:#f92672">.</span>y <span style="color:#f92672">/</span> <span style="color:#ae81ff">2</span>), <span style="color:#66d9ef">false</span>)
+</span></span><span style="display:flex;"><span>    ai <span style="color:#f92672">=</span> Paddle<span style="color:#f92672">.</span><span style="color:#a6e22e">new</span>(<span style="color:#a6e22e">Vector2</span>(viewport<span style="color:#f92672">.</span>x <span style="color:#f92672">-</span> <span style="color:#ae81ff">50</span>, viewport<span style="color:#f92672">.</span>y <span style="color:#f92672">/</span> <span style="color:#ae81ff">2</span>), <span style="color:#66d9ef">true</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">add_child</span>(player)
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">add_child</span>(ai)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">_create_ball</span>():
+</span></span><span style="display:flex;"><span>    ball <span style="color:#f92672">=</span> Ball<span style="color:#f92672">.</span><span style="color:#a6e22e">new</span>(<span style="color:#a6e22e">get_viewport_rect</span>()<span style="color:#f92672">.</span>size <span style="color:#f92672">/</span> <span style="color:#ae81ff">2</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">add_child</span>(ball)
+</span></span></code></pre></div><hr>
+<h2 id="38-summary-of-what-weve-built"><strong>3.8: Summary of What We’ve Built</strong></h2>
+<p>At this stage, our <strong>Game Manager</strong> successfully:</p>
+<ul>
+<li><strong>Tracks scores for Player 1 and AI.</strong></li>
+<li><strong>Creates the paddles and positions them dynamically.</strong></li>
+<li><strong>Creates the ball and places it at the center of the screen.</strong></li>
+<li><strong>Automatically initializes everything when the game starts.</strong></li>
+</ul>
+<p>This concludes the Game Manager section. Next, we will refine <strong>scoring and game logic</strong> to complete the game loop.</p>
+<hr>
+
+    </div>
+    <div class="post-footer">
+      
+    </div>
+  </article>
+
+    </main>
+  </body>
+</html>

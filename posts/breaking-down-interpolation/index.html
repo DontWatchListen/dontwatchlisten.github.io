@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="en-us">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <title>Breaking Down Interpolation // Royal Chickens Interactive</title>
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <meta charset="utf-8" />
+    <meta name="generator" content="Hugo 0.143.1">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="John Doe" />
+    <meta name="description" content="" />
+    <link rel="stylesheet" href="/css/main.min.5b1fcc8902588589c4767187402a3c29f8b8d7a6fdef6d9f8f77045bb0d14fee.css" />
+    
+
+    
+    
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Breaking Down Interpolation">
+  <meta name="twitter:description" content="What is Interpolation (Lerp)? Interpolation is a way to estimate values between two known points. Think of it like filling in the gaps between two numbers, positions, or colors smoothly instead of jumping straight from one to the other.
+Another way of interpreting interpolation is to try, “guessing the values in between two known points.” If you have two points on a graph, interpolation helps you estimate what lies between them based on patterns.">
+
+    <meta property="og:url" content="http://localhost:1313/posts/breaking-down-interpolation/">
+  <meta property="og:site_name" content="Royal Chickens Interactive">
+  <meta property="og:title" content="Breaking Down Interpolation">
+  <meta property="og:description" content="What is Interpolation (Lerp)? Interpolation is a way to estimate values between two known points. Think of it like filling in the gaps between two numbers, positions, or colors smoothly instead of jumping straight from one to the other.
+Another way of interpreting interpolation is to try, “guessing the values in between two known points.” If you have two points on a graph, interpolation helps you estimate what lies between them based on patterns.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2025-02-19T19:26:21-08:00">
+    <meta property="article:modified_time" content="2025-02-19T19:26:21-08:00">
+
+
+  </head>
+  <body>
+    <header class="app-header">
+      <a href="/"><img class="app-header-avatar" src="/avatar.jpg" alt="John Doe" /></a>
+      <span class="app-header-title">Royal Chickens Interactive</span>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vehicula turpis sit amet elit pretium.</p>
+    </header>
+    <main class="app-container">
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class ="post-title">Breaking Down Interpolation</h1>
+      <div class="post-meta">
+        <div>
+          <svg class="icon icon-calendar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><title>calendar</title><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+          Feb 19, 2025
+        </div>
+        <div>
+          <svg class="icon icon-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><title>clock</title><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+          6 min read
+        </div>
+      </div>
+    </header>
+    <div class="post-content">
+      <h3 id="what-is-interpolation-lerp"><strong>What is Interpolation (<em>Lerp</em>)?</strong></h3>
+<p>Interpolation is a way to estimate values between two known points. Think of it like filling in the gaps between two numbers, positions, or colors smoothly instead of jumping straight from one to the other.</p>
+<p>Another way of interpreting interpolation is to try, <strong>&ldquo;guessing the values in between two known points.&rdquo;</strong> If you have two points on a graph, interpolation helps you estimate what lies between them based on patterns.</p>
+<h3 id="a-simple-example"><strong>A Simple Example</strong></h3>
+<p>Imagine you&rsquo;re walking from Point A to Point B. Instead of teleporting instantly, you take steps to get there. Interpolation is like deciding how to take those steps—fast, slow, steady, or with a curve.</p>
+<h3 id="everyday-examples-of-interpolation"><strong>Everyday Examples of Interpolation</strong></h3>
+<ol>
+<li><strong>Volume Fading in Music</strong> – When you lower the volume, it doesn’t just jump down instantly. It gradually decreases—this is interpolation.</li>
+<li><strong>Video Game Animations</strong> – A character moving from one position to another usually does so smoothly, thanks to interpolation.</li>
+<li><strong>Color Transitions</strong> – If a light slowly changes from red to blue, interpolation is used to blend the colors.</li>
+</ol>
+<h3 id="basic-idea-in-math"><strong>Basic Idea in Math</strong></h3>
+<p>If you have two points:</p>
+<ul>
+<li><strong>Start value</strong> = <code>A</code></li>
+<li><strong>End value</strong> = <code>B</code></li>
+<li><strong>A fraction of the way between them</strong> = <code>t</code> (a number between 0 and 1)</li>
+</ul>
+<p>The simplest interpolation formula is:</p>
+<p><em>Interpolated Value</em> = <em>A</em> + (<em>B</em> − <em>A</em>) ∗ <em>t</em></p>
+<p>If <code>t = 0</code>, you&rsquo;re at <code>A</code>.<br>
+If <code>t = 1</code>, you&rsquo;re at <code>B</code>.<br>
+If <code>t = 0.5</code>, you&rsquo;re halfway between <code>A</code> and <code>B</code>.</p>
+<h3 id="what-is-the-interpolated-value-actually-representing"><strong>What is the Interpolated Value Actually Representing?</strong></h3>
+<p>The value you get from interpolation is a &ldquo;middle point&rdquo; between two known values, but what it <em>represents</em> depends on <strong>what you&rsquo;re interpolating.</strong></p>
+<ul>
+<li>If you&rsquo;re interpolating <strong>positions</strong>, the value represents a <strong>point</strong> between two locations.</li>
+<li>If you&rsquo;re interpolating <strong>colors</strong>, the value represents a <strong>mix</strong> between the two colors.</li>
+<li>If you&rsquo;re interpolating <strong>sound volume</strong>, the value represents the <strong>loudness</strong> at that moment.</li>
+</ul>
+<p>So, the interpolated value itself isn&rsquo;t anything special—it’s just a computed number between A and B. What gives it meaning is <strong>how you use it.</strong></p>
+<hr>
+<h3 id="how-do-you-actually-use-interpolation-for-a-smooth-transition"><strong>How Do You Actually Use Interpolation for a Smooth Transition?</strong></h3>
+<p>The key is that interpolation happens <strong>over time.</strong> Instead of jumping to the final value, you gradually change the value over multiple frames.</p>
+<h4 id="example-moving-an-object-smoothly-using-interpolation"><strong>Example: Moving an Object Smoothly Using Interpolation</strong></h4>
+<p>Let&rsquo;s say you want to move an object from <strong>point A = (0,0)</strong> to <strong>point B = (100,100)</strong> over <strong>a fixed time duration (1 second)</strong> using interpolation.</p>
+<p>Sure! Let&rsquo;s go step by step and write the example <strong>comprehensively</strong>, making sure to explain the actual equation properly.</p>
+<hr>
+<h3 id="moving-an-object-smoothly-using-interpolation"><strong>Moving an Object Smoothly Using Interpolation</strong></h3>
+<p>We want to move an object from <strong>point A = (0,0)</strong> to <strong>point B = (100,100)</strong> over <strong>a fixed time duration (1 second)</strong> using interpolation.</p>
+<hr>
+<h5 id="step-1-understanding-the-formula"><strong>Step 1: Understanding the Formula</strong></h5>
+<p>The general interpolation formula for a smooth transition is:</p>
+<p><em>Interpolated Value</em> = <em>A</em> + (<em>B</em> − <em>A</em>) ∗ <em>t</em></p>
+<p>Where:</p>
+<ul>
+<li><strong>A</strong> = Start position (e.g., <code>(0,0)</code>)</li>
+<li><strong>B</strong> = End position (e.g., <code>(100,100)</code>)</li>
+<li><strong>t</strong> = A fraction between <code>0</code> and <code>1</code> that represents how far along the transition is.</li>
+</ul>
+<hr>
+<h5 id="step-2-how-to-compute-t-over-time"><strong>Step 2: How to Compute <code>t</code> Over Time</strong></h5>
+<ul>
+<li>In a game or animation, <strong>time is divided into frames</strong> (e.g., 60 frames per second).</li>
+<li>Each frame, we update <code>t</code> based on the elapsed time (<code>elapsed_time</code>).</li>
+<li>To ensure <code>t</code> smoothly increases from <code>0</code> to <code>1</code> within <strong>1 second</strong>, we calculate:</li>
+</ul>
+<p><em>t</em> = <em>delta_time</em> / <em>total_duration</em></p>
+<p>For a <strong>1-second transition</strong>:</p>
+<p><em>t</em> = <em>delta_time</em> / <em>1.0</em></p>
+<p>For a <strong>2-second transition</strong>:</p>
+<p><em>t</em> = <em>delta_time</em> / <em>2.0</em></p>
+<p>So <code>t</code> increases gradually as time progresses, ensuring smooth movement.</p>
+<hr>
+<h5 id="step-3-applying-the-formula-in-a-game"><strong>Step 3: Applying the Formula in a Game</strong></h5>
+<p>Each frame, the object’s position updates like this:</p>
+<p><em>Position</em> = <em>A</em> + (<em>B</em> - <em>A</em>) * <em>t</em></p>
+<p>For a <strong>1-second transition</strong>, assuming the game runs at <strong>60 FPS</strong>, <code>t</code> increases slightly each frame (<code>delta_time</code> is small).</p>
+<h3 id="why-havent-you-explicitly-used-t-before"><strong>Why Haven’t You Explicitly Used <code>t</code> Before?</strong></h3>
+<p>When using something like:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>x <span style="color:#f92672">+=</span> speed <span style="color:#f92672">*</span> direction <span style="color:#f92672">*</span> delta_time
+</span></span><span style="display:flex;"><span>y <span style="color:#f92672">+=</span> speed <span style="color:#f92672">*</span> direction <span style="color:#f92672">*</span> delta_time
+</span></span></code></pre></div><p>You’re <strong>applying velocity</strong> directly over time. This is a more traditional way to handle movement, where the object&rsquo;s position <strong>gradually updates each frame</strong> based on speed.</p>
+<ul>
+<li>This method doesn’t care about <strong>where the object started and where it should end after a fixed time</strong>.</li>
+<li>Instead, it just <strong>keeps moving</strong> based on velocity until something stops it.</li>
+</ul>
+<h3 id="how-is-interpolation-different"><strong>How is Interpolation Different?</strong></h3>
+<p>Interpolation (like <code>A + (B - A) * t</code>) is used when:</p>
+<ul>
+<li>You want <strong>smooth movement from a defined start to a defined end</strong>.</li>
+<li>The transition is tied to a <strong>fixed duration</strong>, meaning it will <strong>always</strong> complete in the set time.</li>
+<li>You don’t want speed to dictate when it reaches the target—it must <strong>arrive in exactly 1 second (or any given time).</strong></li>
+</ul>
+<h3 id="why-is-t-necessary-for-fixed-time-transitions"><strong>Why is <code>t</code> Necessary for Fixed-Time Transitions?</strong></h3>
+<p>With interpolation, we <strong>calculate position based on progress (<code>t</code>) instead of speed.</strong></p>
+<ul>
+<li><code>t = elapsed_time / duration</code> ensures that no matter the frame rate, the object <strong>always reaches the destination in exactly the given time.</strong></li>
+<li>Instead of adding velocity every frame, the object moves based on how much of the transition has been completed.</li>
+</ul>
+<h3 id="how-your-previous-approach-differs"><strong>How Your Previous Approach Differs</strong></h3>
+<p>Your usual approach (<code>x += speed * delta_time</code>) <strong>doesn’t guarantee reaching a specific point in exactly 1 second</strong>—it depends on speed. If the speed changes, the time to reach the target changes too.</p>
+<p>Interpolation is <strong>more controlled</strong> because it maps movement directly onto time. Instead of &ldquo;keep moving until we arrive,&rdquo; it’s &ldquo;we are exactly this far into the transition.&rdquo;</p>
+<h3 id="when-would-you-actually-need-t"><strong>When Would You Actually Need <code>t</code>?</strong></h3>
+<ul>
+<li>When making <strong>cutscenes, UI animations, or timed movements</strong> where the object must arrive in a set duration.</li>
+<li>When doing <strong>spline interpolation (smooth curves)</strong> for animation.</li>
+<li>When controlling <strong>easing functions</strong> like slowing down as you approach the target.</li>
+</ul>
+<p>So, you <strong>haven’t needed <code>t</code> explicitly</strong> because frame-based movement works fine for most gameplay. But for strict timing or <strong>smoother</strong> movement control, interpolation (and <code>t</code>) gives more precise control.</p>
+<hr>
+<h3 id="what-is-being-checked"><strong>What is Being Checked?</strong></h3>
+<p>The only thing being &ldquo;checked&rdquo; is <strong>how much time has passed</strong> (or how much progress has been made in the transition). Instead of instantly setting a value, you calculate it gradually each frame.</p>
+<h4 id="example-in-code-pseudocode"><strong>Example in Code (Pseudocode)</strong></h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>start <span style="color:#f92672">=</span> (<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span>end <span style="color:#f92672">=</span> (<span style="color:#ae81ff">100</span>, <span style="color:#ae81ff">100</span>)
+</span></span><span style="display:flex;"><span>duration <span style="color:#f92672">=</span> <span style="color:#ae81ff">1.0</span>  <span style="color:#75715e"># 1 second</span>
+</span></span><span style="display:flex;"><span>elapsed_time <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.0</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">while</span> elapsed_time <span style="color:#f92672">&lt;</span> duration:
+</span></span><span style="display:flex;"><span>    t <span style="color:#f92672">=</span> elapsed_time <span style="color:#f92672">/</span> duration  <span style="color:#75715e"># Progress (0 to 1)</span>
+</span></span><span style="display:flex;"><span>    position <span style="color:#f92672">=</span> lerp(start, end, t)
+</span></span><span style="display:flex;"><span>    elapsed_time <span style="color:#f92672">+=</span> delta_time  <span style="color:#75715e"># Assume delta_time is frame time</span>
+</span></span></code></pre></div><p>Each loop updates <code>t</code>, gets a new interpolated position, and moves the object.</p>
+<hr>
+<h3 id="why-interpolation-works-for-anything"><strong>Why Interpolation Works for Anything</strong></h3>
+<p>Let’s say you’re interpolating <strong>color</strong> instead of position:</p>
+<ul>
+<li><code>A = Red (255,0,0)</code></li>
+<li><code>B = Blue (0,0,255)</code></li>
+<li><code>color = Lerp(A, B, t)</code></li>
+</ul>
+<p>As <code>t</code> goes from 0 → 1, the color smoothly shifts from red to blue.</p>
+<p>So <strong>what you’re interpolating determines the meaning</strong>—the math stays the same.</p>
+<hr>
+
+    </div>
+    <div class="post-footer">
+      
+    </div>
+  </article>
+
+    </main>
+  </body>
+</html>

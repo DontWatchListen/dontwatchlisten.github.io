@@ -1,0 +1,806 @@
+<!doctype html>
+<html lang="en-us">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <title>Godot 4.3 Basics // Royal Chickens Interactive</title>
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <meta charset="utf-8" />
+    <meta name="generator" content="Hugo 0.143.1">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="John Doe" />
+    <meta name="description" content="" />
+    <link rel="stylesheet" href="/css/main.min.5b1fcc8902588589c4767187402a3c29f8b8d7a6fdef6d9f8f77045bb0d14fee.css" />
+    
+
+    
+    
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Godot 4.3 Basics">
+  <meta name="twitter:description" content="Connect main.gd In VSC let’s make a new folder in our root directory called Scripts, and then make a new file inside the Sripts folder called main.gd. Once this is made we will go into the Godot Engine and drag and drop the newly made file into the main scenes script found on the right side
+Extends keyword To know what to extend, match your script to the type of node it’s attached to or the functionality you need. In the case of the main.tscn because we made a Node2D to start, we will extend Node2D.">
+
+    <meta property="og:url" content="http://localhost:1313/posts/godot-43-basics/">
+  <meta property="og:site_name" content="Royal Chickens Interactive">
+  <meta property="og:title" content="Godot 4.3 Basics">
+  <meta property="og:description" content="Connect main.gd In VSC let’s make a new folder in our root directory called Scripts, and then make a new file inside the Sripts folder called main.gd. Once this is made we will go into the Godot Engine and drag and drop the newly made file into the main scenes script found on the right side
+Extends keyword To know what to extend, match your script to the type of node it’s attached to or the functionality you need. In the case of the main.tscn because we made a Node2D to start, we will extend Node2D.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2025-02-09T20:42:48-08:00">
+    <meta property="article:modified_time" content="2025-02-09T20:42:48-08:00">
+
+
+  </head>
+  <body>
+    <header class="app-header">
+      <a href="/"><img class="app-header-avatar" src="/avatar.jpg" alt="John Doe" /></a>
+      <span class="app-header-title">Royal Chickens Interactive</span>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vehicula turpis sit amet elit pretium.</p>
+    </header>
+    <main class="app-container">
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class ="post-title">Godot 4.3 Basics</h1>
+      <div class="post-meta">
+        <div>
+          <svg class="icon icon-calendar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><title>calendar</title><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+          Feb 9, 2025
+        </div>
+        <div>
+          <svg class="icon icon-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><title>clock</title><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+          21 min read
+        </div>
+      </div>
+    </header>
+    <div class="post-content">
+      <h1 id="connect-maingd">Connect main.gd</h1>
+<p>In VSC let&rsquo;s make a new folder in our root directory called Scripts, and then make a new file inside the Sripts folder called main.gd. Once this is made we will go into the Godot Engine and drag and drop the newly made file into the main scenes script found on the right side</p>
+<p><img src="/images/Godot-43-Basics/1739163742328.png" alt="Godot Main Scene Inspector"></p>
+<h1 id="extends-keyword">Extends keyword</h1>
+<p>To know what to extend, match your script to the type of node it’s attached to or the functionality you need. In the case of the main.tscn because we made a Node2D to start, we will <code>extend Node2D</code>.</p>
+<ol>
+<li><strong>For basic functionality</strong> like general logic or managing other nodes, extend <code>Node</code> or <code>Node2D</code></li>
+<li><strong>For UI elements</strong>, extend from the UI category, <code>Button</code>, <code>Label</code>, <code>Control</code>.</li>
+<li><strong>For physics and movement</strong>, extend <code>KinematicBody2D</code>, <code>RigidBody2D</code>, or <code>Area2D</code> depending on whether you&rsquo;re controlling, simulating, or detecting.</li>
+<li><strong>For visuals</strong>, extend nodes like <code>Sprite2D</code> for images or <code>AnimationPlayer</code> for animations.</li>
+</ol>
+<p>We can think of extending like choosing a base template.</p>
+<h1 id="_init-or-_ready">_Init() or _ready()</h1>
+<p>Before getting into the code, we need a place to start. Every Godot game, begins with core functions that serve as entry points to the games main loop. Godot script runs within the engine’s scene tree, and the primary functions that every game starts with are:</p>
+<ul>
+<li><strong><code>_init()</code> (Constructor)</strong> – This function is called immediately when an instance of a script is created before it becomes part of the scene tree. This is useful for setting default values or initializing variables that don’t depend on the node being loaded into the scene.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-gdscript" data-lang="gdscript"><span style="display:flex;"><span><span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">Node</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">var</span> health: <span style="color:#66d9ef">int</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">var</span> name: <span style="color:#a6e22e">String</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Constructor</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">_init</span>():
+</span></span><span style="display:flex;"><span>    health <span style="color:#f92672">=</span> <span style="color:#ae81ff">100</span>
+</span></span><span style="display:flex;"><span>    name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Player&#34;</span>
+</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">&#34;Character created with&#34;</span>, health, <span style="color:#e6db74">&#34;HP and name:&#34;</span>, name)
+</span></span></code></pre></div><ul>
+<li><strong><code>_ready()</code></strong> – This function runs once when the node enters the scene tree. It’s typically where you initialize references, set up signals, or prepare anything that requires access to the game world. If a script is attached to a node, <code>_ready()</code> ensures that all child nodes are available before execution.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-gdscript" data-lang="gdscript"><span style="display:flex;"><span><span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">Node</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">var</span> label: <span style="color:#a6e22e">Label</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Runs when the node is added to the scene tree</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">_ready</span>():
+</span></span><span style="display:flex;"><span>    label <span style="color:#f92672">=</span> <span style="color:#a6e22e">$Label</span>  <span style="color:#75715e"># Finds a child node called &#34;Label&#34;</span>
+</span></span><span style="display:flex;"><span>    label<span style="color:#f92672">.</span>text <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Game Started!&#34;</span>
+</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">&#34;Label text set:&#34;</span>, label<span style="color:#f92672">.</span>text)
+</span></span></code></pre></div><p>In this example, <code>_ready()</code> is used to find a child node and modify it. This would fail in <code>_init()</code> because child nodes aren’t available until the script enters the scene tree.</p>
+<h2 id="hello-world">Hello World</h2>
+<p>To create &ldquo;Hello World&rdquo; in Godot, we’ll use the <code>_init()</code> function since it runs immediately when the script instance is created:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-gdscript" data-lang="gdscript"><span style="display:flex;"><span><span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">Node2D</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">_init</span>():
+</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">&#34;Hello, World!&#34;</span>)
+</span></span></code></pre></div><p>When you run the scene, &ldquo;Hello, World!&rdquo; will appear in the output console.</p>
+<h2 id="understand-the-diference">Understand the diference</h2>
+<p>To understand the difference between <code>_init()</code> and <code>_ready()</code>, let’s look at this example</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-gdscript" data-lang="gdscript"><span style="display:flex;"><span><span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">Node2D</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">_init</span>():
+</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">&#34;I always come first&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">_ready</span>():
+</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">&#34;I get processed next&#34;</span>)
+</span></span></code></pre></div><p>When you run this script, the console will output:</p>
+<blockquote>
+<p>I always come first</p>
+<p>I get processed next</p></blockquote>
+<p>Remember, here, <code>_init()</code> runs first because it’s called when the script instance is created. <code>_ready()</code> follows after the node enters the scene tree, making it useful for setup that depends on other nodes or the scene being fully initialized.</p>
+<h1 id="variables-and-basic-data-types">Variables and Basic Data Types</h1>
+<p>Now that we’ve covered <code>_init()</code> and <code>_ready()</code>, let’s introduce variables. A variable stores information that we may want to access later. In most languages, variables can store different data types like integers, floats, strings, booleans, arrays, objects and many more.</p>
+<h3 id="declaring-a-variable">Declaring a Variable</h3>
+<p>In Godot, we use <code>var</code> to create a variable. use a comma or plus sign to append the variable to your string. Here’s an example:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-gdscript" data-lang="gdscript"><span style="display:flex;"><span><span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">Node2D</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">var</span> player_name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Royal Chicken&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">var</span> player_level <span style="color:#f92672">=</span> <span style="color:#ae81ff">20</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">_init</span>():
+</span></span><span style="display:flex;"><span>	print(<span style="color:#e6db74">&#34;Player name (lv): &#34;</span>, player_name,<span style="color:#e6db74">&#34; (&#34;</span>,player_level,<span style="color:#e6db74">&#34;)&#34;</span>)
+</span></span><span style="display:flex;"><span>	print(<span style="color:#e6db74">&#34;Player name (lv): &#34;</span> <span style="color:#f92672">+</span> player_name,<span style="color:#e6db74">&#34; (&#34;</span>,player_level,<span style="color:#e6db74">&#34;)&#34;</span>)
+</span></span></code></pre></div><p>When we run this script, the console will output:</p>
+<blockquote>
+<p>Player name (lv): Royal Chicken (20)</p>
+<p>Player name (lv): Royal Chicken (20)</p></blockquote>
+<h3 id="changing-variables">Changing Variables</h3>
+<p>Variables can be updated anytime. Let’s modify our level inside <code>_ready()</code>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-gdscript" data-lang="gdscript"><span style="display:flex;"><span><span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">Node2D</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">var</span> player_name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Royal Chicken&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">var</span> player_level <span style="color:#f92672">=</span> <span style="color:#ae81ff">20</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">_init</span>():
+</span></span><span style="display:flex;"><span>	print(<span style="color:#e6db74">&#34;Player name (lv): &#34;</span>, player_name,<span style="color:#e6db74">&#34; (&#34;</span>,player_level,<span style="color:#e6db74">&#34;)&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">_ready</span>():
+</span></span><span style="display:flex;"><span>	player_level <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>	print(<span style="color:#e6db74">&#34;Congratulations, &#34;</span>, player_name, <span style="color:#e6db74">&#34; has leveled up to &#34;</span>, player_level, <span style="color:#e6db74">&#34;!&#34;</span>)
+</span></span></code></pre></div><p>This will print:</p>
+<blockquote>
+<p>Player name (lv): Royal Chicken (20)</p>
+<p>Congratulations, Royal Chicken has leveled up to 21!</p></blockquote>
+<p>Since <code>_ready()</code> runs after <code>_init()</code>, we can see how values change during execution.</p>
+<h1 id="node-properties">Node Properties</h1>
+<p>Every node has properties that define how it looks and behaves. Since we&rsquo;re working in <strong>VSC</strong> (Visual Studio Code), we can&rsquo;t see these properties in the Godot Inspector, so we’ll use <code>get_property_list()</code> to list all editable properties in a node.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-gdscript" data-lang="gdscript"><span style="display:flex;"><span><span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">Node2D</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">_init</span>():
+</span></span><span style="display:flex;"><span>    print(<span style="color:#a6e22e">get_property_list</span>())
+</span></span></code></pre></div><p>Running this will print a <strong>large list</strong> of properties and their details in a JSON-like format. While useful, this output can be overwhelming, so let’s break it down.</p>
+<h2 id="what-does-get_property_list-do"><strong>What Does <code>get_property_list()</code> Do?</strong></h2>
+<p><code>get_property_list()</code> returns a <strong>list</strong> (also called an array) where each item is a  <strong>dictionary</strong> . A <strong>dictionary</strong> is a type of data structure that stores  <strong>key-value pairs</strong> —meaning each property has a name and some associated information.</p>
+<p>Here’s what one of these <strong>dictionaries</strong> looks like:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-gdscript" data-lang="gdscript"><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">`</span>{ <span style="color:#e6db74">&#34;name&#34;</span>: <span style="color:#e6db74">&#34;position&#34;</span>, <span style="color:#e6db74">&#34;type&#34;</span>: <span style="color:#ae81ff">5</span> } <span style="color:#960050;background-color:#1e0010">`</span>
+</span></span></code></pre></div><p>This means:</p>
+<ul>
+<li><code>&quot;name&quot;</code> → Stores the  <strong>property name</strong> , like <code>&quot;position&quot;</code>.</li>
+<li><code>&quot;type&quot;</code> → Stores the <strong>data type</strong> of the property, represented as a  <strong>number</strong> .</li>
+</ul>
+<p>Since <code>get_property_list()</code> returns <strong>many</strong> of these dictionaries (one for each property of the node), we need a <strong>loop</strong> to go through them <strong>one at a time</strong>.</p>
+<h3 id="making-it-readable">Making It Readable</h3>
+<p>Before we clean up the data from <code>get_property_list()</code>, we need to learn about loops.</p>
+<p>Right now, <code>get_property_list()</code> gives us a  huge list of properties, and if we just print it out directly, it’s overwhelming. Instead of looking at all that raw data, we can loop through itand extract only the useful parts.</p>
+<h4 id="what-is-a-for-loop">What is a For Loop?</h4>
+<p>A <strong>for loop</strong> repeats a block of code for each item in a list. This is useful when we have multiple things to process, like our  <strong>list of node properties</strong> .</p>
+<p>The general structure of a for loop in Godot looks like this:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-gdscript" data-lang="gdscript"><span style="display:flex;"><span><span style="color:#66d9ef">for</span> variable <span style="color:#f92672">in</span> list:
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Code to run for each item in the list</span>
+</span></span></code></pre></div><ul>
+<li><code>variable</code> → This stores the <strong>current item</strong> from the list as the loop runs.</li>
+<li><code>list</code> → This is the <strong>collection of items</strong> that we’re looping through.</li>
+<li>The loop will repeat once <strong>for each item</strong> in the list.</li>
+</ul>
+<h4 id="how-the-loop-woks-in-gdscript">How the Loop Woks in GDScript</h4>
+<p>When we call <code>get_property_list()</code>, it returns a long list of dictionaries, each containing details about a property in the node. Instead of trying to read through all that data at once, we use a <strong>for loop</strong> to go through each property one at a time.</p>
+<p>In this script, we start by storing the full list in a variable called <code>properties</code>. Then, the <code>for</code> loop picks one dictionary at a time from the list and assigns it to <code>prop</code>. Since each <code>prop</code> is a dictionary, we can access its <code>&quot;name&quot;</code> key to get the property’s name and <code>&quot;type&quot;</code> key to see what kind of data it holds. The <code>print()</code> statement then formats this into a readable output, making it much easier to see the available properties and their types.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-gdscript" data-lang="gdscript"><span style="display:flex;"><span><span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">Node2D</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">_ready</span>():
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">var</span> properties <span style="color:#f92672">=</span> <span style="color:#a6e22e">get_property_list</span>()  <span style="color:#75715e"># Get a list of all properties in this node</span>
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> prop <span style="color:#f92672">in</span> properties:  <span style="color:#75715e"># Loop through each property</span>
+</span></span><span style="display:flex;"><span>        print(prop<span style="color:#f92672">.</span>name, <span style="color:#e6db74">&#34; - Type: &#34;</span>, prop<span style="color:#f92672">.</span>type)  <span style="color:#75715e"># Print the name and type</span>
+</span></span></code></pre></div><p>This method allows us to <strong>efficiently process and display only the useful information</strong> from <code>get_property_list()</code> instead of dealing with an overwhelming block of raw data.</p>
+<h1 id="understanding-data-types">Understanding Data Types</h1>
+<p>The <code>type</code> number corresponds to specific data types in Godot. Here’s the full list of  <strong>all 20 data types</strong> :</p>
+<ul>
+<li>0 → Nil (Represents no value)</li>
+<li>1 → bool (true/false)</li>
+<li>2 → int (whole numbers)</li>
+<li>3 → float (decimal numbers)</li>
+<li>4 → String (text)</li>
+<li>5 → Vector2 (X, Y positions for 2D nodes)</li>
+<li>6 → Vector2i (X, Y integer positions for 2D nodes)</li>
+<li>7 → Rect2 (A 2D rectangle with position and size)</li>
+<li>8 → Rect2i (A 2D rectangle with integer position and size)</li>
+<li>9 → Vector3 (X, Y, Z positions for 3D nodes)</li>
+<li>10 → Vector3i (X, Y, Z integer positions for 3D nodes)</li>
+<li>11 → Transform2D (A transformation matrix for 2D nodes)</li>
+<li>12 → Vector4 (A four-component vector)</li>
+<li>13 → Vector4i (A four-component integer vector)</li>
+<li>14 → Plane (A mathematical plane in 3D space)</li>
+<li>15 → Quat (Quaternion for 3D rotation)</li>
+<li>16 → AABB (3D bounding box)</li>
+<li>17 → Basis (3D transformation matrix)</li>
+<li>18 → Transform3D (Full 3D transformation data)</li>
+<li>19 → Projection (4×4 matrix used for 3D projections)</li>
+<li>20 → Color (RGBA values for colors)</li>
+<li>21 → StringName (Optimized internal string representation)</li>
+<li>22 → NodePath (A reference to another node in the scene)</li>
+<li>23 → RID (Resource ID, used for low-level access)</li>
+<li>24 → Object (A general object reference)</li>
+<li>25 → Callable (A function reference)</li>
+<li>26 → Signal (A signal used for event handling)</li>
+<li>27 → Dictionary (Key-value pairs, similar to JSON objects)</li>
+<li>28 → Array (A list of values)</li>
+<li>29 → PackedByteArray (Optimized array for storing bytes)</li>
+<li>30 → PackedInt32Array (Optimized array for storing 32-bit integers)</li>
+<li>31 → PackedInt64Array (Optimized array for storing 64-bit integers)</li>
+<li>32 → PackedFloat32Array (Optimized array for storing 32-bit floats)</li>
+<li>33 → PackedFloat64Array (Optimized array for storing 64-bit floats)</li>
+<li>34 → PackedStringArray (Optimized array for storing strings)</li>
+<li>35 → PackedVector2Array (Optimized array for storing Vector2 elements)</li>
+<li>36 → PackedVector3Array (Optimized array for storing Vector3 elements)</li>
+<li>37 → PackedColorArray (Optimized array for storing Color elements)</li>
+</ul>
+<h2 id="conditionals-for-cleaning-up-property-types">Conditionals for Cleaning Up Property Types</h2>
+<p>Now that we understand <strong>loops</strong> and how to extract property names and types from <code>get_property_list()</code>, we can take it a step further by using <strong>conditionals</strong> to replace the <code>type</code> number with a more human-readable name.</p>
+<h3 id="step-1-understand-the-problem"><strong>Step 1: Understand the Problem</strong></h3>
+<p>Right now, when we print properties, we see something like this:</p>
+<blockquote>
+<p>position - Type: 5</p>
+<p>rotation - Type: 3</p>
+<p>visible - Type: 1</p>
+<p>modulate - Type: 20</p></blockquote>
+<p>The <strong>type numbers</strong> don’t mean much unless you memorize them. Instead, we want it to look like this:</p>
+<blockquote>
+<p>position - Type: Vector2</p>
+<p>rotation - Type: float</p>
+<p>visible - Type: bool</p>
+<p>modulate - Type: Color</p></blockquote>
+<p>To achieve this, we need to <strong>convert these numbers</strong> into their actual data type names using  <strong>conditionals</strong>.</p>
+<h3 id="step-2-introducing-conditionals">Step 2: Introducing Conditionals</h3>
+<p>A <strong>conditional statement</strong> lets us check if a value matches a certain condition and then execute code based on that.</p>
+<p>A basic example:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-gdscript" data-lang="gdscript"><span style="display:flex;"><span><span style="color:#66d9ef">var</span> type_number <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> type_number <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>:
+</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">&#34;Nil&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">elif</span> type_number <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span>:
+</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">&#34;Boolean&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">&#34;Unknown type&#34;</span>)
+</span></span></code></pre></div><p>If <code>type_number</code> is <code>1</code>, this will print <code>&quot;Boolean&quot;</code>. This is the same logic we’ll use to clean up <code>prop.type</code>.</p>
+<h3 id="step-3-applying-conditionals-to-our-loop"><strong>Step 3: Applying Conditionals to Our Loop</strong></h3>
+<p>Now we modify our script to  <strong>replace type numbers with readable text</strong> .</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-gdscript" data-lang="gdscript"><span style="display:flex;"><span><span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">Node2D</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">_ready</span>():
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">var</span> properties <span style="color:#f92672">=</span> <span style="color:#a6e22e">get_property_list</span>()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> prop <span style="color:#f92672">in</span> properties:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">var</span> type_name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;</span>  <span style="color:#75715e"># Placeholder for the readable type</span>
+</span></span><span style="display:flex;"><span>      
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> prop<span style="color:#f92672">.</span>type <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>:
+</span></span><span style="display:flex;"><span>            type_name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Nil&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">elif</span> prop<span style="color:#f92672">.</span>type <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span>:
+</span></span><span style="display:flex;"><span>            type_name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;bool&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">elif</span> prop<span style="color:#f92672">.</span>type <span style="color:#f92672">==</span> <span style="color:#ae81ff">2</span>:
+</span></span><span style="display:flex;"><span>            type_name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;int&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">elif</span> prop<span style="color:#f92672">.</span>type <span style="color:#f92672">==</span> <span style="color:#ae81ff">3</span>:
+</span></span><span style="display:flex;"><span>            type_name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;float&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">elif</span> prop<span style="color:#f92672">.</span>type <span style="color:#f92672">==</span> <span style="color:#ae81ff">4</span>:
+</span></span><span style="display:flex;"><span>            type_name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;String&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">elif</span> prop<span style="color:#f92672">.</span>type <span style="color:#f92672">==</span> <span style="color:#ae81ff">5</span>:
+</span></span><span style="display:flex;"><span>            type_name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Vector2&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">elif</span> prop<span style="color:#f92672">.</span>type <span style="color:#f92672">==</span> <span style="color:#ae81ff">6</span>:
+</span></span><span style="display:flex;"><span>            type_name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Rect2&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">elif</span> prop<span style="color:#f92672">.</span>type <span style="color:#f92672">==</span> <span style="color:#ae81ff">7</span>:
+</span></span><span style="display:flex;"><span>            type_name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Vector3&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">elif</span> prop<span style="color:#f92672">.</span>type <span style="color:#f92672">==</span> <span style="color:#ae81ff">8</span>:
+</span></span><span style="display:flex;"><span>            type_name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Transform2D&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">elif</span> prop<span style="color:#f92672">.</span>type <span style="color:#f92672">==</span> <span style="color:#ae81ff">10</span>:
+</span></span><span style="display:flex;"><span>            type_name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Quat&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">elif</span> prop<span style="color:#f92672">.</span>type <span style="color:#f92672">==</span> <span style="color:#ae81ff">11</span>:
+</span></span><span style="display:flex;"><span>            type_name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;AABB&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">elif</span> prop<span style="color:#f92672">.</span>type <span style="color:#f92672">==</span> <span style="color:#ae81ff">12</span>:
+</span></span><span style="display:flex;"><span>            type_name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Basis&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">elif</span> prop<span style="color:#f92672">.</span>type <span style="color:#f92672">==</span> <span style="color:#ae81ff">13</span>:
+</span></span><span style="display:flex;"><span>            type_name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Transform&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">elif</span> prop<span style="color:#f92672">.</span>type <span style="color:#f92672">==</span> <span style="color:#ae81ff">14</span>:
+</span></span><span style="display:flex;"><span>            type_name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Color&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">elif</span> prop<span style="color:#f92672">.</span>type <span style="color:#f92672">==</span> <span style="color:#ae81ff">18</span>:
+</span></span><span style="display:flex;"><span>            type_name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Dictionary&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">elif</span> prop<span style="color:#f92672">.</span>type <span style="color:#f92672">==</span> <span style="color:#ae81ff">19</span>:
+</span></span><span style="display:flex;"><span>            type_name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Array&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>            type_name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Unknown&#34;</span>  <span style="color:#75715e"># Default if type isn&#39;t in our list</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        print(prop<span style="color:#f92672">.</span>name, <span style="color:#e6db74">&#34; - Type: &#34;</span>, type_name)
+</span></span></code></pre></div><p>Now, instead of seeing numbers, we get a <strong>readable</strong> output.</p>
+<blockquote>
+<p>position - Type: 5</p>
+<p>rotation - Type: 3</p>
+<p>visible - Type: 1</p>
+<p>modulate - Type: 20</p></blockquote>
+<h3 id="step-4-making-it-more-efficient">Step 4: Making It More Efficient</h3>
+<p>While this works, it’s a bit <strong>long</strong> and repetitive. A better way is to use a <strong>dictionary</strong> or <strong>match statement</strong> to make the code cleaner.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-gdscript" data-lang="gdscript"><span style="display:flex;"><span><span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">Node2D</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">_ready</span>():
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">var</span> properties <span style="color:#f92672">=</span> <span style="color:#a6e22e">get_property_list</span>()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">var</span> type_lookup <span style="color:#f92672">=</span> {
+</span></span><span style="display:flex;"><span>		<span style="color:#ae81ff">0</span>: <span style="color:#e6db74">&#34;Nil&#34;</span>, <span style="color:#ae81ff">1</span>: <span style="color:#e6db74">&#34;bool&#34;</span>, <span style="color:#ae81ff">2</span>: <span style="color:#e6db74">&#34;int&#34;</span>, <span style="color:#ae81ff">3</span>: <span style="color:#e6db74">&#34;float&#34;</span>, <span style="color:#ae81ff">4</span>: <span style="color:#e6db74">&#34;String&#34;</span>, <span style="color:#ae81ff">5</span>: <span style="color:#e6db74">&#34;Vector2&#34;</span>, <span style="color:#ae81ff">6</span>: <span style="color:#e6db74">&#34;Vector2i&#34;</span>,
+</span></span><span style="display:flex;"><span>		<span style="color:#ae81ff">7</span>: <span style="color:#e6db74">&#34;Rect2&#34;</span>, <span style="color:#ae81ff">8</span>: <span style="color:#e6db74">&#34;Rect2i&#34;</span>, <span style="color:#ae81ff">9</span>: <span style="color:#e6db74">&#34;Vector3&#34;</span>, <span style="color:#ae81ff">10</span>: <span style="color:#e6db74">&#34;Vector3i&#34;</span>, <span style="color:#ae81ff">11</span>: <span style="color:#e6db74">&#34;Transform2D&#34;</span>, <span style="color:#ae81ff">12</span>: <span style="color:#e6db74">&#34;Vector4&#34;</span>,
+</span></span><span style="display:flex;"><span>		<span style="color:#ae81ff">13</span>: <span style="color:#e6db74">&#34;Vector4i&#34;</span>, <span style="color:#ae81ff">14</span>: <span style="color:#e6db74">&#34;Plane&#34;</span>, <span style="color:#ae81ff">15</span>: <span style="color:#e6db74">&#34;Quat&#34;</span>, <span style="color:#ae81ff">16</span>: <span style="color:#e6db74">&#34;AABB&#34;</span>, <span style="color:#ae81ff">17</span>: <span style="color:#e6db74">&#34;Basis&#34;</span>, <span style="color:#ae81ff">18</span>: <span style="color:#e6db74">&#34;Transform3D&#34;</span>,
+</span></span><span style="display:flex;"><span>		<span style="color:#ae81ff">19</span>: <span style="color:#e6db74">&#34;Projection&#34;</span>, <span style="color:#ae81ff">20</span>: <span style="color:#e6db74">&#34;Color&#34;</span>, <span style="color:#ae81ff">21</span>: <span style="color:#e6db74">&#34;StringName&#34;</span>, <span style="color:#ae81ff">22</span>: <span style="color:#e6db74">&#34;NodePath&#34;</span>, <span style="color:#ae81ff">23</span>: <span style="color:#e6db74">&#34;RID&#34;</span>, <span style="color:#ae81ff">24</span>: <span style="color:#e6db74">&#34;Object&#34;</span>,
+</span></span><span style="display:flex;"><span>		<span style="color:#ae81ff">25</span>: <span style="color:#e6db74">&#34;Callable&#34;</span>, <span style="color:#ae81ff">26</span>: <span style="color:#e6db74">&#34;Signal&#34;</span>, <span style="color:#ae81ff">27</span>: <span style="color:#e6db74">&#34;Dictionary&#34;</span>, <span style="color:#ae81ff">28</span>: <span style="color:#e6db74">&#34;Array&#34;</span>, <span style="color:#ae81ff">29</span>: <span style="color:#e6db74">&#34;PackedByteArray&#34;</span>,
+</span></span><span style="display:flex;"><span>		<span style="color:#ae81ff">30</span>: <span style="color:#e6db74">&#34;PackedInt32Array&#34;</span>, <span style="color:#ae81ff">31</span>: <span style="color:#e6db74">&#34;PackedInt64Array&#34;</span>, <span style="color:#ae81ff">32</span>: <span style="color:#e6db74">&#34;PackedFloat32Array&#34;</span>, <span style="color:#ae81ff">33</span>: <span style="color:#e6db74">&#34;PackedFloat64Array&#34;</span>,
+</span></span><span style="display:flex;"><span>		<span style="color:#ae81ff">34</span>: <span style="color:#e6db74">&#34;PackedStringArray&#34;</span>, <span style="color:#ae81ff">35</span>: <span style="color:#e6db74">&#34;PackedVector2Array&#34;</span>, <span style="color:#ae81ff">36</span>: <span style="color:#e6db74">&#34;PackedVector3Array&#34;</span>, <span style="color:#ae81ff">37</span>: <span style="color:#e6db74">&#34;PackedColorArray&#34;</span>
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">for</span> prop <span style="color:#f92672">in</span> properties:
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">var</span> type_name <span style="color:#f92672">=</span> type_lookup<span style="color:#f92672">.</span><span style="color:#a6e22e">get</span>(prop<span style="color:#f92672">.</span>type, <span style="color:#e6db74">&#34;Unknown&#34;</span>)
+</span></span><span style="display:flex;"><span>		print(prop<span style="color:#f92672">.</span>name, <span style="color:#e6db74">&#34; - Type: &#34;</span>, type_name)
+</span></span></code></pre></div><p>This does the  <strong>exact same thing</strong> , but <strong>cleaner</strong> and  <strong>easier to update</strong> .</p>
+<blockquote>
+<p>Node - Type: Nil</p>
+<p>_import_path - Type: Unknown</p>
+<p>name - Type: Unknown</p>
+<p>unique_name_in_owner - Type: bool</p></blockquote>
+<h2 id="grouping-data-types-for-better-readability"><strong>Grouping Data Types for Better Readability</strong></h2>
+<p>Now that we have a full list of  <strong>data types</strong>, let&rsquo;s organize them into <strong>groups</strong> so that when we print out properties, they aren’t all mixed together.</p>
+<h3 id="why-group-properties"><strong>Why Group Properties?</strong></h3>
+<p>Now that we’ve learned how to retrieve and print  <strong>node properties,</strong> we’re taking it a step further by  <strong>grouping similar properties together</strong>. This will make our output <strong>more structured and readable</strong> rather than having everything mixed together.</p>
+<p>Right now, when we print properties, they appear in a  <strong>random order</strong>, making it difficult to spot patterns. Instead of this:</p>
+<blockquote>
+<p>position - Type: Vector2</p>
+<p>visible - Type: bool</p>
+<p>rotation - Type: float</p>
+<p>modulate - Type: Color</p>
+<p>children - Type: Array</p></blockquote>
+<p>We want <strong>organized groups</strong> like this:</p>
+<p><img src="/images/Godot-43-Basics/1739174499338.png" alt="Organized CLI Groups"></p>
+<p>By  <strong>grouping properties by type</strong> , we make it much easier to understand what each property does.</p>
+<h4 id="step-1-understanding-lists-in-gdscript">Step 1: Understanding Lists in GDScript</h4>
+<p>A <strong>list</strong> (also called an  <strong>array</strong> ) stores multiple values. We use them to  <strong>group properties of the same type.</strong></p>
+<p><strong>Example</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-gdscript" data-lang="gdscript"><span style="display:flex;"><span><span style="color:#66d9ef">var</span> numbers <span style="color:#f92672">=</span> []  <span style="color:#75715e"># Empty list for number-based properties</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">var</span> colors <span style="color:#f92672">=</span> []   <span style="color:#75715e"># Empty list for color-based properties</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>numbers<span style="color:#f92672">.</span><span style="color:#a6e22e">append</span>(<span style="color:#e6db74">&#34;visible - Type: bool&#34;</span>)  <span style="color:#75715e"># Adding an entry to the list</span>
+</span></span><span style="display:flex;"><span>colors<span style="color:#f92672">.</span><span style="color:#a6e22e">append</span>(<span style="color:#e6db74">&#34;modulate - Type: Color&#34;</span>)  <span style="color:#75715e"># Adding a color-related entry</span>
+</span></span></code></pre></div><p>Now, <code>numbers and colors</code> contain:</p>
+<blockquote>
+<p>[&ldquo;visible - Type: bool&rdquo;]</p>
+<p>[&ldquo;modulate - Type: Color&rdquo;]</p></blockquote>
+<h4 id="step-2-using-conditionals-to-classify-properties"><strong>Step 2: Using Conditionals to Classify Properties</strong></h4>
+<p>To decide <strong>which list</strong> a property should go into, we use <strong>conditionals</strong> (<code>if-elif</code> statements).</p>
+<p>Example:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-gdscript" data-lang="gdscript"><span style="display:flex;"><span><span style="color:#66d9ef">if</span> prop<span style="color:#f92672">.</span>type <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span>:
+</span></span><span style="display:flex;"><span>    numbers<span style="color:#f92672">.</span><span style="color:#a6e22e">append</span>(prop<span style="color:#f92672">.</span>name <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; - Type: bool&#34;</span>)  <span style="color:#75715e"># Adds to the numbers list</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">elif</span> prop<span style="color:#f92672">.</span>type <span style="color:#f92672">==</span> <span style="color:#ae81ff">20</span>:
+</span></span><span style="display:flex;"><span>    colors<span style="color:#f92672">.</span><span style="color:#a6e22e">append</span>(prop<span style="color:#f92672">.</span>name <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; - Type: Color&#34;</span>)  <span style="color:#75715e"># Adds to the colors list</span>
+</span></span></code></pre></div><h4 id="step-3-full-script-for-grouping-properties"><strong>Step 3: Full Script for Grouping Properties</strong></h4>
+<p>Here’s our <strong>fully structured script</strong> that retrieves properties,  <strong>groups them</strong> , and  <strong>prints them separately</strong> .</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-gdscript" data-lang="gdscript"><span style="display:flex;"><span><span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">Node2D</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">_ready</span>():
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">var</span> properties <span style="color:#f92672">=</span> <span style="color:#a6e22e">get_property_list</span>()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">var</span> numbers <span style="color:#f92672">=</span> []
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">var</span> strings <span style="color:#f92672">=</span> []
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">var</span> bools <span style="color:#f92672">=</span> []
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">var</span> vectors <span style="color:#f92672">=</span> []
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">var</span> colors <span style="color:#f92672">=</span> []
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">var</span> objects <span style="color:#f92672">=</span> []
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">var</span> arrays <span style="color:#f92672">=</span> []
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">var</span> nil <span style="color:#f92672">=</span> []
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">var</span> type_lookup <span style="color:#f92672">=</span> {
+</span></span><span style="display:flex;"><span>		<span style="color:#ae81ff">0</span>: <span style="color:#e6db74">&#34;Nil&#34;</span>, <span style="color:#ae81ff">1</span>: <span style="color:#e6db74">&#34;bool&#34;</span>, <span style="color:#ae81ff">2</span>: <span style="color:#e6db74">&#34;int&#34;</span>, <span style="color:#ae81ff">3</span>: <span style="color:#e6db74">&#34;float&#34;</span>, <span style="color:#ae81ff">4</span>: <span style="color:#e6db74">&#34;String&#34;</span>, <span style="color:#ae81ff">5</span>: <span style="color:#e6db74">&#34;Vector2&#34;</span>, <span style="color:#ae81ff">6</span>: <span style="color:#e6db74">&#34;Vector2i&#34;</span>,
+</span></span><span style="display:flex;"><span>		<span style="color:#ae81ff">7</span>: <span style="color:#e6db74">&#34;Rect2&#34;</span>, <span style="color:#ae81ff">8</span>: <span style="color:#e6db74">&#34;Rect2i&#34;</span>, <span style="color:#ae81ff">9</span>: <span style="color:#e6db74">&#34;Vector3&#34;</span>, <span style="color:#ae81ff">10</span>: <span style="color:#e6db74">&#34;Vector3i&#34;</span>, <span style="color:#ae81ff">11</span>: <span style="color:#e6db74">&#34;Transform2D&#34;</span>, <span style="color:#ae81ff">12</span>: <span style="color:#e6db74">&#34;Vector4&#34;</span>,
+</span></span><span style="display:flex;"><span>		<span style="color:#ae81ff">13</span>: <span style="color:#e6db74">&#34;Vector4i&#34;</span>, <span style="color:#ae81ff">14</span>: <span style="color:#e6db74">&#34;Plane&#34;</span>, <span style="color:#ae81ff">15</span>: <span style="color:#e6db74">&#34;Quat&#34;</span>, <span style="color:#ae81ff">16</span>: <span style="color:#e6db74">&#34;AABB&#34;</span>, <span style="color:#ae81ff">17</span>: <span style="color:#e6db74">&#34;Basis&#34;</span>, <span style="color:#ae81ff">18</span>: <span style="color:#e6db74">&#34;Transform3D&#34;</span>,
+</span></span><span style="display:flex;"><span>		<span style="color:#ae81ff">19</span>: <span style="color:#e6db74">&#34;Projection&#34;</span>, <span style="color:#ae81ff">20</span>: <span style="color:#e6db74">&#34;Color&#34;</span>, <span style="color:#ae81ff">21</span>: <span style="color:#e6db74">&#34;StringName&#34;</span>, <span style="color:#ae81ff">22</span>: <span style="color:#e6db74">&#34;NodePath&#34;</span>, <span style="color:#ae81ff">23</span>: <span style="color:#e6db74">&#34;RID&#34;</span>, <span style="color:#ae81ff">24</span>: <span style="color:#e6db74">&#34;Object&#34;</span>,
+</span></span><span style="display:flex;"><span>		<span style="color:#ae81ff">25</span>: <span style="color:#e6db74">&#34;Callable&#34;</span>, <span style="color:#ae81ff">26</span>: <span style="color:#e6db74">&#34;Signal&#34;</span>, <span style="color:#ae81ff">27</span>: <span style="color:#e6db74">&#34;Dictionary&#34;</span>, <span style="color:#ae81ff">28</span>: <span style="color:#e6db74">&#34;Array&#34;</span>, <span style="color:#ae81ff">29</span>: <span style="color:#e6db74">&#34;PackedByteArray&#34;</span>,
+</span></span><span style="display:flex;"><span>		<span style="color:#ae81ff">30</span>: <span style="color:#e6db74">&#34;PackedInt32Array&#34;</span>, <span style="color:#ae81ff">31</span>: <span style="color:#e6db74">&#34;PackedInt64Array&#34;</span>, <span style="color:#ae81ff">32</span>: <span style="color:#e6db74">&#34;PackedFloat32Array&#34;</span>, <span style="color:#ae81ff">33</span>: <span style="color:#e6db74">&#34;PackedFloat64Array&#34;</span>,
+</span></span><span style="display:flex;"><span>		<span style="color:#ae81ff">34</span>: <span style="color:#e6db74">&#34;PackedStringArray&#34;</span>, <span style="color:#ae81ff">35</span>: <span style="color:#e6db74">&#34;PackedVector2Array&#34;</span>, <span style="color:#ae81ff">36</span>: <span style="color:#e6db74">&#34;PackedVector3Array&#34;</span>, <span style="color:#ae81ff">37</span>: <span style="color:#e6db74">&#34;PackedColorArray&#34;</span>
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">for</span> prop <span style="color:#f92672">in</span> properties:
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">var</span> type_name <span style="color:#f92672">=</span> type_lookup<span style="color:#f92672">.</span><span style="color:#a6e22e">get</span>(prop<span style="color:#f92672">.</span>type, <span style="color:#e6db74">&#34;Unknown&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">if</span> prop<span style="color:#f92672">.</span>type <span style="color:#f92672">in</span> [<span style="color:#ae81ff">1</span>]:
+</span></span><span style="display:flex;"><span>			bools<span style="color:#f92672">.</span><span style="color:#a6e22e">append</span>(prop<span style="color:#f92672">.</span>name <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; - Type: &#34;</span> <span style="color:#f92672">+</span> type_name)
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">elif</span> prop<span style="color:#f92672">.</span>type <span style="color:#f92672">in</span> [<span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>]:  <span style="color:#75715e"># bool, int, float</span>
+</span></span><span style="display:flex;"><span>			numbers<span style="color:#f92672">.</span><span style="color:#a6e22e">append</span>(prop<span style="color:#f92672">.</span>name <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; - Type: &#34;</span> <span style="color:#f92672">+</span> type_name)
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">elif</span> prop<span style="color:#f92672">.</span>type <span style="color:#f92672">in</span> [<span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">21</span>]:
+</span></span><span style="display:flex;"><span>			strings<span style="color:#f92672">.</span><span style="color:#a6e22e">append</span>(prop<span style="color:#f92672">.</span>name <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; - Type: &#34;</span> <span style="color:#f92672">+</span> type_name)
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">elif</span> prop<span style="color:#f92672">.</span>type <span style="color:#f92672">in</span> [<span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">6</span>, <span style="color:#ae81ff">7</span>, <span style="color:#ae81ff">8</span>, <span style="color:#ae81ff">9</span>, <span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">11</span>, <span style="color:#ae81ff">12</span>, <span style="color:#ae81ff">13</span>, <span style="color:#ae81ff">14</span>, <span style="color:#ae81ff">15</span>, <span style="color:#ae81ff">16</span>, <span style="color:#ae81ff">17</span>, <span style="color:#ae81ff">18</span>, <span style="color:#ae81ff">19</span>]:  <span style="color:#75715e"># Vector types &amp; transforms</span>
+</span></span><span style="display:flex;"><span>			vectors<span style="color:#f92672">.</span><span style="color:#a6e22e">append</span>(prop<span style="color:#f92672">.</span>name <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; - Type: &#34;</span> <span style="color:#f92672">+</span> type_name)
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">elif</span> prop<span style="color:#f92672">.</span>type <span style="color:#f92672">in</span> [<span style="color:#ae81ff">20</span>]:  <span style="color:#75715e"># Colors</span>
+</span></span><span style="display:flex;"><span>			colors<span style="color:#f92672">.</span><span style="color:#a6e22e">append</span>(prop<span style="color:#f92672">.</span>name <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; - Type: &#34;</span> <span style="color:#f92672">+</span> type_name)
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">elif</span> prop<span style="color:#f92672">.</span>type <span style="color:#f92672">in</span> [<span style="color:#ae81ff">22</span>, <span style="color:#ae81ff">23</span>, <span style="color:#ae81ff">24</span>, <span style="color:#ae81ff">25</span>, <span style="color:#ae81ff">26</span>]:  <span style="color:#75715e"># Node and object references</span>
+</span></span><span style="display:flex;"><span>			objects<span style="color:#f92672">.</span><span style="color:#a6e22e">append</span>(prop<span style="color:#f92672">.</span>name <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; - Type: &#34;</span> <span style="color:#f92672">+</span> type_name)
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">elif</span> prop<span style="color:#f92672">.</span>type <span style="color:#f92672">in</span> [<span style="color:#ae81ff">27</span>, <span style="color:#ae81ff">28</span>, <span style="color:#ae81ff">29</span>, <span style="color:#ae81ff">30</span>, <span style="color:#ae81ff">31</span>, <span style="color:#ae81ff">32</span>, <span style="color:#ae81ff">33</span>, <span style="color:#ae81ff">34</span>, <span style="color:#ae81ff">35</span>, <span style="color:#ae81ff">36</span>, <span style="color:#ae81ff">37</span>]:  <span style="color:#75715e"># Arrays and dictionaries</span>
+</span></span><span style="display:flex;"><span>			arrays<span style="color:#f92672">.</span><span style="color:#a6e22e">append</span>(prop<span style="color:#f92672">.</span>name <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; - Type: &#34;</span> <span style="color:#f92672">+</span> type_name)
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>			nil<span style="color:#f92672">.</span><span style="color:#a6e22e">append</span>(prop<span style="color:#f92672">.</span>name <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; - Type: &#34;</span> <span style="color:#f92672">+</span> type_name)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	print(<span style="color:#e6db74">&#34;Numbers:&#34;</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">for</span> entry <span style="color:#f92672">in</span> numbers:
+</span></span><span style="display:flex;"><span>		print(entry)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	print(<span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">Strings:&#34;</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">for</span> entry <span style="color:#f92672">in</span> strings:
+</span></span><span style="display:flex;"><span>		print(entry)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	print(<span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">Bools:&#34;</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">for</span> entry <span style="color:#f92672">in</span> bools:
+</span></span><span style="display:flex;"><span>		print(entry)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	print(<span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">Vectors:&#34;</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">for</span> entry <span style="color:#f92672">in</span> vectors:
+</span></span><span style="display:flex;"><span>		print(entry)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	print(<span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">Colors&#34;</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">for</span> entry <span style="color:#f92672">in</span> colors:
+</span></span><span style="display:flex;"><span>		print(entry)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	print(<span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">Objects:&#34;</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">for</span> entry <span style="color:#f92672">in</span> objects:
+</span></span><span style="display:flex;"><span>		print(entry)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	print(<span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">Arrays:&#34;</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">for</span> entry <span style="color:#f92672">in</span> arrays:
+</span></span><span style="display:flex;"><span>		print(entry)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	print(<span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">Nil&#34;</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">for</span> entry <span style="color:#f92672">in</span> nil:
+</span></span><span style="display:flex;"><span>		print(entry)
+</span></span></code></pre></div><p>This will produce:</p>
+<p><img src="/images/Godot-43-Basics/1739175718767.png" alt="Formatted Output"></p>
+<h1 id="introducing-functions-for-modularity-and-object-oriented-design">Introducing Functions for Modularity and Object-Oriented Design</h1>
+<p>Now that we have successfully  <strong>organized node properties into groups</strong> , it’s time to <strong>refactor</strong> our code using <strong>functions</strong> to improve modularity and reusability. Right now, all our logic sits inside <code>_ready()</code>, which means:</p>
+<ol>
+<li><strong>The code cannot be reused elsewhere</strong> – We can only check properties for the current node (<code>self</code>).</li>
+<li><strong>If we need to check another object’s properties</strong> , we would have to  <strong>duplicate the entire script</strong> .</li>
+<li><strong>The script assumes every object is a Node</strong> – This will cause errors when passing other object types like <code>Color</code> or <code>Vector2</code>.</li>
+</ol>
+<p>To  <strong>fix these issues</strong> , we will:</p>
+<ul>
+<li><strong>Create a function</strong> that categorizes properties.</li>
+<li><strong>Pass objects</strong> into this function so we can check any class, not just <code>Node2D</code>.</li>
+<li><strong>Prevent errors</strong> by handling different object types correctly.</li>
+</ul>
+<h2 id="what-is-a-function"><strong>What is a Function?</strong></h2>
+<p>A <strong>function</strong> is a reusable block of code that performs a specific task. Instead of  <strong>copy-pasting code</strong> , we define a function <strong>once</strong> and call it  <strong>whenever we need it</strong> .</p>
+<p>Example:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-gdscript" data-lang="gdscript"><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">say_hello</span>():
+</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">&#34;Hello, world!&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">say_hello</span>()  <span style="color:#75715e"># Prints: Hello, world!</span>
+</span></span></code></pre></div><h3 id="step-1-creating-a-function-to-categorize-properties">Step 1: Creating a Function to Categorize Properties</h3>
+<p>Instead of hardcoding everything inside <code>_ready()</code>, we move the logic into a function:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-gdscript" data-lang="gdscript"><span style="display:flex;"><span><span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">Node2D</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">_ready</span>():
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">get_obj_properties</span>(self)  <span style="color:#75715e"># Call function for the current node</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">get_obj_properties</span>(obj):
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">var</span> properties <span style="color:#f92672">=</span> obj<span style="color:#f92672">.</span><span style="color:#a6e22e">get_property_list</span>()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">var</span> numbers <span style="color:#f92672">=</span> []
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">var</span> strings <span style="color:#f92672">=</span> []
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">var</span> bools <span style="color:#f92672">=</span> []
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">var</span> vectors <span style="color:#f92672">=</span> []
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">var</span> colors <span style="color:#f92672">=</span> []
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">var</span> objects <span style="color:#f92672">=</span> []
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">var</span> arrays <span style="color:#f92672">=</span> []
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">var</span> nil <span style="color:#f92672">=</span> []
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">var</span> type_lookup <span style="color:#f92672">=</span> {
+</span></span><span style="display:flex;"><span>		<span style="color:#ae81ff">0</span>: <span style="color:#e6db74">&#34;Nil&#34;</span>, <span style="color:#ae81ff">1</span>: <span style="color:#e6db74">&#34;bool&#34;</span>, <span style="color:#ae81ff">2</span>: <span style="color:#e6db74">&#34;int&#34;</span>, <span style="color:#ae81ff">3</span>: <span style="color:#e6db74">&#34;float&#34;</span>, <span style="color:#ae81ff">4</span>: <span style="color:#e6db74">&#34;String&#34;</span>, <span style="color:#ae81ff">5</span>: <span style="color:#e6db74">&#34;Vector2&#34;</span>, <span style="color:#ae81ff">6</span>: <span style="color:#e6db74">&#34;Vector2i&#34;</span>,
+</span></span><span style="display:flex;"><span>		<span style="color:#ae81ff">7</span>: <span style="color:#e6db74">&#34;Rect2&#34;</span>, <span style="color:#ae81ff">8</span>: <span style="color:#e6db74">&#34;Rect2i&#34;</span>, <span style="color:#ae81ff">9</span>: <span style="color:#e6db74">&#34;Vector3&#34;</span>, <span style="color:#ae81ff">10</span>: <span style="color:#e6db74">&#34;Vector3i&#34;</span>, <span style="color:#ae81ff">11</span>: <span style="color:#e6db74">&#34;Transform2D&#34;</span>, <span style="color:#ae81ff">12</span>: <span style="color:#e6db74">&#34;Vector4&#34;</span>,
+</span></span><span style="display:flex;"><span>		<span style="color:#ae81ff">13</span>: <span style="color:#e6db74">&#34;Vector4i&#34;</span>, <span style="color:#ae81ff">14</span>: <span style="color:#e6db74">&#34;Plane&#34;</span>, <span style="color:#ae81ff">15</span>: <span style="color:#e6db74">&#34;Quat&#34;</span>, <span style="color:#ae81ff">16</span>: <span style="color:#e6db74">&#34;AABB&#34;</span>, <span style="color:#ae81ff">17</span>: <span style="color:#e6db74">&#34;Basis&#34;</span>, <span style="color:#ae81ff">18</span>: <span style="color:#e6db74">&#34;Transform3D&#34;</span>,
+</span></span><span style="display:flex;"><span>		<span style="color:#ae81ff">19</span>: <span style="color:#e6db74">&#34;Projection&#34;</span>, <span style="color:#ae81ff">20</span>: <span style="color:#e6db74">&#34;Color&#34;</span>, <span style="color:#ae81ff">21</span>: <span style="color:#e6db74">&#34;StringName&#34;</span>, <span style="color:#ae81ff">22</span>: <span style="color:#e6db74">&#34;NodePath&#34;</span>, <span style="color:#ae81ff">23</span>: <span style="color:#e6db74">&#34;RID&#34;</span>, <span style="color:#ae81ff">24</span>: <span style="color:#e6db74">&#34;Object&#34;</span>,
+</span></span><span style="display:flex;"><span>		<span style="color:#ae81ff">25</span>: <span style="color:#e6db74">&#34;Callable&#34;</span>, <span style="color:#ae81ff">26</span>: <span style="color:#e6db74">&#34;Signal&#34;</span>, <span style="color:#ae81ff">27</span>: <span style="color:#e6db74">&#34;Dictionary&#34;</span>, <span style="color:#ae81ff">28</span>: <span style="color:#e6db74">&#34;Array&#34;</span>, <span style="color:#ae81ff">29</span>: <span style="color:#e6db74">&#34;PackedByteArray&#34;</span>,
+</span></span><span style="display:flex;"><span>		<span style="color:#ae81ff">30</span>: <span style="color:#e6db74">&#34;PackedInt32Array&#34;</span>, <span style="color:#ae81ff">31</span>: <span style="color:#e6db74">&#34;PackedInt64Array&#34;</span>, <span style="color:#ae81ff">32</span>: <span style="color:#e6db74">&#34;PackedFloat32Array&#34;</span>, <span style="color:#ae81ff">33</span>: <span style="color:#e6db74">&#34;PackedFloat64Array&#34;</span>,
+</span></span><span style="display:flex;"><span>		<span style="color:#ae81ff">34</span>: <span style="color:#e6db74">&#34;PackedStringArray&#34;</span>, <span style="color:#ae81ff">35</span>: <span style="color:#e6db74">&#34;PackedVector2Array&#34;</span>, <span style="color:#ae81ff">36</span>: <span style="color:#e6db74">&#34;PackedVector3Array&#34;</span>, <span style="color:#ae81ff">37</span>: <span style="color:#e6db74">&#34;PackedColorArray&#34;</span>
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">for</span> prop <span style="color:#f92672">in</span> properties:
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">var</span> type_name <span style="color:#f92672">=</span> type_lookup<span style="color:#f92672">.</span><span style="color:#a6e22e">get</span>(prop<span style="color:#f92672">.</span>type, <span style="color:#e6db74">&#34;Unknown&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">if</span> prop<span style="color:#f92672">.</span>type <span style="color:#f92672">in</span> [<span style="color:#ae81ff">1</span>]:
+</span></span><span style="display:flex;"><span>			bools<span style="color:#f92672">.</span><span style="color:#a6e22e">append</span>(prop<span style="color:#f92672">.</span>name <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; - Type: &#34;</span> <span style="color:#f92672">+</span> type_name)
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">elif</span> prop<span style="color:#f92672">.</span>type <span style="color:#f92672">in</span> [<span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>]:  <span style="color:#75715e"># bool, int, float</span>
+</span></span><span style="display:flex;"><span>			numbers<span style="color:#f92672">.</span><span style="color:#a6e22e">append</span>(prop<span style="color:#f92672">.</span>name <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; - Type: &#34;</span> <span style="color:#f92672">+</span> type_name)
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">elif</span> prop<span style="color:#f92672">.</span>type <span style="color:#f92672">in</span> [<span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">21</span>]:
+</span></span><span style="display:flex;"><span>			strings<span style="color:#f92672">.</span><span style="color:#a6e22e">append</span>(prop<span style="color:#f92672">.</span>name <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; - Type: &#34;</span> <span style="color:#f92672">+</span> type_name)
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">elif</span> prop<span style="color:#f92672">.</span>type <span style="color:#f92672">in</span> [<span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">6</span>, <span style="color:#ae81ff">7</span>, <span style="color:#ae81ff">8</span>, <span style="color:#ae81ff">9</span>, <span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">11</span>, <span style="color:#ae81ff">12</span>, <span style="color:#ae81ff">13</span>, <span style="color:#ae81ff">14</span>, <span style="color:#ae81ff">15</span>, <span style="color:#ae81ff">16</span>, <span style="color:#ae81ff">17</span>, <span style="color:#ae81ff">18</span>, <span style="color:#ae81ff">19</span>]:  <span style="color:#75715e"># Vector types &amp; transforms</span>
+</span></span><span style="display:flex;"><span>			vectors<span style="color:#f92672">.</span><span style="color:#a6e22e">append</span>(prop<span style="color:#f92672">.</span>name <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; - Type: &#34;</span> <span style="color:#f92672">+</span> type_name)
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">elif</span> prop<span style="color:#f92672">.</span>type <span style="color:#f92672">in</span> [<span style="color:#ae81ff">20</span>]:  <span style="color:#75715e"># Colors</span>
+</span></span><span style="display:flex;"><span>			colors<span style="color:#f92672">.</span><span style="color:#a6e22e">append</span>(prop<span style="color:#f92672">.</span>name <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; - Type: &#34;</span> <span style="color:#f92672">+</span> type_name)
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">elif</span> prop<span style="color:#f92672">.</span>type <span style="color:#f92672">in</span> [<span style="color:#ae81ff">22</span>, <span style="color:#ae81ff">23</span>, <span style="color:#ae81ff">24</span>, <span style="color:#ae81ff">25</span>, <span style="color:#ae81ff">26</span>]:  <span style="color:#75715e"># Node and object references</span>
+</span></span><span style="display:flex;"><span>			objects<span style="color:#f92672">.</span><span style="color:#a6e22e">append</span>(prop<span style="color:#f92672">.</span>name <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; - Type: &#34;</span> <span style="color:#f92672">+</span> type_name)
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">elif</span> prop<span style="color:#f92672">.</span>type <span style="color:#f92672">in</span> [<span style="color:#ae81ff">27</span>, <span style="color:#ae81ff">28</span>, <span style="color:#ae81ff">29</span>, <span style="color:#ae81ff">30</span>, <span style="color:#ae81ff">31</span>, <span style="color:#ae81ff">32</span>, <span style="color:#ae81ff">33</span>, <span style="color:#ae81ff">34</span>, <span style="color:#ae81ff">35</span>, <span style="color:#ae81ff">36</span>, <span style="color:#ae81ff">37</span>]:  <span style="color:#75715e"># Arrays and dictionaries</span>
+</span></span><span style="display:flex;"><span>			arrays<span style="color:#f92672">.</span><span style="color:#a6e22e">append</span>(prop<span style="color:#f92672">.</span>name <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; - Type: &#34;</span> <span style="color:#f92672">+</span> type_name)
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>			nil<span style="color:#f92672">.</span><span style="color:#a6e22e">append</span>(prop<span style="color:#f92672">.</span>name <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; - Type: &#34;</span> <span style="color:#f92672">+</span> type_name)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	print(<span style="color:#e6db74">&#34;Numbers:&#34;</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">for</span> entry <span style="color:#f92672">in</span> numbers:
+</span></span><span style="display:flex;"><span>		print(entry)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	print(<span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">Strings:&#34;</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">for</span> entry <span style="color:#f92672">in</span> strings:
+</span></span><span style="display:flex;"><span>		print(entry)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	print(<span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">Bools:&#34;</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">for</span> entry <span style="color:#f92672">in</span> bools:
+</span></span><span style="display:flex;"><span>		print(entry)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	print(<span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">Vectors:&#34;</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">for</span> entry <span style="color:#f92672">in</span> vectors:
+</span></span><span style="display:flex;"><span>		print(entry)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	print(<span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">Colors&#34;</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">for</span> entry <span style="color:#f92672">in</span> colors:
+</span></span><span style="display:flex;"><span>		print(entry)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	print(<span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">Objects:&#34;</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">for</span> entry <span style="color:#f92672">in</span> objects:
+</span></span><span style="display:flex;"><span>		print(entry)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	print(<span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">Arrays:&#34;</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">for</span> entry <span style="color:#f92672">in</span> arrays:
+</span></span><span style="display:flex;"><span>		print(entry)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	print(<span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">Nil&#34;</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">for</span> entry <span style="color:#f92672">in</span> nil:
+</span></span><span style="display:flex;"><span>		print(entry)
+</span></span></code></pre></div><p>Now, if we have  <strong>another object</strong> , we can call:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-gdscript" data-lang="gdscript"><span style="display:flex;"><span><span style="color:#66d9ef">var</span> my_sprite <span style="color:#f92672">=</span> <span style="color:#a6e22e">Sprite2D</span><span style="color:#f92672">.</span><span style="color:#a6e22e">new</span>()
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">categorize_properties</span>(my_sprite)  <span style="color:#75715e"># Works on Sprite2D too!</span>
+</span></span></code></pre></div><p>This <strong>removes duplicate code</strong> and makes the function  <strong>work on any node</strong>.</p>
+<h3 id="step-2-handling-non-node-objects"><strong>Step 2: Handling Non-Node Objects</strong></h3>
+<h4 id="the-problem-what-happens-if-we-pass-a-non-node"><strong>The Problem: What Happens If We Pass a Non-Node?</strong></h4>
+<p>So far, our function  <strong>assumes every object has <code>get_property_list()</code></strong> , which  <strong>only exists in Nodes</strong> .</p>
+<p>Let’s try calling:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-gdscript" data-lang="gdscript"><span style="display:flex;"><span><span style="color:#a6e22e">categorize_properties</span>(<span style="color:#a6e22e">Color</span>(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>))
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">categorize_properties</span>(<span style="color:#a6e22e">Vector2</span>(<span style="color:#ae81ff">100</span>, <span style="color:#ae81ff">200</span>))
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">categorize_properties</span>(<span style="color:#ae81ff">5</span>)
+</span></span></code></pre></div><p>These  <strong>will break</strong> , because <code>Color</code>, <code>Vector2</code>, and <code>int</code>  <strong>do not have <code>get_property_list()</code></strong> .</p>
+<h3 id="common-errors-youll-encounter"><strong>Common Errors You’ll Encounter</strong></h3>
+<p>If we try:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-gdscript" data-lang="gdscript"><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">_ready</span>():
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">categorize_properties</span>(<span style="color:#a6e22e">Color</span>(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>))  <span style="color:#75715e"># A red color</span>
+</span></span></code></pre></div><p>We get an <strong>error</strong> like:</p>
+<blockquote>
+<p>Invalid call. Nonexistent function &lsquo;get_property_list&rsquo; in base &lsquo;Color&rsquo;.</p></blockquote>
+<p><strong>Why?</strong></p>
+<ul>
+<li><strong>Color objects do not have properties like Nodes.</strong></li>
+<li><strong>Only Nodes have <code>get_property_list()</code>.</strong></li>
+</ul>
+<h2 id="step-3-checking-the-object-type-before-using-it"><strong>Step 3: Checking the Object Type Before Using It</strong></h2>
+<p>To  <strong>prevent errors</strong>, we use <strong>type checking</strong> in Godot.</p>
+<h3 id="1-using-typeof"><strong>1. Using <code>typeof()</code></strong></h3>
+<p><code>typeof(obj)</code> checks <strong>basic types</strong> like <code>int</code>, <code>float</code>, <code>String</code>, <code>Vector2</code>, <code>Color</code>, etc.</p>
+<p>Example:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-gdscript" data-lang="gdscript"><span style="display:flex;"><span>print(typeof(<span style="color:#ae81ff">5</span>))  <span style="color:#75715e"># Prints: 2 (int)</span>
+</span></span><span style="display:flex;"><span>print(typeof(<span style="color:#a6e22e">Color</span>()))  <span style="color:#75715e"># Prints: 20 (Color)</span>
+</span></span></code></pre></div><h3 id="2-using-is-to-check-for-node-based-objects"><strong>2. Using <code>is</code> to Check for Node-Based Objects</strong></h3>
+<p>To check if something is a <strong>Node</strong>, we use keywork <strong>is</strong> to check if an object is a certain type:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-gdscript" data-lang="gdscript"><span style="display:flex;"><span><span style="color:#66d9ef">var</span> my_node <span style="color:#f92672">=</span> <span style="color:#a6e22e">Node2D</span><span style="color:#f92672">.</span><span style="color:#a6e22e">new</span>()
+</span></span><span style="display:flex;"><span>print(my_node <span style="color:#f92672">is</span> <span style="color:#a6e22e">Node</span>)  <span style="color:#75715e"># Prints: true</span>
+</span></span><span style="display:flex;"><span>print(my_node <span style="color:#f92672">is</span> <span style="color:#a6e22e">Color</span>)  <span style="color:#75715e"># Prints: false</span>
+</span></span></code></pre></div><p>We can use is to help prevent us from calling <code>get_property_list()</code> on non-Node objects by wrapping the statements in an if obj is obj check. <strong>Updated function below</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-gdscript" data-lang="gdscript"><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">get_obj_properties</span>(obj):
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">if</span> obj <span style="color:#f92672">is</span> <span style="color:#a6e22e">Node</span>:
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">var</span> properties <span style="color:#f92672">=</span> obj<span style="color:#f92672">.</span><span style="color:#a6e22e">get_property_list</span>()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">var</span> numbers <span style="color:#f92672">=</span> []
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">var</span> strings <span style="color:#f92672">=</span> []
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">var</span> bools <span style="color:#f92672">=</span> []
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">var</span> vectors <span style="color:#f92672">=</span> []
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">var</span> colors <span style="color:#f92672">=</span> []
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">var</span> objects <span style="color:#f92672">=</span> []
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">var</span> arrays <span style="color:#f92672">=</span> []
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">var</span> nil <span style="color:#f92672">=</span> []
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">var</span> type_lookup <span style="color:#f92672">=</span> {
+</span></span><span style="display:flex;"><span>			<span style="color:#ae81ff">0</span>: <span style="color:#e6db74">&#34;Nil&#34;</span>, <span style="color:#ae81ff">1</span>: <span style="color:#e6db74">&#34;bool&#34;</span>, <span style="color:#ae81ff">2</span>: <span style="color:#e6db74">&#34;int&#34;</span>, <span style="color:#ae81ff">3</span>: <span style="color:#e6db74">&#34;float&#34;</span>, <span style="color:#ae81ff">4</span>: <span style="color:#e6db74">&#34;String&#34;</span>, <span style="color:#ae81ff">5</span>: <span style="color:#e6db74">&#34;Vector2&#34;</span>, <span style="color:#ae81ff">6</span>: <span style="color:#e6db74">&#34;Vector2i&#34;</span>,
+</span></span><span style="display:flex;"><span>			<span style="color:#ae81ff">7</span>: <span style="color:#e6db74">&#34;Rect2&#34;</span>, <span style="color:#ae81ff">8</span>: <span style="color:#e6db74">&#34;Rect2i&#34;</span>, <span style="color:#ae81ff">9</span>: <span style="color:#e6db74">&#34;Vector3&#34;</span>, <span style="color:#ae81ff">10</span>: <span style="color:#e6db74">&#34;Vector3i&#34;</span>, <span style="color:#ae81ff">11</span>: <span style="color:#e6db74">&#34;Transform2D&#34;</span>, <span style="color:#ae81ff">12</span>: <span style="color:#e6db74">&#34;Vector4&#34;</span>,
+</span></span><span style="display:flex;"><span>			<span style="color:#ae81ff">13</span>: <span style="color:#e6db74">&#34;Vector4i&#34;</span>, <span style="color:#ae81ff">14</span>: <span style="color:#e6db74">&#34;Plane&#34;</span>, <span style="color:#ae81ff">15</span>: <span style="color:#e6db74">&#34;Quat&#34;</span>, <span style="color:#ae81ff">16</span>: <span style="color:#e6db74">&#34;AABB&#34;</span>, <span style="color:#ae81ff">17</span>: <span style="color:#e6db74">&#34;Basis&#34;</span>, <span style="color:#ae81ff">18</span>: <span style="color:#e6db74">&#34;Transform3D&#34;</span>,
+</span></span><span style="display:flex;"><span>			<span style="color:#ae81ff">19</span>: <span style="color:#e6db74">&#34;Projection&#34;</span>, <span style="color:#ae81ff">20</span>: <span style="color:#e6db74">&#34;Color&#34;</span>, <span style="color:#ae81ff">21</span>: <span style="color:#e6db74">&#34;StringName&#34;</span>, <span style="color:#ae81ff">22</span>: <span style="color:#e6db74">&#34;NodePath&#34;</span>, <span style="color:#ae81ff">23</span>: <span style="color:#e6db74">&#34;RID&#34;</span>, <span style="color:#ae81ff">24</span>: <span style="color:#e6db74">&#34;Object&#34;</span>,
+</span></span><span style="display:flex;"><span>			<span style="color:#ae81ff">25</span>: <span style="color:#e6db74">&#34;Callable&#34;</span>, <span style="color:#ae81ff">26</span>: <span style="color:#e6db74">&#34;Signal&#34;</span>, <span style="color:#ae81ff">27</span>: <span style="color:#e6db74">&#34;Dictionary&#34;</span>, <span style="color:#ae81ff">28</span>: <span style="color:#e6db74">&#34;Array&#34;</span>, <span style="color:#ae81ff">29</span>: <span style="color:#e6db74">&#34;PackedByteArray&#34;</span>,
+</span></span><span style="display:flex;"><span>			<span style="color:#ae81ff">30</span>: <span style="color:#e6db74">&#34;PackedInt32Array&#34;</span>, <span style="color:#ae81ff">31</span>: <span style="color:#e6db74">&#34;PackedInt64Array&#34;</span>, <span style="color:#ae81ff">32</span>: <span style="color:#e6db74">&#34;PackedFloat32Array&#34;</span>, <span style="color:#ae81ff">33</span>: <span style="color:#e6db74">&#34;PackedFloat64Array&#34;</span>,
+</span></span><span style="display:flex;"><span>			<span style="color:#ae81ff">34</span>: <span style="color:#e6db74">&#34;PackedStringArray&#34;</span>, <span style="color:#ae81ff">35</span>: <span style="color:#e6db74">&#34;PackedVector2Array&#34;</span>, <span style="color:#ae81ff">36</span>: <span style="color:#e6db74">&#34;PackedVector3Array&#34;</span>, <span style="color:#ae81ff">37</span>: <span style="color:#e6db74">&#34;PackedColorArray&#34;</span>
+</span></span><span style="display:flex;"><span>		}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">for</span> prop <span style="color:#f92672">in</span> properties:
+</span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">var</span> type_name <span style="color:#f92672">=</span> type_lookup<span style="color:#f92672">.</span><span style="color:#a6e22e">get</span>(prop<span style="color:#f92672">.</span>type, <span style="color:#e6db74">&#34;Unknown&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">if</span> prop<span style="color:#f92672">.</span>type <span style="color:#f92672">in</span> [<span style="color:#ae81ff">1</span>]:
+</span></span><span style="display:flex;"><span>				bools<span style="color:#f92672">.</span><span style="color:#a6e22e">append</span>(prop<span style="color:#f92672">.</span>name <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; - Type: &#34;</span> <span style="color:#f92672">+</span> type_name)
+</span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">elif</span> prop<span style="color:#f92672">.</span>type <span style="color:#f92672">in</span> [<span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>]:  <span style="color:#75715e"># bool, int, float</span>
+</span></span><span style="display:flex;"><span>				numbers<span style="color:#f92672">.</span><span style="color:#a6e22e">append</span>(prop<span style="color:#f92672">.</span>name <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; - Type: &#34;</span> <span style="color:#f92672">+</span> type_name)
+</span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">elif</span> prop<span style="color:#f92672">.</span>type <span style="color:#f92672">in</span> [<span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">21</span>]:
+</span></span><span style="display:flex;"><span>				strings<span style="color:#f92672">.</span><span style="color:#a6e22e">append</span>(prop<span style="color:#f92672">.</span>name <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; - Type: &#34;</span> <span style="color:#f92672">+</span> type_name)
+</span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">elif</span> prop<span style="color:#f92672">.</span>type <span style="color:#f92672">in</span> [<span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">6</span>, <span style="color:#ae81ff">7</span>, <span style="color:#ae81ff">8</span>, <span style="color:#ae81ff">9</span>, <span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">11</span>, <span style="color:#ae81ff">12</span>, <span style="color:#ae81ff">13</span>, <span style="color:#ae81ff">14</span>, <span style="color:#ae81ff">15</span>, <span style="color:#ae81ff">16</span>, <span style="color:#ae81ff">17</span>, <span style="color:#ae81ff">18</span>, <span style="color:#ae81ff">19</span>]:  <span style="color:#75715e"># Vector types &amp; transforms</span>
+</span></span><span style="display:flex;"><span>				vectors<span style="color:#f92672">.</span><span style="color:#a6e22e">append</span>(prop<span style="color:#f92672">.</span>name <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; - Type: &#34;</span> <span style="color:#f92672">+</span> type_name)
+</span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">elif</span> prop<span style="color:#f92672">.</span>type <span style="color:#f92672">in</span> [<span style="color:#ae81ff">20</span>]:  <span style="color:#75715e"># Colors</span>
+</span></span><span style="display:flex;"><span>				colors<span style="color:#f92672">.</span><span style="color:#a6e22e">append</span>(prop<span style="color:#f92672">.</span>name <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; - Type: &#34;</span> <span style="color:#f92672">+</span> type_name)
+</span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">elif</span> prop<span style="color:#f92672">.</span>type <span style="color:#f92672">in</span> [<span style="color:#ae81ff">22</span>, <span style="color:#ae81ff">23</span>, <span style="color:#ae81ff">24</span>, <span style="color:#ae81ff">25</span>, <span style="color:#ae81ff">26</span>]:  <span style="color:#75715e"># Node and object references</span>
+</span></span><span style="display:flex;"><span>				objects<span style="color:#f92672">.</span><span style="color:#a6e22e">append</span>(prop<span style="color:#f92672">.</span>name <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; - Type: &#34;</span> <span style="color:#f92672">+</span> type_name)
+</span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">elif</span> prop<span style="color:#f92672">.</span>type <span style="color:#f92672">in</span> [<span style="color:#ae81ff">27</span>, <span style="color:#ae81ff">28</span>, <span style="color:#ae81ff">29</span>, <span style="color:#ae81ff">30</span>, <span style="color:#ae81ff">31</span>, <span style="color:#ae81ff">32</span>, <span style="color:#ae81ff">33</span>, <span style="color:#ae81ff">34</span>, <span style="color:#ae81ff">35</span>, <span style="color:#ae81ff">36</span>, <span style="color:#ae81ff">37</span>]:  <span style="color:#75715e"># Arrays and dictionaries</span>
+</span></span><span style="display:flex;"><span>				arrays<span style="color:#f92672">.</span><span style="color:#a6e22e">append</span>(prop<span style="color:#f92672">.</span>name <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; - Type: &#34;</span> <span style="color:#f92672">+</span> type_name)
+</span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>				nil<span style="color:#f92672">.</span><span style="color:#a6e22e">append</span>(prop<span style="color:#f92672">.</span>name <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; - Type: &#34;</span> <span style="color:#f92672">+</span> type_name)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>		print(<span style="color:#e6db74">&#34;Numbers:&#34;</span>)
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">for</span> entry <span style="color:#f92672">in</span> numbers:
+</span></span><span style="display:flex;"><span>			print(entry)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>		print(<span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">Strings:&#34;</span>)
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">for</span> entry <span style="color:#f92672">in</span> strings:
+</span></span><span style="display:flex;"><span>			print(entry)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>		print(<span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">Bools:&#34;</span>)
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">for</span> entry <span style="color:#f92672">in</span> bools:
+</span></span><span style="display:flex;"><span>			print(entry)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>		print(<span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">Vectors:&#34;</span>)
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">for</span> entry <span style="color:#f92672">in</span> vectors:
+</span></span><span style="display:flex;"><span>			print(entry)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>		print(<span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">Colors&#34;</span>)
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">for</span> entry <span style="color:#f92672">in</span> colors:
+</span></span><span style="display:flex;"><span>			print(entry)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>		print(<span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">Objects:&#34;</span>)
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">for</span> entry <span style="color:#f92672">in</span> objects:
+</span></span><span style="display:flex;"><span>			print(entry)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>		print(<span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">Arrays:&#34;</span>)
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">for</span> entry <span style="color:#f92672">in</span> arrays:
+</span></span><span style="display:flex;"><span>			print(entry)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>		print(<span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">Nil&#34;</span>)
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">for</span> entry <span style="color:#f92672">in</span> nil:
+</span></span><span style="display:flex;"><span>			print(entry)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>		print(<span style="color:#e6db74">&#34;&#39;/obj&#39;/ passed was not a Node&#34;</span>) 
+</span></span></code></pre></div><h3 id="3-using-sort-to-alphabetically-sort-the-lists"><strong>3. Using <code>sort</code> to alphabetically sort the lists</strong></h3>
+<p>sort() is a built in function that can be used with all lists by calling the list.sort()</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-gdscript" data-lang="gdscript"><span style="display:flex;"><span><span style="color:#f92672">...</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>				nil<span style="color:#f92672">.</span><span style="color:#a6e22e">append</span>(prop<span style="color:#f92672">.</span>name <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; - Type: &#34;</span> <span style="color:#f92672">+</span> type_name)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>		numbers<span style="color:#f92672">.</span><span style="color:#a6e22e">sort</span>()
+</span></span><span style="display:flex;"><span>		strings<span style="color:#f92672">.</span><span style="color:#a6e22e">sort</span>()
+</span></span><span style="display:flex;"><span>		bools<span style="color:#f92672">.</span><span style="color:#a6e22e">sort</span>()
+</span></span><span style="display:flex;"><span>		vectors<span style="color:#f92672">.</span><span style="color:#a6e22e">sort</span>()
+</span></span><span style="display:flex;"><span>		colors<span style="color:#f92672">.</span><span style="color:#a6e22e">sort</span>()
+</span></span><span style="display:flex;"><span>		objects<span style="color:#f92672">.</span><span style="color:#a6e22e">sort</span>()
+</span></span><span style="display:flex;"><span>		arrays<span style="color:#f92672">.</span><span style="color:#a6e22e">sort</span>()
+</span></span><span style="display:flex;"><span>		nil<span style="color:#f92672">.</span><span style="color:#a6e22e">sort</span>()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>		print(<span style="color:#e6db74">&#34;Numbers:&#34;</span>)
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">for</span> entry <span style="color:#f92672">in</span> numbers:
+</span></span><span style="display:flex;"><span>			print(entry)
+</span></span><span style="display:flex;"><span><span style="color:#f92672">...</span>
+</span></span></code></pre></div><h3 id="step-4-refactoring-to-return-data-instead-of-printing">Step 4: Refactoring to Return Data Instead of Printing</h3>
+<p>Now that we’ve organized properties into groups and  sorted them alphabetically, the next step is to return the data instead of printing it directly.</p>
+<h4 id="why-we-need-to-refactor"><strong>Why We Need to Refactor</strong></h4>
+<p>Right now, our function <strong>immediately prints the results</strong>, making it <strong>inflexible</strong> .</p>
+<h5 id="current-behavior-direct-printing"><strong>Current Behavior (Direct Printing)</strong></h5>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-gdscript" data-lang="gdscript"><span style="display:flex;"><span>print(<span style="color:#e6db74">&#34;Numbers:&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> entry <span style="color:#f92672">in</span> numbers:
+</span></span><span style="display:flex;"><span>    print(entry)
+</span></span></code></pre></div><p>The function <strong>forces</strong> output into the console, meaning we <strong>cannot reuse the data elsewhere</strong>.</p>
+<h5 id="updated-behavior-returning-data"><strong>Updated Behavior (Returning Data)</strong></h5>
+<p>Instead of printing:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-gdscript" data-lang="gdscript"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> sorted_obj_prop_dict
+</span></span></code></pre></div><p>Now, we can <strong>store the results in a variable</strong> and use them later:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-gdscript" data-lang="gdscript"><span style="display:flex;"><span><span style="color:#66d9ef">var</span> data <span style="color:#f92672">=</span> <span style="color:#a6e22e">get_obj_properties</span>(self)
+</span></span><span style="display:flex;"><span>print(data[<span style="color:#e6db74">&#34;numbers&#34;</span>])  <span style="color:#75715e"># Now we can choose when to print</span>
+</span></span></code></pre></div><h4 id="step-1-updating-the-function-to-return-data"><strong>Step 1: Updating the Function to Return Data</strong></h4>
+<p>Here’s the <strong>updated code</strong> that returns a dictionary instead of printing:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-gdscript" data-lang="gdscript"><span style="display:flex;"><span><span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">Node2D</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">var</span> type_lookup: <span style="color:#a6e22e">Dictionary</span> <span style="color:#f92672">=</span> {
+</span></span><span style="display:flex;"><span>			<span style="color:#ae81ff">0</span>: <span style="color:#e6db74">&#34;Nil&#34;</span>, <span style="color:#ae81ff">1</span>: <span style="color:#e6db74">&#34;bool&#34;</span>, <span style="color:#ae81ff">2</span>: <span style="color:#e6db74">&#34;int&#34;</span>, <span style="color:#ae81ff">3</span>: <span style="color:#e6db74">&#34;float&#34;</span>, <span style="color:#ae81ff">4</span>: <span style="color:#e6db74">&#34;String&#34;</span>, <span style="color:#ae81ff">5</span>: <span style="color:#e6db74">&#34;Vector2&#34;</span>, <span style="color:#ae81ff">6</span>: <span style="color:#e6db74">&#34;Vector2i&#34;</span>,
+</span></span><span style="display:flex;"><span>			<span style="color:#ae81ff">7</span>: <span style="color:#e6db74">&#34;Rect2&#34;</span>, <span style="color:#ae81ff">8</span>: <span style="color:#e6db74">&#34;Rect2i&#34;</span>, <span style="color:#ae81ff">9</span>: <span style="color:#e6db74">&#34;Vector3&#34;</span>, <span style="color:#ae81ff">10</span>: <span style="color:#e6db74">&#34;Vector3i&#34;</span>, <span style="color:#ae81ff">11</span>: <span style="color:#e6db74">&#34;Transform2D&#34;</span>, <span style="color:#ae81ff">12</span>: <span style="color:#e6db74">&#34;Vector4&#34;</span>,
+</span></span><span style="display:flex;"><span>			<span style="color:#ae81ff">13</span>: <span style="color:#e6db74">&#34;Vector4i&#34;</span>, <span style="color:#ae81ff">14</span>: <span style="color:#e6db74">&#34;Plane&#34;</span>, <span style="color:#ae81ff">15</span>: <span style="color:#e6db74">&#34;Quat&#34;</span>, <span style="color:#ae81ff">16</span>: <span style="color:#e6db74">&#34;AABB&#34;</span>, <span style="color:#ae81ff">17</span>: <span style="color:#e6db74">&#34;Basis&#34;</span>, <span style="color:#ae81ff">18</span>: <span style="color:#e6db74">&#34;Transform3D&#34;</span>,
+</span></span><span style="display:flex;"><span>			<span style="color:#ae81ff">19</span>: <span style="color:#e6db74">&#34;Projection&#34;</span>, <span style="color:#ae81ff">20</span>: <span style="color:#e6db74">&#34;Color&#34;</span>, <span style="color:#ae81ff">21</span>: <span style="color:#e6db74">&#34;StringName&#34;</span>, <span style="color:#ae81ff">22</span>: <span style="color:#e6db74">&#34;NodePath&#34;</span>, <span style="color:#ae81ff">23</span>: <span style="color:#e6db74">&#34;RID&#34;</span>, <span style="color:#ae81ff">24</span>: <span style="color:#e6db74">&#34;Object&#34;</span>,
+</span></span><span style="display:flex;"><span>			<span style="color:#ae81ff">25</span>: <span style="color:#e6db74">&#34;Callable&#34;</span>, <span style="color:#ae81ff">26</span>: <span style="color:#e6db74">&#34;Signal&#34;</span>, <span style="color:#ae81ff">27</span>: <span style="color:#e6db74">&#34;Dictionary&#34;</span>, <span style="color:#ae81ff">28</span>: <span style="color:#e6db74">&#34;Array&#34;</span>, <span style="color:#ae81ff">29</span>: <span style="color:#e6db74">&#34;PackedByteArray&#34;</span>,
+</span></span><span style="display:flex;"><span>			<span style="color:#ae81ff">30</span>: <span style="color:#e6db74">&#34;PackedInt32Array&#34;</span>, <span style="color:#ae81ff">31</span>: <span style="color:#e6db74">&#34;PackedInt64Array&#34;</span>, <span style="color:#ae81ff">32</span>: <span style="color:#e6db74">&#34;PackedFloat32Array&#34;</span>, <span style="color:#ae81ff">33</span>: <span style="color:#e6db74">&#34;PackedFloat64Array&#34;</span>,
+</span></span><span style="display:flex;"><span>			<span style="color:#ae81ff">34</span>: <span style="color:#e6db74">&#34;PackedStringArray&#34;</span>, <span style="color:#ae81ff">35</span>: <span style="color:#e6db74">&#34;PackedVector2Array&#34;</span>, <span style="color:#ae81ff">36</span>: <span style="color:#e6db74">&#34;PackedVector3Array&#34;</span>, <span style="color:#ae81ff">37</span>: <span style="color:#e6db74">&#34;PackedColorArray&#34;</span>
+</span></span><span style="display:flex;"><span>		}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">_ready</span>():
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">for</span> x <span style="color:#f92672">in</span> <span style="color:#a6e22e">get_obj_properties</span>(self)[<span style="color:#e6db74">&#34;numbers&#34;</span>]:
+</span></span><span style="display:flex;"><span>		print(x)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">get_obj_properties</span>(obj):
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">if</span> obj <span style="color:#f92672">is</span> <span style="color:#a6e22e">Node</span>:
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">var</span> properties <span style="color:#f92672">=</span> obj<span style="color:#f92672">.</span><span style="color:#a6e22e">get_property_list</span>()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">var</span> numbers <span style="color:#f92672">=</span> []
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">var</span> strings <span style="color:#f92672">=</span> []
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">var</span> bools <span style="color:#f92672">=</span> []
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">var</span> vectors <span style="color:#f92672">=</span> []
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">var</span> colors <span style="color:#f92672">=</span> []
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">var</span> objects <span style="color:#f92672">=</span> []
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">var</span> arrays <span style="color:#f92672">=</span> []
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">var</span> nil <span style="color:#f92672">=</span> []
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">for</span> prop <span style="color:#f92672">in</span> properties:
+</span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">var</span> type_name <span style="color:#f92672">=</span> type_lookup<span style="color:#f92672">.</span><span style="color:#a6e22e">get</span>(prop<span style="color:#f92672">.</span>type, <span style="color:#e6db74">&#34;Unknown&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">if</span> prop<span style="color:#f92672">.</span>type <span style="color:#f92672">in</span> [<span style="color:#ae81ff">1</span>]:
+</span></span><span style="display:flex;"><span>				bools<span style="color:#f92672">.</span><span style="color:#a6e22e">append</span>(prop<span style="color:#f92672">.</span>name <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; - Type: &#34;</span> <span style="color:#f92672">+</span> type_name)
+</span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">elif</span> prop<span style="color:#f92672">.</span>type <span style="color:#f92672">in</span> [<span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>]:  <span style="color:#75715e"># bool, int, float</span>
+</span></span><span style="display:flex;"><span>				numbers<span style="color:#f92672">.</span><span style="color:#a6e22e">append</span>(prop<span style="color:#f92672">.</span>name <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; - Type: &#34;</span> <span style="color:#f92672">+</span> type_name)
+</span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">elif</span> prop<span style="color:#f92672">.</span>type <span style="color:#f92672">in</span> [<span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">21</span>]:
+</span></span><span style="display:flex;"><span>				strings<span style="color:#f92672">.</span><span style="color:#a6e22e">append</span>(prop<span style="color:#f92672">.</span>name <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; - Type: &#34;</span> <span style="color:#f92672">+</span> type_name)
+</span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">elif</span> prop<span style="color:#f92672">.</span>type <span style="color:#f92672">in</span> [<span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">6</span>, <span style="color:#ae81ff">7</span>, <span style="color:#ae81ff">8</span>, <span style="color:#ae81ff">9</span>, <span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">11</span>, <span style="color:#ae81ff">12</span>, <span style="color:#ae81ff">13</span>, <span style="color:#ae81ff">14</span>, <span style="color:#ae81ff">15</span>, <span style="color:#ae81ff">16</span>, <span style="color:#ae81ff">17</span>, <span style="color:#ae81ff">18</span>, <span style="color:#ae81ff">19</span>]:  <span style="color:#75715e"># Vector types &amp; transforms</span>
+</span></span><span style="display:flex;"><span>				vectors<span style="color:#f92672">.</span><span style="color:#a6e22e">append</span>(prop<span style="color:#f92672">.</span>name <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; - Type: &#34;</span> <span style="color:#f92672">+</span> type_name)
+</span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">elif</span> prop<span style="color:#f92672">.</span>type <span style="color:#f92672">in</span> [<span style="color:#ae81ff">20</span>]:  <span style="color:#75715e"># Colors</span>
+</span></span><span style="display:flex;"><span>				colors<span style="color:#f92672">.</span><span style="color:#a6e22e">append</span>(prop<span style="color:#f92672">.</span>name <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; - Type: &#34;</span> <span style="color:#f92672">+</span> type_name)
+</span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">elif</span> prop<span style="color:#f92672">.</span>type <span style="color:#f92672">in</span> [<span style="color:#ae81ff">22</span>, <span style="color:#ae81ff">23</span>, <span style="color:#ae81ff">24</span>, <span style="color:#ae81ff">25</span>, <span style="color:#ae81ff">26</span>]:  <span style="color:#75715e"># Node and object references</span>
+</span></span><span style="display:flex;"><span>				objects<span style="color:#f92672">.</span><span style="color:#a6e22e">append</span>(prop<span style="color:#f92672">.</span>name <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; - Type: &#34;</span> <span style="color:#f92672">+</span> type_name)
+</span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">elif</span> prop<span style="color:#f92672">.</span>type <span style="color:#f92672">in</span> [<span style="color:#ae81ff">27</span>, <span style="color:#ae81ff">28</span>, <span style="color:#ae81ff">29</span>, <span style="color:#ae81ff">30</span>, <span style="color:#ae81ff">31</span>, <span style="color:#ae81ff">32</span>, <span style="color:#ae81ff">33</span>, <span style="color:#ae81ff">34</span>, <span style="color:#ae81ff">35</span>, <span style="color:#ae81ff">36</span>, <span style="color:#ae81ff">37</span>]:  <span style="color:#75715e"># Arrays and dictionaries</span>
+</span></span><span style="display:flex;"><span>				arrays<span style="color:#f92672">.</span><span style="color:#a6e22e">append</span>(prop<span style="color:#f92672">.</span>name <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; - Type: &#34;</span> <span style="color:#f92672">+</span> type_name)
+</span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>				nil<span style="color:#f92672">.</span><span style="color:#a6e22e">append</span>(prop<span style="color:#f92672">.</span>name <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; - Type: &#34;</span> <span style="color:#f92672">+</span> type_name)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>		numbers<span style="color:#f92672">.</span><span style="color:#a6e22e">sort</span>()
+</span></span><span style="display:flex;"><span>		strings<span style="color:#f92672">.</span><span style="color:#a6e22e">sort</span>()
+</span></span><span style="display:flex;"><span>		bools<span style="color:#f92672">.</span><span style="color:#a6e22e">sort</span>()
+</span></span><span style="display:flex;"><span>		vectors<span style="color:#f92672">.</span><span style="color:#a6e22e">sort</span>()
+</span></span><span style="display:flex;"><span>		colors<span style="color:#f92672">.</span><span style="color:#a6e22e">sort</span>()
+</span></span><span style="display:flex;"><span>		objects<span style="color:#f92672">.</span><span style="color:#a6e22e">sort</span>()
+</span></span><span style="display:flex;"><span>		arrays<span style="color:#f92672">.</span><span style="color:#a6e22e">sort</span>()
+</span></span><span style="display:flex;"><span>		nil<span style="color:#f92672">.</span><span style="color:#a6e22e">sort</span>()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">var</span> sorted_obj_prop_dict <span style="color:#f92672">=</span> {<span style="color:#e6db74">&#34;numbers&#34;</span>: numbers, <span style="color:#e6db74">&#34;strings&#34;</span>: strings, <span style="color:#e6db74">&#34;bools&#34;</span>: bools,
+</span></span><span style="display:flex;"><span>		<span style="color:#e6db74">&#34;vectors&#34;</span>: vectors, <span style="color:#e6db74">&#34;colors&#34;</span>: colors, <span style="color:#e6db74">&#34;objects&#34;</span>: objects, <span style="color:#e6db74">&#34;arrays&#34;</span>: arrays, <span style="color:#e6db74">&#34;nil&#34;</span>: nil }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">return</span> sorted_obj_prop_dict
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>		print(<span style="color:#e6db74">&#34;&#39;/obj&#39;/ passed was not a Node&#34;</span>) 
+</span></span></code></pre></div><h4 id="why-this-approach-is-better"><strong>Why This Approach is Better</strong></h4>
+<ol>
+<li><strong>Prevents Unnecessary Console Spam</strong>
+<ul>
+<li>We only print  <strong>when necessary</strong> , instead of forcing console output from the function.</li>
+</ul>
+</li>
+<li><strong>Improves Reusability</strong>
+<ul>
+<li>Now, <code>get_obj_properties()</code> can be used <strong>anywhere</strong> without needing console output.</li>
+<li>We can store results for later use,  <strong>send them to a UI</strong> , or  <strong>log them to a file</strong> .</li>
+</ul>
+</li>
+<li><strong>Better Error Handling</strong>
+<ul>
+<li>The function <strong>returns a proper error message</strong> instead of <strong>crashing</strong> when an invalid object is passed.</li>
+</ul>
+</li>
+</ol>
+
+    </div>
+    <div class="post-footer">
+      
+    </div>
+  </article>
+
+    </main>
+  </body>
+</html>

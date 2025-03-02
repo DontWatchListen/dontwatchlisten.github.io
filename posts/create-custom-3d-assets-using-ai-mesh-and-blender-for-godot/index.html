@@ -1,0 +1,264 @@
+<!doctype html>
+<html lang="en-us">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <title>Create Custom 3D Assets Using AI Meshy and Blender for Godot // Royal Chickens Interactive</title>
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <meta charset="utf-8" />
+    <meta name="generator" content="Hugo 0.143.1">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="John Doe" />
+    <meta name="description" content="" />
+    <link rel="stylesheet" href="/css/main.min.5b1fcc8902588589c4767187402a3c29f8b8d7a6fdef6d9f8f77045bb0d14fee.css" />
+    
+
+    
+    
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Create Custom 3D Assets Using AI Meshy and Blender for Godot">
+  <meta name="twitter:description" content="How to Create Custom 3D Assets Using AI, Meshy, and Blender for Godot In this guide, we will go step by step to generate a 2D representation of a 3D object, convert it into a fully textured 3D model, and format it properly for use in Godot.
+We will cover:
+✅ Using AI Image Generators to create a 2D image of your 3D object.
+✅ Removing the background and converting formats for best results.">
+
+    <meta property="og:url" content="http://localhost:1313/posts/create-custom-3d-assets-using-ai-mesh-and-blender-for-godot/">
+  <meta property="og:site_name" content="Royal Chickens Interactive">
+  <meta property="og:title" content="Create Custom 3D Assets Using AI Meshy and Blender for Godot">
+  <meta property="og:description" content="How to Create Custom 3D Assets Using AI, Meshy, and Blender for Godot In this guide, we will go step by step to generate a 2D representation of a 3D object, convert it into a fully textured 3D model, and format it properly for use in Godot.
+We will cover:
+✅ Using AI Image Generators to create a 2D image of your 3D object.
+✅ Removing the background and converting formats for best results.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2025-02-15T17:08:49-08:00">
+    <meta property="article:modified_time" content="2025-02-15T17:08:49-08:00">
+
+
+  </head>
+  <body>
+    <header class="app-header">
+      <a href="/"><img class="app-header-avatar" src="/avatar.jpg" alt="John Doe" /></a>
+      <span class="app-header-title">Royal Chickens Interactive</span>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vehicula turpis sit amet elit pretium.</p>
+    </header>
+    <main class="app-container">
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class ="post-title">Create Custom 3D Assets Using AI Meshy and Blender for Godot</h1>
+      <div class="post-meta">
+        <div>
+          <svg class="icon icon-calendar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><title>calendar</title><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+          Feb 15, 2025
+        </div>
+        <div>
+          <svg class="icon icon-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><title>clock</title><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+          5 min read
+        </div>
+      </div>
+    </header>
+    <div class="post-content">
+      <h1 id="how-to-create-custom-3d-assets-using-ai-meshy-and-blender-for-godot"><strong>How to Create Custom 3D Assets Using AI, Meshy, and Blender for Godot</strong></h1>
+<p>In this guide, we will go step by step to generate a <strong>2D representation of a 3D object</strong>, convert it into a  <strong>fully textured 3D model</strong>, and format it properly for use in <strong>Godot</strong>.</p>
+<p>We will cover:</p>
+<p>✅ Using <strong>AI Image Generators</strong> to create a 2D image of your 3D object.</p>
+<p>✅ <strong>Removing the background</strong> and converting formats for best results.</p>
+<p>✅ Importing the <strong>2D image into Meshy AI</strong> to generate a <strong>3D model</strong>.</p>
+<p>✅ <strong>Fixing textures</strong> and <strong>exporting from Blender</strong> into <strong>Godot-compatible formats</strong>.</p>
+<hr>
+<h2 id="step-1-generate-a-2d-image-of-your-3d-object-using-ai"><strong>Step 1: Generate a 2D Image of Your 3D Object Using AI</strong></h2>
+<p>To create a 3D model, we first need a <strong>high-quality</strong> AI-generated image that represents it.</p>
+<h3 id="-choosing-an-ai-image-generator"><strong>🔹 Choosing an AI Image Generator</strong></h3>
+<p>Some of the best free AI image generators include:</p>
+<ul>
+<li><a href="https://leonardo.ai/"><strong>Leonardo.AI</strong></a> – Best for detailed and stylized 3D-like renders.</li>
+<li><a href="https://stablediffusionweb.com/"><strong>Stable Diffusion</strong></a> – Fully customizable for specific looks.</li>
+<li><a href="https://dream.ai/"><strong>Dream by Wombo</strong></a> – Easy and fast AI art generation.</li>
+</ul>
+<h3 id="-steps-to-generate-the-image"><strong>🔹 Steps to Generate the Image</strong></h3>
+<ol>
+<li>Visit your chosen AI  <strong>image generator</strong> .</li>
+<li>Enter a <strong>prompt</strong> describing your object. Example:
+<blockquote>
+<p>“A futuristic sci-fi crate with glowing blue lights, 3D perspective, white background”</p></blockquote>
+</li>
+<li><strong>Ensure the image is on a plain white background</strong> (this helps with background removal later).</li>
+<li>Download the generated image. Some AI tools may save it in <strong>WEBP format</strong>, which we will fix in the next step.</li>
+</ol>
+<hr>
+<h2 id="-step-2-convert-webp-to-png-if-needed"><strong>📂 Step 2: Convert WEBP to PNG (If Needed)</strong></h2>
+<p>Many AI tools save images in  <strong>WEBP format</strong> , but we need <strong>PNG</strong> for transparency support.</p>
+<h3 id="-how-to-convert-webp-to-png"><strong>🔹 How to Convert WEBP to PNG</strong></h3>
+<ol>
+<li>Use an online tool like  <strong><a href="https://www.cloudconvert.com/webp-to-png">CloudConvert</a></strong> .</li>
+<li>Upload your <strong>WEBP image</strong> and convert it to  <strong>PNG</strong> .</li>
+<li>Download the <strong>converted PNG</strong> file.</li>
+</ol>
+<hr>
+<h2 id="-step-3-remove-the-background-using-removebg"><strong>🧹 Step 3: Remove the Background Using Remove.bg</strong></h2>
+<p>Now we need to <strong>remove the white background</strong> so Meshy AI can correctly detect edges and shapes.</p>
+<h3 id="-steps-to-remove-the-background"><strong>🔹 Steps to Remove the Background</strong></h3>
+<ol>
+<li>Go to  <strong><a href="https://www.remove.bg/">Remove.bg</a></strong> .</li>
+<li>Upload your  <strong>PNG file</strong> .</li>
+<li>The tool will  <strong>automatically remove the background</strong> .</li>
+<li>Download the  <strong>new transparent PNG file</strong> .</li>
+</ol>
+<p>💡 <strong>Why do this?</strong> AI models often <strong>blur</strong> the background into objects, so manually cleaning it up improves the 3D conversion.</p>
+<hr>
+<h2 id="-step-4-import-the-image-into-meshy-ai-for-3d-conversion"><strong>🛠 Step 4: Import the Image into Meshy AI for 3D Conversion</strong></h2>
+<p>Now that we have a  <strong>clean 2D image</strong> , we will use <strong>Meshy AI</strong> to generate a <strong>3D model</strong> with textures.</p>
+<h3 id="-steps-to-convert-the-2d-image-to-3d-in-meshy"><strong>🔹 Steps to Convert the 2D Image to 3D in Meshy</strong></h3>
+<ol>
+<li>Visit  <strong><a href="https://www.meshy.ai/">Meshy AI</a></strong> .</li>
+<li>Click <strong>Upload Image</strong> and select your  <strong>transparent PNG</strong> .</li>
+<li>Let Meshy  <strong>automatically generate a 3D model</strong> .</li>
+<li>Click <strong>Download</strong> and select  <strong>OBJ or FBX format</strong> .</li>
+</ol>
+<p><strong>Which format should you choose?</strong></p>
+<ul>
+<li>
+<p><strong>OBJ (.obj)</strong> – Best for <strong>static models</strong> (no animations). This format is simple, widely compatible, and works well if you&rsquo;re planning to <strong>manually assign textures</strong> in Blender or Godot. However, it doesn’t support animations or complex material settings.</p>
+</li>
+<li>
+<p><strong>FBX (.fbx)</strong> – Better for <strong>animated models</strong>. FBX supports <strong>skeleton rigs, animations, and more complex material setups</strong>, making it ideal if your asset will have movement or animations.</p>
+</li>
+</ul>
+<p>🚀 <strong>Meshy will also generate textures!</strong> These will be included as separate texture files.</p>
+<hr>
+<h2 id="-step-5-import-the-3d-model-into-blender-for-cleanup"><strong>🎨 Step 5: Import the 3D Model into Blender for Cleanup</strong></h2>
+<p>At this stage, the model might not be <strong>perfectly formatted</strong> for  <strong>Godot</strong> , so we will:</p>
+<p>✔ Apply <strong>textures manually</strong> (if missing).</p>
+<p>✔ Convert the <strong>file format to <code>.glb</code></strong> for best compatibility.</p>
+<h3 id="-importing-the-model"><strong>🔹 Importing the Model</strong></h3>
+<ol>
+<li>Open <strong>Blender</strong> and create a new project.</li>
+<li>Go to <strong>File &gt; Import</strong> and select:
+<ul>
+<li><strong>Wavefront (.obj)</strong> if Meshy exported an OBJ file.</li>
+<li><strong>FBX (.fbx)</strong> if Meshy exported an FBX file.</li>
+</ul>
+</li>
+<li>Select the model and click  <strong>Import</strong> .</li>
+</ol>
+<hr>
+<h2 id="-step-6-apply-the-texture-in-blender-if-missing"><strong>🖌 Step 6: Apply the Texture in Blender (If Missing)</strong></h2>
+<p>Sometimes  <strong>textures don’t automatically load</strong> , so we need to manually assign them.</p>
+<h3 id="-steps-to-fix-textures"><strong>🔹 Steps to Fix Textures</strong></h3>
+<ol>
+<li>Click on the  <strong>model</strong> .</li>
+<li>Go to  <strong>Shading Tab</strong> .</li>
+<li>In the  <strong>Shader Editor</strong> , locate the  <strong>Principled BSDF Shader</strong> .</li>
+<li>Press <strong>Shift + A</strong> → Add  <strong>&ldquo;Image Texture&rdquo;</strong> .</li>
+<li>Click <strong>&ldquo;Open&rdquo;</strong> and select the <strong>texture file</strong> that came with the model.</li>
+<li>Connect the <strong>Image Texture node</strong> to the <strong>Base Color</strong> input.</li>
+</ol>
+<p>✅ <strong>Your model should now display textures correctly!</strong></p>
+<hr>
+<h2 id="-step-7-export-to-a-godot-compatible-format"><strong>📦 Step 7: Export to a Godot-Compatible Format</strong></h2>
+<p>Now we need to convert the <strong>3D model</strong> into a  <strong>format that works perfectly in Godot</strong> .</p>
+<h3 id="-best-format-for-godot-glb-gltf-20"><strong>🔹 Best Format for Godot: GLB (glTF 2.0)</strong></h3>
+<ul>
+<li>
+<p><strong>Why GLB?</strong>
+✅ Loads <strong>faster</strong> than OBJ or FBX.</p>
+<p>✅ Supports  <strong>textures, animations, and materials</strong> .</p>
+<p>✅  <strong>Native format for Godot</strong> , no extra steps needed.</p>
+</li>
+</ul>
+<h3 id="-how-to-export-as-glb-in-blender"><strong>🔹 How to Export as <code>.glb</code> in Blender</strong></h3>
+<ol>
+<li><strong>Go to</strong> <code>File &gt; Export &gt; glTF 2.0 (.glb)</code>.</li>
+<li><strong>Choose:</strong>
+<ul>
+<li>✅ <strong>Format:</strong> <code>glTF Binary (.glb)</code> (Best for Godot).</li>
+<li>✅ <strong>Transform:</strong> <code>+Y Up</code> (Godot uses Y as the up-axis).</li>
+<li>✅ <strong>Include:</strong> <code>Selected Objects</code>.</li>
+<li>✅ <strong>Geometry:</strong> Apply <strong>modifiers</strong> and  <strong>keep materials</strong> .</li>
+<li>✅ <strong>Embed Textures:</strong> Select <strong>&ldquo;Export PBR&rdquo;</strong> to keep materials in one file.</li>
+</ul>
+</li>
+<li>Click  <strong>Export</strong> .</li>
+</ol>
+<hr>
+<h2 id="-step-8-import-the-model-into-godot"><strong>📥 Step 8: Import the Model into Godot</strong></h2>
+<p>Now we bring the <strong>optimized <code>.glb</code> model</strong> into Godot.</p>
+<h3 id="-steps-to-import-into-godot"><strong>🔹 Steps to Import into Godot</strong></h3>
+<ol>
+<li><strong>Open Godot</strong> and create a new project.</li>
+<li>Drag and drop the <code>.glb</code> file into your  <strong>assets folder</strong> .</li>
+<li>Select the imported model and check the  <strong>Inspector Panel</strong> :
+<ul>
+<li>Adjust materials if needed.</li>
+<li>Make sure <strong>Textures</strong> are applied correctly.</li>
+</ul>
+</li>
+<li>Click <strong>&ldquo;New Inherited Scene&rdquo;</strong> to place the model into your game.</li>
+</ol>
+<p>✅ <strong>Your AI-generated model is now fully in Godot!</strong> 🎉</p>
+<hr>
+<h2 id="-final-recap-complete-workflow"><strong>🔥 Final Recap: Complete Workflow</strong></h2>
+<table>
+  <thead>
+      <tr>
+          <th><strong>Step</strong></th>
+          <th><strong>Tool</strong></th>
+          <th><strong>Purpose</strong></th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>1. Generate 2D Image</strong></td>
+          <td><strong>Leonardo AI / Stable Diffusion</strong></td>
+          <td>Create a 3D-like image</td>
+      </tr>
+      <tr>
+          <td><strong>2. Convert to PNG</strong></td>
+          <td><strong>CloudConvert</strong></td>
+          <td>Fix AI-generated WEBP images</td>
+      </tr>
+      <tr>
+          <td><strong>3. Remove Background</strong></td>
+          <td><strong>Remove.bg</strong></td>
+          <td>Ensure clean transparency</td>
+      </tr>
+      <tr>
+          <td><strong>4. Convert to 3D</strong></td>
+          <td><strong>Meshy AI</strong></td>
+          <td>Auto-generate a 3D model</td>
+      </tr>
+      <tr>
+          <td><strong>5. Import to Blender</strong></td>
+          <td><strong>Blender</strong></td>
+          <td>Apply textures and format correctly</td>
+      </tr>
+      <tr>
+          <td><strong>6. Fix Textures</strong></td>
+          <td><strong>Blender Shading Editor</strong></td>
+          <td>Ensure correct materials</td>
+      </tr>
+      <tr>
+          <td><strong>7. Export as GLB</strong></td>
+          <td><strong>Blender</strong></td>
+          <td>Optimize for Godot</td>
+      </tr>
+      <tr>
+          <td><strong>8. Import to Godot</strong></td>
+          <td><strong>Godot Engine</strong></td>
+          <td>Use the model in a game</td>
+      </tr>
+  </tbody>
+</table>
+<hr>
+<h2 id="-conclusion"><strong>🚀 Conclusion</strong></h2>
+<p>With this method,  <strong>you can create custom 3D assets from AI-generated images in under 30 minutes</strong>! This workflow <strong>eliminates the need for manual 3D modeling</strong> while still allowing  <strong>customization in Blender</strong>.</p>
+
+    </div>
+    <div class="post-footer">
+      
+    </div>
+  </article>
+
+    </main>
+  </body>
+</html>

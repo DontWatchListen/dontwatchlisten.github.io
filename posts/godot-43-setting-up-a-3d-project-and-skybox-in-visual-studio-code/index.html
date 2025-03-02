@@ -1,0 +1,535 @@
+<!doctype html>
+<html lang="en-us">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <title>Godot 4.3 Set Up a 3D Project, Skybox &amp; Import Your Custom 3d Model from VSC // Royal Chickens Interactive</title>
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <meta charset="utf-8" />
+    <meta name="generator" content="Hugo 0.143.1">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="John Doe" />
+    <meta name="description" content="" />
+    <link rel="stylesheet" href="/css/main.min.5b1fcc8902588589c4767187402a3c29f8b8d7a6fdef6d9f8f77045bb0d14fee.css" />
+    
+
+    
+    
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Godot 4.3 Set Up a 3D Project, Skybox & Import Your Custom 3d Model from VSC">
+  <meta name="twitter:description" content="This guide teaches you how to create a 3D scene programmatically in Godot 4.3, complete with a custom skybox, using only code (no editor setup). We’ll explain core concepts like WorldEnvironment, Camera3D, and SkyMaterial.
+Final Code Structure Project/ ├── scripts/ │ ├── main.gd # Root scene script │ └── skybox.gd # Skybox configuration └── textures/ └── default_sky.hdr # HDRI skybox texture 1. Setting Up the Main Scene (main.gd) 🔹 Code extends Node3D func _ready(): # 1. Configure camera var camera = Camera3D.new() camera.position = Vector3(0, 1, 3) # Position (X, Y, Z) camera.look_at(Vector3.ZERO) # Look at world origin add_child(camera) camera.make_current() # Activate this camera # 2. Add skybox var skybox = load(&#34;res://Scripts/skybox.gd&#34;).new() add_child(skybox) 🔹 Explanation Why We Need a Camera:">
+
+    <meta property="og:url" content="http://localhost:1313/posts/godot-43-setting-up-a-3d-project-and-skybox-in-visual-studio-code/">
+  <meta property="og:site_name" content="Royal Chickens Interactive">
+  <meta property="og:title" content="Godot 4.3 Set Up a 3D Project, Skybox & Import Your Custom 3d Model from VSC">
+  <meta property="og:description" content="This guide teaches you how to create a 3D scene programmatically in Godot 4.3, complete with a custom skybox, using only code (no editor setup). We’ll explain core concepts like WorldEnvironment, Camera3D, and SkyMaterial.
+Final Code Structure Project/ ├── scripts/ │ ├── main.gd # Root scene script │ └── skybox.gd # Skybox configuration └── textures/ └── default_sky.hdr # HDRI skybox texture 1. Setting Up the Main Scene (main.gd) 🔹 Code extends Node3D func _ready(): # 1. Configure camera var camera = Camera3D.new() camera.position = Vector3(0, 1, 3) # Position (X, Y, Z) camera.look_at(Vector3.ZERO) # Look at world origin add_child(camera) camera.make_current() # Activate this camera # 2. Add skybox var skybox = load(&#34;res://Scripts/skybox.gd&#34;).new() add_child(skybox) 🔹 Explanation Why We Need a Camera:">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2025-02-15T18:27:41-08:00">
+    <meta property="article:modified_time" content="2025-02-15T18:27:41-08:00">
+
+
+  </head>
+  <body>
+    <header class="app-header">
+      <a href="/"><img class="app-header-avatar" src="/avatar.jpg" alt="John Doe" /></a>
+      <span class="app-header-title">Royal Chickens Interactive</span>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vehicula turpis sit amet elit pretium.</p>
+    </header>
+    <main class="app-container">
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class ="post-title">Godot 4.3 Set Up a 3D Project, Skybox &amp; Import Your Custom 3d Model from VSC</h1>
+      <div class="post-meta">
+        <div>
+          <svg class="icon icon-calendar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><title>calendar</title><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+          Feb 15, 2025
+        </div>
+        <div>
+          <svg class="icon icon-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><title>clock</title><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+          11 min read
+        </div>
+      </div>
+    </header>
+    <div class="post-content">
+      <p>This guide teaches you how to create a <strong>3D scene programmatically</strong> in Godot 4.3, complete with a <strong>custom skybox</strong>, using only code (no editor setup). We’ll explain core concepts like <code>WorldEnvironment</code>, <code>Camera3D</code>, and <code>SkyMaterial.</code></p>
+<hr>
+<h2 id="final-code-structure"><strong>Final Code Structure</strong></h2>
+<pre tabindex="0"><code>Project/
+├── scripts/
+│   ├── main.gd       # Root scene script
+│   └── skybox.gd     # Skybox configuration
+└── textures/
+    └── default_sky.hdr  # HDRI skybox texture
+</code></pre><hr>
+<h2 id="1-setting-up-the-main-scene-maingd"><strong>1. Setting Up the Main Scene (<code>main.gd</code>)</strong></h2>
+<h3 id="-code">🔹 <strong>Code</strong></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-gdscript" data-lang="gdscript"><span style="display:flex;"><span><span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">Node3D</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">_ready</span>():
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># 1. Configure camera</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">var</span> camera <span style="color:#f92672">=</span> <span style="color:#a6e22e">Camera3D</span><span style="color:#f92672">.</span><span style="color:#a6e22e">new</span>()
+</span></span><span style="display:flex;"><span>    camera<span style="color:#f92672">.</span>position <span style="color:#f92672">=</span> <span style="color:#a6e22e">Vector3</span>(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">3</span>)  <span style="color:#75715e"># Position (X, Y, Z)</span>
+</span></span><span style="display:flex;"><span>    camera<span style="color:#f92672">.</span><span style="color:#a6e22e">look_at</span>(<span style="color:#a6e22e">Vector3</span><span style="color:#f92672">.</span>ZERO)        <span style="color:#75715e"># Look at world origin</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">add_child</span>(camera)
+</span></span><span style="display:flex;"><span>    camera<span style="color:#f92672">.</span><span style="color:#a6e22e">make_current</span>()  <span style="color:#75715e"># Activate this camera</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># 2. Add skybox</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">var</span> skybox <span style="color:#f92672">=</span> load(<span style="color:#e6db74">&#34;res://Scripts/skybox.gd&#34;</span>)<span style="color:#f92672">.</span><span style="color:#a6e22e">new</span>()
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">add_child</span>(skybox)
+</span></span></code></pre></div><h3 id="-explanation">🔹 <strong>Explanation</strong></h3>
+<ol>
+<li>
+<p><strong>Why We Need a Camera</strong>:</p>
+<ul>
+<li>Godot renders 3D scenes <strong>only through a camera</strong>.</li>
+<li><code>camera.make_current()</code> ensures this is the active viewpoint.</li>
+</ul>
+</li>
+<li>
+<p><strong>Camera Positioning</strong>:</p>
+<ul>
+<li><code>Vector3(0, 1, 3)</code> places the camera 3 units back and 1 unit up.</li>
+<li><code>look_at(Vector3.ZERO)</code> makes it point at the scene center.</li>
+</ul>
+</li>
+<li>
+<p><strong>Adding the Skybox</strong>:</p>
+<ul>
+<li><code>skybox.gd</code> is loaded as a <code>WorldEnvironment</code> node.</li>
+<li>Added to the scene tree to affect global rendering.</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h2 id="2-creating-the-skybox-skyboxgd"><strong>2. Creating the Skybox (<code>skybox.gd</code>)</strong></h2>
+<h3 id="-code-1">🔹 <strong>Code</strong></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-gdscript" data-lang="gdscript"><span style="display:flex;"><span><span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">WorldEnvironment</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">_init</span>():
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># 1. Create Environment resource</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">var</span> env <span style="color:#f92672">=</span> <span style="color:#a6e22e">Environment</span><span style="color:#f92672">.</span><span style="color:#a6e22e">new</span>()
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># 2. Configure background as sky</span>
+</span></span><span style="display:flex;"><span>    env<span style="color:#f92672">.</span>background_mode <span style="color:#f92672">=</span> <span style="color:#a6e22e">Environment</span><span style="color:#f92672">.</span>BG_SKY
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># 3. Create sky material with HDRI texture</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">var</span> sky_material <span style="color:#f92672">=</span> <span style="color:#a6e22e">PanoramaSkyMaterial</span><span style="color:#f92672">.</span><span style="color:#a6e22e">new</span>()
+</span></span><span style="display:flex;"><span>    sky_material<span style="color:#f92672">.</span>panorama <span style="color:#f92672">=</span> load(<span style="color:#e6db74">&#34;res://Textures/default_sky.hdr&#34;</span>)
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># 4. Assign material to Sky resource</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">var</span> sky <span style="color:#f92672">=</span> <span style="color:#a6e22e">Sky</span><span style="color:#f92672">.</span><span style="color:#a6e22e">new</span>()
+</span></span><span style="display:flex;"><span>    sky<span style="color:#f92672">.</span>sky_material <span style="color:#f92672">=</span> sky_material
+</span></span><span style="display:flex;"><span>    env<span style="color:#f92672">.</span>sky <span style="color:#f92672">=</span> sky
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># 5. Configure HDR exposure</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">var</span> camera_attrs <span style="color:#f92672">=</span> <span style="color:#a6e22e">CameraAttributesPhysical</span><span style="color:#f92672">.</span><span style="color:#a6e22e">new</span>()
+</span></span><span style="display:flex;"><span>    camera_attrs<span style="color:#f92672">.</span>exposure_multiplier <span style="color:#f92672">=</span> <span style="color:#ae81ff">1.5</span>  <span style="color:#75715e"># Brightness control</span>
+</span></span><span style="display:flex;"><span>    env<span style="color:#f92672">.</span>camera_attributes <span style="color:#f92672">=</span> camera_attrs
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># 6. Apply settings to WorldEnvironment</span>
+</span></span><span style="display:flex;"><span>    environment <span style="color:#f92672">=</span> env
+</span></span></code></pre></div><h3 id="-step-by-step-explanation">🔹 <strong>Step-by-Step Explanation</strong></h3>
+<ol>
+<li>
+<p><strong><code>WorldEnvironment</code> Node</strong>:</p>
+<ul>
+<li>Controls global rendering settings (sky, fog, ambient light).</li>
+<li>Only <strong>one</strong> can exist per scene.</li>
+</ul>
+</li>
+<li>
+<p><strong><code>BG_SKY</code> Mode</strong>:</p>
+<ul>
+<li>Tells Godot to use a skybox instead of a solid color.</li>
+<li>(Common Mistake: Forgetting this results in a blank background).</li>
+</ul>
+</li>
+<li>
+<p><strong><code>PanoramaSkyMaterial</code></strong>:</p>
+<ul>
+<li>Uses an equirectangular (360°) HDRI texture.</li>
+<li><code>.hdr</code> files provide realistic lighting data.</li>
+</ul>
+</li>
+<li>
+<p><strong><code>Sky</code> Resource</strong>:</p>
+<ul>
+<li>Acts as a container for sky materials.</li>
+<li>Required even though we’re using a panorama.</li>
+</ul>
+</li>
+<li>
+<p><strong><code>CameraAttributesPhysical</code></strong>:</p>
+<ul>
+<li>Adjusts exposure for HDR lighting.</li>
+<li>Without this, your skybox might look too dark/bright.</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h2 id="3-key-concepts"><strong>3. Key Concepts</strong></h2>
+<h3 id="-why-use-worldenvironment">🔹 <strong>Why Use <code>WorldEnvironment</code>?</strong></h3>
+<ul>
+<li><strong>Global Settings</strong>: Affects the entire scene (not just specific objects).</li>
+<li><strong>Sky Rendering</strong>: Provides background and ambient lighting.</li>
+<li><strong>Post-Processing</strong>: Can add effects like fog or color grading.</li>
+</ul>
+<h3 id="-hdri-textures-explained">🔹 <strong>HDRI Textures Explained</strong></h3>
+<ul>
+<li><strong>What They Are</strong>: 360° images that capture real-world lighting.</li>
+<li><strong>Why Use Them</strong>:
+<ul>
+<li>Realistic backgrounds.</li>
+<li>Natural lighting for objects (no need for extra lights).</li>
+</ul>
+</li>
+</ul>
+<h3 id="-camera-positioning-tips">🔹 <strong>Camera Positioning Tips</strong></h3>
+<ul>
+<li><strong><code>look_at()</code></strong>: Ensures the camera faces the target point.</li>
+<li><strong>Z-Axis</strong>: Moving backward uses <em>positive</em> Z values in Godot’s 3D space.</li>
+</ul>
+<hr>
+<h2 id="4-common-issues--fixes"><strong>4. Common Issues &amp; Fixes</strong></h2>
+<h3 id="-sky-not-appearing">🔸 <strong>Sky Not Appearing</strong></h3>
+<ol>
+<li>Check <strong>background_mode</strong> is <code>BG_SKY</code>.</li>
+<li>Verify texture path in <code>PanoramaSkyMaterial</code>.</li>
+<li>Ensure <code>exposure_multiplier</code> isn’t too low (try <code>2.0</code>).</li>
+</ol>
+<h3 id="-purpleblack-skybox">🔸 <strong>Purple/Black Skybox</strong></h3>
+<ul>
+<li><strong>Texture Not Loaded</strong>: Confirm:
+<ul>
+<li>File exists at <code>res://Textures/default_sky.hdr</code>.</li>
+<li>No typos in path (case-sensitive on Linux/macOS).</li>
+</ul>
+</li>
+</ul>
+<h3 id="-objects-too-dark">🔸 <strong>Objects Too Dark</strong></h3>
+<ul>
+<li>Add ambient light in <code>skybox.gd</code>:
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-gdscript" data-lang="gdscript"><span style="display:flex;"><span>env<span style="color:#f92672">.</span>ambient_light_color <span style="color:#f92672">=</span> <span style="color:#a6e22e">Color</span>(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>env<span style="color:#f92672">.</span>ambient_light_energy <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.3</span>
+</span></span></code></pre></div></li>
+</ul>
+<hr>
+<h2 id="5-understanding-meshinstance3d-and-mesh-beginner-friendly-guide"><strong>5. Understanding MeshInstance3D and Mesh (Beginner-Friendly Guide)</strong></h2>
+<p>At this point, we’ve successfully set up:</p>
+<ol>
+<li>A <strong>camera</strong> so we can see the world.</li>
+<li>A <strong>skybox</strong> to provide a realistic background.</li>
+</ol>
+<p>However, our scene still looks empty because there are  <strong>no physical objects in it yet</strong>. To fix that, we’re going to add a <strong>cube</strong>.</p>
+<hr>
+<h2 id="-51-what-is-a-3d-mesh"><strong>🔹 5.1: What is a 3D Mesh?</strong></h2>
+<p>Before we jump into the code, let&rsquo;s break down a core concept:  <strong>what a &ldquo;mesh&rdquo; is in 3D graphics</strong>.</p>
+<h3 id="what-is-a-mesh"><strong>What is a Mesh?</strong></h3>
+<p>A <strong>mesh</strong> is the shape of a 3D object. Imagine a cube, a sphere, or a character model in a video game—all of these are made up of  <strong>meshes</strong>.</p>
+<p>In technical terms:</p>
+<ul>
+<li>A <strong>mesh</strong> is a collection of <strong>vertices (points)</strong> connected by  <strong>edges (lines)</strong> , forming  <strong>faces (triangles or polygons)</strong> .</li>
+<li>The <strong>GPU (Graphics Processing Unit)</strong> takes these points and renders them into a solid shape.</li>
+</ul>
+<h3 id="how-does-godot-handle-meshes"><strong>How Does Godot Handle Meshes?</strong></h3>
+<p>Godot has <strong>prebuilt meshes</strong> that let us create 3D objects quickly, including:</p>
+<ul>
+<li><code>BoxMesh</code> → A cube.</li>
+<li><code>SphereMesh</code> → A ball.</li>
+<li><code>CylinderMesh</code> → A tube.</li>
+</ul>
+<p>These meshes exist  <strong>only as data</strong> —they don’t appear in the world unless we assign them to something.</p>
+<hr>
+<h2 id="-52-what-is-a-meshinstance3d"><strong>🔹 5.2: What is a MeshInstance3D?</strong></h2>
+<p>A <strong>MeshInstance3D</strong> is what actually makes a  <strong>mesh visible in the 3D world</strong>.</p>
+<p>Think of it like this:</p>
+<ul>
+<li>A <strong>mesh</strong> is just raw data (like a blueprint).</li>
+<li>A <strong>MeshInstance3D</strong> is a <strong>physical object that holds a mesh</strong> and makes it appear in the scene.</li>
+</ul>
+<h3 id="analogy"><strong>Analogy</strong></h3>
+<p>If a <strong>mesh</strong> is like the blueprint for a house, then a <strong>MeshInstance3D</strong> is the actual house built from that blueprint.</p>
+<p>A <code>MeshInstance3D</code> does  <strong>two important things</strong> :</p>
+<ol>
+<li>It holds a  <strong>mesh</strong>, which gives it shape.</li>
+<li>It exists  <strong>inside the 3D world</strong>, so the camera can see it.</li>
+</ol>
+<hr>
+<h2 id="-53-adding-a-cube-to-the-scene"><strong>🔹 5.3: Adding a Cube to the Scene</strong></h2>
+<p>Now that we understand <strong>meshes</strong> and  <strong>MeshInstance3D</strong>, let’s add a cube to the game world.</p>
+<h3 id="-updated-maingd-code"><strong>📝 Updated <code>main.gd</code> Code</strong></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-gdscript" data-lang="gdscript"><span style="display:flex;"><span><span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">Node3D</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">var</span> cube: <span style="color:#a6e22e">MeshInstance3D</span>  <span style="color:#75715e"># We declare a cube variable (empty for now)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Animate the cube&#39;s rotation every frame</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">_process</span>(delta):
+</span></span><span style="display:flex;"><span>    cube<span style="color:#f92672">.</span><span style="color:#a6e22e">rotate_y</span>(delta <span style="color:#f92672">*</span> <span style="color:#ae81ff">0.5</span>)  <span style="color:#75715e"># This makes the cube spin</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">_ready</span>():
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Create and configure the camera</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">var</span> camera <span style="color:#f92672">=</span> <span style="color:#a6e22e">Camera3D</span><span style="color:#f92672">.</span><span style="color:#a6e22e">new</span>()
+</span></span><span style="display:flex;"><span>    camera<span style="color:#f92672">.</span>position <span style="color:#f92672">=</span> <span style="color:#a6e22e">Vector3</span>(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">3</span>)  <span style="color:#75715e"># Moves the camera up and back</span>
+</span></span><span style="display:flex;"><span>    camera<span style="color:#f92672">.</span><span style="color:#a6e22e">look_at</span>(<span style="color:#a6e22e">Vector3</span><span style="color:#f92672">.</span>ZERO)        <span style="color:#75715e"># Makes it face the center of the world</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">add_child</span>(camera)
+</span></span><span style="display:flex;"><span>    camera<span style="color:#f92672">.</span><span style="color:#a6e22e">make_current</span>()  <span style="color:#75715e"># Set this as the active camera</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Create a new cube instance</span>
+</span></span><span style="display:flex;"><span>    cube <span style="color:#f92672">=</span> <span style="color:#a6e22e">MeshInstance3D</span><span style="color:#f92672">.</span><span style="color:#a6e22e">new</span>()  <span style="color:#75715e"># This is a new 3D object</span>
+</span></span><span style="display:flex;"><span>    cube<span style="color:#f92672">.</span>mesh <span style="color:#f92672">=</span> <span style="color:#a6e22e">BoxMesh</span><span style="color:#f92672">.</span><span style="color:#a6e22e">new</span>()    <span style="color:#75715e"># We assign a cube mesh (BoxMesh)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">add_child</span>(cube)              <span style="color:#75715e"># Add the cube to the scene so it appears</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Add world environment (Skybox)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">var</span> skybox <span style="color:#f92672">=</span> load(<span style="color:#e6db74">&#34;res://Scripts/skybox.gd&#34;</span>)<span style="color:#f92672">.</span><span style="color:#a6e22e">new</span>()
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">add_child</span>(skybox)
+</span></span></code></pre></div><hr>
+<h2 id="-54-breaking-down-the-code"><strong>🔹 5.4: Breaking Down the Code</strong></h2>
+<p>Let’s break this down  <strong>step by step</strong> , making sure we understand  <strong>every single line</strong> .</p>
+<h3 id="step-1--creating-a-camera"><strong>Step 1️⃣ – Creating a Camera</strong></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-gdscript" data-lang="gdscript"><span style="display:flex;"><span><span style="color:#66d9ef">var</span> camera <span style="color:#f92672">=</span> <span style="color:#a6e22e">Camera3D</span><span style="color:#f92672">.</span><span style="color:#a6e22e">new</span>()
+</span></span><span style="display:flex;"><span>camera<span style="color:#f92672">.</span>position <span style="color:#f92672">=</span> <span style="color:#a6e22e">Vector3</span>(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">3</span>)
+</span></span><span style="display:flex;"><span>camera<span style="color:#f92672">.</span><span style="color:#a6e22e">look_at</span>(<span style="color:#a6e22e">Vector3</span><span style="color:#f92672">.</span>ZERO)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">add_child</span>(camera)
+</span></span><span style="display:flex;"><span>camera<span style="color:#f92672">.</span><span style="color:#a6e22e">make_current</span>()
+</span></span></code></pre></div><ul>
+<li><strong><code>Camera3D.new()</code></strong> → Creates a new camera.</li>
+<li><strong><code>camera.position = Vector3(0, 1, 3)</code></strong> → Moves it <strong>up</strong> and <strong>back</strong> so we can see the scene.</li>
+<li><strong><code>camera.look_at(Vector3.ZERO)</code></strong> → Rotates the camera so it  <strong>faces the center of the world</strong> .</li>
+<li><strong><code>add_child(camera)</code></strong> → Adds it to the scene so it actually exists.</li>
+<li><strong><code>camera.make_current()</code></strong> → Sets it as the  <strong>active camera</strong> .</li>
+</ul>
+<hr>
+<h3 id="step-2--creating-a-cube"><strong>Step 2️⃣ – Creating a Cube</strong></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-gdscript" data-lang="gdscript"><span style="display:flex;"><span>cube <span style="color:#f92672">=</span> <span style="color:#a6e22e">MeshInstance3D</span><span style="color:#f92672">.</span><span style="color:#a6e22e">new</span>()  <span style="color:#75715e"># Creates a new MeshInstance3D object</span>
+</span></span><span style="display:flex;"><span>cube<span style="color:#f92672">.</span>mesh <span style="color:#f92672">=</span> <span style="color:#a6e22e">BoxMesh</span><span style="color:#f92672">.</span><span style="color:#a6e22e">new</span>()    <span style="color:#75715e"># Assigns a cube mesh</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">add_child</span>(cube)              <span style="color:#75715e"># Adds the cube to the scene</span>
+</span></span></code></pre></div><p>This does  <strong>three things</strong> :</p>
+<ol>
+<li><strong><code>MeshInstance3D.new()</code></strong> → Creates a new 3D object.</li>
+<li><strong><code>BoxMesh.new()</code></strong> → Assigns it a cube shape.</li>
+<li><strong><code>add_child(cube)</code></strong> → Adds the cube to the scene, making it  <strong>visible</strong> .</li>
+</ol>
+<p>Without <code>add_child(cube)</code>, the cube  <strong>would exist in memory but never appear</strong> .</p>
+<hr>
+<h3 id="step-3--adding-a-skybox"><strong>Step 3️⃣ – Adding a Skybox</strong></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-gdscript" data-lang="gdscript"><span style="display:flex;"><span><span style="color:#66d9ef">var</span> skybox <span style="color:#f92672">=</span> load(<span style="color:#e6db74">&#34;res://Scripts/skybox.gd&#34;</span>)<span style="color:#f92672">.</span><span style="color:#a6e22e">new</span>()
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">add_child</span>(skybox)
+</span></span></code></pre></div><p>This loads our <code>skybox.gd</code> script, which  <strong>adds a background to the scene</strong> .</p>
+<hr>
+<h2 id="-55-making-the-cube-rotate"><strong>🔹 5.5: Making the Cube Rotate</strong></h2>
+<p>Right now, the cube is  <strong>static</strong> . Let’s make it rotate.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-gdscript" data-lang="gdscript"><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">_process</span>(delta):
+</span></span><span style="display:flex;"><span>    cube<span style="color:#f92672">.</span><span style="color:#a6e22e">rotate_y</span>(delta <span style="color:#f92672">*</span> <span style="color:#ae81ff">0.5</span>)  <span style="color:#75715e"># Spins the cube around the Y-axis</span>
+</span></span></code></pre></div><h3 id="breaking-this-down"><strong>Breaking This Down</strong></h3>
+<ul>
+<li><code>_process(delta)</code> runs <strong>every frame</strong> in the game.</li>
+<li><code>cube.rotate_y(angle)</code> rotates the cube  <strong>around the Y-axis</strong> .</li>
+<li><code>delta</code> ensures smooth rotation no matter the frame rate.</li>
+</ul>
+<hr>
+<h2 id="-56-running-the-scene"><strong>🔹 5.6: Running the Scene</strong></h2>
+<p>If you  <strong>run the game now</strong> , you should see:</p>
+<ol>
+<li>A <strong>skybox background</strong> 🌄</li>
+<li>A <strong>spinning cube in the center</strong> 🟦</li>
+<li>A <strong>camera showing the scene</strong> 🎥</li>
+</ol>
+<p><strong>🎉 Congratulations! You’ve created your first fully-coded 3D scene!</strong> 🚀</p>
+<hr>
+<h2 id="-57-troubleshooting--common-issues"><strong>🔹 5.7: Troubleshooting &amp; Common Issues</strong></h2>
+<h3 id="-the-cube-doesnt-appear"><strong>🔸 The Cube Doesn’t Appear</strong></h3>
+<ol>
+<li><strong>Make sure the cube is added to the scene</strong> :</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-gdscript" data-lang="gdscript"><span style="display:flex;"><span>   print(<span style="color:#e6db74">&#34;Cube added:&#34;</span>, cube)
+</span></span></code></pre></div><p>If this doesn’t print anything, <code>add_child(cube)</code> might not be running.</p>
+<ol>
+<li><strong>Check the camera position</strong> :</li>
+</ol>
+<ul>
+<li>If the camera is <strong>inside</strong> the cube, try moving it further back:
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-gdscript" data-lang="gdscript"><span style="display:flex;"><span>camera<span style="color:#f92672">.</span>position <span style="color:#f92672">=</span> <span style="color:#a6e22e">Vector3</span>(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">5</span>)
+</span></span></code></pre></div></li>
+</ul>
+<hr>
+<h3 id="-the-cube-isnt-rotating"><strong>🔸 The Cube Isn’t Rotating</strong></h3>
+<ol>
+<li><strong>Check if <code>_process(delta)</code> is running</strong> :</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-gdscript" data-lang="gdscript"><span style="display:flex;"><span>   print(<span style="color:#e6db74">&#34;Rotation running...&#34;</span>)
+</span></span></code></pre></div><p>If this doesn’t print, Godot isn’t calling <code>_process()</code>. Try restarting the scene.</p>
+<ol>
+<li><strong>Check for errors in the console</strong> :</li>
+</ol>
+<ul>
+<li>If <code>cube</code> is <code>null</code>, something is wrong with how it’s being assigned.</li>
+</ul>
+<h1 id="step-6-importing-and-displaying-a-custom-3d-model-in-godot-43"><strong>Step 6: Importing and Displaying a Custom 3D Model in Godot 4.3</strong></h1>
+<p>At this stage, we have successfully established a <strong>3D scene</strong> that includes a <strong>camera, skybox, and a rotating cube</strong>. However, the cube is merely a placeholder for testing purposes. Now, we will <strong>replace the cube with a custom 3D model</strong>, specifically whichever glb file you made in the previous guides. If you did not, go back and review or download one online.</p>
+<hr>
+<h2 id="-step-61-understanding-glb-files-and-3d-models-in-godot"><strong>🔹 Step 6.1: Understanding GLB Files and 3D Models in Godot</strong></h2>
+<p>Before integrating our <code>000_Snowpuff.glb</code> model, it is essential to understand <strong>what a 3D model is</strong> and <strong>how Godot processes it</strong>.</p>
+<h3 id="what-is-a-3d-model"><strong>What is a 3D Model?</strong></h3>
+<p>A <strong>3D model</strong> is a <strong>digital representation</strong> of an object in three-dimensional space, created using <strong>vertices (points)</strong> connected by <strong>edges and faces</strong> to form a shape.</p>
+<p>These models can be created using <strong>3D modeling software</strong> such as:</p>
+<ul>
+<li>Blender</li>
+<li>Autodesk Maya</li>
+<li>3ds Max</li>
+<li>Cinema 4D</li>
+</ul>
+<p>3D models can be <strong>textured, rigged (for animation), and include materials</strong> that define how they look in a scene.</p>
+<h3 id="what-is-a-glb-file"><strong>What is a GLB File?</strong></h3>
+<p>GLB (or <strong>GLTF Binary</strong>) is a <strong>universal 3D file format</strong> that is highly optimized for game engines like Godot. It is preferred because:</p>
+<ul>
+<li>It <strong>contains mesh data, textures, materials, and animations</strong> in a single file.</li>
+<li>It has <strong>smaller file sizes</strong> than other formats like <code>.obj</code> or <code>.fbx</code>.</li>
+<li>It is <strong>fully compatible with Godot</strong> without requiring external converters.</li>
+</ul>
+<p>Our <code>000_Snowpuff.glb</code> file contains <strong>a fully textured 3D model</strong> of Snowpuff, which we will now integrate into the scene.</p>
+<hr>
+<h2 id="-step-62-importing-the-model-into-godot"><strong>🔹 Step 6.2: Importing the Model into Godot</strong></h2>
+<h3 id="step-1-copy-the-model-into-the-project-folder"><strong>Step 1: Copy the Model into the Project Folder</strong></h3>
+<p>Ensure that your <code>000_Snowpuff.glb</code> file is stored within the <strong>res://Models/</strong> directory. Your project should now look like this:</p>
+<pre tabindex="0"><code>Project/
+├── Models/
+│   └── 000_Snowpuff.glb   # Custom 3D Model
+├── Scripts/
+│   ├── main.gd
+│   └── skybox.gd
+├── Textures/
+│   └── default_sky.hdr
+└── project.godot
+</code></pre><hr>
+<h3 id="step-2-let-godot-process-the-model"><strong>Step 2: Let Godot Process the Model</strong></h3>
+<p>Once the <code>.glb</code> file is placed inside the <code>Models/</code> directory, <strong>Godot will automatically detect it</strong> in the  <strong>FileSystem panel</strong> .</p>
+<p>To verify:</p>
+<ol>
+<li>Open  <strong>Godot Editor</strong> .</li>
+<li>Navigate to <strong>res://Models/</strong> in the  <strong>FileSystem panel</strong> .</li>
+<li>Locate <code>000_Snowpuff.glb</code> and click on it.</li>
+</ol>
+<p>At this stage,  <strong>Godot will generate additional files</strong> , including:</p>
+<ul>
+<li><strong>000_Snowpuff.material</strong> → Stores material settings for the model.</li>
+<li><strong>000_Snowpuff.meshes</strong> → Stores mesh data.</li>
+<li><strong>000_Snowpuff.animations</strong> (if applicable).</li>
+</ul>
+<p>These are automatically created and used when loading the <code>.glb</code> file into the scene.</p>
+<hr>
+<h2 id="-step-63-replacing-the-cube-with-snowpuff-in-maingd"><strong>🔹 Step 6.3: Replacing the Cube with Snowpuff in <code>main.gd</code></strong></h2>
+<p>Now that our model is imported, we need to <strong>dynamically load and instantiate it through code</strong> in <code>main.gd</code>.</p>
+<h3 id="-updated-maingd-code-1"><strong>📝 Updated <code>main.gd</code> Code</strong></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-gdscript" data-lang="gdscript"><span style="display:flex;"><span><span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">Node3D</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">var</span> snowpuff: <span style="color:#a6e22e">Node3D</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Animate rotation</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">_process</span>(delta):
+</span></span><span style="display:flex;"><span>	snowpuff<span style="color:#f92672">.</span><span style="color:#a6e22e">rotate_y</span>(delta <span style="color:#f92672">*</span> <span style="color:#ae81ff">0.5</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">_ready</span>():
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e"># Configure camera</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">var</span> camera <span style="color:#f92672">=</span> <span style="color:#a6e22e">Camera3D</span><span style="color:#f92672">.</span><span style="color:#a6e22e">new</span>()
+</span></span><span style="display:flex;"><span>	camera<span style="color:#f92672">.</span>position <span style="color:#f92672">=</span> <span style="color:#a6e22e">Vector3</span>(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">3</span>)
+</span></span><span style="display:flex;"><span>	camera<span style="color:#f92672">.</span><span style="color:#a6e22e">look_at</span>(<span style="color:#a6e22e">Vector3</span><span style="color:#f92672">.</span>ZERO)
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">add_child</span>(camera)
+</span></span><span style="display:flex;"><span>	camera<span style="color:#f92672">.</span><span style="color:#a6e22e">make_current</span>()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e"># Add a rotating snowpuff</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">var</span> snowpuff_model <span style="color:#f92672">=</span> load(<span style="color:#e6db74">&#34;res://Models/000_Snowpuff.glb&#34;</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">if</span> snowpuff_model:
+</span></span><span style="display:flex;"><span>		snowpuff <span style="color:#f92672">=</span> snowpuff_model<span style="color:#f92672">.</span><span style="color:#a6e22e">instantiate</span>()
+</span></span><span style="display:flex;"><span>		snowpuff<span style="color:#f92672">.</span>transform<span style="color:#f92672">.</span>origin <span style="color:#f92672">=</span> <span style="color:#a6e22e">Vector3</span>(<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">add_child</span>(snowpuff)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e"># Add world environment</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">var</span> skybox <span style="color:#f92672">=</span> load(<span style="color:#e6db74">&#34;res://Scripts/skybox.gd&#34;</span>)<span style="color:#f92672">.</span><span style="color:#a6e22e">new</span>()
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">add_child</span>(skybox)
+</span></span></code></pre></div><hr>
+<h2 id="-step-64-breaking-down-the-code"><strong>🔹 Step 6.4: Breaking Down the Code</strong></h2>
+<h3 id="1-loading-the-3d-model"><strong>1️⃣ Loading the 3D Model</strong></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-gdscript" data-lang="gdscript"><span style="display:flex;"><span><span style="color:#66d9ef">var</span> snowpuff_scene <span style="color:#f92672">=</span> load(<span style="color:#e6db74">&#34;res://Models/000_Snowpuff.glb&#34;</span>)
+</span></span></code></pre></div><ul>
+<li><strong><code>load(&quot;res://Models/000_Snowpuff.glb&quot;)</code></strong> loads the 3D model file.</li>
+<li>The file  <strong>must be inside the &ldquo;res://&rdquo; directory</strong> , otherwise it won’t be found.</li>
+<li><code>load()</code> simply  <strong>loads the file into memory</strong> , but does <strong>not yet create an instance</strong> of it in the game.</li>
+</ul>
+<hr>
+<h3 id="2-creating-an-instance-of-the-model"><strong>2️⃣ Creating an Instance of the Model</strong></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-gdscript" data-lang="gdscript"><span style="display:flex;"><span><span style="color:#66d9ef">if</span> snowpuff_model:
+</span></span><span style="display:flex;"><span>    snowpuff <span style="color:#f92672">=</span> snowpuff_model<span style="color:#f92672">.</span><span style="color:#a6e22e">instantiate</span>()
+</span></span></code></pre></div><ul>
+<li><code>.instantiate()</code> <strong>creates an actual instance</strong> of the model in the scene.</li>
+<li>This is necessary because <code>.glb</code> files are  <strong>scenes, not single objects</strong> .</li>
+<li>If this step is skipped, the model will remain loaded in memory but will  <strong>never appear in the scene</strong> .</li>
+</ul>
+<hr>
+<h3 id="3-positioning-the-model"><strong>3️⃣ Positioning the Model</strong></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-gdscript" data-lang="gdscript"><span style="display:flex;"><span>snowpuff<span style="color:#f92672">.</span>transform<span style="color:#f92672">.</span>origin <span style="color:#f92672">=</span> <span style="color:#a6e22e">Vector3</span>(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>)
+</span></span></code></pre></div><ul>
+<li><strong>Moves the model to the center of the scene</strong> .</li>
+<li>If the model appears  <strong>too high or too low</strong> , adjust the Y-axis:
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-gdscript" data-lang="gdscript"><span style="display:flex;"><span>snowpuff<span style="color:#f92672">.</span>transform<span style="color:#f92672">.</span>origin <span style="color:#f92672">=</span> <span style="color:#a6e22e">Vector3</span>(<span style="color:#ae81ff">0</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">0.5</span>, <span style="color:#ae81ff">0</span>)
+</span></span></code></pre></div></li>
+</ul>
+<hr>
+<h3 id="4-rotating-the-model"><strong>4️⃣ Rotating the Model</strong></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-gdscript" data-lang="gdscript"><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">_process</span>(delta):
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> snowpuff:
+</span></span><span style="display:flex;"><span>        snowpuff<span style="color:#f92672">.</span><span style="color:#a6e22e">rotate_y</span>(delta <span style="color:#f92672">*</span> <span style="color:#ae81ff">0.5</span>)
+</span></span></code></pre></div><ul>
+<li>The model <strong>rotates around the Y-axis</strong> over time.</li>
+<li><code>delta</code> ensures smooth rotation at  <strong>any frame rate</strong> .</li>
+</ul>
+<hr>
+<h2 id="-step-65-running-the-scene"><strong>🔹 Step 6.5: Running the Scene</strong></h2>
+<p>After implementing these changes, running the game should now display:</p>
+<p>✅ <strong>A skybox background</strong> 🌄</p>
+<p>✅ <strong>A custom 3D model (Snowpuff) instead of a cube</strong> ❄️</p>
+<p>✅ <strong>Smooth rotation animation</strong> 🔄</p>
+<p>✅ <strong>A properly positioned and rendered model</strong> 🎨</p>
+<hr>
+<h2 id="-step-66-troubleshooting-common-issues"><strong>🔹 Step 6.6: Troubleshooting Common Issues</strong></h2>
+<h3 id="-the-model-doesnt-appear"><strong>🔸 The Model Doesn’t Appear</strong></h3>
+<ul>
+<li><strong>Check if the file path is correct</strong> :</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-gdscript" data-lang="gdscript"><span style="display:flex;"><span>  <span style="color:#66d9ef">var</span> snowpuff_model <span style="color:#f92672">=</span> load(<span style="color:#e6db74">&#34;res://Models/000_Snowpuff.glb&#34;</span>)
+</span></span></code></pre></div><p>The file must exist in the correct location.</p>
+<ul>
+<li><strong>Make sure the model is instantiated</strong> :</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-gdscript" data-lang="gdscript"><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> snowpuff_model:
+</span></span><span style="display:flex;"><span>      print(<span style="color:#e6db74">&#34;Model loaded successfully&#34;</span>)
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>      print(<span style="color:#e6db74">&#34;Failed to load model&#34;</span>)
+</span></span></code></pre></div><ul>
+<li><strong>Check if the model is too small or inside the floor</strong> :</li>
+<li>Try scaling it up:
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-gdscript" data-lang="gdscript"><span style="display:flex;"><span>snowpuff<span style="color:#f92672">.</span>scale <span style="color:#f92672">=</span> <span style="color:#a6e22e">Vector3</span>(<span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">2</span>)
+</span></span></code></pre></div></li>
+</ul>
+<hr>
+<h3 id="-the-model-is-too-dark"><strong>🔸 The Model is Too Dark</strong></h3>
+<ul>
+<li><strong>Ensure there is lighting</strong> in the scene (Godot does not add lights by default).</li>
+<li>Add an ambient light source:
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-gdscript" data-lang="gdscript"><span style="display:flex;"><span><span style="color:#66d9ef">var</span> light <span style="color:#f92672">=</span> <span style="color:#a6e22e">DirectionalLight3D</span><span style="color:#f92672">.</span><span style="color:#a6e22e">new</span>()
+</span></span><span style="display:flex;"><span>light<span style="color:#f92672">.</span>light_energy <span style="color:#f92672">=</span> <span style="color:#ae81ff">2.0</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">add_child</span>(light)
+</span></span></code></pre></div></li>
+</ul>
+
+    </div>
+    <div class="post-footer">
+      
+    </div>
+  </article>
+
+    </main>
+  </body>
+</html>
