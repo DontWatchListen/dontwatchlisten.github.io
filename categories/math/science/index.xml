@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Math/Science on Dont Watch Listen</title>
-    <link>http://localhost:1313/categories/math/science/</link>
-    <description>Recent content in Math/Science on Dont Watch Listen</description>
+    <title>Math/Science on Don&#39;t Watch, Listen</title>
+    <link>https://dontwatchlisten.github.io/categories/math/science/</link>
+    <description>Recent content in Math/Science on Don&#39;t Watch, Listen</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Wed, 19 Feb 2025 23:22:54 -0800</lastBuildDate>
-    <atom:link href="http://localhost:1313/categories/math/science/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://dontwatchlisten.github.io/categories/math/science/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Mathematics and Physics of Light: Introduction to Light</title>
-      <link>http://localhost:1313/posts/mathematics-and-physics-of-light-introduction-to-light/</link>
+      <link>https://dontwatchlisten.github.io/posts/mathematics-and-physics-of-light-introduction-to-light/</link>
       <pubDate>Wed, 19 Feb 2025 23:22:54 -0800</pubDate>
-      <guid>http://localhost:1313/posts/mathematics-and-physics-of-light-introduction-to-light/</guid>
+      <guid>https://dontwatchlisten.github.io/posts/mathematics-and-physics-of-light-introduction-to-light/</guid>
       <description>&lt;h1 id=&#34;the-mathematics-and-physics-of-light-a-comprehensive-introduction&#34;&gt;&lt;strong&gt;The Mathematics and Physics of Light: A Comprehensive Introduction&lt;/strong&gt;&lt;/h1&gt;&#xA;&lt;h2 id=&#34;chapter-1-introduction-to-light&#34;&gt;&lt;strong&gt;Chapter 1: Introduction to Light&lt;/strong&gt;&lt;/h2&gt;&#xA;&lt;p&gt;Light is one of the most fundamental and fascinating phenomena in the universe. It is responsible for our ability to see, it fuels life through photosynthesis, and it plays a crucial role in technology, from fiber optic communication to laser surgery. However, despite its everyday presence, light is an incredibly complex and multi-faceted subject that has challenged scientists for centuries.&lt;/p&gt;</description>
     </item>
   </channel>
