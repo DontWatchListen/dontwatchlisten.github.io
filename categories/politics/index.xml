@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Politics on Royal Chickens Interactive</title>
-    <link>https://dontwatchlisten.github.io/categories/politics/</link>
-    <description>Recent content in Politics on Royal Chickens Interactive</description>
+    <title>Politics on Dont Watch Listen</title>
+    <link>http://localhost:1313/categories/politics/</link>
+    <description>Recent content in Politics on Dont Watch Listen</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Sat, 01 Mar 2025 21:09:09 -0800</lastBuildDate>
-    <atom:link href="https://dontwatchlisten.github.io/categories/politics/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/categories/politics/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>How Big Business Avoids Billions in Taxes Legally</title>
-      <link>https://dontwatchlisten.github.io/posts/how-big-business-avoids-billions-in-taxes-legally/</link>
+      <link>http://localhost:1313/posts/how-big-business-avoids-billions-in-taxes-legally/</link>
       <pubDate>Sat, 01 Mar 2025 21:09:09 -0800</pubDate>
-      <guid>https://dontwatchlisten.github.io/posts/how-big-business-avoids-billions-in-taxes-legally/</guid>
+      <guid>http://localhost:1313/posts/how-big-business-avoids-billions-in-taxes-legally/</guid>
       <description>&lt;p&gt;Big businesses use a variety of &lt;strong&gt;legal&lt;/strong&gt; tax avoidance strategies to minimize their tax liabilities, often leveraging loopholes, deductions, and incentives embedded within national and international tax laws. These methods—sometimes called &amp;ldquo;aggressive tax planning&amp;rdquo;—are technically legal but can be controversial. Below are the key ways corporations legally avoid paying billions in taxes:&lt;/p&gt;&#xA;&lt;h1 id=&#34;1-offshore-tax-havens--profit-shifting&#34;&gt;1. &lt;strong&gt;Offshore Tax Havens &amp;amp; Profit Shifting&lt;/strong&gt;&lt;/h1&gt;&#xA;&lt;p&gt;Multinational corporations shift profits to low-tax or no-tax countries like &lt;strong&gt;Ireland, Bermuda, the Cayman Islands, and Luxembourg&lt;/strong&gt; to avoid paying higher corporate taxes in their home countries. &lt;strong&gt;This is done through&lt;/strong&gt;:&lt;/p&gt;</description>
     </item>
   </channel>
