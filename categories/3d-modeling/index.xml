@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>3D Modeling on Royal Chickens Interactive</title>
+    <link>https://dontwatchlisten.github.io/categories/3d-modeling/</link>
+    <description>Recent content in 3D Modeling on Royal Chickens Interactive</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 15 Feb 2025 17:08:49 -0800</lastBuildDate>
+    <atom:link href="https://dontwatchlisten.github.io/categories/3d-modeling/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Create Custom 3D Assets Using AI Meshy and Blender for Godot</title>
+      <link>https://dontwatchlisten.github.io/posts/create-custom-3d-assets-using-ai-mesh-and-blender-for-godot/</link>
+      <pubDate>Sat, 15 Feb 2025 17:08:49 -0800</pubDate>
+      <guid>https://dontwatchlisten.github.io/posts/create-custom-3d-assets-using-ai-mesh-and-blender-for-godot/</guid>
+      <description>&lt;h1 id=&#34;how-to-create-custom-3d-assets-using-ai-meshy-and-blender-for-godot&#34;&gt;&lt;strong&gt;How to Create Custom 3D Assets Using AI, Meshy, and Blender for Godot&lt;/strong&gt;&lt;/h1&gt;&#xA;&lt;p&gt;In this guide, we will go step by step to generate a &lt;strong&gt;2D representation of a 3D object&lt;/strong&gt;, convert it into a  &lt;strong&gt;fully textured 3D model&lt;/strong&gt;, and format it properly for use in &lt;strong&gt;Godot&lt;/strong&gt;.&lt;/p&gt;&#xA;&lt;p&gt;We will cover:&lt;/p&gt;&#xA;&lt;p&gt;✅ Using &lt;strong&gt;AI Image Generators&lt;/strong&gt; to create a 2D image of your 3D object.&lt;/p&gt;&#xA;&lt;p&gt;✅ &lt;strong&gt;Removing the background&lt;/strong&gt; and converting formats for best results.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

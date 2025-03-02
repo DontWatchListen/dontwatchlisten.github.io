@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>GProgramming on Royal Chickens Interactive</title>
+    <link>http://localhost:1313/categories/gprogramming/</link>
+    <description>Recent content in GProgramming on Royal Chickens Interactive</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 19 Feb 2025 22:22:35 -0800</lastBuildDate>
+    <atom:link href="http://localhost:1313/categories/gprogramming/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Godot 4.3 Using ColorRect for Simple 2D Backgrounds</title>
+      <link>http://localhost:1313/posts/godot-4.3-using-colorrect-for-simple-2d-backgrounds/</link>
+      <pubDate>Wed, 19 Feb 2025 22:22:35 -0800</pubDate>
+      <guid>http://localhost:1313/posts/godot-4.3-using-colorrect-for-simple-2d-backgrounds/</guid>
+      <description>&lt;h1 id=&#34;procedural-background-color-interpolation-in-godot-using-gdscript-a-code-driven-approach&#34;&gt;&lt;strong&gt;Procedural Background Color Interpolation in Godot Using GDScript: A Code-Driven Approach&lt;/strong&gt;&lt;/h1&gt;&#xA;&lt;h2 id=&#34;abstract&#34;&gt;&lt;strong&gt;Abstract&lt;/strong&gt;&lt;/h2&gt;&#xA;&lt;p&gt;This paper presents an efficient method for procedurally generating and interpolating a 2D background color in &lt;strong&gt;Godot 4.3&lt;/strong&gt; using &lt;strong&gt;GDScript&lt;/strong&gt;. The implementation relies entirely on scripting, eliminating the need for manual adjustments in the Godot editor. By leveraging &lt;strong&gt;linear interpolation (LERP)&lt;/strong&gt;, the system smoothly transitions between predefined color values over a fixed duration, ensuring a seamless visual experience. This approach is particularly beneficial for procedurally generated environments, menu screens, and dynamic aesthetic modifications in 2D games.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>
