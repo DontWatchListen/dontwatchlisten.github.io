@@ -24,21 +24,23 @@
     <meta charset="utf-8" />
     <meta name="generator" content="Hugo 0.143.1">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="author" content="John Doe" />
+    <meta name="author" content="Joshua Parsons" />
     <meta name="description" content="" />
-    <link rel="stylesheet" href="/css/main.min.7994f9550bb78a616adb8a2695451298fcee6c2d6765a3f73fc74fd0f0eeff48.css" />
+    <link rel="stylesheet" href="/css/main.min.22a892bf8b03d571a11cc78d5f3383574a10fcc38da9f834d108f44635bf957e.css" />
     
 
     
     
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Mathematics and Physics of Light: Introduction to Light">
-  <meta name="twitter:description" content="The Mathematics and Physics of Light: A Comprehensive Introduction Chapter 1: Introduction to Light Light is one of the most fundamental and fascinating phenomena in the universe. It is responsible for our ability to see, it fuels life through photosynthesis, and it plays a crucial role in technology, from fiber optic communication to laser surgery. However, despite its everyday presence, light is an incredibly complex and multi-faceted subject that has challenged scientists for centuries.">
+  <meta name="twitter:description" content="Chapter 1: Introduction to Light Light is one of the most fundamental and fascinating phenomena in the universe. It is responsible for our ability to see, it fuels life through photosynthesis, and it plays a crucial role in technology, from fiber optic communication to laser surgery. However, despite its everyday presence, light is an incredibly complex and multi-faceted subject that has challenged scientists for centuries.
+To truly understand light, one must first understand the broader concept it belongs to: electromagnetic radiation. Light is not an isolated phenomenon—it is part of a vast spectrum of energy waves that travel through space, known as the electromagnetic spectrum. This spectrum includes familiar forms of energy like radio waves, microwaves, X-rays, and gamma rays. Each of these, including visible light, consists of oscillating electric and magnetic fields that propagate through space at the speed of light.">
 
     <meta property="og:url" content="http://localhost:1313/posts/mathematics-and-physics-of-light-introduction-to-light/">
   <meta property="og:site_name" content="Don&#39;t Watch, Listen">
   <meta property="og:title" content="Mathematics and Physics of Light: Introduction to Light">
-  <meta property="og:description" content="The Mathematics and Physics of Light: A Comprehensive Introduction Chapter 1: Introduction to Light Light is one of the most fundamental and fascinating phenomena in the universe. It is responsible for our ability to see, it fuels life through photosynthesis, and it plays a crucial role in technology, from fiber optic communication to laser surgery. However, despite its everyday presence, light is an incredibly complex and multi-faceted subject that has challenged scientists for centuries.">
+  <meta property="og:description" content="Chapter 1: Introduction to Light Light is one of the most fundamental and fascinating phenomena in the universe. It is responsible for our ability to see, it fuels life through photosynthesis, and it plays a crucial role in technology, from fiber optic communication to laser surgery. However, despite its everyday presence, light is an incredibly complex and multi-faceted subject that has challenged scientists for centuries.
+To truly understand light, one must first understand the broader concept it belongs to: electromagnetic radiation. Light is not an isolated phenomenon—it is part of a vast spectrum of energy waves that travel through space, known as the electromagnetic spectrum. This spectrum includes familiar forms of energy like radio waves, microwaves, X-rays, and gamma rays. Each of these, including visible light, consists of oscillating electric and magnetic fields that propagate through space at the speed of light.">
   <meta property="og:locale" content="en_us">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
@@ -47,10 +49,51 @@
 
 
   </head>
+
   <body>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        let posts = document.querySelectorAll(".random-post");
+        let totalPosts = posts.length;
+        let numToShow = Math.min(3, totalPosts);
+        let chosenIndexes = new Set();
+    
+        while (chosenIndexes.size < numToShow) {
+          let randIndex = Math.floor(Math.random() * totalPosts);
+          chosenIndexes.add(randIndex);
+        }
+    
+        chosenIndexes.forEach(index => {
+          posts[index].style.display = "block";
+        });
+      });
+    </script>
+
+    <script>
+      function toggleSidebarSections() {
+        let trendingSection = document.querySelector('.baseof-trending');
+        let randomSection = document.querySelector('.baseof-random');
+        let screenWidth = window.innerWidth;
+    
+        if (screenWidth >= 1650) {
+          trendingSection.style.display = "none";
+          randomSection.style.display = "none";
+        } else {
+          trendingSection.style.display = "block";
+          randomSection.style.display = "block";
+        }
+      }
+    
+      
+      document.addEventListener("DOMContentLoaded", toggleSidebarSections);
+      window.addEventListener("resize", toggleSidebarSections);
+    </script>
+    
+    
     <button id="styleToggle" class="style-toggle"></button>
     <header class="app-header">
-      <a href="/"><img class="app-header-avatar" src="/images/avatar.png" alt="John Doe" /></a>
+      <a href="/"><img class="app-header-avatar" src="/images/avatar.png" alt="Joshua Parsons" /></a>
       <span class="app-header-title">Don&#39;t Watch, Listen</span>
       <p>Don&#39;t Watch, Listen&#39;s Blog details extensive nuance in each discussion. Find a topic of interest to you in our categories below!</p>
 
@@ -70,12 +113,42 @@
           
         </ul>
       </nav>
+
+    
+    <div class="sidebar-section baseof-trending">
+      <h2>Trending Articles</h2>
+      <ul>
+        
+          <li><a href="/posts/the-hidden-cost-of-always-being-right/">The Hidden Cost of Always Being Right</a></li>
+        
+          <li><a href="/posts/the-social-security-fairness-act-was-never-about-fairness/">The Social Security Fairness Act (SSFA) Was Never About Fairness</a></li>
+        
+          <li><a href="/posts/stock-buybacks-are-a-scambut-not-for-the-reason-you-think/">Stock Buybacks Are a Scam—But Not for the Reason You Think</a></li>
+        
+      </ul>
+    </div>
+
+    
+    <div class="sidebar-section baseof-random">
+      <h2>Random Articles</h2>
+      <ul>
+        
+          <li><a href="/posts/godot-43-setting-up-a-3d-project-and-skybox-in-visual-studio-code/">Godot 4.3 Set Up a 3D Project, Skybox &amp; Import Your Custom 3d Model from VSC</a></li>
+        
+          <li><a href="/posts/the-hidden-cost-of-always-being-right/">The Hidden Cost of Always Being Right</a></li>
+        
+          <li><a href="/posts/using-python-3-to-convert-webp-to-png/">How to Convert WEBP Files to PNG Using VS Code in Python</a></li>
+        
+      </ul>
+    </div>
     </header>
     <main class="app-container">
       
   <article class="post">
     <header class="post-header">
-      <h1 class ="post-title">Mathematics and Physics of Light: Introduction to Light</h1>
+      
+      <h1 class="post-title">Mathematics and Physics of Light: Introduction to Light</h1>
+    
       <div class="post-meta">
         <div>
           <svg class="icon icon-calendar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><title>calendar</title><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
@@ -87,9 +160,14 @@
         </div>
       </div>
     </header>
+
     <div class="post-content">
-      <h1 id="the-mathematics-and-physics-of-light-a-comprehensive-introduction"><strong>The Mathematics and Physics of Light: A Comprehensive Introduction</strong></h1>
-<h2 id="chapter-1-introduction-to-light"><strong>Chapter 1: Introduction to Light</strong></h2>
+      
+
+      
+
+  
+  <h2 id="chapter-1-introduction-to-light"><strong>Chapter 1: Introduction to Light</strong></h2>
 <p>Light is one of the most fundamental and fascinating phenomena in the universe. It is responsible for our ability to see, it fuels life through photosynthesis, and it plays a crucial role in technology, from fiber optic communication to laser surgery. However, despite its everyday presence, light is an incredibly complex and multi-faceted subject that has challenged scientists for centuries.</p>
 <p>To truly understand light, one must first understand the broader concept it belongs to: <strong>electromagnetic radiation</strong>. Light is not an isolated phenomenon—it is part of a vast spectrum of energy waves that travel through space, known as the <strong>electromagnetic spectrum</strong>. This spectrum includes familiar forms of energy like radio waves, microwaves, X-rays, and gamma rays. Each of these, including visible light, consists of <strong>oscillating electric and magnetic fields</strong> that propagate through space at the speed of light.</p>
 <p>The study of light has undergone dramatic shifts throughout history. Early theories viewed light as a stream of tiny particles, while later discoveries revealed its wave-like nature. Today, we understand that light is neither purely a wave nor purely a particle—it exhibits characteristics of both, a concept known as <strong>wave-particle duality</strong>. This duality is one of the cornerstones of modern physics and plays a crucial role in fields like quantum mechanics.</p>
@@ -620,7 +698,9 @@
 <p>The perception of color arises from the way different wavelengths of light interact with objects and how our eyes process those signals. For example, an object appears red because it absorbs all other wavelengths except for red, which it reflects toward our eyes.</p>
 <p>In physics, light intensity, color, and direction can be quantified using equations governing <strong>optics</strong> (the study of light behavior) and <strong>perception psychology</strong> (how the brain processes visual information).</p>
 
+
     </div>
+
     <div class="post-footer">
       
     </div>

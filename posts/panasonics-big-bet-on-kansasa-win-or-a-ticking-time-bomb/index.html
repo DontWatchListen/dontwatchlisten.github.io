@@ -24,21 +24,21 @@
     <meta charset="utf-8" />
     <meta name="generator" content="Hugo 0.143.1">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="author" content="John Doe" />
+    <meta name="author" content="Joshua Parsons" />
     <meta name="description" content="" />
-    <link rel="stylesheet" href="/css/main.min.7994f9550bb78a616adb8a2695451298fcee6c2d6765a3f73fc74fd0f0eeff48.css" />
+    <link rel="stylesheet" href="/css/main.min.c0f3e32351f4aa29888cbb8814d3dcd61e64ea5251d6895916def644ca57c010.css" />
     
 
     
     
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Panasonics Big Bet on Kansas–A Win or a Ticking Time Bomb">
-  <meta name="twitter:description" content="Panasonic’s Big Bet on Kansas – A Win or a Ticking Time Bomb? I didn’t expect to go down this rabbit hole, but here we are. It started when I saw a take on X (Twitter) calling the Panasonic EV battery plant in De Soto, Kansas, a perfect example of government waste. That was enough to get me curious. Is this just a big corporate handout, or is there a real economic win here? I went deep into the details, and honestly, I can see both sides of the argument—and I think people aren’t realizing the full financial weight of what’s happening.">
+  <meta name="twitter:description" content="I didn’t expect to go down this rabbit hole, but here we are. It started when I saw a take on X (Twitter) calling the Panasonic EV battery plant in De Soto, Kansas, a perfect example of government waste. That was enough to get me curious. Is this just a big corporate handout, or is there a real economic win here? I went deep into the details, and honestly, I can see both sides of the argument—and I think people aren’t realizing the full financial weight of what’s happening.">
 
     <meta property="og:url" content="http://localhost:1313/posts/panasonics-big-bet-on-kansasa-win-or-a-ticking-time-bomb/">
   <meta property="og:site_name" content="Don&#39;t Watch, Listen">
   <meta property="og:title" content="Panasonics Big Bet on Kansas–A Win or a Ticking Time Bomb">
-  <meta property="og:description" content="Panasonic’s Big Bet on Kansas – A Win or a Ticking Time Bomb? I didn’t expect to go down this rabbit hole, but here we are. It started when I saw a take on X (Twitter) calling the Panasonic EV battery plant in De Soto, Kansas, a perfect example of government waste. That was enough to get me curious. Is this just a big corporate handout, or is there a real economic win here? I went deep into the details, and honestly, I can see both sides of the argument—and I think people aren’t realizing the full financial weight of what’s happening.">
+  <meta property="og:description" content="I didn’t expect to go down this rabbit hole, but here we are. It started when I saw a take on X (Twitter) calling the Panasonic EV battery plant in De Soto, Kansas, a perfect example of government waste. That was enough to get me curious. Is this just a big corporate handout, or is there a real economic win here? I went deep into the details, and honestly, I can see both sides of the argument—and I think people aren’t realizing the full financial weight of what’s happening.">
   <meta property="og:locale" content="en_us">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
@@ -47,10 +47,51 @@
 
 
   </head>
+
   <body>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        let posts = document.querySelectorAll(".random-post");
+        let totalPosts = posts.length;
+        let numToShow = Math.min(3, totalPosts);
+        let chosenIndexes = new Set();
+    
+        while (chosenIndexes.size < numToShow) {
+          let randIndex = Math.floor(Math.random() * totalPosts);
+          chosenIndexes.add(randIndex);
+        }
+    
+        chosenIndexes.forEach(index => {
+          posts[index].style.display = "block";
+        });
+      });
+    </script>
+
+    <script>
+      function toggleSidebarSections() {
+        let trendingSection = document.querySelector('.baseof-trending');
+        let randomSection = document.querySelector('.baseof-random');
+        let screenWidth = window.innerWidth;
+    
+        if (screenWidth >= 1650) {
+          trendingSection.style.display = "none";
+          randomSection.style.display = "none";
+        } else {
+          trendingSection.style.display = "block";
+          randomSection.style.display = "block";
+        }
+      }
+    
+      
+      document.addEventListener("DOMContentLoaded", toggleSidebarSections);
+      window.addEventListener("resize", toggleSidebarSections);
+    </script>
+    
+    
     <button id="styleToggle" class="style-toggle"></button>
     <header class="app-header">
-      <a href="/"><img class="app-header-avatar" src="/images/avatar.png" alt="John Doe" /></a>
+      <a href="/"><img class="app-header-avatar" src="/images/avatar.png" alt="Joshua Parsons" /></a>
       <span class="app-header-title">Don&#39;t Watch, Listen</span>
       <p>Don&#39;t Watch, Listen&#39;s Blog details extensive nuance in each discussion. Find a topic of interest to you in our categories below!</p>
 
@@ -70,12 +111,40 @@
           
         </ul>
       </nav>
+
+    
+    <div class="sidebar-section baseof-trending">
+      <h2>Trending Articles</h2>
+      <ul>
+        
+          <li><a href="/posts/the-hidden-cost-of-always-being-right/">The Hidden Cost of Always Being Right</a></li>
+        
+          <li><a href="/posts/the-social-security-fairness-act-was-never-about-fairness/">The Social Security Fairness Act (SSFA) Was Never About Fairness</a></li>
+        
+          <li><a href="/posts/stock-buybacks-are-a-scambut-not-for-the-reason-you-think/">Stock Buybacks Are a Scam—But Not for the Reason You Think</a></li>
+        
+      </ul>
+    </div>
+
+    
+    <div class="sidebar-section baseof-random">
+      <h2>Random Articles</h2>
+      <ul>
+        
+          <li><a href="/posts/godot-43-understanding-parent-and-child-relationships-through-an-entity-system/">Godot 4.3 Understanding Parent and Child Relationships Through an Entity System</a></li>
+        
+          <li><a href="/posts/create-custom-3d-assets-using-ai-mesh-and-blender-for-godot/">Create Custom 3D Assets Using AI Meshy and Blender for Godot</a></li>
+        
+          <li><a href="/posts/using-python-3-to-convert-webp-to-png/">How to Convert WEBP Files to PNG Using VS Code in Python</a></li>
+        
+      </ul>
+    </div>
     </header>
     <main class="app-container">
       
   <article class="post">
     <header class="post-header">
-      <h1 class ="post-title">Panasonics Big Bet on Kansas–A Win or a Ticking Time Bomb</h1>
+      
       <div class="post-meta">
         <div>
           <svg class="icon icon-calendar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><title>calendar</title><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
@@ -87,13 +156,24 @@
         </div>
       </div>
     </header>
-    <div class="post-content">
-      <h1 id="panasonics-big-bet-on-kansas--a-win-or-a-ticking-time-bomb"><strong>Panasonic’s Big Bet on Kansas – A Win or a Ticking Time Bomb?</strong></h1>
-<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
-      <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/zw1D5PMCAqA?autoplay=0&amp;controls=1&amp;end=0&amp;loop=0&amp;mute=0&amp;start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"></iframe>
-    </div>
 
-<p>I didn’t expect to go down this rabbit hole, but here we are. It started when I saw a take on X (Twitter) calling the <strong>Panasonic EV battery plant in De Soto, Kansas, a perfect example of government waste</strong>. That was enough to get me curious. <strong>Is this just a big corporate handout, or is there a real economic win here?</strong> I went deep into the details, and honestly, I can see <strong>both sides of the argument</strong>—and I think people aren’t realizing the full financial weight of what’s happening.</p>
+    <div class="post-content">
+      
+
+      
+      <div class="post-video">
+        <iframe 
+          width="100%" 
+          height="315" 
+          src="https://www.youtube.com/embed/zw1D5PMCAqA?modestbranding=1&rel=0&iv_load_policy=3" 
+          frameborder="0" 
+          allowfullscreen>
+        </iframe>
+      </div>
+    
+
+  
+  <p>I didn’t expect to go down this rabbit hole, but here we are. It started when I saw a take on X (Twitter) calling the <strong>Panasonic EV battery plant in De Soto, Kansas, a perfect example of government waste</strong>. That was enough to get me curious. <strong>Is this just a big corporate handout, or is there a real economic win here?</strong> I went deep into the details, and honestly, I can see <strong>both sides of the argument</strong>—and I think people aren’t realizing the full financial weight of what’s happening.</p>
 <p>This isn’t some <strong>easy “good vs. bad” take.</strong> It’s <strong>complex, layered, and comes down to how much risk Kansans are willing to take for the promise of economic growth.</strong></p>
 <p>So, let’s lay it out properly—<strong>who’s paying, who’s benefiting, and what’s the real long-term impact?</strong></p>
 <h2 id="the-4-billion-investmentwhos-really-paying"><strong>THE $4 BILLION INVESTMENT—WHO’S REALLY PAYING?</strong></h2>
@@ -230,7 +310,9 @@
 <h2 id="so-whos-really-paying"><strong>SO, WHO’S REALLY PAYING?</strong></h2>
 <p>At the end of the day, <strong>Kansas taxpayers are footing the bill upfront, banking on future returns.</strong> The state is forfeiting nearly <strong>a billion in tax revenue</strong> to secure Panasonic’s investment, hoping that the <strong>jobs, supplier businesses, and long-term economic activity</strong> will eventually <strong>outweigh the short-term costs.</strong> If Panasonic thrives, Kansas could <strong>break even or come out ahead</strong> in a decade, turning this into one of the state’s biggest economic wins. But if <strong>Panasonic underperforms, scales back, or leaves early</strong>, then <strong>Kansans will be left holding the bag</strong>, with sunk costs in infrastructure and no way to recover lost revenue. The real question isn’t just <strong>“Is this a good deal?”</strong> but rather <strong>“Are we willing to accept short-term costs for the potential of long-term economic growth?”</strong> Because that’s what this is—a calculated risk. If <strong>Kansas manages this transition well, keeps Evergy accountable, ensures infrastructure keeps pace, and prevents housing from spiraling out of reach, then the hardship now could be worth it later.</strong> Growth isn’t free. It demands <strong>smart planning, short-term sacrifices, and patience.</strong> But if handled correctly, this could be the kind of move that <strong>redefines Kansas&rsquo; economic future for decades to come.</strong></p>
 
+
     </div>
+
     <div class="post-footer">
       
     </div>

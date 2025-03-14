@@ -24,9 +24,9 @@
     <meta charset="utf-8" />
     <meta name="generator" content="Hugo 0.143.1">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="author" content="John Doe" />
+    <meta name="author" content="Joshua Parsons" />
     <meta name="description" content="" />
-    <link rel="stylesheet" href="/css/main.min.7994f9550bb78a616adb8a2695451298fcee6c2d6765a3f73fc74fd0f0eeff48.css" />
+    <link rel="stylesheet" href="/css/main.min.22a892bf8b03d571a11cc78d5f3383574a10fcc38da9f834d108f44635bf957e.css" />
     
 
     
@@ -49,10 +49,51 @@ Now, we’re ready to take a big step forward: understanding parent and child re
 
 
   </head>
+
   <body>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        let posts = document.querySelectorAll(".random-post");
+        let totalPosts = posts.length;
+        let numToShow = Math.min(3, totalPosts);
+        let chosenIndexes = new Set();
+    
+        while (chosenIndexes.size < numToShow) {
+          let randIndex = Math.floor(Math.random() * totalPosts);
+          chosenIndexes.add(randIndex);
+        }
+    
+        chosenIndexes.forEach(index => {
+          posts[index].style.display = "block";
+        });
+      });
+    </script>
+
+    <script>
+      function toggleSidebarSections() {
+        let trendingSection = document.querySelector('.baseof-trending');
+        let randomSection = document.querySelector('.baseof-random');
+        let screenWidth = window.innerWidth;
+    
+        if (screenWidth >= 1650) {
+          trendingSection.style.display = "none";
+          randomSection.style.display = "none";
+        } else {
+          trendingSection.style.display = "block";
+          randomSection.style.display = "block";
+        }
+      }
+    
+      
+      document.addEventListener("DOMContentLoaded", toggleSidebarSections);
+      window.addEventListener("resize", toggleSidebarSections);
+    </script>
+    
+    
     <button id="styleToggle" class="style-toggle"></button>
     <header class="app-header">
-      <a href="/"><img class="app-header-avatar" src="/images/avatar.png" alt="John Doe" /></a>
+      <a href="/"><img class="app-header-avatar" src="/images/avatar.png" alt="Joshua Parsons" /></a>
       <span class="app-header-title">Don&#39;t Watch, Listen</span>
       <p>Don&#39;t Watch, Listen&#39;s Blog details extensive nuance in each discussion. Find a topic of interest to you in our categories below!</p>
 
@@ -72,12 +113,42 @@ Now, we’re ready to take a big step forward: understanding parent and child re
           
         </ul>
       </nav>
+
+    
+    <div class="sidebar-section baseof-trending">
+      <h2>Trending Articles</h2>
+      <ul>
+        
+          <li><a href="/posts/the-hidden-cost-of-always-being-right/">The Hidden Cost of Always Being Right</a></li>
+        
+          <li><a href="/posts/the-social-security-fairness-act-was-never-about-fairness/">The Social Security Fairness Act (SSFA) Was Never About Fairness</a></li>
+        
+          <li><a href="/posts/stock-buybacks-are-a-scambut-not-for-the-reason-you-think/">Stock Buybacks Are a Scam—But Not for the Reason You Think</a></li>
+        
+      </ul>
+    </div>
+
+    
+    <div class="sidebar-section baseof-random">
+      <h2>Random Articles</h2>
+      <ul>
+        
+          <li><a href="/posts/the-social-security-fairness-act-was-never-about-fairness/">The Social Security Fairness Act (SSFA) Was Never About Fairness</a></li>
+        
+          <li><a href="/posts/godot-43-moving-get_properties-to-a-separate-class/">Godot 4.3 Moving Get_properties to a Separate Class</a></li>
+        
+          <li><a href="/posts/godot-43-expanding-object-compatibility-beyond-nodes/">Godot 4.3 Expanding Object Compatibility Beyond Nodes</a></li>
+        
+      </ul>
+    </div>
     </header>
     <main class="app-container">
       
   <article class="post">
     <header class="post-header">
-      <h1 class ="post-title">Godot 4.3 Understanding Parent and Child Relationships Through an Entity System</h1>
+      
+      <h1 class="post-title">Godot 4.3 Understanding Parent and Child Relationships Through an Entity System</h1>
+    
       <div class="post-meta">
         <div>
           <svg class="icon icon-calendar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><title>calendar</title><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
@@ -89,8 +160,14 @@ Now, we’re ready to take a big step forward: understanding parent and child re
         </div>
       </div>
     </header>
+
     <div class="post-content">
-      <p>In our previous section, we introduced <strong>custom classes</strong> in Godot by moving the <code>get_properties()</code> function into its own dedicated class, <code>ObjectAnalyzer</code>. This helped us keep <code>main.gd</code> clean while improving code organization.</p>
+      
+
+      
+
+  
+  <p>In our previous section, we introduced <strong>custom classes</strong> in Godot by moving the <code>get_properties()</code> function into its own dedicated class, <code>ObjectAnalyzer</code>. This helped us keep <code>main.gd</code> clean while improving code organization.</p>
 <p>Now, we’re ready to take a big step forward:  <strong>understanding parent and child relationships in Godot</strong>. This will serve as the foundation for <strong>inheritance</strong> — a key concept in game development that allows us to structure our projects efficiently.</p>
 <p>Rather than having separate, unrelated objects like a <strong>player</strong> and <strong>NPCs</strong>, we’ll create a <strong>general <code>Entity</code> class</strong> that <strong>all characters can inherit from</strong>. This will allow us to share common behavior across different types of game objects.</p>
 <hr>
@@ -350,7 +427,9 @@ Crow is wandering...
 </ol>
 <hr>
 
+
     </div>
+
     <div class="post-footer">
       
     </div>

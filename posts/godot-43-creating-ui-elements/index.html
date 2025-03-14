@@ -24,22 +24,22 @@
     <meta charset="utf-8" />
     <meta name="generator" content="Hugo 0.143.1">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="author" content="John Doe" />
+    <meta name="author" content="Joshua Parsons" />
     <meta name="description" content="" />
-    <link rel="stylesheet" href="/css/main.min.7994f9550bb78a616adb8a2695451298fcee6c2d6765a3f73fc74fd0f0eeff48.css" />
+    <link rel="stylesheet" href="/css/main.min.c27bdbde9ad2ae9022125bc5e927509b9d793611b5af72ea993b2ffa7ec0b838.css" />
     
 
     
     
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Godot 43 Creating UI Elements">
-  <meta name="twitter:description" content="Building a Dynamic UI System in Godot Using Visual Studio Code If you’re coding exclusively in Visual Studio Code (VSC) and developing a game in Godot, you’ll need to create and manage UI elements like Labels, Buttons, Health Bars, and Score Counters entirely through GDScript. This guide will walk you through setting up a fully script-driven UI system, ensuring it scales properly and remains organized.
+  <meta name="twitter:description" content="If you’re coding exclusively in Visual Studio Code (VSC) and developing a game in Godot, you’ll need to create and manage UI elements like Labels, Buttons, Health Bars, and Score Counters entirely through GDScript. This guide will walk you through setting up a fully script-driven UI system, ensuring it scales properly and remains organized.
 1. Setting Up UI Elements with Code Since we’re not using the scene editor, we must instantiate UI elements programmatically. UI nodes in Godot fall under the Control class and include elements like:">
 
     <meta property="og:url" content="http://localhost:1313/posts/godot-43-creating-ui-elements/">
   <meta property="og:site_name" content="Don&#39;t Watch, Listen">
   <meta property="og:title" content="Godot 43 Creating UI Elements">
-  <meta property="og:description" content="Building a Dynamic UI System in Godot Using Visual Studio Code If you’re coding exclusively in Visual Studio Code (VSC) and developing a game in Godot, you’ll need to create and manage UI elements like Labels, Buttons, Health Bars, and Score Counters entirely through GDScript. This guide will walk you through setting up a fully script-driven UI system, ensuring it scales properly and remains organized.
+  <meta property="og:description" content="If you’re coding exclusively in Visual Studio Code (VSC) and developing a game in Godot, you’ll need to create and manage UI elements like Labels, Buttons, Health Bars, and Score Counters entirely through GDScript. This guide will walk you through setting up a fully script-driven UI system, ensuring it scales properly and remains organized.
 1. Setting Up UI Elements with Code Since we’re not using the scene editor, we must instantiate UI elements programmatically. UI nodes in Godot fall under the Control class and include elements like:">
   <meta property="og:locale" content="en_us">
   <meta property="og:type" content="article">
@@ -49,10 +49,76 @@
 
 
   </head>
+
   <body>
+    
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        let articles = document.querySelectorAll("#random-articles .random-article");
+        let totalArticles = articles.length;
+        let numToShow = Math.min(3, totalArticles);
+        let selectedIndexes = new Set();
+    
+        
+        while (selectedIndexes.size < numToShow) {
+          let randomIndex = Math.floor(Math.random() * totalArticles);
+          selectedIndexes.add(randomIndex);
+        }
+    
+        
+        selectedIndexes.forEach(index => {
+          articles[index].style.display = "block";
+        });
+      });
+    </script>
+    
+    <script>
+      function randomizeBaseofArticles() {
+        let articles = document.querySelectorAll("#random-articles-baseof .random-article-baseof");
+        let totalArticles = articles.length;
+        let numToShow = Math.min(3, totalArticles);
+        let selectedIndexes = new Set();
+    
+        
+        while (selectedIndexes.size < numToShow) {
+          let randomIndex = Math.floor(Math.random() * totalArticles);
+          selectedIndexes.add(randomIndex);
+        }
+    
+        
+        selectedIndexes.forEach(index => {
+          articles[index].style.display = "block";
+        });
+      }
+    
+      document.addEventListener("DOMContentLoaded", randomizeBaseofArticles);
+    </script>
+    
+    
+    <script>
+      function toggleSidebarSections() {
+        let trendingSection = document.querySelector('.baseof-trending');
+        let randomSection = document.querySelector('.baseof-random');
+        let screenWidth = window.innerWidth;
+    
+        if (screenWidth >= 1929) {
+          trendingSection.style.display = "none";
+          randomSection.style.display = "none";
+        } else {
+          trendingSection.style.display = "block";
+          randomSection.style.display = "block";
+        }
+      }
+    
+      
+      document.addEventListener("DOMContentLoaded", toggleSidebarSections);
+      window.addEventListener("resize", toggleSidebarSections);
+    </script>
+    
+    
     <button id="styleToggle" class="style-toggle"></button>
     <header class="app-header">
-      <a href="/"><img class="app-header-avatar" src="/images/avatar.png" alt="John Doe" /></a>
+      <a href="/"><img class="app-header-avatar" src="/images/avatar.png" alt="Joshua Parsons" /></a>
       <span class="app-header-title">Don&#39;t Watch, Listen</span>
       <p>Don&#39;t Watch, Listen&#39;s Blog details extensive nuance in each discussion. Find a topic of interest to you in our categories below!</p>
 
@@ -72,12 +138,111 @@
           
         </ul>
       </nav>
+
+    
+    <div class="sidebar-section baseof-trending">
+      <h2>Trending Articles</h2>
+      <ul>
+        
+          <li><a href="/posts/the-hidden-cost-of-always-being-right/">The Hidden Cost of Always Being Right</a></li>
+        
+          <li><a href="/posts/the-social-security-fairness-act-was-never-about-fairness/">The Social Security Fairness Act Was Never About Fairness</a></li>
+        
+          <li><a href="/posts/stock-buybacks-are-a-scambut-not-for-the-reason-you-think/">Stock Buybacks Are a Scam—But Not for the Reason You Think</a></li>
+        
+      </ul>
+    </div>
+
+    
+    <div class="sidebar-section baseof-random">
+      <h2>Random Articles</h2>
+      <ul id="random-articles-baseof">
+        
+          <li class="random-article-baseof" style="display: none;">
+            <a href="/posts/the-hidden-cost-of-always-being-right/">The Hidden Cost of Always Being Right</a>
+          </li>
+        
+          <li class="random-article-baseof" style="display: none;">
+            <a href="/posts/the-social-security-fairness-act-was-never-about-fairness/">The Social Security Fairness Act Was Never About Fairness</a>
+          </li>
+        
+          <li class="random-article-baseof" style="display: none;">
+            <a href="/posts/stock-buybacks-are-a-scambut-not-for-the-reason-you-think/">Stock Buybacks Are a Scam—But Not for the Reason You Think</a>
+          </li>
+        
+          <li class="random-article-baseof" style="display: none;">
+            <a href="/posts/panasonics-big-bet-on-kansasa-win-or-a-ticking-time-bomb/">Panasonics Big Bet on Kansas–A Win or a Ticking Time Bomb</a>
+          </li>
+        
+          <li class="random-article-baseof" style="display: none;">
+            <a href="/posts/is-pramila-jayapal-good-for-washington/">Is Pramila Jayapal Good for Washington</a>
+          </li>
+        
+          <li class="random-article-baseof" style="display: none;">
+            <a href="/posts/one-of-the-nine-ways-big-business-avoids-billions-in-taxes-legally/">One of the Nine Ways Big Business Avoids Billions in Taxes Legally</a>
+          </li>
+        
+          <li class="random-article-baseof" style="display: none;">
+            <a href="/posts/mathematics-and-physics-of-light-introduction-to-light/">Mathematics and Physics of Light: Introduction to Light</a>
+          </li>
+        
+          <li class="random-article-baseof" style="display: none;">
+            <a href="/posts/godot-4.3-using-colorrect-for-simple-2d-backgrounds/">Godot 4.3 Using ColorRect for Simple 2D Backgrounds</a>
+          </li>
+        
+          <li class="random-article-baseof" style="display: none;">
+            <a href="/posts/breaking-down-interpolation-lerp/">Breaking Down Interpolation (Lerp)</a>
+          </li>
+        
+          <li class="random-article-baseof" style="display: none;">
+            <a href="/posts/godot-43-creating-ui-elements/">Godot 43 Creating UI Elements</a>
+          </li>
+        
+          <li class="random-article-baseof" style="display: none;">
+            <a href="/posts/godot-43-adding-basic-input/">Godot 4.3 Adding Basic Keyboard Input</a>
+          </li>
+        
+          <li class="random-article-baseof" style="display: none;">
+            <a href="/posts/godot-43-setting-up-a-3d-project-and-skybox-in-visual-studio-code/">Godot 4.3 Set Up a 3D Project, Skybox &amp; Import Your Custom 3d Model from VSC</a>
+          </li>
+        
+          <li class="random-article-baseof" style="display: none;">
+            <a href="/posts/using-python-3-to-convert-webp-to-png/">How to Convert WEBP Files to PNG Using VS Code in Python</a>
+          </li>
+        
+          <li class="random-article-baseof" style="display: none;">
+            <a href="/posts/create-custom-3d-assets-using-ai-mesh-and-blender-for-godot/">Create Custom 3D Assets Using AI Meshy and Blender for Godot</a>
+          </li>
+        
+          <li class="random-article-baseof" style="display: none;">
+            <a href="/posts/godot-43-understanding-parent-and-child-relationships-through-an-entity-system/">Godot 4.3 Understanding Parent and Child Relationships Through an Entity System</a>
+          </li>
+        
+          <li class="random-article-baseof" style="display: none;">
+            <a href="/posts/godot-43-moving-get_properties-to-a-separate-class/">Godot 4.3 Moving Get_properties to a Separate Class</a>
+          </li>
+        
+          <li class="random-article-baseof" style="display: none;">
+            <a href="/posts/godot-43-expanding-object-compatibility-beyond-nodes/">Godot 4.3 Expanding Object Compatibility Beyond Nodes</a>
+          </li>
+        
+          <li class="random-article-baseof" style="display: none;">
+            <a href="/posts/godot-43-basics/">Godot 4.3 Basics</a>
+          </li>
+        
+          <li class="random-article-baseof" style="display: none;">
+            <a href="/posts/setting-up-godot-43-for-visual-studio-code/">Setting up Godot 4.3 for Visual Studio Code</a>
+          </li>
+        
+      </ul>
     </header>
     <main class="app-container">
       
   <article class="post">
     <header class="post-header">
-      <h1 class ="post-title">Godot 43 Creating UI Elements</h1>
+      
+      <h1 class="post-title">Godot 43 Creating UI Elements</h1>
+    
       <div class="post-meta">
         <div>
           <svg class="icon icon-calendar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><title>calendar</title><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
@@ -89,10 +254,14 @@
         </div>
       </div>
     </header>
+
     <div class="post-content">
-      <h1 id="building-a-dynamic-ui-system-in-godot-using-visual-studio-code"><strong>Building a Dynamic UI System in Godot Using Visual Studio Code</strong></h1>
-<p>If you’re coding exclusively in <strong>Visual Studio Code (VSC)</strong> and developing a game in <strong>Godot</strong>, you’ll need to create and manage <strong>UI elements</strong> like <strong>Labels, Buttons, Health Bars, and Score Counters</strong> entirely through GDScript. This guide will walk you through setting up a fully <strong>script-driven UI system</strong>, ensuring it scales properly and remains organized.</p>
-<hr>
+      
+
+      
+
+  
+  <p>If you’re coding exclusively in <strong>Visual Studio Code (VSC)</strong> and developing a game in <strong>Godot</strong>, you’ll need to create and manage <strong>UI elements</strong> like <strong>Labels, Buttons, Health Bars, and Score Counters</strong> entirely through GDScript. This guide will walk you through setting up a fully <strong>script-driven UI system</strong>, ensuring it scales properly and remains organized.</p>
 <h2 id="1-setting-up-ui-elements-with-code"><strong>1. Setting Up UI Elements with Code</strong></h2>
 <p>Since we&rsquo;re not using the scene editor, we must instantiate UI elements programmatically. UI nodes in Godot fall under the <strong>Control</strong> class and include elements like:</p>
 <ul>
@@ -173,7 +342,9 @@ For example:</p>
 </span></span><span style="display:flex;"><span>        label<span style="color:#f92672">.</span>text <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Button Clicked!&#34;</span>
 </span></span></code></pre></div><p>Now clicking the button updates the <strong>Label</strong> dynamically.</p>
 
+
     </div>
+
     <div class="post-footer">
       
     </div>

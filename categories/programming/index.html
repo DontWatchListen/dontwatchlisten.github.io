@@ -24,9 +24,9 @@
     <meta charset="utf-8" />
     <meta name="generator" content="Hugo 0.143.1">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="author" content="John Doe" />
+    <meta name="author" content="Joshua Parsons" />
     <meta name="description" content="" />
-    <link rel="stylesheet" href="/css/main.min.7994f9550bb78a616adb8a2695451298fcee6c2d6765a3f73fc74fd0f0eeff48.css" />
+    <link rel="stylesheet" href="/css/main.min.c27bdbde9ad2ae9022125bc5e927509b9d793611b5af72ea993b2ffa7ec0b838.css" />
     <link rel="alternate" type="application/rss+xml" href="http://localhost:1313/categories/programming/index.xml" title="Don't Watch, Listen">
     
 
@@ -43,10 +43,76 @@
 
 
   </head>
+
   <body>
+    
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        let articles = document.querySelectorAll("#random-articles .random-article");
+        let totalArticles = articles.length;
+        let numToShow = Math.min(3, totalArticles);
+        let selectedIndexes = new Set();
+    
+        
+        while (selectedIndexes.size < numToShow) {
+          let randomIndex = Math.floor(Math.random() * totalArticles);
+          selectedIndexes.add(randomIndex);
+        }
+    
+        
+        selectedIndexes.forEach(index => {
+          articles[index].style.display = "block";
+        });
+      });
+    </script>
+    
+    <script>
+      function randomizeBaseofArticles() {
+        let articles = document.querySelectorAll("#random-articles-baseof .random-article-baseof");
+        let totalArticles = articles.length;
+        let numToShow = Math.min(3, totalArticles);
+        let selectedIndexes = new Set();
+    
+        
+        while (selectedIndexes.size < numToShow) {
+          let randomIndex = Math.floor(Math.random() * totalArticles);
+          selectedIndexes.add(randomIndex);
+        }
+    
+        
+        selectedIndexes.forEach(index => {
+          articles[index].style.display = "block";
+        });
+      }
+    
+      document.addEventListener("DOMContentLoaded", randomizeBaseofArticles);
+    </script>
+    
+    
+    <script>
+      function toggleSidebarSections() {
+        let trendingSection = document.querySelector('.baseof-trending');
+        let randomSection = document.querySelector('.baseof-random');
+        let screenWidth = window.innerWidth;
+    
+        if (screenWidth >= 1929) {
+          trendingSection.style.display = "none";
+          randomSection.style.display = "none";
+        } else {
+          trendingSection.style.display = "block";
+          randomSection.style.display = "block";
+        }
+      }
+    
+      
+      document.addEventListener("DOMContentLoaded", toggleSidebarSections);
+      window.addEventListener("resize", toggleSidebarSections);
+    </script>
+    
+    
     <button id="styleToggle" class="style-toggle"></button>
     <header class="app-header">
-      <a href="/"><img class="app-header-avatar" src="/images/avatar.png" alt="John Doe" /></a>
+      <a href="/"><img class="app-header-avatar" src="/images/avatar.png" alt="Joshua Parsons" /></a>
       <span class="app-header-title">Don&#39;t Watch, Listen</span>
       <p>Don&#39;t Watch, Listen&#39;s Blog details extensive nuance in each discussion. Find a topic of interest to you in our categories below!</p>
 
@@ -66,154 +132,580 @@
           
         </ul>
       </nav>
+
+    
+    <div class="sidebar-section baseof-trending">
+      <h2>Trending Articles</h2>
+      <ul>
+        
+          <li><a href="/posts/the-hidden-cost-of-always-being-right/">The Hidden Cost of Always Being Right</a></li>
+        
+          <li><a href="/posts/the-social-security-fairness-act-was-never-about-fairness/">The Social Security Fairness Act Was Never About Fairness</a></li>
+        
+          <li><a href="/posts/stock-buybacks-are-a-scambut-not-for-the-reason-you-think/">Stock Buybacks Are a Scam—But Not for the Reason You Think</a></li>
+        
+      </ul>
+    </div>
+
+    
+    <div class="sidebar-section baseof-random">
+      <h2>Random Articles</h2>
+      <ul id="random-articles-baseof">
+        
+          <li class="random-article-baseof" style="display: none;">
+            <a href="/posts/the-hidden-cost-of-always-being-right/">The Hidden Cost of Always Being Right</a>
+          </li>
+        
+          <li class="random-article-baseof" style="display: none;">
+            <a href="/posts/the-social-security-fairness-act-was-never-about-fairness/">The Social Security Fairness Act Was Never About Fairness</a>
+          </li>
+        
+          <li class="random-article-baseof" style="display: none;">
+            <a href="/posts/stock-buybacks-are-a-scambut-not-for-the-reason-you-think/">Stock Buybacks Are a Scam—But Not for the Reason You Think</a>
+          </li>
+        
+          <li class="random-article-baseof" style="display: none;">
+            <a href="/posts/panasonics-big-bet-on-kansasa-win-or-a-ticking-time-bomb/">Panasonics Big Bet on Kansas–A Win or a Ticking Time Bomb</a>
+          </li>
+        
+          <li class="random-article-baseof" style="display: none;">
+            <a href="/posts/is-pramila-jayapal-good-for-washington/">Is Pramila Jayapal Good for Washington</a>
+          </li>
+        
+          <li class="random-article-baseof" style="display: none;">
+            <a href="/posts/one-of-the-nine-ways-big-business-avoids-billions-in-taxes-legally/">One of the Nine Ways Big Business Avoids Billions in Taxes Legally</a>
+          </li>
+        
+          <li class="random-article-baseof" style="display: none;">
+            <a href="/posts/mathematics-and-physics-of-light-introduction-to-light/">Mathematics and Physics of Light: Introduction to Light</a>
+          </li>
+        
+          <li class="random-article-baseof" style="display: none;">
+            <a href="/posts/godot-4.3-using-colorrect-for-simple-2d-backgrounds/">Godot 4.3 Using ColorRect for Simple 2D Backgrounds</a>
+          </li>
+        
+          <li class="random-article-baseof" style="display: none;">
+            <a href="/posts/breaking-down-interpolation-lerp/">Breaking Down Interpolation (Lerp)</a>
+          </li>
+        
+          <li class="random-article-baseof" style="display: none;">
+            <a href="/posts/godot-43-creating-ui-elements/">Godot 43 Creating UI Elements</a>
+          </li>
+        
+          <li class="random-article-baseof" style="display: none;">
+            <a href="/posts/godot-43-adding-basic-input/">Godot 4.3 Adding Basic Keyboard Input</a>
+          </li>
+        
+          <li class="random-article-baseof" style="display: none;">
+            <a href="/posts/godot-43-setting-up-a-3d-project-and-skybox-in-visual-studio-code/">Godot 4.3 Set Up a 3D Project, Skybox &amp; Import Your Custom 3d Model from VSC</a>
+          </li>
+        
+          <li class="random-article-baseof" style="display: none;">
+            <a href="/posts/using-python-3-to-convert-webp-to-png/">How to Convert WEBP Files to PNG Using VS Code in Python</a>
+          </li>
+        
+          <li class="random-article-baseof" style="display: none;">
+            <a href="/posts/create-custom-3d-assets-using-ai-mesh-and-blender-for-godot/">Create Custom 3D Assets Using AI Meshy and Blender for Godot</a>
+          </li>
+        
+          <li class="random-article-baseof" style="display: none;">
+            <a href="/posts/godot-43-understanding-parent-and-child-relationships-through-an-entity-system/">Godot 4.3 Understanding Parent and Child Relationships Through an Entity System</a>
+          </li>
+        
+          <li class="random-article-baseof" style="display: none;">
+            <a href="/posts/godot-43-moving-get_properties-to-a-separate-class/">Godot 4.3 Moving Get_properties to a Separate Class</a>
+          </li>
+        
+          <li class="random-article-baseof" style="display: none;">
+            <a href="/posts/godot-43-expanding-object-compatibility-beyond-nodes/">Godot 4.3 Expanding Object Compatibility Beyond Nodes</a>
+          </li>
+        
+          <li class="random-article-baseof" style="display: none;">
+            <a href="/posts/godot-43-basics/">Godot 4.3 Basics</a>
+          </li>
+        
+          <li class="random-article-baseof" style="display: none;">
+            <a href="/posts/setting-up-godot-43-for-visual-studio-code/">Setting up Godot 4.3 for Visual Studio Code</a>
+          </li>
+        
+      </ul>
     </header>
     <main class="app-container">
       
-  <article>
-    <h1>Programming</h1>
-    
-    <ul class="posts-list">
-      
-        <li class="posts-list-item">
-          <a class="posts-list-item-title" href="/posts/godot-4.3-using-colorrect-for-simple-2d-backgrounds/">Godot 4.3 Using ColorRect for Simple 2D Backgrounds</a>
-          <span class="posts-list-item-description">
-            <svg class="icon icon-calendar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><title>calendar</title><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
-            Feb 19, 2025
-            <span class="posts-list-item-separator">-</span>
-            <svg class="icon icon-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><title>clock</title><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
-            4 min read
-          </span>
-        </li>
-      
-        <li class="posts-list-item">
-          <a class="posts-list-item-title" href="/posts/breaking-down-interpolation-lerp/">Breaking Down Interpolation (Lerp)</a>
-          <span class="posts-list-item-description">
-            <svg class="icon icon-calendar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><title>calendar</title><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
-            Feb 19, 2025
-            <span class="posts-list-item-separator">-</span>
-            <svg class="icon icon-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><title>clock</title><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
-            6 min read
-          </span>
-        </li>
-      
-        <li class="posts-list-item">
-          <a class="posts-list-item-title" href="/posts/godot-43-creating-ui-elements/">Godot 43 Creating UI Elements</a>
-          <span class="posts-list-item-description">
-            <svg class="icon icon-calendar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><title>calendar</title><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
-            Feb 16, 2025
-            <span class="posts-list-item-separator">-</span>
-            <svg class="icon icon-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><title>clock</title><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
-            3 min read
-          </span>
-        </li>
-      
-        <li class="posts-list-item">
-          <a class="posts-list-item-title" href="/posts/godot-43-adding-basic-input/">Godot 4.3 Adding Basic Keyboard Input</a>
-          <span class="posts-list-item-description">
-            <svg class="icon icon-calendar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><title>calendar</title><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
-            Feb 16, 2025
-            <span class="posts-list-item-separator">-</span>
-            <svg class="icon icon-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><title>clock</title><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
-            7 min read
-          </span>
-        </li>
-      
-        <li class="posts-list-item">
-          <a class="posts-list-item-title" href="/posts/godot-43-setting-up-a-3d-project-and-skybox-in-visual-studio-code/">Godot 4.3 Set Up a 3D Project, Skybox &amp; Import Your Custom 3d Model from VSC</a>
-          <span class="posts-list-item-description">
-            <svg class="icon icon-calendar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><title>calendar</title><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
-            Feb 15, 2025
-            <span class="posts-list-item-separator">-</span>
-            <svg class="icon icon-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><title>clock</title><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
-            11 min read
-          </span>
-        </li>
-      
-        <li class="posts-list-item">
-          <a class="posts-list-item-title" href="/posts/using-python-3-to-convert-webp-to-png/">How to Convert WEBP Files to PNG Using VS Code in Python</a>
-          <span class="posts-list-item-description">
-            <svg class="icon icon-calendar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><title>calendar</title><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
-            Feb 15, 2025
-            <span class="posts-list-item-separator">-</span>
-            <svg class="icon icon-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><title>clock</title><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
-            3 min read
-          </span>
-        </li>
-      
-        <li class="posts-list-item">
-          <a class="posts-list-item-title" href="/posts/godot-43-understanding-parent-and-child-relationships-through-an-entity-system/">Godot 4.3 Understanding Parent and Child Relationships Through an Entity System</a>
-          <span class="posts-list-item-description">
-            <svg class="icon icon-calendar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><title>calendar</title><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
-            Feb 15, 2025
-            <span class="posts-list-item-separator">-</span>
-            <svg class="icon icon-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><title>clock</title><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
-            7 min read
-          </span>
-        </li>
-      
-        <li class="posts-list-item">
-          <a class="posts-list-item-title" href="/posts/godot-43-moving-get_properties-to-a-separate-class/">Godot 4.3 Moving Get_properties to a Separate Class</a>
-          <span class="posts-list-item-description">
-            <svg class="icon icon-calendar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><title>calendar</title><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
-            Feb 15, 2025
-            <span class="posts-list-item-separator">-</span>
-            <svg class="icon icon-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><title>clock</title><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
-            4 min read
-          </span>
-        </li>
-      
-        <li class="posts-list-item">
-          <a class="posts-list-item-title" href="/posts/godot-43-expanding-object-compatibility-beyond-nodes/">Godot 4.3 Expanding Object Compatibility Beyond Nodes</a>
-          <span class="posts-list-item-description">
-            <svg class="icon icon-calendar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><title>calendar</title><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
-            Feb 15, 2025
-            <span class="posts-list-item-separator">-</span>
-            <svg class="icon icon-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><title>clock</title><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
-            6 min read
-          </span>
-        </li>
-      
-        <li class="posts-list-item">
-          <a class="posts-list-item-title" href="/posts/godot-43-basics/">Godot 4.3 Basics</a>
-          <span class="posts-list-item-description">
-            <svg class="icon icon-calendar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><title>calendar</title><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
-            Feb 9, 2025
-            <span class="posts-list-item-separator">-</span>
-            <svg class="icon icon-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><title>clock</title><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
-            21 min read
-          </span>
-        </li>
-      
-    </ul>
-    
 
-<ul class="pagination">
   
   
-  <li class="page-item active">
-    <a class="page-link" href="/categories/programming/">
-      1
-    </a>
-  </li>
-  
-  <li class="page-item">
-    <a class="page-link" href="/categories/programming/page/2/">
-      2
-    </a>
-  </li>
+
   
   
-  <li class="page-item">
-    <a class="page-link" href="/categories/programming/page/2/">
-      <svg class="icon icon-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><title>arrow-right</title><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-    </a>
-  </li>
+
+
+
+<div class="content-wrapper">
   
+  
+  <section class="grid-layout">
+    
+      
+        <article class="grid-item">
+          <a href="/posts/godot-4.3-using-colorrect-for-simple-2d-backgrounds/">
+            
+            
+              <img class="grid-image" src="/images/GodotColorRects.jpg" alt="Godot 4.3 Using ColorRect for Simple 2D Backgrounds">
+            
+
+            
+            <h2 class="grid-title">Godot 4.3 Using ColorRect for Simple 2D Backgrounds</h2>
+          </a>
+
+          
+          <span class="grid-meta">
+            Feb 19, 2025 • 4 min read
+            
+              <span class="category-tag">Programming</span>
+            
+          </span>
+
+          
+          <p class="grid-summary"><p>This paper presents an efficient method for procedurally generating and interpolating a 2D background color in <strong>Godot 4.3</strong> using <strong>GDScript</strong>. The implementation relies entirely on scripting, eliminating the need for manual adjustments in the Godot editor. By leveraging <strong>linear interpolation (LERP)</strong>, the system smoothly transitions between predefined color values over a fixed duration, ensuring a seamless visual experience. This approach is particularly beneficial for procedurally generated environments, menu screens, and dynamic aesthetic modifications in 2D games.</p></p>
+
+        </article>
+      
+        <article class="grid-item">
+          <a href="/posts/breaking-down-interpolation-lerp/">
+            
+            
+              <img class="grid-image" src="/images/interpolation.jpg" alt="Breaking Down Interpolation (Lerp)">
+            
+
+            
+            <h2 class="grid-title">Breaking Down Interpolation (Lerp)</h2>
+          </a>
+
+          
+          <span class="grid-meta">
+            Feb 19, 2025 • 6 min read
+            
+              <span class="category-tag">Programming</span>
+            
+          </span>
+
+          
+          <p class="grid-summary"><h3 id="what-is-interpolation-lerpabt"><strong>What is Interpolation (<em>Lerp(A,B,t)</em>)?</strong></h3>
+<p>Interpolation is a way to estimate values between two known points. Think of it like filling in the gaps between two numbers, positions, or colors smoothly instead of jumping straight from one to the other.</p>
+<p>Another way of interpreting interpolation is to try, <strong>&ldquo;guessing the values in between two known points.&rdquo;</strong> If you have two points on a graph, interpolation helps you estimate what lies between them based on patterns.</p></p>
+
+        </article>
+      
+        <article class="grid-item">
+          <a href="/posts/godot-43-creating-ui-elements/">
+            
+            
+              <img class="grid-image" src="/images/Godot43UI.jpg" alt="Godot 43 Creating UI Elements">
+            
+
+            
+            <h2 class="grid-title">Godot 43 Creating UI Elements</h2>
+          </a>
+
+          
+          <span class="grid-meta">
+            Feb 16, 2025 • 3 min read
+            
+              <span class="category-tag">Programming</span>
+            
+          </span>
+
+          
+          <p class="grid-summary"><p>If you’re coding exclusively in <strong>Visual Studio Code (VSC)</strong> and developing a game in <strong>Godot</strong>, you’ll need to create and manage <strong>UI elements</strong> like <strong>Labels, Buttons, Health Bars, and Score Counters</strong> entirely through GDScript. This guide will walk you through setting up a fully <strong>script-driven UI system</strong>, ensuring it scales properly and remains organized.</p>
+<h2 id="1-setting-up-ui-elements-with-code"><strong>1. Setting Up UI Elements with Code</strong></h2>
+<p>Since we&rsquo;re not using the scene editor, we must instantiate UI elements programmatically. UI nodes in Godot fall under the <strong>Control</strong> class and include elements like:</p></p>
+
+        </article>
+      
+        <article class="grid-item">
+          <a href="/posts/godot-43-adding-basic-input/">
+            
+            
+              <img class="grid-image" src="/images/GodotBasicInput.jpg" alt="Godot 4.3 Adding Basic Keyboard Input">
+            
+
+            
+            <h2 class="grid-title">Godot 4.3 Adding Basic Keyboard Input</h2>
+          </a>
+
+          
+          <span class="grid-meta">
+            Feb 16, 2025 • 7 min read
+            
+              <span class="category-tag">Programming</span>
+            
+          </span>
+
+          
+          <p class="grid-summary"><p>Now that we’ve successfully set up a <strong>3D scene</strong>, imported a <strong>custom 3D model</strong>, and made it <strong>rotate</strong>, it&rsquo;s time to <strong>add user input</strong>. In this guide, we’ll modify our script so that <strong>pressing the spacebar makes the model jump</strong>.</p>
+<hr>
+<h2 id="final-code-structure"><strong>Final Code Structure</strong></h2>
+<pre tabindex="0"><code>Project/
+├── Models/
+│   └── 000_Snowpuff.glb   # Custom 3D Model
+├── Scripts/
+│   ├── main.gd       # Root scene script
+│   └── skybox.gd     # Skybox configuration
+├── Textures/
+│   └── default_sky.hdr  # HDRI skybox texture
+└── project.godot
+</code></pre><hr>
+<h2 id="1-understanding-input-in-godot-43"><strong>1. Understanding Input in Godot 4.3</strong></h2>
+<p>Before writing code, let&rsquo;s discuss <strong>how Godot handles input</strong>.</p></p>
+
+        </article>
+      
+        <article class="grid-item">
+          <a href="/posts/godot-43-setting-up-a-3d-project-and-skybox-in-visual-studio-code/">
+            
+            
+              <img class="grid-image" src="/images/skybox.jpg" alt="Godot 4.3 Set Up a 3D Project, Skybox &amp; Import Your Custom 3d Model from VSC">
+            
+
+            
+            <h2 class="grid-title">Godot 4.3 Set Up a 3D Project, Skybox &amp; Import Your Custom 3d Model from VSC</h2>
+          </a>
+
+          
+          <span class="grid-meta">
+            Feb 15, 2025 • 11 min read
+            
+              <span class="category-tag">Programming</span>
+            
+          </span>
+
+          
+          <p class="grid-summary"><p>This guide teaches you how to create a <strong>3D scene programmatically</strong> in Godot 4.3, complete with a <strong>custom skybox</strong>, using only code (no editor setup). We’ll explain core concepts like <code>WorldEnvironment</code>, <code>Camera3D</code>, and <code>SkyMaterial.</code></p>
+<h2 id="final-code-structure"><strong>Final Code Structure</strong></h2>
+<pre tabindex="0"><code>Project/
+├── scripts/
+│   ├── main.gd       # Root scene script
+│   └── skybox.gd     # Skybox configuration
+└── textures/
+    └── default_sky.hdr  # HDRI skybox texture
+</code></pre><hr>
+<h2 id="1-setting-up-the-main-scene-maingd"><strong>1. Setting Up the Main Scene (<code>main.gd</code>)</strong></h2>
+<h3 id="-code">🔹 <strong>Code</strong></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-gdscript" data-lang="gdscript"><span style="display:flex;"><span><span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">Node3D</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">_ready</span>():
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># 1. Configure camera</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">var</span> camera <span style="color:#f92672">=</span> <span style="color:#a6e22e">Camera3D</span><span style="color:#f92672">.</span><span style="color:#a6e22e">new</span>()
+</span></span><span style="display:flex;"><span>    camera<span style="color:#f92672">.</span>position <span style="color:#f92672">=</span> <span style="color:#a6e22e">Vector3</span>(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">3</span>)  <span style="color:#75715e"># Position (X, Y, Z)</span>
+</span></span><span style="display:flex;"><span>    camera<span style="color:#f92672">.</span><span style="color:#a6e22e">look_at</span>(<span style="color:#a6e22e">Vector3</span><span style="color:#f92672">.</span>ZERO)        <span style="color:#75715e"># Look at world origin</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">add_child</span>(camera)
+</span></span><span style="display:flex;"><span>    camera<span style="color:#f92672">.</span><span style="color:#a6e22e">make_current</span>()  <span style="color:#75715e"># Activate this camera</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># 2. Add skybox</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">var</span> skybox <span style="color:#f92672">=</span> load(<span style="color:#e6db74">&#34;res://Scripts/skybox.gd&#34;</span>)<span style="color:#f92672">.</span><span style="color:#a6e22e">new</span>()
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">add_child</span>(skybox)
+</span></span></code></pre></div><h3 id="-explanation">🔹 <strong>Explanation</strong></h3>
+<ol>
+<li>
+<p><strong>Why We Need a Camera</strong>:</p></p>
+
+        </article>
+      
+        <article class="grid-item">
+          <a href="/posts/using-python-3-to-convert-webp-to-png/">
+            
+            
+              <img class="grid-image" src="/images/webptopng.jpg" alt="How to Convert WEBP Files to PNG Using VS Code in Python">
+            
+
+            
+            <h2 class="grid-title">How to Convert WEBP Files to PNG Using VS Code in Python</h2>
+          </a>
+
+          
+          <span class="grid-meta">
+            Feb 15, 2025 • 3 min read
+            
+              <span class="category-tag">Programming</span>
+            
+          </span>
+
+          
+          <p class="grid-summary"><p>If you have a set of <code>.webp</code> images that need to be converted to <code>.png</code>, Python makes the process simple and efficient. In this guide, I’ll walk you through how to convert WebP files to PNG using <strong>Visual Studio Code (VS Code)</strong> and Python.</p>
+<h2 id="prerequisites">Prerequisites</h2>
+<p>Before we begin, ensure you have the following:</p>
+<ol>
+<li>
+<p><strong>Python Installed</strong><br>
+If you don’t have Python installed, download it from <a href="https://www.python.org/">python.org</a> and install it.</p>
+</li>
+<li>
+<p><strong>VS Code Installed</strong><br>
+Download and install <strong>Visual Studio Code</strong> from <a href="https://code.visualstudio.com/">code.visualstudio.com</a>.</p></p>
+
+        </article>
+      
+        <article class="grid-item">
+          <a href="/posts/godot-43-understanding-parent-and-child-relationships-through-an-entity-system/">
+            
+            
+              <img class="grid-image" src="/images/GodotParentsChildren.jpg" alt="Godot 4.3 Understanding Parent and Child Relationships Through an Entity System">
+            
+
+            
+            <h2 class="grid-title">Godot 4.3 Understanding Parent and Child Relationships Through an Entity System</h2>
+          </a>
+
+          
+          <span class="grid-meta">
+            Feb 15, 2025 • 7 min read
+            
+              <span class="category-tag">Programming</span>
+            
+          </span>
+
+          
+          <p class="grid-summary"><p>In our previous section, we introduced <strong>custom classes</strong> in Godot by moving the <code>get_properties()</code> function into its own dedicated class, <code>ObjectAnalyzer</code>. This helped us keep <code>main.gd</code> clean while improving code organization.</p>
+<p>Now, we’re ready to take a big step forward:  <strong>understanding parent and child relationships in Godot</strong>. This will serve as the foundation for <strong>inheritance</strong> — a key concept in game development that allows us to structure our projects efficiently.</p></p>
+
+        </article>
+      
+        <article class="grid-item">
+          <a href="/posts/godot-43-moving-get_properties-to-a-separate-class/">
+            
+            
+              <img class="grid-image" src="/images/GodotMovingClass.jpg" alt="Godot 4.3 Moving Get_properties to a Separate Class">
+            
+
+            
+            <h2 class="grid-title">Godot 4.3 Moving Get_properties to a Separate Class</h2>
+          </a>
+
+          
+          <span class="grid-meta">
+            Feb 15, 2025 • 4 min read
+            
+              <span class="category-tag">Programming</span>
+            
+          </span>
+
+          
+          <p class="grid-summary"><p>So far, we’ve implemented a powerful object analysis system that can dynamically inspect and categorize both <strong>node-based and non-node objects</strong> in Godot. However, keeping all this logic inside <code>main.gd</code> can <strong>clutter</strong> the script, making it harder to maintain and expand.</p>
+<p>To improve  <strong>code organization</strong>, we’ll move the <code>get_properties()</code> function into its own dedicated class. This will:</p>
+<ul>
+<li><strong>Keep <code>main.gd</code> clean and focused</strong> on high-level game logic.</li>
+<li><strong>Make <code>get_properties()</code> reusable</strong> across different parts of the project.</li>
+<li><strong>Encourage modular programming</strong> , making it easier to expand in the future.</li>
 </ul>
+<hr>
+<h2 id="step-1-creating-a-new-script-for-object-analysis"><strong>Step 1: Creating a New Script for Object Analysis</strong></h2>
+<p>In  <strong>Visual Studio Code</strong>, we will create a new script to handle object analysis separately.</p></p>
+
+        </article>
+      
+        <article class="grid-item">
+          <a href="/posts/godot-43-expanding-object-compatibility-beyond-nodes/">
+            
+            
+              <img class="grid-image" src="/images/godotobjectcompatibility.jpg" alt="Godot 4.3 Expanding Object Compatibility Beyond Nodes">
+            
+
+            
+            <h2 class="grid-title">Godot 4.3 Expanding Object Compatibility Beyond Nodes</h2>
+          </a>
+
+          
+          <span class="grid-meta">
+            Feb 15, 2025 • 6 min read
+            
+              <span class="category-tag">Programming</span>
+            
+          </span>
+
+          
+          <p class="grid-summary"><p>In the previous section, we explored analyzing nodes in Godot using <code>get_property_list()</code>. This gave us the ability to inspect a node’s properties and their respective types. However, in Godot, not all objects are nodes. Many essential data types—such as <code>Vector2</code>, <code>Color</code>, <code>Dictionary</code>, and <code>Array</code>—do not have <code>get_property_list()</code>, which means treating them the same way as nodes would lead to errors.</p>
+<p>This section builds upon our previous approach by expanding compatibility to all Godot objects. We aim to ensure that both node-based and non-node objects can be <strong>inspected, categorized, and returned in a structured format</strong> for further use.</p></p>
+
+        </article>
+      
+        <article class="grid-item">
+          <a href="/posts/godot-43-basics/">
+            
+            
+              <img class="grid-image" src="/images/learngodotbasics.jpg" alt="Godot 4.3 Basics">
+            
+
+            
+            <h2 class="grid-title">Godot 4.3 Basics</h2>
+          </a>
+
+          
+          <span class="grid-meta">
+            Feb 9, 2025 • 21 min read
+            
+              <span class="category-tag">Programming</span>
+            
+          </span>
+
+          
+          <p class="grid-summary"><p>In VSC let&rsquo;s make a new folder in our root directory called Scripts, and then make a new file inside the Sripts folder called main.gd. Once this is made we will go into the Godot Engine and drag and drop the newly made file into the main scenes script found on the right side</p>
+<p><img src="/images/Godot-43-Basics/1739163742328.png" alt="Godot Main Scene Inspector"></p>
+<h1 id="extends-keyword">Extends keyword</h1>
+<p>To know what to extend, match your script to the type of node it’s attached to or the functionality you need. In the case of the main.tscn because we made a Node2D to start, we will <code>extend Node2D</code>.</p></p>
+
+        </article>
+      
+        <article class="grid-item">
+          <a href="/posts/setting-up-godot-43-for-visual-studio-code/">
+            
+            
+              <img class="grid-image" src="/images/settingupvscforgodot.jpg" alt="Setting up Godot 4.3 for Visual Studio Code">
+            
+
+            
+            <h2 class="grid-title">Setting up Godot 4.3 for Visual Studio Code</h2>
+          </a>
+
+          
+          <span class="grid-meta">
+            Feb 9, 2025 • 4 min read
+            
+              <span class="category-tag">Programming</span>
+            
+          </span>
+
+          
+          <p class="grid-summary"><p><strong>NOTE:</strong> These articles are written using Windows</p>
+<p><strong>Requirements</strong>:</p>
+<ul>
+<li><em>Godot 4.3</em> (<a href="">https://godotengine.org</a>)</li>
+<li><em>Visual Studio Code</em> (VSC) (<a href="">https://code.visualstudio.com</a>)</li>
+<li>VSC Extension <em>godot-tools</em>
+<ul>
+<li>In VSC go to Extensions (ctrl+shift+x), and search and install <em>godot-tools</em></li>
+</ul>
+</li>
+</ul>
+<p><strong>Suggested Requirments:</strong></p>
+<ul>
+<li>VSC Extension <em>C/C++</em>
+<ul>
+<li>In VSC go to Extensions (ctrl+shift+x), and search and install <em>C/C++</em></li>
+</ul>
+</li>
+</ul>
+<h3 id="make-your-project"><strong>Make your project:</strong></h3>
+<p>Launch the <code>Godot_v4.3-stable_win64.exe</code> and this will bring up the below window. If this is your first time launching the <em>Godot Engine - Project Manager</em>, your project list will likely be empty.</p></p>
+
+        </article>
+      
+    
+  </section>
+</div>
+
+
+  
+  <aside class="sidebar">
+    <div class="sidebar-section sidebar-trending">
+      <h2>Trending Articles</h2>
+      <ul>
+        
+          <li><a href="/posts/the-hidden-cost-of-always-being-right/">The Hidden Cost of Always Being Right</a></li>
+        
+          <li><a href="/posts/the-social-security-fairness-act-was-never-about-fairness/">The Social Security Fairness Act Was Never About Fairness</a></li>
+        
+          <li><a href="/posts/stock-buybacks-are-a-scambut-not-for-the-reason-you-think/">Stock Buybacks Are a Scam—But Not for the Reason You Think</a></li>
+        
+      </ul>
+    </div>
+
+    <div class="sidebar-section sidebar-random">
+      <h2>Random Articles</h2>
+      <ul id="random-articles">
+        
+          <li class="random-article" style="display: none;">
+            <a href="/posts/the-hidden-cost-of-always-being-right/">The Hidden Cost of Always Being Right</a>
+          </li>
+        
+          <li class="random-article" style="display: none;">
+            <a href="/posts/the-social-security-fairness-act-was-never-about-fairness/">The Social Security Fairness Act Was Never About Fairness</a>
+          </li>
+        
+          <li class="random-article" style="display: none;">
+            <a href="/posts/stock-buybacks-are-a-scambut-not-for-the-reason-you-think/">Stock Buybacks Are a Scam—But Not for the Reason You Think</a>
+          </li>
+        
+          <li class="random-article" style="display: none;">
+            <a href="/posts/panasonics-big-bet-on-kansasa-win-or-a-ticking-time-bomb/">Panasonics Big Bet on Kansas–A Win or a Ticking Time Bomb</a>
+          </li>
+        
+          <li class="random-article" style="display: none;">
+            <a href="/posts/is-pramila-jayapal-good-for-washington/">Is Pramila Jayapal Good for Washington</a>
+          </li>
+        
+          <li class="random-article" style="display: none;">
+            <a href="/posts/one-of-the-nine-ways-big-business-avoids-billions-in-taxes-legally/">One of the Nine Ways Big Business Avoids Billions in Taxes Legally</a>
+          </li>
+        
+          <li class="random-article" style="display: none;">
+            <a href="/posts/mathematics-and-physics-of-light-introduction-to-light/">Mathematics and Physics of Light: Introduction to Light</a>
+          </li>
+        
+          <li class="random-article" style="display: none;">
+            <a href="/posts/godot-4.3-using-colorrect-for-simple-2d-backgrounds/">Godot 4.3 Using ColorRect for Simple 2D Backgrounds</a>
+          </li>
+        
+          <li class="random-article" style="display: none;">
+            <a href="/posts/breaking-down-interpolation-lerp/">Breaking Down Interpolation (Lerp)</a>
+          </li>
+        
+          <li class="random-article" style="display: none;">
+            <a href="/posts/godot-43-creating-ui-elements/">Godot 43 Creating UI Elements</a>
+          </li>
+        
+          <li class="random-article" style="display: none;">
+            <a href="/posts/godot-43-adding-basic-input/">Godot 4.3 Adding Basic Keyboard Input</a>
+          </li>
+        
+          <li class="random-article" style="display: none;">
+            <a href="/posts/godot-43-setting-up-a-3d-project-and-skybox-in-visual-studio-code/">Godot 4.3 Set Up a 3D Project, Skybox &amp; Import Your Custom 3d Model from VSC</a>
+          </li>
+        
+          <li class="random-article" style="display: none;">
+            <a href="/posts/using-python-3-to-convert-webp-to-png/">How to Convert WEBP Files to PNG Using VS Code in Python</a>
+          </li>
+        
+          <li class="random-article" style="display: none;">
+            <a href="/posts/create-custom-3d-assets-using-ai-mesh-and-blender-for-godot/">Create Custom 3D Assets Using AI Meshy and Blender for Godot</a>
+          </li>
+        
+          <li class="random-article" style="display: none;">
+            <a href="/posts/godot-43-understanding-parent-and-child-relationships-through-an-entity-system/">Godot 4.3 Understanding Parent and Child Relationships Through an Entity System</a>
+          </li>
+        
+          <li class="random-article" style="display: none;">
+            <a href="/posts/godot-43-moving-get_properties-to-a-separate-class/">Godot 4.3 Moving Get_properties to a Separate Class</a>
+          </li>
+        
+          <li class="random-article" style="display: none;">
+            <a href="/posts/godot-43-expanding-object-compatibility-beyond-nodes/">Godot 4.3 Expanding Object Compatibility Beyond Nodes</a>
+          </li>
+        
+          <li class="random-article" style="display: none;">
+            <a href="/posts/godot-43-basics/">Godot 4.3 Basics</a>
+          </li>
+        
+          <li class="random-article" style="display: none;">
+            <a href="/posts/setting-up-godot-43-for-visual-studio-code/">Setting up Godot 4.3 for Visual Studio Code</a>
+          </li>
+        
+      </ul>
+    </div>
+  </aside>
 
 
 
-  </article>
 
     </main>
     <script src="/js/theme-toggle.js"></script>

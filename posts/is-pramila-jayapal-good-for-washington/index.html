@@ -24,21 +24,21 @@
     <meta charset="utf-8" />
     <meta name="generator" content="Hugo 0.143.1">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="author" content="John Doe" />
+    <meta name="author" content="Joshua Parsons" />
     <meta name="description" content="" />
-    <link rel="stylesheet" href="/css/main.min.7994f9550bb78a616adb8a2695451298fcee6c2d6765a3f73fc74fd0f0eeff48.css" />
+    <link rel="stylesheet" href="/css/main.min.22a892bf8b03d571a11cc78d5f3383574a10fcc38da9f834d108f44635bf957e.css" />
     
 
     
     
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Is Pramila Jayapal Good for Washington">
-  <meta name="twitter:description" content="Is Pramila Jayapal Good For Washington Pramila Jayapal has positioned herself as a champion for progressive values, representing Washington’s 7th Congressional District with a strong stance on healthcare, immigration, and social justice. She’s an outspoken critic of Donald Trump, frequently challenging his policies on Medicaid cuts, federal funding freezes, and immigration enforcement. But beyond the rhetoric, how effective is she? Is she truly fighting for Washington’s best interests, or is she just another politician playing the game of influence and lobbying?">
+  <meta name="twitter:description" content="Pramila Jayapal has positioned herself as a champion for progressive values, representing Washington’s 7th Congressional District with a strong stance on healthcare, immigration, and social justice. She’s an outspoken critic of Donald Trump, frequently challenging his policies on Medicaid cuts, federal funding freezes, and immigration enforcement. But beyond the rhetoric, how effective is she? Is she truly fighting for Washington’s best interests, or is she just another politician playing the game of influence and lobbying?">
 
     <meta property="og:url" content="http://localhost:1313/posts/is-pramila-jayapal-good-for-washington/">
   <meta property="og:site_name" content="Don&#39;t Watch, Listen">
   <meta property="og:title" content="Is Pramila Jayapal Good for Washington">
-  <meta property="og:description" content="Is Pramila Jayapal Good For Washington Pramila Jayapal has positioned herself as a champion for progressive values, representing Washington’s 7th Congressional District with a strong stance on healthcare, immigration, and social justice. She’s an outspoken critic of Donald Trump, frequently challenging his policies on Medicaid cuts, federal funding freezes, and immigration enforcement. But beyond the rhetoric, how effective is she? Is she truly fighting for Washington’s best interests, or is she just another politician playing the game of influence and lobbying?">
+  <meta property="og:description" content="Pramila Jayapal has positioned herself as a champion for progressive values, representing Washington’s 7th Congressional District with a strong stance on healthcare, immigration, and social justice. She’s an outspoken critic of Donald Trump, frequently challenging his policies on Medicaid cuts, federal funding freezes, and immigration enforcement. But beyond the rhetoric, how effective is she? Is she truly fighting for Washington’s best interests, or is she just another politician playing the game of influence and lobbying?">
   <meta property="og:locale" content="en_us">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
@@ -47,10 +47,51 @@
 
 
   </head>
+
   <body>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        let posts = document.querySelectorAll(".random-post");
+        let totalPosts = posts.length;
+        let numToShow = Math.min(3, totalPosts);
+        let chosenIndexes = new Set();
+    
+        while (chosenIndexes.size < numToShow) {
+          let randIndex = Math.floor(Math.random() * totalPosts);
+          chosenIndexes.add(randIndex);
+        }
+    
+        chosenIndexes.forEach(index => {
+          posts[index].style.display = "block";
+        });
+      });
+    </script>
+
+    <script>
+      function toggleSidebarSections() {
+        let trendingSection = document.querySelector('.baseof-trending');
+        let randomSection = document.querySelector('.baseof-random');
+        let screenWidth = window.innerWidth;
+    
+        if (screenWidth >= 1650) {
+          trendingSection.style.display = "none";
+          randomSection.style.display = "none";
+        } else {
+          trendingSection.style.display = "block";
+          randomSection.style.display = "block";
+        }
+      }
+    
+      
+      document.addEventListener("DOMContentLoaded", toggleSidebarSections);
+      window.addEventListener("resize", toggleSidebarSections);
+    </script>
+    
+    
     <button id="styleToggle" class="style-toggle"></button>
     <header class="app-header">
-      <a href="/"><img class="app-header-avatar" src="/images/avatar.png" alt="John Doe" /></a>
+      <a href="/"><img class="app-header-avatar" src="/images/avatar.png" alt="Joshua Parsons" /></a>
       <span class="app-header-title">Don&#39;t Watch, Listen</span>
       <p>Don&#39;t Watch, Listen&#39;s Blog details extensive nuance in each discussion. Find a topic of interest to you in our categories below!</p>
 
@@ -70,12 +111,40 @@
           
         </ul>
       </nav>
+
+    
+    <div class="sidebar-section baseof-trending">
+      <h2>Trending Articles</h2>
+      <ul>
+        
+          <li><a href="/posts/the-hidden-cost-of-always-being-right/">The Hidden Cost of Always Being Right</a></li>
+        
+          <li><a href="/posts/the-social-security-fairness-act-was-never-about-fairness/">The Social Security Fairness Act (SSFA) Was Never About Fairness</a></li>
+        
+          <li><a href="/posts/stock-buybacks-are-a-scambut-not-for-the-reason-you-think/">Stock Buybacks Are a Scam—But Not for the Reason You Think</a></li>
+        
+      </ul>
+    </div>
+
+    
+    <div class="sidebar-section baseof-random">
+      <h2>Random Articles</h2>
+      <ul>
+        
+          <li><a href="/posts/breaking-down-interpolation-lerp/">Breaking Down Interpolation (Lerp)</a></li>
+        
+          <li><a href="/posts/setting-up-godot-43-for-visual-studio-code/">Setting up Godot 4.3 for Visual Studio Code</a></li>
+        
+          <li><a href="/posts/is-pramila-jayapal-good-for-washington/">Is Pramila Jayapal Good for Washington</a></li>
+        
+      </ul>
+    </div>
     </header>
     <main class="app-container">
       
   <article class="post">
     <header class="post-header">
-      <h1 class ="post-title">Is Pramila Jayapal Good for Washington</h1>
+      
       <div class="post-meta">
         <div>
           <svg class="icon icon-calendar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><title>calendar</title><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
@@ -87,13 +156,24 @@
         </div>
       </div>
     </header>
-    <div class="post-content">
-      <h1 id="is-pramila-jayapal-good-for-washington">Is Pramila Jayapal Good For Washington</h1>
-<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
-      <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/SUt7ReeMDDk?autoplay=0&amp;controls=1&amp;end=0&amp;loop=0&amp;mute=0&amp;start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"></iframe>
-    </div>
 
-<p>Pramila Jayapal has positioned herself as a champion for progressive values, representing Washington’s 7th Congressional District with a strong stance on healthcare, immigration, and social justice. She’s an outspoken critic of Donald Trump, frequently challenging his policies on Medicaid cuts, federal funding freezes, and immigration enforcement. But beyond the rhetoric, how effective is she? Is she truly fighting for Washington’s best interests, or is she just another politician playing the game of influence and lobbying?</p>
+    <div class="post-content">
+      
+
+      
+      <div class="post-video">
+        <iframe 
+          width="100%" 
+          height="315" 
+          src="https://www.youtube.com/embed/SUt7ReeMDDk?modestbranding=1&rel=0&iv_load_policy=3" 
+          frameborder="0" 
+          allowfullscreen>
+        </iframe>
+      </div>
+    
+
+  
+  <p>Pramila Jayapal has positioned herself as a champion for progressive values, representing Washington’s 7th Congressional District with a strong stance on healthcare, immigration, and social justice. She’s an outspoken critic of Donald Trump, frequently challenging his policies on Medicaid cuts, federal funding freezes, and immigration enforcement. But beyond the rhetoric, how effective is she? Is she truly fighting for Washington’s best interests, or is she just another politician playing the game of influence and lobbying?</p>
 <h2 id="jayapals-no-cuts-full-protection-fight-for-medicaid"><strong>Jayapal&rsquo;s no cuts, full protection fight for Medicaid:</strong></h2>
 <p>The House of Representatives recently reviewed a new budget proposing significant spending cuts, including approximately $880 billion from Medicaid; a program that provides health coverage to over 70 million Americans, serving primarily low-income individuals over the next decade. Experts warn that such cuts may strain state budgets and healthcare providers, potentially resulting in reduced services or increased costs for beneficiaries. While these cuts aim to finance $4.5 trillion in tax reductions and increased funding for defense and border security.</p>
 <p>Representative Pramila Jayapal introduced an amendment during the recent budget markup session aiming to protect Medicaid from proposed funding cuts. Specifically, her amendment sought to prevent the $880 billion reduction in Medicaid funding over the next decade, as outlined in the GOP budget proposal. ​</p>
@@ -144,7 +224,9 @@
 <p>Her stance on <strong>campaign finance reform</strong> is perhaps the least controversial. She is correct in stating that <strong>corporate influence corrupts politics</strong>, and she has walked the walk by <strong>rejecting dark money and corporate PACs.</strong> However, <strong>her alliance with labor unions and ideological organizations suggests that she still benefits from large, agenda-driven financial backers.</strong> If she truly wanted to <strong>eliminate undue influence in politics</strong>, would she be willing to apply the same restrictions to unions and activist groups that she demands for corporations? <strong>That remains to be seen.</strong></p>
 <p>At the end of the day, <strong>Pramila Jayapal is not a corrupt politician, but she is also not an effective one.</strong> Her unwillingness to compromise limits her ability to deliver real results. <strong>She fights for what she believes in, but she fights in a way that guarantees more political posturing than legislative success.</strong> While <strong>her heart is in the right place, her strategy leaves much to be desired.</strong> In politics, <strong>winning the moral argument is not enough—you have to win the legislative battle too.</strong> And for now, <strong>Jayapal&rsquo;s all-or-nothing approach makes her more of an activist than a dealmaker.</strong> Washington needs fighters, but it also needs <strong>leaders who know how to turn idealism into policy.</strong></p>
 
+
     </div>
+
     <div class="post-footer">
       
     </div>

@@ -24,9 +24,9 @@
     <meta charset="utf-8" />
     <meta name="generator" content="Hugo 0.143.1">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="author" content="John Doe" />
+    <meta name="author" content="Joshua Parsons" />
     <meta name="description" content="" />
-    <link rel="stylesheet" href="/css/main.min.7994f9550bb78a616adb8a2695451298fcee6c2d6765a3f73fc74fd0f0eeff48.css" />
+    <link rel="stylesheet" href="/css/main.min.c27bdbde9ad2ae9022125bc5e927509b9d793611b5af72ea993b2ffa7ec0b838.css" />
     <link rel="alternate" type="application/rss+xml" href="http://localhost:1313/categories/politics/index.xml" title="Don't Watch, Listen">
     
 
@@ -43,10 +43,76 @@
 
 
   </head>
+
   <body>
+    
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        let articles = document.querySelectorAll("#random-articles .random-article");
+        let totalArticles = articles.length;
+        let numToShow = Math.min(3, totalArticles);
+        let selectedIndexes = new Set();
+    
+        
+        while (selectedIndexes.size < numToShow) {
+          let randomIndex = Math.floor(Math.random() * totalArticles);
+          selectedIndexes.add(randomIndex);
+        }
+    
+        
+        selectedIndexes.forEach(index => {
+          articles[index].style.display = "block";
+        });
+      });
+    </script>
+    
+    <script>
+      function randomizeBaseofArticles() {
+        let articles = document.querySelectorAll("#random-articles-baseof .random-article-baseof");
+        let totalArticles = articles.length;
+        let numToShow = Math.min(3, totalArticles);
+        let selectedIndexes = new Set();
+    
+        
+        while (selectedIndexes.size < numToShow) {
+          let randomIndex = Math.floor(Math.random() * totalArticles);
+          selectedIndexes.add(randomIndex);
+        }
+    
+        
+        selectedIndexes.forEach(index => {
+          articles[index].style.display = "block";
+        });
+      }
+    
+      document.addEventListener("DOMContentLoaded", randomizeBaseofArticles);
+    </script>
+    
+    
+    <script>
+      function toggleSidebarSections() {
+        let trendingSection = document.querySelector('.baseof-trending');
+        let randomSection = document.querySelector('.baseof-random');
+        let screenWidth = window.innerWidth;
+    
+        if (screenWidth >= 1929) {
+          trendingSection.style.display = "none";
+          randomSection.style.display = "none";
+        } else {
+          trendingSection.style.display = "block";
+          randomSection.style.display = "block";
+        }
+      }
+    
+      
+      document.addEventListener("DOMContentLoaded", toggleSidebarSections);
+      window.addEventListener("resize", toggleSidebarSections);
+    </script>
+    
+    
     <button id="styleToggle" class="style-toggle"></button>
     <header class="app-header">
-      <a href="/"><img class="app-header-avatar" src="/images/avatar.png" alt="John Doe" /></a>
+      <a href="/"><img class="app-header-avatar" src="/images/avatar.png" alt="Joshua Parsons" /></a>
       <span class="app-header-title">Don&#39;t Watch, Listen</span>
       <p>Don&#39;t Watch, Listen&#39;s Blog details extensive nuance in each discussion. Find a topic of interest to you in our categories below!</p>
 
@@ -66,75 +132,389 @@
           
         </ul>
       </nav>
+
+    
+    <div class="sidebar-section baseof-trending">
+      <h2>Trending Articles</h2>
+      <ul>
+        
+          <li><a href="/posts/the-hidden-cost-of-always-being-right/">The Hidden Cost of Always Being Right</a></li>
+        
+          <li><a href="/posts/the-social-security-fairness-act-was-never-about-fairness/">The Social Security Fairness Act Was Never About Fairness</a></li>
+        
+          <li><a href="/posts/stock-buybacks-are-a-scambut-not-for-the-reason-you-think/">Stock Buybacks Are a Scam—But Not for the Reason You Think</a></li>
+        
+      </ul>
+    </div>
+
+    
+    <div class="sidebar-section baseof-random">
+      <h2>Random Articles</h2>
+      <ul id="random-articles-baseof">
+        
+          <li class="random-article-baseof" style="display: none;">
+            <a href="/posts/the-hidden-cost-of-always-being-right/">The Hidden Cost of Always Being Right</a>
+          </li>
+        
+          <li class="random-article-baseof" style="display: none;">
+            <a href="/posts/the-social-security-fairness-act-was-never-about-fairness/">The Social Security Fairness Act Was Never About Fairness</a>
+          </li>
+        
+          <li class="random-article-baseof" style="display: none;">
+            <a href="/posts/stock-buybacks-are-a-scambut-not-for-the-reason-you-think/">Stock Buybacks Are a Scam—But Not for the Reason You Think</a>
+          </li>
+        
+          <li class="random-article-baseof" style="display: none;">
+            <a href="/posts/panasonics-big-bet-on-kansasa-win-or-a-ticking-time-bomb/">Panasonics Big Bet on Kansas–A Win or a Ticking Time Bomb</a>
+          </li>
+        
+          <li class="random-article-baseof" style="display: none;">
+            <a href="/posts/is-pramila-jayapal-good-for-washington/">Is Pramila Jayapal Good for Washington</a>
+          </li>
+        
+          <li class="random-article-baseof" style="display: none;">
+            <a href="/posts/one-of-the-nine-ways-big-business-avoids-billions-in-taxes-legally/">One of the Nine Ways Big Business Avoids Billions in Taxes Legally</a>
+          </li>
+        
+          <li class="random-article-baseof" style="display: none;">
+            <a href="/posts/mathematics-and-physics-of-light-introduction-to-light/">Mathematics and Physics of Light: Introduction to Light</a>
+          </li>
+        
+          <li class="random-article-baseof" style="display: none;">
+            <a href="/posts/godot-4.3-using-colorrect-for-simple-2d-backgrounds/">Godot 4.3 Using ColorRect for Simple 2D Backgrounds</a>
+          </li>
+        
+          <li class="random-article-baseof" style="display: none;">
+            <a href="/posts/breaking-down-interpolation-lerp/">Breaking Down Interpolation (Lerp)</a>
+          </li>
+        
+          <li class="random-article-baseof" style="display: none;">
+            <a href="/posts/godot-43-creating-ui-elements/">Godot 43 Creating UI Elements</a>
+          </li>
+        
+          <li class="random-article-baseof" style="display: none;">
+            <a href="/posts/godot-43-adding-basic-input/">Godot 4.3 Adding Basic Keyboard Input</a>
+          </li>
+        
+          <li class="random-article-baseof" style="display: none;">
+            <a href="/posts/godot-43-setting-up-a-3d-project-and-skybox-in-visual-studio-code/">Godot 4.3 Set Up a 3D Project, Skybox &amp; Import Your Custom 3d Model from VSC</a>
+          </li>
+        
+          <li class="random-article-baseof" style="display: none;">
+            <a href="/posts/using-python-3-to-convert-webp-to-png/">How to Convert WEBP Files to PNG Using VS Code in Python</a>
+          </li>
+        
+          <li class="random-article-baseof" style="display: none;">
+            <a href="/posts/create-custom-3d-assets-using-ai-mesh-and-blender-for-godot/">Create Custom 3D Assets Using AI Meshy and Blender for Godot</a>
+          </li>
+        
+          <li class="random-article-baseof" style="display: none;">
+            <a href="/posts/godot-43-understanding-parent-and-child-relationships-through-an-entity-system/">Godot 4.3 Understanding Parent and Child Relationships Through an Entity System</a>
+          </li>
+        
+          <li class="random-article-baseof" style="display: none;">
+            <a href="/posts/godot-43-moving-get_properties-to-a-separate-class/">Godot 4.3 Moving Get_properties to a Separate Class</a>
+          </li>
+        
+          <li class="random-article-baseof" style="display: none;">
+            <a href="/posts/godot-43-expanding-object-compatibility-beyond-nodes/">Godot 4.3 Expanding Object Compatibility Beyond Nodes</a>
+          </li>
+        
+          <li class="random-article-baseof" style="display: none;">
+            <a href="/posts/godot-43-basics/">Godot 4.3 Basics</a>
+          </li>
+        
+          <li class="random-article-baseof" style="display: none;">
+            <a href="/posts/setting-up-godot-43-for-visual-studio-code/">Setting up Godot 4.3 for Visual Studio Code</a>
+          </li>
+        
+      </ul>
     </header>
     <main class="app-container">
       
-  <article>
-    <h1>Politics</h1>
+
+  
+  
+
+  
+  
+
+
+
+<div class="content-wrapper">
+  
+  
+  <section class="grid-layout">
     
-    <ul class="posts-list">
       
-        <li class="posts-list-item">
-          <a class="posts-list-item-title" href="/posts/the-social-security-fairness-act-was-never-about-fairness/">The Social Security Fairness Act (SSFA) Was Never About Fairness</a>
-          <span class="posts-list-item-description">
-            <svg class="icon icon-calendar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><title>calendar</title><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
-            Mar 8, 2025
-            <span class="posts-list-item-separator">-</span>
-            <svg class="icon icon-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><title>clock</title><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
-            11 min read
+        <article class="grid-item">
+          <a href="/posts/the-social-security-fairness-act-was-never-about-fairness/">
+            
+            
+              <div class="grid-image post-video">
+                <iframe 
+                  width="100%" 
+                  height="100%" 
+                  src="https://www.youtube.com/embed/6PFSVyUngCg?modestbranding=1&rel=0&iv_load_policy=3&showinfo=0&controls=1" 
+                  frameborder="0" 
+                  allowfullscreen>
+                </iframe>
+              </div>
+            
+
+            
+            <h2 class="grid-title">The Social Security Fairness Act Was Never About Fairness</h2>
+          </a>
+
+          
+          <span class="grid-meta">
+            Mar 8, 2025 • 11 min read
+            
+              <span class="category-tag">Politics</span>
+            
           </span>
-        </li>
+
+          
+          <p class="grid-summary"><p>When <strong>President Joe Biden signed the Social Security Fairness Act (SSFA) on January 5, 2025</strong>, I bought the pitch for a minute: fix what many saw as an unfair system. The repeal of the <strong>Windfall Elimination Provision (WEP) and Government Pension Offset (GPO)</strong> meant that <strong>public-sector retirees—teachers, firefighters, and police officers—would no longer see their Social Security benefits reduced because they also had government pensions</strong>.</p>
+<p>Supporters framed it as long-overdue justice, correcting a system that had penalized public employees for decades. But here’s the problem: <strong>fixing one unfairness doesn’t mean you don’t create another in its place</strong>.</p></p>
+
+        </article>
       
-        <li class="posts-list-item">
-          <a class="posts-list-item-title" href="/posts/stock-buybacks-are-a-scambut-not-for-the-reason-you-think/">Stock Buybacks Are a Scam—But Not for the Reason You Think</a>
-          <span class="posts-list-item-description">
-            <svg class="icon icon-calendar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><title>calendar</title><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
-            Mar 4, 2025
-            <span class="posts-list-item-separator">-</span>
-            <svg class="icon icon-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><title>clock</title><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
-            8 min read
+        <article class="grid-item">
+          <a href="/posts/stock-buybacks-are-a-scambut-not-for-the-reason-you-think/">
+            
+            
+              <div class="grid-image post-video">
+                <iframe 
+                  width="100%" 
+                  height="100%" 
+                  src="https://www.youtube.com/embed/11XSfa1xVOc?modestbranding=1&rel=0&iv_load_policy=3&showinfo=0&controls=1" 
+                  frameborder="0" 
+                  allowfullscreen>
+                </iframe>
+              </div>
+            
+
+            
+            <h2 class="grid-title">Stock Buybacks Are a Scam—But Not for the Reason You Think</h2>
+          </a>
+
+          
+          <span class="grid-meta">
+            Mar 4, 2025 • 8 min read
+            
+              <span class="category-tag">Politics</span>
+            
           </span>
-        </li>
+
+          
+          <p class="grid-summary"><p>In 2023, U.S. companies dumped <strong>$900 billion into stock buybacks</strong>—more than they spent on wages or R&amp;D combined. At their core, a <strong>stock buyback</strong> happens when a company <strong>uses its own money to repurchase shares from the stock market</strong>, reducing the number of outstanding shares. This benefits existing shareholders by <strong>increasing the value of the remaining shares</strong>, making it a common strategy for corporations looking to boost stock prices.</p>
+<p>But while some argue that buybacks <strong>stabilize stock prices and return value to investors</strong>, others see them as <strong>a legalized form of market manipulation</strong>, disproportionately benefiting <strong>executives and wealthy shareholders</strong> while diverting money that <strong>could be spent on wages, R&amp;D, or long-term growth.</strong></p></p>
+
+        </article>
       
-        <li class="posts-list-item">
-          <a class="posts-list-item-title" href="/posts/panasonics-big-bet-on-kansasa-win-or-a-ticking-time-bomb/">Panasonics Big Bet on Kansas–A Win or a Ticking Time Bomb</a>
-          <span class="posts-list-item-description">
-            <svg class="icon icon-calendar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><title>calendar</title><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
-            Mar 2, 2025
-            <span class="posts-list-item-separator">-</span>
-            <svg class="icon icon-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><title>clock</title><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
-            11 min read
+        <article class="grid-item">
+          <a href="/posts/panasonics-big-bet-on-kansasa-win-or-a-ticking-time-bomb/">
+            
+            
+              <div class="grid-image post-video">
+                <iframe 
+                  width="100%" 
+                  height="100%" 
+                  src="https://www.youtube.com/embed/zw1D5PMCAqA?modestbranding=1&rel=0&iv_load_policy=3&showinfo=0&controls=1" 
+                  frameborder="0" 
+                  allowfullscreen>
+                </iframe>
+              </div>
+            
+
+            
+            <h2 class="grid-title">Panasonics Big Bet on Kansas–A Win or a Ticking Time Bomb</h2>
+          </a>
+
+          
+          <span class="grid-meta">
+            Mar 2, 2025 • 11 min read
+            
+              <span class="category-tag">Politics</span>
+            
           </span>
-        </li>
+
+          
+          <p class="grid-summary"><p>I didn’t expect to go down this rabbit hole, but here we are. It started when I saw a take on X (Twitter) calling the <strong>Panasonic EV battery plant in De Soto, Kansas, a perfect example of government waste</strong>. That was enough to get me curious. <strong>Is this just a big corporate handout, or is there a real economic win here?</strong> I went deep into the details, and honestly, I can see <strong>both sides of the argument</strong>—and I think people aren’t realizing the full financial weight of what’s happening.</p></p>
+
+        </article>
       
-        <li class="posts-list-item">
-          <a class="posts-list-item-title" href="/posts/is-pramila-jayapal-good-for-washington/">Is Pramila Jayapal Good for Washington</a>
-          <span class="posts-list-item-description">
-            <svg class="icon icon-calendar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><title>calendar</title><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
-            Mar 2, 2025
-            <span class="posts-list-item-separator">-</span>
-            <svg class="icon icon-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><title>clock</title><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
-            16 min read
+        <article class="grid-item">
+          <a href="/posts/is-pramila-jayapal-good-for-washington/">
+            
+            
+              <div class="grid-image post-video">
+                <iframe 
+                  width="100%" 
+                  height="100%" 
+                  src="https://www.youtube.com/embed/SUt7ReeMDDk?modestbranding=1&rel=0&iv_load_policy=3&showinfo=0&controls=1" 
+                  frameborder="0" 
+                  allowfullscreen>
+                </iframe>
+              </div>
+            
+
+            
+            <h2 class="grid-title">Is Pramila Jayapal Good for Washington</h2>
+          </a>
+
+          
+          <span class="grid-meta">
+            Mar 2, 2025 • 16 min read
+            
+              <span class="category-tag">Politics</span>
+            
           </span>
-        </li>
+
+          
+          <p class="grid-summary"><p>Pramila Jayapal has positioned herself as a champion for progressive values, representing Washington’s 7th Congressional District with a strong stance on healthcare, immigration, and social justice. She’s an outspoken critic of Donald Trump, frequently challenging his policies on Medicaid cuts, federal funding freezes, and immigration enforcement. But beyond the rhetoric, how effective is she? Is she truly fighting for Washington’s best interests, or is she just another politician playing the game of influence and lobbying?</p></p>
+
+        </article>
       
-        <li class="posts-list-item">
-          <a class="posts-list-item-title" href="/posts/one-of-the-nine-ways-big-business-avoids-billions-in-taxes-legally/">One of the Nine Ways Big Business Avoids Billions in Taxes Legally</a>
-          <span class="posts-list-item-description">
-            <svg class="icon icon-calendar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><title>calendar</title><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
-            Mar 1, 2025
-            <span class="posts-list-item-separator">-</span>
-            <svg class="icon icon-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><title>clock</title><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
-            8 min read
+        <article class="grid-item">
+          <a href="/posts/one-of-the-nine-ways-big-business-avoids-billions-in-taxes-legally/">
+            
+            
+              <div class="grid-image post-video">
+                <iframe 
+                  width="100%" 
+                  height="100%" 
+                  src="https://www.youtube.com/embed/vFjugPjJfc0?modestbranding=1&rel=0&iv_load_policy=3&showinfo=0&controls=1" 
+                  frameborder="0" 
+                  allowfullscreen>
+                </iframe>
+              </div>
+            
+
+            
+            <h2 class="grid-title">One of the Nine Ways Big Business Avoids Billions in Taxes Legally</h2>
+          </a>
+
+          
+          <span class="grid-meta">
+            Mar 1, 2025 • 8 min read
+            
+              <span class="category-tag">Politics</span>
+            
           </span>
-        </li>
+
+          
+          <p class="grid-summary"><p>Big businesses don’t pay taxes the way you do. While the average person’s paycheck gets taxed before it even hits their bank account, corporations use <strong>loopholes, deductions, and legal maneuvers</strong> to shrink their tax bills—sometimes down to nothing. It’s called <strong>aggressive tax planning</strong>—not illegal, but certainly not something the everyday taxpayer can pull off. From <strong>offshore tax havens to stock buybacks and depreciation tricks</strong>, here’s how the biggest companies legally avoid paying billions.</p></p>
+
+        </article>
       
-    </ul>
     
+  </section>
+</div>
+
+
+  
+  <aside class="sidebar">
+    <div class="sidebar-section sidebar-trending">
+      <h2>Trending Articles</h2>
+      <ul>
+        
+          <li><a href="/posts/the-hidden-cost-of-always-being-right/">The Hidden Cost of Always Being Right</a></li>
+        
+          <li><a href="/posts/the-social-security-fairness-act-was-never-about-fairness/">The Social Security Fairness Act Was Never About Fairness</a></li>
+        
+          <li><a href="/posts/stock-buybacks-are-a-scambut-not-for-the-reason-you-think/">Stock Buybacks Are a Scam—But Not for the Reason You Think</a></li>
+        
+      </ul>
+    </div>
+
+    <div class="sidebar-section sidebar-random">
+      <h2>Random Articles</h2>
+      <ul id="random-articles">
+        
+          <li class="random-article" style="display: none;">
+            <a href="/posts/the-hidden-cost-of-always-being-right/">The Hidden Cost of Always Being Right</a>
+          </li>
+        
+          <li class="random-article" style="display: none;">
+            <a href="/posts/the-social-security-fairness-act-was-never-about-fairness/">The Social Security Fairness Act Was Never About Fairness</a>
+          </li>
+        
+          <li class="random-article" style="display: none;">
+            <a href="/posts/stock-buybacks-are-a-scambut-not-for-the-reason-you-think/">Stock Buybacks Are a Scam—But Not for the Reason You Think</a>
+          </li>
+        
+          <li class="random-article" style="display: none;">
+            <a href="/posts/panasonics-big-bet-on-kansasa-win-or-a-ticking-time-bomb/">Panasonics Big Bet on Kansas–A Win or a Ticking Time Bomb</a>
+          </li>
+        
+          <li class="random-article" style="display: none;">
+            <a href="/posts/is-pramila-jayapal-good-for-washington/">Is Pramila Jayapal Good for Washington</a>
+          </li>
+        
+          <li class="random-article" style="display: none;">
+            <a href="/posts/one-of-the-nine-ways-big-business-avoids-billions-in-taxes-legally/">One of the Nine Ways Big Business Avoids Billions in Taxes Legally</a>
+          </li>
+        
+          <li class="random-article" style="display: none;">
+            <a href="/posts/mathematics-and-physics-of-light-introduction-to-light/">Mathematics and Physics of Light: Introduction to Light</a>
+          </li>
+        
+          <li class="random-article" style="display: none;">
+            <a href="/posts/godot-4.3-using-colorrect-for-simple-2d-backgrounds/">Godot 4.3 Using ColorRect for Simple 2D Backgrounds</a>
+          </li>
+        
+          <li class="random-article" style="display: none;">
+            <a href="/posts/breaking-down-interpolation-lerp/">Breaking Down Interpolation (Lerp)</a>
+          </li>
+        
+          <li class="random-article" style="display: none;">
+            <a href="/posts/godot-43-creating-ui-elements/">Godot 43 Creating UI Elements</a>
+          </li>
+        
+          <li class="random-article" style="display: none;">
+            <a href="/posts/godot-43-adding-basic-input/">Godot 4.3 Adding Basic Keyboard Input</a>
+          </li>
+        
+          <li class="random-article" style="display: none;">
+            <a href="/posts/godot-43-setting-up-a-3d-project-and-skybox-in-visual-studio-code/">Godot 4.3 Set Up a 3D Project, Skybox &amp; Import Your Custom 3d Model from VSC</a>
+          </li>
+        
+          <li class="random-article" style="display: none;">
+            <a href="/posts/using-python-3-to-convert-webp-to-png/">How to Convert WEBP Files to PNG Using VS Code in Python</a>
+          </li>
+        
+          <li class="random-article" style="display: none;">
+            <a href="/posts/create-custom-3d-assets-using-ai-mesh-and-blender-for-godot/">Create Custom 3D Assets Using AI Meshy and Blender for Godot</a>
+          </li>
+        
+          <li class="random-article" style="display: none;">
+            <a href="/posts/godot-43-understanding-parent-and-child-relationships-through-an-entity-system/">Godot 4.3 Understanding Parent and Child Relationships Through an Entity System</a>
+          </li>
+        
+          <li class="random-article" style="display: none;">
+            <a href="/posts/godot-43-moving-get_properties-to-a-separate-class/">Godot 4.3 Moving Get_properties to a Separate Class</a>
+          </li>
+        
+          <li class="random-article" style="display: none;">
+            <a href="/posts/godot-43-expanding-object-compatibility-beyond-nodes/">Godot 4.3 Expanding Object Compatibility Beyond Nodes</a>
+          </li>
+        
+          <li class="random-article" style="display: none;">
+            <a href="/posts/godot-43-basics/">Godot 4.3 Basics</a>
+          </li>
+        
+          <li class="random-article" style="display: none;">
+            <a href="/posts/setting-up-godot-43-for-visual-studio-code/">Setting up Godot 4.3 for Visual Studio Code</a>
+          </li>
+        
+      </ul>
+    </div>
+  </aside>
 
 
 
-  </article>
 
     </main>
     <script src="/js/theme-toggle.js"></script>
