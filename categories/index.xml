@@ -2,45 +2,45 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Categories on Don&#39;t Watch, Listen</title>
-    <link>https://dontwatchlisten.github.io/categories/</link>
+    <link>http://localhost:1313/categories/</link>
     <description>Recent content in Categories on Don&#39;t Watch, Listen</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Tue, 11 Mar 2025 11:13:28 -0700</lastBuildDate>
-    <atom:link href="https://dontwatchlisten.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/categories/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Psychology</title>
-      <link>https://dontwatchlisten.github.io/categories/psychology/</link>
+      <link>http://localhost:1313/categories/psychology/</link>
       <pubDate>Tue, 11 Mar 2025 11:13:28 -0700</pubDate>
-      <guid>https://dontwatchlisten.github.io/categories/psychology/</guid>
+      <guid>http://localhost:1313/categories/psychology/</guid>
       <description></description>
     </item>
     <item>
       <title>Politics</title>
-      <link>https://dontwatchlisten.github.io/categories/politics/</link>
+      <link>http://localhost:1313/categories/politics/</link>
       <pubDate>Sat, 08 Mar 2025 21:23:57 -0800</pubDate>
-      <guid>https://dontwatchlisten.github.io/categories/politics/</guid>
+      <guid>http://localhost:1313/categories/politics/</guid>
       <description></description>
     </item>
     <item>
       <title>Math/Science</title>
-      <link>https://dontwatchlisten.github.io/categories/math/science/</link>
+      <link>http://localhost:1313/categories/math/science/</link>
       <pubDate>Wed, 19 Feb 2025 23:22:54 -0800</pubDate>
-      <guid>https://dontwatchlisten.github.io/categories/math/science/</guid>
+      <guid>http://localhost:1313/categories/math/science/</guid>
       <description></description>
     </item>
     <item>
       <title>Programming</title>
-      <link>https://dontwatchlisten.github.io/categories/programming/</link>
+      <link>http://localhost:1313/categories/programming/</link>
       <pubDate>Wed, 19 Feb 2025 22:22:35 -0800</pubDate>
-      <guid>https://dontwatchlisten.github.io/categories/programming/</guid>
+      <guid>http://localhost:1313/categories/programming/</guid>
       <description></description>
     </item>
     <item>
       <title>3D Modeling</title>
-      <link>https://dontwatchlisten.github.io/categories/3d-modeling/</link>
+      <link>http://localhost:1313/categories/3d-modeling/</link>
       <pubDate>Sat, 15 Feb 2025 17:08:49 -0800</pubDate>
-      <guid>https://dontwatchlisten.github.io/categories/3d-modeling/</guid>
+      <guid>http://localhost:1313/categories/3d-modeling/</guid>
       <description></description>
     </item>
   </channel>

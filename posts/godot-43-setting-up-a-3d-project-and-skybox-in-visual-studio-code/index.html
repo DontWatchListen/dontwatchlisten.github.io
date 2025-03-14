@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en-us">
-  <head>
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
     <title>Godot 4.3 Set Up a 3D Project, Skybox &amp; Import Your Custom 3d Model from VSC // Don&#39;t Watch, Listen</title>
 
     
@@ -26,7 +26,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="author" content="John Doe" />
     <meta name="description" content="" />
-    <link rel="stylesheet" href="/css/main.min.5f5be8724f044b32db7c953ebe0ac636aa78a871e76d45eaa8bef74be30619f1.css" />
+    <link rel="stylesheet" href="/css/main.min.7994f9550bb78a616adb8a2695451298fcee6c2d6765a3f73fc74fd0f0eeff48.css" />
     
 
     
@@ -36,7 +36,7 @@
   <meta name="twitter:description" content="This guide teaches you how to create a 3D scene programmatically in Godot 4.3, complete with a custom skybox, using only code (no editor setup). We’ll explain core concepts like WorldEnvironment, Camera3D, and SkyMaterial.
 Final Code Structure Project/ ├── scripts/ │ ├── main.gd # Root scene script │ └── skybox.gd # Skybox configuration └── textures/ └── default_sky.hdr # HDRI skybox texture 1. Setting Up the Main Scene (main.gd) 🔹 Code extends Node3D func _ready(): # 1. Configure camera var camera = Camera3D.new() camera.position = Vector3(0, 1, 3) # Position (X, Y, Z) camera.look_at(Vector3.ZERO) # Look at world origin add_child(camera) camera.make_current() # Activate this camera # 2. Add skybox var skybox = load(&#34;res://Scripts/skybox.gd&#34;).new() add_child(skybox) 🔹 Explanation Why We Need a Camera:">
 
-    <meta property="og:url" content="https://dontwatchlisten.github.io/posts/godot-43-setting-up-a-3d-project-and-skybox-in-visual-studio-code/">
+    <meta property="og:url" content="http://localhost:1313/posts/godot-43-setting-up-a-3d-project-and-skybox-in-visual-studio-code/">
   <meta property="og:site_name" content="Don&#39;t Watch, Listen">
   <meta property="og:title" content="Godot 4.3 Set Up a 3D Project, Skybox & Import Your Custom 3d Model from VSC">
   <meta property="og:description" content="This guide teaches you how to create a 3D scene programmatically in Godot 4.3, complete with a custom skybox, using only code (no editor setup). We’ll explain core concepts like WorldEnvironment, Camera3D, and SkyMaterial.
@@ -50,10 +50,11 @@ Final Code Structure Project/ ├── scripts/ │ ├── main.gd # Root sc
 
   </head>
   <body>
+    <button id="styleToggle" class="style-toggle"></button>
     <header class="app-header">
       <a href="/"><img class="app-header-avatar" src="/images/avatar.png" alt="John Doe" /></a>
       <span class="app-header-title">Don&#39;t Watch, Listen</span>
-      <p>Don&#39;t Watch Listen&#39;s Blog details extensive nuance in each discussion. Find a topic of interest to you in our categories below!</p>
+      <p>Don&#39;t Watch, Listen&#39;s Blog details extensive nuance in each discussion. Find a topic of interest to you in our categories below!</p>
 
       <nav class="category-nav">
         <h2>Categories</h2>
@@ -566,5 +567,6 @@ Final Code Structure Project/ ├── scripts/ │ ├── main.gd # Root sc
   </article>
 
     </main>
+    <script src="/js/theme-toggle.js"></script>
   </body>
 </html>
