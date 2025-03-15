@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en-us">
-  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <head>
     <title>Categories // Don&#39;t Watch, Listen</title>
 
     
@@ -26,8 +26,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="author" content="Joshua Parsons" />
     <meta name="description" content="" />
-    <link rel="stylesheet" href="/css/main.min.3e57c2f4056c28637144e2a55ffa72ee651708fc9a00084d7acf6dda704f78f9.css" />
-    <link rel="alternate" type="application/rss+xml" href="http://localhost:1313/categories/index.xml" title="Don't Watch, Listen">
+    <link rel="stylesheet" href="/css/main.min.c27bdbde9ad2ae9022125bc5e927509b9d793611b5af72ea993b2ffa7ec0b838.css" />
+    <link rel="alternate" type="application/rss+xml" href="https://dontwatchlisten.github.io/categories/index.xml" title="Don't Watch, Listen">
     
 
     
@@ -35,7 +35,7 @@
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Categories">
 
-    <meta property="og:url" content="http://localhost:1313/categories/">
+    <meta property="og:url" content="https://dontwatchlisten.github.io/categories/">
   <meta property="og:site_name" content="Don&#39;t Watch, Listen">
   <meta property="og:title" content="Categories">
   <meta property="og:locale" content="en_us">
@@ -43,7 +43,73 @@
 
 
   </head>
+
   <body>
+    
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        let articles = document.querySelectorAll("#random-articles .random-article");
+        let totalArticles = articles.length;
+        let numToShow = Math.min(3, totalArticles);
+        let selectedIndexes = new Set();
+    
+        
+        while (selectedIndexes.size < numToShow) {
+          let randomIndex = Math.floor(Math.random() * totalArticles);
+          selectedIndexes.add(randomIndex);
+        }
+    
+        
+        selectedIndexes.forEach(index => {
+          articles[index].style.display = "block";
+        });
+      });
+    </script>
+    
+    <script>
+      function randomizeBaseofArticles() {
+        let articles = document.querySelectorAll("#random-articles-baseof .random-article-baseof");
+        let totalArticles = articles.length;
+        let numToShow = Math.min(3, totalArticles);
+        let selectedIndexes = new Set();
+    
+        
+        while (selectedIndexes.size < numToShow) {
+          let randomIndex = Math.floor(Math.random() * totalArticles);
+          selectedIndexes.add(randomIndex);
+        }
+    
+        
+        selectedIndexes.forEach(index => {
+          articles[index].style.display = "block";
+        });
+      }
+    
+      document.addEventListener("DOMContentLoaded", randomizeBaseofArticles);
+    </script>
+    
+    
+    <script>
+      function toggleSidebarSections() {
+        let trendingSection = document.querySelector('.baseof-trending');
+        let randomSection = document.querySelector('.baseof-random');
+        let screenWidth = window.innerWidth;
+    
+        if (screenWidth >= 1929) {
+          trendingSection.style.display = "none";
+          randomSection.style.display = "none";
+        } else {
+          trendingSection.style.display = "block";
+          randomSection.style.display = "block";
+        }
+      }
+    
+      
+      document.addEventListener("DOMContentLoaded", toggleSidebarSections);
+      window.addEventListener("resize", toggleSidebarSections);
+    </script>
+    
+    
     <button id="styleToggle" class="style-toggle"></button>
     <header class="app-header">
       <a href="/"><img class="app-header-avatar" src="/images/avatar.png" alt="Joshua Parsons" /></a>
@@ -58,7 +124,7 @@
           
             <li><a href="/categories/math/science/">Math/Science (1)</a></li>
           
-            <li><a href="/categories/politics/">Politics (5)</a></li>
+            <li><a href="/categories/politics/">Politics (6)</a></li>
           
             <li><a href="/categories/programming/">Programming (11)</a></li>
           
@@ -66,6 +132,107 @@
           
         </ul>
       </nav>
+
+    
+    <div class="sidebar-section baseof-trending">
+      <h2>Trending Articles</h2>
+      <ul>
+        
+          <li><a href="/posts/the-journalists-mic-a-security-oversight-waiting-for-disaster/">The Journalists Mic a Security Oversight Waiting for Disaster</a></li>
+        
+          <li><a href="/posts/the-hidden-cost-of-always-being-right/">The Hidden Cost of Always Being Right</a></li>
+        
+          <li><a href="/posts/the-social-security-fairness-act-was-never-about-fairness/">The Social Security Fairness Act Was Never About Fairness</a></li>
+        
+      </ul>
+    </div>
+
+    
+    <div class="sidebar-section baseof-random">
+      <h2>Random Articles</h2>
+      <ul id="random-articles-baseof">
+        
+          <li class="random-article-baseof" style="display: none;">
+            <a href="/posts/the-journalists-mic-a-security-oversight-waiting-for-disaster/">The Journalists Mic a Security Oversight Waiting for Disaster</a>
+          </li>
+        
+          <li class="random-article-baseof" style="display: none;">
+            <a href="/posts/the-hidden-cost-of-always-being-right/">The Hidden Cost of Always Being Right</a>
+          </li>
+        
+          <li class="random-article-baseof" style="display: none;">
+            <a href="/posts/the-social-security-fairness-act-was-never-about-fairness/">The Social Security Fairness Act Was Never About Fairness</a>
+          </li>
+        
+          <li class="random-article-baseof" style="display: none;">
+            <a href="/posts/stock-buybacks-are-a-scambut-not-for-the-reason-you-think/">Stock Buybacks Are a Scam—But Not for the Reason You Think</a>
+          </li>
+        
+          <li class="random-article-baseof" style="display: none;">
+            <a href="/posts/panasonics-big-bet-on-kansasa-win-or-a-ticking-time-bomb/">Panasonics Big Bet on Kansas–A Win or a Ticking Time Bomb</a>
+          </li>
+        
+          <li class="random-article-baseof" style="display: none;">
+            <a href="/posts/is-pramila-jayapal-good-for-washington/">Is Pramila Jayapal Good for Washington</a>
+          </li>
+        
+          <li class="random-article-baseof" style="display: none;">
+            <a href="/posts/one-of-the-nine-ways-big-business-avoids-billions-in-taxes-legally/">One of the Nine Ways Big Business Avoids Billions in Taxes Legally</a>
+          </li>
+        
+          <li class="random-article-baseof" style="display: none;">
+            <a href="/posts/mathematics-and-physics-of-light-introduction-to-light/">Mathematics and Physics of Light: Introduction to Light</a>
+          </li>
+        
+          <li class="random-article-baseof" style="display: none;">
+            <a href="/posts/godot-4.3-using-colorrect-for-simple-2d-backgrounds/">Godot 4.3 Using ColorRect for Simple 2D Backgrounds</a>
+          </li>
+        
+          <li class="random-article-baseof" style="display: none;">
+            <a href="/posts/breaking-down-interpolation-lerp/">Breaking Down Interpolation (Lerp)</a>
+          </li>
+        
+          <li class="random-article-baseof" style="display: none;">
+            <a href="/posts/godot-43-creating-ui-elements/">Godot 43 Creating UI Elements</a>
+          </li>
+        
+          <li class="random-article-baseof" style="display: none;">
+            <a href="/posts/godot-43-adding-basic-input/">Godot 4.3 Adding Basic Keyboard Input</a>
+          </li>
+        
+          <li class="random-article-baseof" style="display: none;">
+            <a href="/posts/godot-43-setting-up-a-3d-project-and-skybox-in-visual-studio-code/">Godot 4.3 Set Up a 3D Project, Skybox &amp; Import Your Custom 3d Model from VSC</a>
+          </li>
+        
+          <li class="random-article-baseof" style="display: none;">
+            <a href="/posts/using-python-3-to-convert-webp-to-png/">How to Convert WEBP Files to PNG Using VS Code in Python</a>
+          </li>
+        
+          <li class="random-article-baseof" style="display: none;">
+            <a href="/posts/create-custom-3d-assets-using-ai-mesh-and-blender-for-godot/">Create Custom 3D Assets Using AI Meshy and Blender for Godot</a>
+          </li>
+        
+          <li class="random-article-baseof" style="display: none;">
+            <a href="/posts/godot-43-understanding-parent-and-child-relationships-through-an-entity-system/">Godot 4.3 Understanding Parent and Child Relationships Through an Entity System</a>
+          </li>
+        
+          <li class="random-article-baseof" style="display: none;">
+            <a href="/posts/godot-43-moving-get_properties-to-a-separate-class/">Godot 4.3 Moving Get_properties to a Separate Class</a>
+          </li>
+        
+          <li class="random-article-baseof" style="display: none;">
+            <a href="/posts/godot-43-expanding-object-compatibility-beyond-nodes/">Godot 4.3 Expanding Object Compatibility Beyond Nodes</a>
+          </li>
+        
+          <li class="random-article-baseof" style="display: none;">
+            <a href="/posts/godot-43-basics/">Godot 4.3 Basics</a>
+          </li>
+        
+          <li class="random-article-baseof" style="display: none;">
+            <a href="/posts/setting-up-godot-43-for-visual-studio-code/">Setting up Godot 4.3 for Visual Studio Code</a>
+          </li>
+        
+      </ul>
     </header>
     <main class="app-container">
       
@@ -84,7 +251,7 @@
         <li class="tags-list-item">
             <svg class="icon icon-tag" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><title>tag</title><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line></svg>
             <a class="tags-list-item-title" href="/categories/politics/">
-              (5)
+              (6)
               Politics
             </a>
         </li>

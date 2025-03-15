@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en-us">
-  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <head>
     <title>Posts // Don&#39;t Watch, Listen</title>
 
     
@@ -26,8 +26,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="author" content="Joshua Parsons" />
     <meta name="description" content="" />
-    <link rel="stylesheet" href="/css/main.min.3e57c2f4056c28637144e2a55ffa72ee651708fc9a00084d7acf6dda704f78f9.css" />
-    <link rel="alternate" type="application/rss+xml" href="http://localhost:1313/posts/index.xml" title="Don't Watch, Listen">
+    <link rel="stylesheet" href="/css/main.min.c27bdbde9ad2ae9022125bc5e927509b9d793611b5af72ea993b2ffa7ec0b838.css" />
+    <link rel="alternate" type="application/rss+xml" href="https://dontwatchlisten.github.io/posts/index.xml" title="Don't Watch, Listen">
     
 
     
@@ -35,7 +35,7 @@
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Posts">
 
-    <meta property="og:url" content="http://localhost:1313/posts/">
+    <meta property="og:url" content="https://dontwatchlisten.github.io/posts/">
   <meta property="og:site_name" content="Don&#39;t Watch, Listen">
   <meta property="og:title" content="Posts">
   <meta property="og:locale" content="en_us">
@@ -43,7 +43,73 @@
 
 
   </head>
+
   <body>
+    
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        let articles = document.querySelectorAll("#random-articles .random-article");
+        let totalArticles = articles.length;
+        let numToShow = Math.min(3, totalArticles);
+        let selectedIndexes = new Set();
+    
+        
+        while (selectedIndexes.size < numToShow) {
+          let randomIndex = Math.floor(Math.random() * totalArticles);
+          selectedIndexes.add(randomIndex);
+        }
+    
+        
+        selectedIndexes.forEach(index => {
+          articles[index].style.display = "block";
+        });
+      });
+    </script>
+    
+    <script>
+      function randomizeBaseofArticles() {
+        let articles = document.querySelectorAll("#random-articles-baseof .random-article-baseof");
+        let totalArticles = articles.length;
+        let numToShow = Math.min(3, totalArticles);
+        let selectedIndexes = new Set();
+    
+        
+        while (selectedIndexes.size < numToShow) {
+          let randomIndex = Math.floor(Math.random() * totalArticles);
+          selectedIndexes.add(randomIndex);
+        }
+    
+        
+        selectedIndexes.forEach(index => {
+          articles[index].style.display = "block";
+        });
+      }
+    
+      document.addEventListener("DOMContentLoaded", randomizeBaseofArticles);
+    </script>
+    
+    
+    <script>
+      function toggleSidebarSections() {
+        let trendingSection = document.querySelector('.baseof-trending');
+        let randomSection = document.querySelector('.baseof-random');
+        let screenWidth = window.innerWidth;
+    
+        if (screenWidth >= 1929) {
+          trendingSection.style.display = "none";
+          randomSection.style.display = "none";
+        } else {
+          trendingSection.style.display = "block";
+          randomSection.style.display = "block";
+        }
+      }
+    
+      
+      document.addEventListener("DOMContentLoaded", toggleSidebarSections);
+      window.addEventListener("resize", toggleSidebarSections);
+    </script>
+    
+    
     <button id="styleToggle" class="style-toggle"></button>
     <header class="app-header">
       <a href="/"><img class="app-header-avatar" src="/images/avatar.png" alt="Joshua Parsons" /></a>
@@ -58,7 +124,7 @@
           
             <li><a href="/categories/math/science/">Math/Science (1)</a></li>
           
-            <li><a href="/categories/politics/">Politics (5)</a></li>
+            <li><a href="/categories/politics/">Politics (6)</a></li>
           
             <li><a href="/categories/programming/">Programming (11)</a></li>
           
@@ -66,198 +132,466 @@
           
         </ul>
       </nav>
+
+    
+    <div class="sidebar-section baseof-trending">
+      <h2>Trending Articles</h2>
+      <ul>
+        
+          <li><a href="/posts/the-journalists-mic-a-security-oversight-waiting-for-disaster/">The Journalists Mic a Security Oversight Waiting for Disaster</a></li>
+        
+          <li><a href="/posts/the-hidden-cost-of-always-being-right/">The Hidden Cost of Always Being Right</a></li>
+        
+          <li><a href="/posts/the-social-security-fairness-act-was-never-about-fairness/">The Social Security Fairness Act Was Never About Fairness</a></li>
+        
+      </ul>
+    </div>
+
+    
+    <div class="sidebar-section baseof-random">
+      <h2>Random Articles</h2>
+      <ul id="random-articles-baseof">
+        
+          <li class="random-article-baseof" style="display: none;">
+            <a href="/posts/the-journalists-mic-a-security-oversight-waiting-for-disaster/">The Journalists Mic a Security Oversight Waiting for Disaster</a>
+          </li>
+        
+          <li class="random-article-baseof" style="display: none;">
+            <a href="/posts/the-hidden-cost-of-always-being-right/">The Hidden Cost of Always Being Right</a>
+          </li>
+        
+          <li class="random-article-baseof" style="display: none;">
+            <a href="/posts/the-social-security-fairness-act-was-never-about-fairness/">The Social Security Fairness Act Was Never About Fairness</a>
+          </li>
+        
+          <li class="random-article-baseof" style="display: none;">
+            <a href="/posts/stock-buybacks-are-a-scambut-not-for-the-reason-you-think/">Stock Buybacks Are a Scam—But Not for the Reason You Think</a>
+          </li>
+        
+          <li class="random-article-baseof" style="display: none;">
+            <a href="/posts/panasonics-big-bet-on-kansasa-win-or-a-ticking-time-bomb/">Panasonics Big Bet on Kansas–A Win or a Ticking Time Bomb</a>
+          </li>
+        
+          <li class="random-article-baseof" style="display: none;">
+            <a href="/posts/is-pramila-jayapal-good-for-washington/">Is Pramila Jayapal Good for Washington</a>
+          </li>
+        
+          <li class="random-article-baseof" style="display: none;">
+            <a href="/posts/one-of-the-nine-ways-big-business-avoids-billions-in-taxes-legally/">One of the Nine Ways Big Business Avoids Billions in Taxes Legally</a>
+          </li>
+        
+          <li class="random-article-baseof" style="display: none;">
+            <a href="/posts/mathematics-and-physics-of-light-introduction-to-light/">Mathematics and Physics of Light: Introduction to Light</a>
+          </li>
+        
+          <li class="random-article-baseof" style="display: none;">
+            <a href="/posts/godot-4.3-using-colorrect-for-simple-2d-backgrounds/">Godot 4.3 Using ColorRect for Simple 2D Backgrounds</a>
+          </li>
+        
+          <li class="random-article-baseof" style="display: none;">
+            <a href="/posts/breaking-down-interpolation-lerp/">Breaking Down Interpolation (Lerp)</a>
+          </li>
+        
+          <li class="random-article-baseof" style="display: none;">
+            <a href="/posts/godot-43-creating-ui-elements/">Godot 43 Creating UI Elements</a>
+          </li>
+        
+          <li class="random-article-baseof" style="display: none;">
+            <a href="/posts/godot-43-adding-basic-input/">Godot 4.3 Adding Basic Keyboard Input</a>
+          </li>
+        
+          <li class="random-article-baseof" style="display: none;">
+            <a href="/posts/godot-43-setting-up-a-3d-project-and-skybox-in-visual-studio-code/">Godot 4.3 Set Up a 3D Project, Skybox &amp; Import Your Custom 3d Model from VSC</a>
+          </li>
+        
+          <li class="random-article-baseof" style="display: none;">
+            <a href="/posts/using-python-3-to-convert-webp-to-png/">How to Convert WEBP Files to PNG Using VS Code in Python</a>
+          </li>
+        
+          <li class="random-article-baseof" style="display: none;">
+            <a href="/posts/create-custom-3d-assets-using-ai-mesh-and-blender-for-godot/">Create Custom 3D Assets Using AI Meshy and Blender for Godot</a>
+          </li>
+        
+          <li class="random-article-baseof" style="display: none;">
+            <a href="/posts/godot-43-understanding-parent-and-child-relationships-through-an-entity-system/">Godot 4.3 Understanding Parent and Child Relationships Through an Entity System</a>
+          </li>
+        
+          <li class="random-article-baseof" style="display: none;">
+            <a href="/posts/godot-43-moving-get_properties-to-a-separate-class/">Godot 4.3 Moving Get_properties to a Separate Class</a>
+          </li>
+        
+          <li class="random-article-baseof" style="display: none;">
+            <a href="/posts/godot-43-expanding-object-compatibility-beyond-nodes/">Godot 4.3 Expanding Object Compatibility Beyond Nodes</a>
+          </li>
+        
+          <li class="random-article-baseof" style="display: none;">
+            <a href="/posts/godot-43-basics/">Godot 4.3 Basics</a>
+          </li>
+        
+          <li class="random-article-baseof" style="display: none;">
+            <a href="/posts/setting-up-godot-43-for-visual-studio-code/">Setting up Godot 4.3 for Visual Studio Code</a>
+          </li>
+        
+      </ul>
     </header>
     <main class="app-container">
       
 
   
-  <section class="hero-featured">
-    
-      
-        <a href="/posts/the-hidden-cost-of-always-being-right/" class="featured-link">
-          
-            <div class="featured-placeholder">No Image Available</div>
-          
-          <div class="featured-content">
-            <h1 class="featured-title">The Hidden Cost of Always Being Right</h1>
-            <p class="featured-summary"><div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
-      <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/Jeez98tUtW4?autoplay=0&amp;controls=1&amp;end=0&amp;loop=0&amp;mute=0&amp;start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"></iframe>
-    </div>
-
-<h1 id="the-hidden-cost-of-always-being-right">The Hidden Cost of Always Being Right</h1>
-<p>Tonight, it’s not about politics—but, self-reflection. Often in personal life, I find myself …</p></p>
-            <span class="featured-meta">
-              Mar 11, 2025 • 22 min read
-            </span>
-          </div>
-        </a>
-      
-    
-  </section>
   
 
+  
+  
+
+
+
+<div class="content-wrapper">
+  
   
   <section class="grid-layout">
     
-      <article class="grid-item">
-        <a href="/posts/the-hidden-cost-of-always-being-right/">
-          
-          <h2 class="grid-title">The Hidden Cost of Always Being Right</h2>
-        </a>
-        <span class="grid-meta">
-          Mar 11, 2025 • 22 min read
-        </span>
-        <p class="grid-summary"><div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
-      <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/Jeez98tUtW4?autoplay=0&amp;controls=1&amp;end=0&amp;loop=0&amp;mute=0&amp;start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"></iframe>
-    </div>
+      
+        <article class="grid-item">
+          <a href="/posts/the-journalists-mic-a-security-oversight-waiting-for-disaster/">
+            
+            
+              <img class="grid-image" src="/images/mic2.png" alt="The Journalists Mic a Security Oversight Waiting for Disaster">
+            
 
-<h1 id="the-hidden-cost-of-always-being-right">The Hidden Cost of Always Being Right</h1>
-<p>Tonight, it’s not about politics—but, self-reflection. Often in personal life, I find myself overreacting and not truly listening. Even when I ask for nuance, it’s rarely to understand—it’s to prove I’m right, and that narrows my perspective, leaving blind spots that I can’t ignore. If we&rsquo;re always the smartest person in the room, we&rsquo;ll never know true enlightenment. Overconfidence doesn’t just limit you; it cuts you off from what others offer. Shift your focus from winning alone to growing together and listen, really listen, embrace “I don’t know.” Admitting that, isn’t a weakness, it’s courage that shadows pretending you’ve got it all figured out.</p></p>
-      </article>
-    
-      <article class="grid-item">
-        <a href="/posts/the-social-security-fairness-act-was-never-about-fairness/">
-          
-          <h2 class="grid-title">The Social Security Fairness Act (SSFA) Was Never About Fairness</h2>
-        </a>
-        <span class="grid-meta">
-          Mar 8, 2025 • 11 min read
-        </span>
-        <p class="grid-summary"><div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
-      <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/6PFSVyUngCg?autoplay=0&amp;controls=1&amp;end=0&amp;loop=0&amp;mute=0&amp;start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"></iframe>
-    </div>
+            
+            <h2 class="grid-title">The Journalists Mic a Security Oversight Waiting for Disaster</h2>
+          </a>
 
-<h1 id="the-social-security-fairness-act-ssfa-was-never-about-fairness"><strong>The Social Security Fairness Act (SSFA) Was Never About Fairness</strong></h1>
-<p>When <strong>President Joe Biden signed the Social Security Fairness Act (SSFA) on January 5, 2025</strong>, I bought the pitch for a minute: fix what many saw as an unfair system. The repeal of the <strong>Windfall Elimination Provision (WEP) and Government Pension Offset (GPO)</strong> meant that <strong>public-sector retirees—teachers, firefighters, and police officers—would no longer see their Social Security benefits reduced because they also had government pensions</strong>.</p></p>
-      </article>
-    
-      <article class="grid-item">
-        <a href="/posts/stock-buybacks-are-a-scambut-not-for-the-reason-you-think/">
           
-          <h2 class="grid-title">Stock Buybacks Are a Scam—But Not for the Reason You Think</h2>
-        </a>
-        <span class="grid-meta">
-          Mar 4, 2025 • 8 min read
-        </span>
-        <p class="grid-summary"><h1 id="stock-buybacks-a-legal-cheat-codebut-not-the-real-villain"><strong>Stock Buybacks: A Legal Cheat Code—But Not the Real Villain</strong></h1>
-<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
-      <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/11XSfa1xVOc?autoplay=0&amp;controls=1&amp;end=0&amp;loop=0&amp;mute=0&amp;start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"></iframe>
-    </div>
+          <span class="grid-meta">
+            Mar 14, 2025 • 10 min read
+            
+              <span class="category-tag">Politics</span>
+            
+          </span>
 
-<p>In 2023, U.S. companies dumped <strong>$900 billion into stock buybacks</strong>—more than they spent on wages or R&amp;D combined. At their core, a <strong>stock buyback</strong> happens when a company <strong>uses its own money to repurchase shares from the stock market</strong>, reducing the number of outstanding shares. This benefits existing shareholders by <strong>increasing the value of the remaining shares</strong>, making it a common strategy for corporations looking to boost stock prices.</p></p>
-      </article>
-    
-      <article class="grid-item">
-        <a href="/posts/panasonics-big-bet-on-kansasa-win-or-a-ticking-time-bomb/">
           
-          <h2 class="grid-title">Panasonics Big Bet on Kansas–A Win or a Ticking Time Bomb</h2>
-        </a>
-        <span class="grid-meta">
-          Mar 2, 2025 • 11 min read
-        </span>
-        <p class="grid-summary"><h1 id="panasonics-big-bet-on-kansas--a-win-or-a-ticking-time-bomb"><strong>Panasonic’s Big Bet on Kansas – A Win or a Ticking Time Bomb?</strong></h1>
-<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
-      <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/zw1D5PMCAqA?autoplay=0&amp;controls=1&amp;end=0&amp;loop=0&amp;mute=0&amp;start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"></iframe>
-    </div>
+          <p class="grid-summary"><p>During an interaction with the Press at Joint Base Andrews on March 14, 2025, Trump got hit in the face with a boom mic. Not hard, not enough to cause damage—but enough to make him pause. The microphone, covered with one of those fuzzy &ldquo;dead cat&rdquo; windshields, brushed his mouth, and for a split second, he just stared at the reporter holding it. Then came the response: “She just became a big story tonight.” At first, I brushed it off as just another awkward political moment—one of those clips people would meme to death and move on from. But as I scrolled through the reactions online, something caught my attention. People weren’t just laughing. Some were asking a serious question: What if that mic had been laced with something? It sounds ridiculous until you realize journalists have a history of exposing security gaps in ways no one expects. Take Jeffrey Goldberg’s 2008 TSA stunt—he wasn’t trying to kill anyone, but he waltzed through airport security with box cutters, fake boarding passes, and a 12-ounce bottle labeled “saline solution” that could’ve been anything. TSA didn’t blink. Now apply that same logic to a press event with the president. A mic in the face isn’t just a blooper—it’s a vulnerability staring us down.</p></p>
 
-<p>I didn’t expect to go down this rabbit hole, but here we are. It started when I saw a take on X (Twitter) calling the <strong>Panasonic EV battery plant in De Soto, Kansas, a perfect example of government waste</strong>. That was enough to get me curious. <strong>Is this just a big corporate handout, or is there a real economic win here?</strong> I went deep into the details, and honestly, I can see <strong>both sides of the argument</strong>—and I think people aren’t realizing the full financial weight of what’s happening.</p></p>
-      </article>
-    
-      <article class="grid-item">
-        <a href="/posts/is-pramila-jayapal-good-for-washington/">
-          
-          <h2 class="grid-title">Is Pramila Jayapal Good for Washington</h2>
-        </a>
-        <span class="grid-meta">
-          Mar 2, 2025 • 16 min read
-        </span>
-        <p class="grid-summary"><h1 id="is-pramila-jayapal-good-for-washington">Is Pramila Jayapal Good For Washington</h1>
-<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
-      <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/SUt7ReeMDDk?autoplay=0&amp;controls=1&amp;end=0&amp;loop=0&amp;mute=0&amp;start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"></iframe>
-    </div>
+        </article>
+      
+        <article class="grid-item">
+          <a href="/posts/the-hidden-cost-of-always-being-right/">
+            
+            
+              <div class="grid-image post-video">
+                <iframe 
+                  width="100%" 
+                  height="100%" 
+                  src="https://www.youtube.com/embed/Jeez98tUtW4?modestbranding=1&rel=0&iv_load_policy=3&showinfo=0&controls=1" 
+                  frameborder="0" 
+                  allowfullscreen>
+                </iframe>
+              </div>
+            
 
-<p>Pramila Jayapal has positioned herself as a champion for progressive values, representing Washington’s 7th Congressional District with a strong stance on healthcare, immigration, and social justice. She’s an outspoken critic of Donald Trump, frequently challenging his policies on Medicaid cuts, federal funding freezes, and immigration enforcement. But beyond the rhetoric, how effective is she? Is she truly fighting for Washington’s best interests, or is she just another politician playing the game of influence and lobbying?</p></p>
-      </article>
-    
-      <article class="grid-item">
-        <a href="/posts/one-of-the-nine-ways-big-business-avoids-billions-in-taxes-legally/">
-          
-          <h2 class="grid-title">One of the Nine Ways Big Business Avoids Billions in Taxes Legally</h2>
-        </a>
-        <span class="grid-meta">
-          Mar 1, 2025 • 8 min read
-        </span>
-        <p class="grid-summary"><div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
-      <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/vFjugPjJfc0?autoplay=0&amp;controls=1&amp;end=0&amp;loop=0&amp;mute=0&amp;start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"></iframe>
-    </div>
+            
+            <h2 class="grid-title">The Hidden Cost of Always Being Right</h2>
+          </a>
 
-<p>Big businesses don’t pay taxes the way you do. While the average person’s paycheck gets taxed before it even hits their bank account, corporations use <strong>loopholes, deductions, and legal maneuvers</strong> to shrink their tax bills—sometimes down to nothing. It’s called <strong>aggressive tax planning</strong>—not illegal, but certainly not something the everyday taxpayer can pull off. From <strong>offshore tax havens to stock buybacks and depreciation tricks</strong>, here’s how the biggest companies legally avoid paying billions.</p></p>
-      </article>
-    
-      <article class="grid-item">
-        <a href="/posts/mathematics-and-physics-of-light-introduction-to-light/">
           
-          <h2 class="grid-title">Mathematics and Physics of Light: Introduction to Light</h2>
-        </a>
-        <span class="grid-meta">
-          Feb 19, 2025 • 42 min read
-        </span>
-        <p class="grid-summary"><h1 id="the-mathematics-and-physics-of-light-a-comprehensive-introduction"><strong>The Mathematics and Physics of Light: A Comprehensive Introduction</strong></h1>
-<h2 id="chapter-1-introduction-to-light"><strong>Chapter 1: Introduction to Light</strong></h2>
-<p>Light is one of the most fundamental and fascinating phenomena in the universe. It is responsible for our ability to see, it fuels life through photosynthesis, and it plays a crucial role in technology, from fiber optic communication to laser surgery. However, despite its everyday presence, light is an incredibly complex and multi-faceted subject that has challenged scientists for centuries.</p></p>
-      </article>
-    
-      <article class="grid-item">
-        <a href="/posts/godot-4.3-using-colorrect-for-simple-2d-backgrounds/">
+          <span class="grid-meta">
+            Mar 11, 2025 • 22 min read
+            
+              <span class="category-tag">Psychology</span>
+            
+          </span>
+
           
-          <h2 class="grid-title">Godot 4.3 Using ColorRect for Simple 2D Backgrounds</h2>
-        </a>
-        <span class="grid-meta">
-          Feb 19, 2025 • 4 min read
-        </span>
-        <p class="grid-summary"><h1 id="procedural-background-color-interpolation-in-godot-using-gdscript-a-code-driven-approach"><strong>Procedural Background Color Interpolation in Godot Using GDScript: A Code-Driven Approach</strong></h1>
-<h2 id="abstract"><strong>Abstract</strong></h2>
-<p>This paper presents an efficient method for procedurally generating and interpolating a 2D background color in <strong>Godot 4.3</strong> using <strong>GDScript</strong>. The implementation relies entirely on scripting, eliminating the need for manual adjustments in the Godot editor. By leveraging <strong>linear interpolation (LERP)</strong>, the system smoothly transitions between predefined color values over a fixed duration, ensuring a seamless visual experience. This approach is particularly beneficial for procedurally generated environments, menu screens, and dynamic aesthetic modifications in 2D games.</p></p>
-      </article>
-    
-      <article class="grid-item">
-        <a href="/posts/breaking-down-interpolation-lerp/">
+          <p class="grid-summary"><p>Tonight, it’s not about politics—but, self-reflection. Often in personal life, I find myself overreacting and not truly listening. Even when I ask for nuance, it’s rarely to understand—it’s to prove I’m right, and that narrows my perspective, leaving blind spots that I can’t ignore. If we&rsquo;re always the smartest person in the room, we&rsquo;ll never know true enlightenment. Overconfidence doesn’t just limit you; it cuts you off from what others offer. Shift your focus from winning alone to growing together and listen, really listen, embrace “I don’t know.” Admitting that, isn’t a weakness, it’s courage that shadows pretending you’ve got it all figured out.</p></p>
+
+        </article>
+      
+        <article class="grid-item">
+          <a href="/posts/the-social-security-fairness-act-was-never-about-fairness/">
+            
+            
+              <div class="grid-image post-video">
+                <iframe 
+                  width="100%" 
+                  height="100%" 
+                  src="https://www.youtube.com/embed/6PFSVyUngCg?modestbranding=1&rel=0&iv_load_policy=3&showinfo=0&controls=1" 
+                  frameborder="0" 
+                  allowfullscreen>
+                </iframe>
+              </div>
+            
+
+            
+            <h2 class="grid-title">The Social Security Fairness Act Was Never About Fairness</h2>
+          </a>
+
           
-          <h2 class="grid-title">Breaking Down Interpolation (Lerp)</h2>
-        </a>
-        <span class="grid-meta">
-          Feb 19, 2025 • 6 min read
-        </span>
-        <p class="grid-summary"><h3 id="what-is-interpolation-lerpabt"><strong>What is Interpolation (<em>Lerp(A,B,t)</em>)?</strong></h3>
+          <span class="grid-meta">
+            Mar 8, 2025 • 11 min read
+            
+              <span class="category-tag">Politics</span>
+            
+          </span>
+
+          
+          <p class="grid-summary"><p>When <strong>President Joe Biden signed the Social Security Fairness Act (SSFA) on January 5, 2025</strong>, I bought the pitch for a minute: fix what many saw as an unfair system. The repeal of the <strong>Windfall Elimination Provision (WEP) and Government Pension Offset (GPO)</strong> meant that <strong>public-sector retirees—teachers, firefighters, and police officers—would no longer see their Social Security benefits reduced because they also had government pensions</strong>.</p>
+<p>Supporters framed it as long-overdue justice, correcting a system that had penalized public employees for decades. But here’s the problem: <strong>fixing one unfairness doesn’t mean you don’t create another in its place</strong>.</p></p>
+
+        </article>
+      
+        <article class="grid-item">
+          <a href="/posts/stock-buybacks-are-a-scambut-not-for-the-reason-you-think/">
+            
+            
+              <div class="grid-image post-video">
+                <iframe 
+                  width="100%" 
+                  height="100%" 
+                  src="https://www.youtube.com/embed/11XSfa1xVOc?modestbranding=1&rel=0&iv_load_policy=3&showinfo=0&controls=1" 
+                  frameborder="0" 
+                  allowfullscreen>
+                </iframe>
+              </div>
+            
+
+            
+            <h2 class="grid-title">Stock Buybacks Are a Scam—But Not for the Reason You Think</h2>
+          </a>
+
+          
+          <span class="grid-meta">
+            Mar 4, 2025 • 8 min read
+            
+              <span class="category-tag">Politics</span>
+            
+          </span>
+
+          
+          <p class="grid-summary"><p>In 2023, U.S. companies dumped <strong>$900 billion into stock buybacks</strong>—more than they spent on wages or R&amp;D combined. At their core, a <strong>stock buyback</strong> happens when a company <strong>uses its own money to repurchase shares from the stock market</strong>, reducing the number of outstanding shares. This benefits existing shareholders by <strong>increasing the value of the remaining shares</strong>, making it a common strategy for corporations looking to boost stock prices.</p>
+<p>But while some argue that buybacks <strong>stabilize stock prices and return value to investors</strong>, others see them as <strong>a legalized form of market manipulation</strong>, disproportionately benefiting <strong>executives and wealthy shareholders</strong> while diverting money that <strong>could be spent on wages, R&amp;D, or long-term growth.</strong></p></p>
+
+        </article>
+      
+        <article class="grid-item">
+          <a href="/posts/panasonics-big-bet-on-kansasa-win-or-a-ticking-time-bomb/">
+            
+            
+              <div class="grid-image post-video">
+                <iframe 
+                  width="100%" 
+                  height="100%" 
+                  src="https://www.youtube.com/embed/zw1D5PMCAqA?modestbranding=1&rel=0&iv_load_policy=3&showinfo=0&controls=1" 
+                  frameborder="0" 
+                  allowfullscreen>
+                </iframe>
+              </div>
+            
+
+            
+            <h2 class="grid-title">Panasonics Big Bet on Kansas–A Win or a Ticking Time Bomb</h2>
+          </a>
+
+          
+          <span class="grid-meta">
+            Mar 2, 2025 • 11 min read
+            
+              <span class="category-tag">Politics</span>
+            
+          </span>
+
+          
+          <p class="grid-summary"><p>I didn’t expect to go down this rabbit hole, but here we are. It started when I saw a take on X (Twitter) calling the <strong>Panasonic EV battery plant in De Soto, Kansas, a perfect example of government waste</strong>. That was enough to get me curious. <strong>Is this just a big corporate handout, or is there a real economic win here?</strong> I went deep into the details, and honestly, I can see <strong>both sides of the argument</strong>—and I think people aren’t realizing the full financial weight of what’s happening.</p></p>
+
+        </article>
+      
+        <article class="grid-item">
+          <a href="/posts/is-pramila-jayapal-good-for-washington/">
+            
+            
+              <div class="grid-image post-video">
+                <iframe 
+                  width="100%" 
+                  height="100%" 
+                  src="https://www.youtube.com/embed/SUt7ReeMDDk?modestbranding=1&rel=0&iv_load_policy=3&showinfo=0&controls=1" 
+                  frameborder="0" 
+                  allowfullscreen>
+                </iframe>
+              </div>
+            
+
+            
+            <h2 class="grid-title">Is Pramila Jayapal Good for Washington</h2>
+          </a>
+
+          
+          <span class="grid-meta">
+            Mar 2, 2025 • 16 min read
+            
+              <span class="category-tag">Politics</span>
+            
+          </span>
+
+          
+          <p class="grid-summary"><p>Pramila Jayapal has positioned herself as a champion for progressive values, representing Washington’s 7th Congressional District with a strong stance on healthcare, immigration, and social justice. She’s an outspoken critic of Donald Trump, frequently challenging his policies on Medicaid cuts, federal funding freezes, and immigration enforcement. But beyond the rhetoric, how effective is she? Is she truly fighting for Washington’s best interests, or is she just another politician playing the game of influence and lobbying?</p></p>
+
+        </article>
+      
+        <article class="grid-item">
+          <a href="/posts/one-of-the-nine-ways-big-business-avoids-billions-in-taxes-legally/">
+            
+            
+              <div class="grid-image post-video">
+                <iframe 
+                  width="100%" 
+                  height="100%" 
+                  src="https://www.youtube.com/embed/vFjugPjJfc0?modestbranding=1&rel=0&iv_load_policy=3&showinfo=0&controls=1" 
+                  frameborder="0" 
+                  allowfullscreen>
+                </iframe>
+              </div>
+            
+
+            
+            <h2 class="grid-title">One of the Nine Ways Big Business Avoids Billions in Taxes Legally</h2>
+          </a>
+
+          
+          <span class="grid-meta">
+            Mar 1, 2025 • 8 min read
+            
+              <span class="category-tag">Politics</span>
+            
+          </span>
+
+          
+          <p class="grid-summary"><p>Big businesses don’t pay taxes the way you do. While the average person’s paycheck gets taxed before it even hits their bank account, corporations use <strong>loopholes, deductions, and legal maneuvers</strong> to shrink their tax bills—sometimes down to nothing. It’s called <strong>aggressive tax planning</strong>—not illegal, but certainly not something the everyday taxpayer can pull off. From <strong>offshore tax havens to stock buybacks and depreciation tricks</strong>, here’s how the biggest companies legally avoid paying billions.</p></p>
+
+        </article>
+      
+        <article class="grid-item">
+          <a href="/posts/mathematics-and-physics-of-light-introduction-to-light/">
+            
+            
+              <img class="grid-image" src="/images/lightwaves.jpg" alt="Mathematics and Physics of Light: Introduction to Light">
+            
+
+            
+            <h2 class="grid-title">Mathematics and Physics of Light: Introduction to Light</h2>
+          </a>
+
+          
+          <span class="grid-meta">
+            Feb 19, 2025 • 42 min read
+            
+              <span class="category-tag">Math/Science</span>
+            
+          </span>
+
+          
+          <p class="grid-summary"><h2 id="chapter-1-introduction-to-light"><strong>Chapter 1: Introduction to Light</strong></h2>
+<p>Light is one of the most fundamental and fascinating phenomena in the universe. It is responsible for our ability to see, it fuels life through photosynthesis, and it plays a crucial role in technology, from fiber optic communication to laser surgery. However, despite its everyday presence, light is an incredibly complex and multi-faceted subject that has challenged scientists for centuries.</p>
+<p>To truly understand light, one must first understand the broader concept it belongs to: <strong>electromagnetic radiation</strong>. Light is not an isolated phenomenon—it is part of a vast spectrum of energy waves that travel through space, known as the <strong>electromagnetic spectrum</strong>. This spectrum includes familiar forms of energy like radio waves, microwaves, X-rays, and gamma rays. Each of these, including visible light, consists of <strong>oscillating electric and magnetic fields</strong> that propagate through space at the speed of light.</p></p>
+
+        </article>
+      
+        <article class="grid-item">
+          <a href="/posts/godot-4.3-using-colorrect-for-simple-2d-backgrounds/">
+            
+            
+              <img class="grid-image" src="/images/GodotColorRects.jpg" alt="Godot 4.3 Using ColorRect for Simple 2D Backgrounds">
+            
+
+            
+            <h2 class="grid-title">Godot 4.3 Using ColorRect for Simple 2D Backgrounds</h2>
+          </a>
+
+          
+          <span class="grid-meta">
+            Feb 19, 2025 • 4 min read
+            
+              <span class="category-tag">Programming</span>
+            
+          </span>
+
+          
+          <p class="grid-summary"><p>This paper presents an efficient method for procedurally generating and interpolating a 2D background color in <strong>Godot 4.3</strong> using <strong>GDScript</strong>. The implementation relies entirely on scripting, eliminating the need for manual adjustments in the Godot editor. By leveraging <strong>linear interpolation (LERP)</strong>, the system smoothly transitions between predefined color values over a fixed duration, ensuring a seamless visual experience. This approach is particularly beneficial for procedurally generated environments, menu screens, and dynamic aesthetic modifications in 2D games.</p></p>
+
+        </article>
+      
+        <article class="grid-item">
+          <a href="/posts/breaking-down-interpolation-lerp/">
+            
+            
+              <img class="grid-image" src="/images/interpolation.jpg" alt="Breaking Down Interpolation (Lerp)">
+            
+
+            
+            <h2 class="grid-title">Breaking Down Interpolation (Lerp)</h2>
+          </a>
+
+          
+          <span class="grid-meta">
+            Feb 19, 2025 • 6 min read
+            
+              <span class="category-tag">Programming</span>
+            
+          </span>
+
+          
+          <p class="grid-summary"><h3 id="what-is-interpolation-lerpabt"><strong>What is Interpolation (<em>Lerp(A,B,t)</em>)?</strong></h3>
 <p>Interpolation is a way to estimate values between two known points. Think of it like filling in the gaps between two numbers, positions, or colors smoothly instead of jumping straight from one to the other.</p>
 <p>Another way of interpreting interpolation is to try, <strong>&ldquo;guessing the values in between two known points.&rdquo;</strong> If you have two points on a graph, interpolation helps you estimate what lies between them based on patterns.</p></p>
-      </article>
-    
-      <article class="grid-item">
-        <a href="/posts/godot-43-creating-ui-elements/">
+
+        </article>
+      
+        <article class="grid-item">
+          <a href="/posts/godot-43-creating-ui-elements/">
+            
+            
+              <img class="grid-image" src="/images/Godot43UI.jpg" alt="Godot 43 Creating UI Elements">
+            
+
+            
+            <h2 class="grid-title">Godot 43 Creating UI Elements</h2>
+          </a>
+
           
-          <h2 class="grid-title">Godot 43 Creating UI Elements</h2>
-        </a>
-        <span class="grid-meta">
-          Feb 16, 2025 • 3 min read
-        </span>
-        <p class="grid-summary"><h1 id="building-a-dynamic-ui-system-in-godot-using-visual-studio-code"><strong>Building a Dynamic UI System in Godot Using Visual Studio Code</strong></h1>
-<p>If you’re coding exclusively in <strong>Visual Studio Code (VSC)</strong> and developing a game in <strong>Godot</strong>, you’ll need to create and manage <strong>UI elements</strong> like <strong>Labels, Buttons, Health Bars, and Score Counters</strong> entirely through GDScript. This guide will walk you through setting up a fully <strong>script-driven UI system</strong>, ensuring it scales properly and remains organized.</p>
-<hr>
+          <span class="grid-meta">
+            Feb 16, 2025 • 3 min read
+            
+              <span class="category-tag">Programming</span>
+            
+          </span>
+
+          
+          <p class="grid-summary"><p>If you’re coding exclusively in <strong>Visual Studio Code (VSC)</strong> and developing a game in <strong>Godot</strong>, you’ll need to create and manage <strong>UI elements</strong> like <strong>Labels, Buttons, Health Bars, and Score Counters</strong> entirely through GDScript. This guide will walk you through setting up a fully <strong>script-driven UI system</strong>, ensuring it scales properly and remains organized.</p>
 <h2 id="1-setting-up-ui-elements-with-code"><strong>1. Setting Up UI Elements with Code</strong></h2>
 <p>Since we&rsquo;re not using the scene editor, we must instantiate UI elements programmatically. UI nodes in Godot fall under the <strong>Control</strong> class and include elements like:</p></p>
-      </article>
-    
-      <article class="grid-item">
-        <a href="/posts/godot-43-adding-basic-input/">
+
+        </article>
+      
+        <article class="grid-item">
+          <a href="/posts/godot-43-adding-basic-input/">
+            
+            
+              <img class="grid-image" src="/images/GodotBasicInput.jpg" alt="Godot 4.3 Adding Basic Keyboard Input">
+            
+
+            
+            <h2 class="grid-title">Godot 4.3 Adding Basic Keyboard Input</h2>
+          </a>
+
           
-          <h2 class="grid-title">Godot 4.3 Adding Basic Keyboard Input</h2>
-        </a>
-        <span class="grid-meta">
-          Feb 16, 2025 • 7 min read
-        </span>
-        <p class="grid-summary"><h1 id="godot-43-adding-basic-input---making-the-model-jump-with-spacebar"><strong>Godot 4.3: Adding Basic Input - Making the Model Jump with Spacebar</strong></h1>
-<p>Now that we’ve successfully set up a <strong>3D scene</strong>, imported a <strong>custom 3D model</strong>, and made it <strong>rotate</strong>, it&rsquo;s time to <strong>add user input</strong>. In this guide, we’ll modify our script so that <strong>pressing the spacebar makes the model jump</strong>.</p>
+          <span class="grid-meta">
+            Feb 16, 2025 • 7 min read
+            
+              <span class="category-tag">Programming</span>
+            
+          </span>
+
+          
+          <p class="grid-summary"><p>Now that we’ve successfully set up a <strong>3D scene</strong>, imported a <strong>custom 3D model</strong>, and made it <strong>rotate</strong>, it&rsquo;s time to <strong>add user input</strong>. In this guide, we’ll modify our script so that <strong>pressing the spacebar makes the model jump</strong>.</p>
 <hr>
 <h2 id="final-code-structure"><strong>Final Code Structure</strong></h2>
 <pre tabindex="0"><code>Project/
@@ -272,18 +606,30 @@
 </code></pre><hr>
 <h2 id="1-understanding-input-in-godot-43"><strong>1. Understanding Input in Godot 4.3</strong></h2>
 <p>Before writing code, let&rsquo;s discuss <strong>how Godot handles input</strong>.</p></p>
-      </article>
-    
-      <article class="grid-item">
-        <a href="/posts/godot-43-setting-up-a-3d-project-and-skybox-in-visual-studio-code/">
+
+        </article>
+      
+        <article class="grid-item">
+          <a href="/posts/godot-43-setting-up-a-3d-project-and-skybox-in-visual-studio-code/">
+            
+            
+              <img class="grid-image" src="/images/skybox.jpg" alt="Godot 4.3 Set Up a 3D Project, Skybox &amp; Import Your Custom 3d Model from VSC">
+            
+
+            
+            <h2 class="grid-title">Godot 4.3 Set Up a 3D Project, Skybox &amp; Import Your Custom 3d Model from VSC</h2>
+          </a>
+
           
-          <h2 class="grid-title">Godot 4.3 Set Up a 3D Project, Skybox &amp; Import Your Custom 3d Model from VSC</h2>
-        </a>
-        <span class="grid-meta">
-          Feb 15, 2025 • 11 min read
-        </span>
-        <p class="grid-summary"><p>This guide teaches you how to create a <strong>3D scene programmatically</strong> in Godot 4.3, complete with a <strong>custom skybox</strong>, using only code (no editor setup). We’ll explain core concepts like <code>WorldEnvironment</code>, <code>Camera3D</code>, and <code>SkyMaterial.</code></p>
-<hr>
+          <span class="grid-meta">
+            Feb 15, 2025 • 11 min read
+            
+              <span class="category-tag">Programming</span>
+            
+          </span>
+
+          
+          <p class="grid-summary"><p>This guide teaches you how to create a <strong>3D scene programmatically</strong> in Godot 4.3, complete with a <strong>custom skybox</strong>, using only code (no editor setup). We’ll explain core concepts like <code>WorldEnvironment</code>, <code>Camera3D</code>, and <code>SkyMaterial.</code></p>
 <h2 id="final-code-structure"><strong>Final Code Structure</strong></h2>
 <pre tabindex="0"><code>Project/
 ├── scripts/
@@ -311,63 +657,117 @@
 <ol>
 <li>
 <p><strong>Why We Need a Camera</strong>:</p></p>
-      </article>
-    
-      <article class="grid-item">
-        <a href="/posts/using-python-3-to-convert-webp-to-png/">
+
+        </article>
+      
+        <article class="grid-item">
+          <a href="/posts/using-python-3-to-convert-webp-to-png/">
+            
+            
+              <img class="grid-image" src="/images/webptopng.jpg" alt="How to Convert WEBP Files to PNG Using VS Code in Python">
+            
+
+            
+            <h2 class="grid-title">How to Convert WEBP Files to PNG Using VS Code in Python</h2>
+          </a>
+
           
-          <h2 class="grid-title">How to Convert WEBP Files to PNG Using VS Code in Python</h2>
-        </a>
-        <span class="grid-meta">
-          Feb 15, 2025 • 3 min read
-        </span>
-        <p class="grid-summary"><h1 id="how-to-convert-webp-files-to-png-using-vs-code-in-python">How to Convert WEBP Files to PNG Using VS Code in Python</h1>
-<p>If you have a set of <code>.webp</code> images that need to be converted to <code>.png</code>, Python makes the process simple and efficient. In this guide, I’ll walk you through how to convert WebP files to PNG using <strong>Visual Studio Code (VS Code)</strong> and Python.</p>
+          <span class="grid-meta">
+            Feb 15, 2025 • 3 min read
+            
+              <span class="category-tag">Programming</span>
+            
+          </span>
+
+          
+          <p class="grid-summary"><p>If you have a set of <code>.webp</code> images that need to be converted to <code>.png</code>, Python makes the process simple and efficient. In this guide, I’ll walk you through how to convert WebP files to PNG using <strong>Visual Studio Code (VS Code)</strong> and Python.</p>
 <h2 id="prerequisites">Prerequisites</h2>
 <p>Before we begin, ensure you have the following:</p>
 <ol>
 <li>
 <p><strong>Python Installed</strong><br>
-If you don’t have Python installed, download it from <a href="https://www.python.org/">python.org</a> and install it.</p></p>
-      </article>
-    
-      <article class="grid-item">
-        <a href="/posts/create-custom-3d-assets-using-ai-mesh-and-blender-for-godot/">
+If you don’t have Python installed, download it from <a href="https://www.python.org/">python.org</a> and install it.</p>
+</li>
+<li>
+<p><strong>VS Code Installed</strong><br>
+Download and install <strong>Visual Studio Code</strong> from <a href="https://code.visualstudio.com/">code.visualstudio.com</a>.</p></p>
+
+        </article>
+      
+        <article class="grid-item">
+          <a href="/posts/create-custom-3d-assets-using-ai-mesh-and-blender-for-godot/">
+            
+            
+              <img class="grid-image" src="/images/meshai.jpg" alt="Create Custom 3D Assets Using AI Meshy and Blender for Godot">
+            
+
+            
+            <h2 class="grid-title">Create Custom 3D Assets Using AI Meshy and Blender for Godot</h2>
+          </a>
+
           
-          <h2 class="grid-title">Create Custom 3D Assets Using AI Meshy and Blender for Godot</h2>
-        </a>
-        <span class="grid-meta">
-          Feb 15, 2025 • 5 min read
-        </span>
-        <p class="grid-summary"><h1 id="how-to-create-custom-3d-assets-using-ai-meshy-and-blender-for-godot"><strong>How to Create Custom 3D Assets Using AI, Meshy, and Blender for Godot</strong></h1>
-<p>In this guide, we will go step by step to generate a <strong>2D representation of a 3D object</strong>, convert it into a  <strong>fully textured 3D model</strong>, and format it properly for use in <strong>Godot</strong>.</p>
+          <span class="grid-meta">
+            Feb 15, 2025 • 5 min read
+            
+              <span class="category-tag">3D Modeling</span>
+            
+          </span>
+
+          
+          <p class="grid-summary"><p>In this guide, we will go step by step to generate a <strong>2D representation of a 3D object</strong>, convert it into a  <strong>fully textured 3D model</strong>, and format it properly for use in <strong>Godot</strong>.</p>
 <p>We will cover:</p>
 <p>✅ Using <strong>AI Image Generators</strong> to create a 2D image of your 3D object.</p>
-<p>✅ <strong>Removing the background</strong> and converting formats for best results.</p></p>
-      </article>
-    
-      <article class="grid-item">
-        <a href="/posts/godot-43-understanding-parent-and-child-relationships-through-an-entity-system/">
+<p>✅ <strong>Removing the background</strong> and converting formats for best results.</p>
+<p>✅ Importing the <strong>2D image into Meshy AI</strong> to generate a <strong>3D model</strong>.</p></p>
+
+        </article>
+      
+        <article class="grid-item">
+          <a href="/posts/godot-43-understanding-parent-and-child-relationships-through-an-entity-system/">
+            
+            
+              <img class="grid-image" src="/images/GodotParentsChildren.jpg" alt="Godot 4.3 Understanding Parent and Child Relationships Through an Entity System">
+            
+
+            
+            <h2 class="grid-title">Godot 4.3 Understanding Parent and Child Relationships Through an Entity System</h2>
+          </a>
+
           
-          <h2 class="grid-title">Godot 4.3 Understanding Parent and Child Relationships Through an Entity System</h2>
-        </a>
-        <span class="grid-meta">
-          Feb 15, 2025 • 7 min read
-        </span>
-        <p class="grid-summary"><p>In our previous section, we introduced <strong>custom classes</strong> in Godot by moving the <code>get_properties()</code> function into its own dedicated class, <code>ObjectAnalyzer</code>. This helped us keep <code>main.gd</code> clean while improving code organization.</p>
+          <span class="grid-meta">
+            Feb 15, 2025 • 7 min read
+            
+              <span class="category-tag">Programming</span>
+            
+          </span>
+
+          
+          <p class="grid-summary"><p>In our previous section, we introduced <strong>custom classes</strong> in Godot by moving the <code>get_properties()</code> function into its own dedicated class, <code>ObjectAnalyzer</code>. This helped us keep <code>main.gd</code> clean while improving code organization.</p>
 <p>Now, we’re ready to take a big step forward:  <strong>understanding parent and child relationships in Godot</strong>. This will serve as the foundation for <strong>inheritance</strong> — a key concept in game development that allows us to structure our projects efficiently.</p></p>
-      </article>
-    
-      <article class="grid-item">
-        <a href="/posts/godot-43-moving-get_properties-to-a-separate-class/">
+
+        </article>
+      
+        <article class="grid-item">
+          <a href="/posts/godot-43-moving-get_properties-to-a-separate-class/">
+            
+            
+              <img class="grid-image" src="/images/GodotMovingClass.jpg" alt="Godot 4.3 Moving Get_properties to a Separate Class">
+            
+
+            
+            <h2 class="grid-title">Godot 4.3 Moving Get_properties to a Separate Class</h2>
+          </a>
+
           
-          <h2 class="grid-title">Godot 4.3 Moving Get_properties to a Separate Class</h2>
-        </a>
-        <span class="grid-meta">
-          Feb 15, 2025 • 4 min read
-        </span>
-        <p class="grid-summary"><h3 id="modularizing-object-analysis-moving-get_properties-to-a-separate-class"><strong>Modularizing Object Analysis: Moving <code>get_properties()</code> to a Separate Class</strong></h3>
-<p>So far, we’ve implemented a powerful object analysis system that can dynamically inspect and categorize both <strong>node-based and non-node objects</strong> in Godot. However, keeping all this logic inside <code>main.gd</code> can <strong>clutter</strong> the script, making it harder to maintain and expand.</p>
+          <span class="grid-meta">
+            Feb 15, 2025 • 4 min read
+            
+              <span class="category-tag">Programming</span>
+            
+          </span>
+
+          
+          <p class="grid-summary"><p>So far, we’ve implemented a powerful object analysis system that can dynamically inspect and categorize both <strong>node-based and non-node objects</strong> in Godot. However, keeping all this logic inside <code>main.gd</code> can <strong>clutter</strong> the script, making it harder to maintain and expand.</p>
 <p>To improve  <strong>code organization</strong>, we’ll move the <code>get_properties()</code> function into its own dedicated class. This will:</p>
 <ul>
 <li><strong>Keep <code>main.gd</code> clean and focused</strong> on high-level game logic.</li>
@@ -377,46 +777,82 @@ If you don’t have Python installed, download it from <a href="https://www.pyth
 <hr>
 <h2 id="step-1-creating-a-new-script-for-object-analysis"><strong>Step 1: Creating a New Script for Object Analysis</strong></h2>
 <p>In  <strong>Visual Studio Code</strong>, we will create a new script to handle object analysis separately.</p></p>
-      </article>
-    
-      <article class="grid-item">
-        <a href="/posts/godot-43-expanding-object-compatibility-beyond-nodes/">
+
+        </article>
+      
+        <article class="grid-item">
+          <a href="/posts/godot-43-expanding-object-compatibility-beyond-nodes/">
+            
+            
+              <img class="grid-image" src="/images/godotobjectcompatibility.jpg" alt="Godot 4.3 Expanding Object Compatibility Beyond Nodes">
+            
+
+            
+            <h2 class="grid-title">Godot 4.3 Expanding Object Compatibility Beyond Nodes</h2>
+          </a>
+
           
-          <h2 class="grid-title">Godot 4.3 Expanding Object Compatibility Beyond Nodes</h2>
-        </a>
-        <span class="grid-meta">
-          Feb 15, 2025 • 6 min read
-        </span>
-        <p class="grid-summary"><h3 id="expanding-object-compatibility-beyond-nodes-in-godot-43"><strong>Expanding Object Compatibility Beyond Nodes in Godot 4.3</strong></h3>
-<p>In the previous section, we explored analyzing nodes in Godot using <code>get_property_list()</code>. This gave us the ability to inspect a node’s properties and their respective types. However, in Godot, not all objects are nodes. Many essential data types—such as <code>Vector2</code>, <code>Color</code>, <code>Dictionary</code>, and <code>Array</code>—do not have <code>get_property_list()</code>, which means treating them the same way as nodes would lead to errors.</p>
+          <span class="grid-meta">
+            Feb 15, 2025 • 6 min read
+            
+              <span class="category-tag">Programming</span>
+            
+          </span>
+
+          
+          <p class="grid-summary"><p>In the previous section, we explored analyzing nodes in Godot using <code>get_property_list()</code>. This gave us the ability to inspect a node’s properties and their respective types. However, in Godot, not all objects are nodes. Many essential data types—such as <code>Vector2</code>, <code>Color</code>, <code>Dictionary</code>, and <code>Array</code>—do not have <code>get_property_list()</code>, which means treating them the same way as nodes would lead to errors.</p>
 <p>This section builds upon our previous approach by expanding compatibility to all Godot objects. We aim to ensure that both node-based and non-node objects can be <strong>inspected, categorized, and returned in a structured format</strong> for further use.</p></p>
-      </article>
-    
-      <article class="grid-item">
-        <a href="/posts/godot-43-basics/">
+
+        </article>
+      
+        <article class="grid-item">
+          <a href="/posts/godot-43-basics/">
+            
+            
+              <img class="grid-image" src="/images/learngodotbasics.jpg" alt="Godot 4.3 Basics">
+            
+
+            
+            <h2 class="grid-title">Godot 4.3 Basics</h2>
+          </a>
+
           
-          <h2 class="grid-title">Godot 4.3 Basics</h2>
-        </a>
-        <span class="grid-meta">
-          Feb 9, 2025 • 21 min read
-        </span>
-        <p class="grid-summary"><h1 id="connect-maingd">Connect main.gd</h1>
-<p>In VSC let&rsquo;s make a new folder in our root directory called Scripts, and then make a new file inside the Sripts folder called main.gd. Once this is made we will go into the Godot Engine and drag and drop the newly made file into the main scenes script found on the right side</p>
+          <span class="grid-meta">
+            Feb 9, 2025 • 21 min read
+            
+              <span class="category-tag">Programming</span>
+            
+          </span>
+
+          
+          <p class="grid-summary"><p>In VSC let&rsquo;s make a new folder in our root directory called Scripts, and then make a new file inside the Sripts folder called main.gd. Once this is made we will go into the Godot Engine and drag and drop the newly made file into the main scenes script found on the right side</p>
 <p><img src="/images/Godot-43-Basics/1739163742328.png" alt="Godot Main Scene Inspector"></p>
 <h1 id="extends-keyword">Extends keyword</h1>
 <p>To know what to extend, match your script to the type of node it’s attached to or the functionality you need. In the case of the main.tscn because we made a Node2D to start, we will <code>extend Node2D</code>.</p></p>
-      </article>
-    
-      <article class="grid-item">
-        <a href="/posts/my-first-post/">
+
+        </article>
+      
+        <article class="grid-item">
+          <a href="/posts/setting-up-godot-43-for-visual-studio-code/">
+            
+            
+              <img class="grid-image" src="/images/settingupvscforgodot.jpg" alt="Setting up Godot 4.3 for Visual Studio Code">
+            
+
+            
+            <h2 class="grid-title">Setting up Godot 4.3 for Visual Studio Code</h2>
+          </a>
+
           
-          <h2 class="grid-title">Setting up Godot 4.3 for Visual Studio Code</h2>
-        </a>
-        <span class="grid-meta">
-          Feb 9, 2025 • 4 min read
-        </span>
-        <p class="grid-summary"><h2 id="setting-up-vsc-for-godot-43">Setting up VSC for Godot 4.3</h2>
-<p><strong>NOTE:</strong> These articles are written using Windows</p>
+          <span class="grid-meta">
+            Feb 9, 2025 • 4 min read
+            
+              <span class="category-tag">Programming</span>
+            
+          </span>
+
+          
+          <p class="grid-summary"><p><strong>NOTE:</strong> These articles are written using Windows</p>
 <p><strong>Requirements</strong>:</p>
 <ul>
 <li><em>Godot 4.3</em> (<a href="">https://godotengine.org</a>)</li>
@@ -437,42 +873,118 @@ If you don’t have Python installed, download it from <a href="https://www.pyth
 </ul>
 <h3 id="make-your-project"><strong>Make your project:</strong></h3>
 <p>Launch the <code>Godot_v4.3-stable_win64.exe</code> and this will bring up the below window. If this is your first time launching the <em>Godot Engine - Project Manager</em>, your project list will likely be empty.</p></p>
-      </article>
+
+        </article>
+      
     
   </section>
+</div>
+
 
   
   <aside class="sidebar">
-    <h2>Trending Articles</h2>
-    <ul>
-      
-        <li><a href="/posts/the-hidden-cost-of-always-being-right/">The Hidden Cost of Always Being Right</a></li>
-      
-        <li><a href="/posts/the-social-security-fairness-act-was-never-about-fairness/">The Social Security Fairness Act (SSFA) Was Never About Fairness</a></li>
-      
-        <li><a href="/posts/stock-buybacks-are-a-scambut-not-for-the-reason-you-think/">Stock Buybacks Are a Scam—But Not for the Reason You Think</a></li>
-      
-        <li><a href="/posts/panasonics-big-bet-on-kansasa-win-or-a-ticking-time-bomb/">Panasonics Big Bet on Kansas–A Win or a Ticking Time Bomb</a></li>
-      
-        <li><a href="/posts/is-pramila-jayapal-good-for-washington/">Is Pramila Jayapal Good for Washington</a></li>
-      
-    </ul>
+    <div class="sidebar-section sidebar-trending">
+      <h2>Trending Articles</h2>
+      <ul>
+        
+          <li><a href="/posts/the-journalists-mic-a-security-oversight-waiting-for-disaster/">The Journalists Mic a Security Oversight Waiting for Disaster</a></li>
+        
+          <li><a href="/posts/the-hidden-cost-of-always-being-right/">The Hidden Cost of Always Being Right</a></li>
+        
+          <li><a href="/posts/the-social-security-fairness-act-was-never-about-fairness/">The Social Security Fairness Act Was Never About Fairness</a></li>
+        
+      </ul>
+    </div>
 
-    <h2>Recent Posts</h2>
-    <ul>
-      
-        <li><a href="/posts/the-hidden-cost-of-always-being-right/">The Hidden Cost of Always Being Right</a></li>
-      
-        <li><a href="/posts/the-social-security-fairness-act-was-never-about-fairness/">The Social Security Fairness Act (SSFA) Was Never About Fairness</a></li>
-      
-        <li><a href="/posts/stock-buybacks-are-a-scambut-not-for-the-reason-you-think/">Stock Buybacks Are a Scam—But Not for the Reason You Think</a></li>
-      
-        <li><a href="/posts/panasonics-big-bet-on-kansasa-win-or-a-ticking-time-bomb/">Panasonics Big Bet on Kansas–A Win or a Ticking Time Bomb</a></li>
-      
-        <li><a href="/posts/is-pramila-jayapal-good-for-washington/">Is Pramila Jayapal Good for Washington</a></li>
-      
-    </ul>
+    <div class="sidebar-section sidebar-random">
+      <h2>Random Articles</h2>
+      <ul id="random-articles">
+        
+          <li class="random-article" style="display: none;">
+            <a href="/posts/the-journalists-mic-a-security-oversight-waiting-for-disaster/">The Journalists Mic a Security Oversight Waiting for Disaster</a>
+          </li>
+        
+          <li class="random-article" style="display: none;">
+            <a href="/posts/the-hidden-cost-of-always-being-right/">The Hidden Cost of Always Being Right</a>
+          </li>
+        
+          <li class="random-article" style="display: none;">
+            <a href="/posts/the-social-security-fairness-act-was-never-about-fairness/">The Social Security Fairness Act Was Never About Fairness</a>
+          </li>
+        
+          <li class="random-article" style="display: none;">
+            <a href="/posts/stock-buybacks-are-a-scambut-not-for-the-reason-you-think/">Stock Buybacks Are a Scam—But Not for the Reason You Think</a>
+          </li>
+        
+          <li class="random-article" style="display: none;">
+            <a href="/posts/panasonics-big-bet-on-kansasa-win-or-a-ticking-time-bomb/">Panasonics Big Bet on Kansas–A Win or a Ticking Time Bomb</a>
+          </li>
+        
+          <li class="random-article" style="display: none;">
+            <a href="/posts/is-pramila-jayapal-good-for-washington/">Is Pramila Jayapal Good for Washington</a>
+          </li>
+        
+          <li class="random-article" style="display: none;">
+            <a href="/posts/one-of-the-nine-ways-big-business-avoids-billions-in-taxes-legally/">One of the Nine Ways Big Business Avoids Billions in Taxes Legally</a>
+          </li>
+        
+          <li class="random-article" style="display: none;">
+            <a href="/posts/mathematics-and-physics-of-light-introduction-to-light/">Mathematics and Physics of Light: Introduction to Light</a>
+          </li>
+        
+          <li class="random-article" style="display: none;">
+            <a href="/posts/godot-4.3-using-colorrect-for-simple-2d-backgrounds/">Godot 4.3 Using ColorRect for Simple 2D Backgrounds</a>
+          </li>
+        
+          <li class="random-article" style="display: none;">
+            <a href="/posts/breaking-down-interpolation-lerp/">Breaking Down Interpolation (Lerp)</a>
+          </li>
+        
+          <li class="random-article" style="display: none;">
+            <a href="/posts/godot-43-creating-ui-elements/">Godot 43 Creating UI Elements</a>
+          </li>
+        
+          <li class="random-article" style="display: none;">
+            <a href="/posts/godot-43-adding-basic-input/">Godot 4.3 Adding Basic Keyboard Input</a>
+          </li>
+        
+          <li class="random-article" style="display: none;">
+            <a href="/posts/godot-43-setting-up-a-3d-project-and-skybox-in-visual-studio-code/">Godot 4.3 Set Up a 3D Project, Skybox &amp; Import Your Custom 3d Model from VSC</a>
+          </li>
+        
+          <li class="random-article" style="display: none;">
+            <a href="/posts/using-python-3-to-convert-webp-to-png/">How to Convert WEBP Files to PNG Using VS Code in Python</a>
+          </li>
+        
+          <li class="random-article" style="display: none;">
+            <a href="/posts/create-custom-3d-assets-using-ai-mesh-and-blender-for-godot/">Create Custom 3D Assets Using AI Meshy and Blender for Godot</a>
+          </li>
+        
+          <li class="random-article" style="display: none;">
+            <a href="/posts/godot-43-understanding-parent-and-child-relationships-through-an-entity-system/">Godot 4.3 Understanding Parent and Child Relationships Through an Entity System</a>
+          </li>
+        
+          <li class="random-article" style="display: none;">
+            <a href="/posts/godot-43-moving-get_properties-to-a-separate-class/">Godot 4.3 Moving Get_properties to a Separate Class</a>
+          </li>
+        
+          <li class="random-article" style="display: none;">
+            <a href="/posts/godot-43-expanding-object-compatibility-beyond-nodes/">Godot 4.3 Expanding Object Compatibility Beyond Nodes</a>
+          </li>
+        
+          <li class="random-article" style="display: none;">
+            <a href="/posts/godot-43-basics/">Godot 4.3 Basics</a>
+          </li>
+        
+          <li class="random-article" style="display: none;">
+            <a href="/posts/setting-up-godot-43-for-visual-studio-code/">Setting up Godot 4.3 for Visual Studio Code</a>
+          </li>
+        
+      </ul>
+    </div>
   </aside>
+
+
 
 
     </main>
