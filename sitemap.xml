@@ -2,90 +2,96 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://dontwatchlisten.github.io/categories/</loc>
+    <loc>http://localhost:1313/categories/</loc>
+    <lastmod>2025-04-07T22:10:10-07:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/</loc>
+    <lastmod>2025-04-07T22:10:10-07:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/categories/politics/</loc>
+    <lastmod>2025-04-07T22:10:10-07:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/posts/</loc>
+    <lastmod>2025-04-07T22:10:10-07:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/posts/trumps-third-term-why-the-supreme-court-isnt-a-shield/</loc>
+    <lastmod>2025-04-07T22:10:10-07:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/categories/programming/</loc>
+    <lastmod>2025-03-15T19:49:58-07:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/posts/setting-up-the-yahoo-finance-api/</loc>
+    <lastmod>2025-03-15T19:49:58-07:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/posts/the-journalists-mic-a-security-oversight-waiting-for-disaster/</loc>
     <lastmod>2025-03-14T21:52:02-07:00</lastmod>
   </url><url>
-    <loc>https://dontwatchlisten.github.io/</loc>
-    <lastmod>2025-03-14T21:52:02-07:00</lastmod>
-  </url><url>
-    <loc>https://dontwatchlisten.github.io/categories/politics/</loc>
-    <lastmod>2025-03-14T21:52:02-07:00</lastmod>
-  </url><url>
-    <loc>https://dontwatchlisten.github.io/posts/</loc>
-    <lastmod>2025-03-14T21:52:02-07:00</lastmod>
-  </url><url>
-    <loc>https://dontwatchlisten.github.io/posts/the-journalists-mic-a-security-oversight-waiting-for-disaster/</loc>
-    <lastmod>2025-03-14T21:52:02-07:00</lastmod>
-  </url><url>
-    <loc>https://dontwatchlisten.github.io/categories/psychology/</loc>
+    <loc>http://localhost:1313/categories/psychology/</loc>
     <lastmod>2025-03-11T11:13:28-07:00</lastmod>
   </url><url>
-    <loc>https://dontwatchlisten.github.io/posts/the-hidden-cost-of-always-being-right/</loc>
+    <loc>http://localhost:1313/posts/the-hidden-cost-of-always-being-right/</loc>
     <lastmod>2025-03-11T11:13:28-07:00</lastmod>
   </url><url>
-    <loc>https://dontwatchlisten.github.io/posts/the-social-security-fairness-act-was-never-about-fairness/</loc>
+    <loc>http://localhost:1313/posts/the-social-security-fairness-act-was-never-about-fairness/</loc>
     <lastmod>2025-03-08T21:23:57-08:00</lastmod>
   </url><url>
-    <loc>https://dontwatchlisten.github.io/posts/stock-buybacks-are-a-scambut-not-for-the-reason-you-think/</loc>
+    <loc>http://localhost:1313/posts/stock-buybacks-are-a-scambut-not-for-the-reason-you-think/</loc>
     <lastmod>2025-03-04T23:55:47-08:00</lastmod>
   </url><url>
-    <loc>https://dontwatchlisten.github.io/posts/panasonics-big-bet-on-kansasa-win-or-a-ticking-time-bomb/</loc>
+    <loc>http://localhost:1313/posts/panasonics-big-bet-on-kansasa-win-or-a-ticking-time-bomb/</loc>
     <lastmod>2025-03-02T10:32:22-08:00</lastmod>
   </url><url>
-    <loc>https://dontwatchlisten.github.io/posts/is-pramila-jayapal-good-for-washington/</loc>
+    <loc>http://localhost:1313/posts/is-pramila-jayapal-good-for-washington/</loc>
     <lastmod>2025-03-02T01:41:31-08:00</lastmod>
   </url><url>
-    <loc>https://dontwatchlisten.github.io/posts/one-of-the-nine-ways-big-business-avoids-billions-in-taxes-legally/</loc>
+    <loc>http://localhost:1313/posts/one-of-the-nine-ways-big-business-avoids-billions-in-taxes-legally/</loc>
     <lastmod>2025-03-01T21:09:09-08:00</lastmod>
   </url><url>
-    <loc>https://dontwatchlisten.github.io/categories/math/science/</loc>
+    <loc>http://localhost:1313/categories/math/science/</loc>
     <lastmod>2025-02-19T23:22:54-08:00</lastmod>
   </url><url>
-    <loc>https://dontwatchlisten.github.io/posts/mathematics-and-physics-of-light-introduction-to-light/</loc>
+    <loc>http://localhost:1313/posts/mathematics-and-physics-of-light-introduction-to-light/</loc>
     <lastmod>2025-02-19T23:22:54-08:00</lastmod>
   </url><url>
-    <loc>https://dontwatchlisten.github.io/posts/godot-4.3-using-colorrect-for-simple-2d-backgrounds/</loc>
+    <loc>http://localhost:1313/posts/godot-4.3-using-colorrect-for-simple-2d-backgrounds/</loc>
     <lastmod>2025-02-19T22:22:35-08:00</lastmod>
   </url><url>
-    <loc>https://dontwatchlisten.github.io/categories/programming/</loc>
-    <lastmod>2025-02-19T22:22:35-08:00</lastmod>
-  </url><url>
-    <loc>https://dontwatchlisten.github.io/posts/breaking-down-interpolation-lerp/</loc>
+    <loc>http://localhost:1313/posts/breaking-down-interpolation-lerp/</loc>
     <lastmod>2025-02-19T19:26:21-08:00</lastmod>
   </url><url>
-    <loc>https://dontwatchlisten.github.io/posts/godot-43-creating-ui-elements/</loc>
+    <loc>http://localhost:1313/posts/godot-43-creating-ui-elements/</loc>
     <lastmod>2025-02-16T14:58:21-08:00</lastmod>
   </url><url>
-    <loc>https://dontwatchlisten.github.io/posts/godot-43-adding-basic-input/</loc>
+    <loc>http://localhost:1313/posts/godot-43-adding-basic-input/</loc>
     <lastmod>2025-02-16T13:58:24-08:00</lastmod>
   </url><url>
-    <loc>https://dontwatchlisten.github.io/posts/godot-43-setting-up-a-3d-project-and-skybox-in-visual-studio-code/</loc>
+    <loc>http://localhost:1313/posts/godot-43-setting-up-a-3d-project-and-skybox-in-visual-studio-code/</loc>
     <lastmod>2025-02-15T18:27:41-08:00</lastmod>
   </url><url>
-    <loc>https://dontwatchlisten.github.io/posts/using-python-3-to-convert-webp-to-png/</loc>
+    <loc>http://localhost:1313/posts/using-python-3-to-convert-webp-to-png/</loc>
     <lastmod>2025-02-15T17:21:16-08:00</lastmod>
   </url><url>
-    <loc>https://dontwatchlisten.github.io/categories/3d-modeling/</loc>
+    <loc>http://localhost:1313/categories/3d-modeling/</loc>
     <lastmod>2025-02-15T17:08:49-08:00</lastmod>
   </url><url>
-    <loc>https://dontwatchlisten.github.io/posts/create-custom-3d-assets-using-ai-mesh-and-blender-for-godot/</loc>
+    <loc>http://localhost:1313/posts/create-custom-3d-assets-using-ai-mesh-and-blender-for-godot/</loc>
     <lastmod>2025-02-15T17:08:49-08:00</lastmod>
   </url><url>
-    <loc>https://dontwatchlisten.github.io/posts/godot-43-understanding-parent-and-child-relationships-through-an-entity-system/</loc>
+    <loc>http://localhost:1313/posts/godot-43-understanding-parent-and-child-relationships-through-an-entity-system/</loc>
     <lastmod>2025-02-15T14:17:33-08:00</lastmod>
   </url><url>
-    <loc>https://dontwatchlisten.github.io/posts/godot-43-moving-get_properties-to-a-separate-class/</loc>
+    <loc>http://localhost:1313/posts/godot-43-moving-get_properties-to-a-separate-class/</loc>
     <lastmod>2025-02-15T14:01:08-08:00</lastmod>
   </url><url>
-    <loc>https://dontwatchlisten.github.io/posts/godot-43-expanding-object-compatibility-beyond-nodes/</loc>
+    <loc>http://localhost:1313/posts/godot-43-expanding-object-compatibility-beyond-nodes/</loc>
     <lastmod>2025-02-15T02:37:34-08:00</lastmod>
   </url><url>
-    <loc>https://dontwatchlisten.github.io/posts/godot-43-basics/</loc>
+    <loc>http://localhost:1313/posts/godot-43-basics/</loc>
     <lastmod>2025-02-09T20:42:48-08:00</lastmod>
   </url><url>
-    <loc>https://dontwatchlisten.github.io/posts/setting-up-godot-43-for-visual-studio-code/</loc>
+    <loc>http://localhost:1313/posts/setting-up-godot-43-for-visual-studio-code/</loc>
     <lastmod>2025-02-09T17:21:16-08:00</lastmod>
   </url><url>
-    <loc>https://dontwatchlisten.github.io/tags/</loc>
+    <loc>http://localhost:1313/tags/</loc>
   </url>
 </urlset>

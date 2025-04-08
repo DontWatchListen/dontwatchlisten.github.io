@@ -1,0 +1,890 @@
+<!doctype html>
+<html lang="en-us">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <title>Setting Up the Yahoo Finance API // Don&#39;t Watch, Listen</title>
+
+    
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="/android-chrome-512x512.png">
+    <link rel="shortcut icon" href="/favicon.ico">
+
+    
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+
+    
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="theme-color" content="#242930">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="Don't Watch, Listen">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <meta charset="utf-8" />
+    <meta name="generator" content="Hugo 0.143.1">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="Joshua Parsons" />
+    <meta name="description" content="" />
+    <link rel="stylesheet" href="/css/main.min.c27bdbde9ad2ae9022125bc5e927509b9d793611b5af72ea993b2ffa7ec0b838.css" />
+    
+
+    
+    
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Setting Up the Yahoo Finance API">
+  <meta name="twitter:description" content="The Yahoo Finance API, accessed through the yfinance Python library, will serve as the primary market data provider. It provides historical and near-real-time OHLCV data (open, high, low, close, volume) for stocks, ETFs, and cryptocurrencies. While this API is publicly available, it does not have official documentation on rate limits, requiring optimization strategies such as caching, automated retries, and alternative storage solutions to ensure reliable data retrieval.
+A key challenge is long-term data storage. Since we will collect and store vast amounts of data over time, this section introduces alternative storage options that are scalable, free, and fast while ensuring seamless integration with GitHub Actions for automated updates.">
+
+    <meta property="og:url" content="http://localhost:1313/posts/setting-up-the-yahoo-finance-api/">
+  <meta property="og:site_name" content="Don&#39;t Watch, Listen">
+  <meta property="og:title" content="Setting Up the Yahoo Finance API">
+  <meta property="og:description" content="The Yahoo Finance API, accessed through the yfinance Python library, will serve as the primary market data provider. It provides historical and near-real-time OHLCV data (open, high, low, close, volume) for stocks, ETFs, and cryptocurrencies. While this API is publicly available, it does not have official documentation on rate limits, requiring optimization strategies such as caching, automated retries, and alternative storage solutions to ensure reliable data retrieval.
+A key challenge is long-term data storage. Since we will collect and store vast amounts of data over time, this section introduces alternative storage options that are scalable, free, and fast while ensuring seamless integration with GitHub Actions for automated updates.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2025-03-15T19:49:58-07:00">
+    <meta property="article:modified_time" content="2025-03-15T19:49:58-07:00">
+
+
+  </head>
+
+  <body>
+    
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        let articles = document.querySelectorAll("#random-articles .random-article");
+        let totalArticles = articles.length;
+        let numToShow = Math.min(3, totalArticles);
+        let selectedIndexes = new Set();
+    
+        
+        while (selectedIndexes.size < numToShow) {
+          let randomIndex = Math.floor(Math.random() * totalArticles);
+          selectedIndexes.add(randomIndex);
+        }
+    
+        
+        selectedIndexes.forEach(index => {
+          articles[index].style.display = "block";
+        });
+      });
+    </script>
+    
+    <script>
+      function randomizeBaseofArticles() {
+        let articles = document.querySelectorAll("#random-articles-baseof .random-article-baseof");
+        let totalArticles = articles.length;
+        let numToShow = Math.min(3, totalArticles);
+        let selectedIndexes = new Set();
+    
+        
+        while (selectedIndexes.size < numToShow) {
+          let randomIndex = Math.floor(Math.random() * totalArticles);
+          selectedIndexes.add(randomIndex);
+        }
+    
+        
+        selectedIndexes.forEach(index => {
+          articles[index].style.display = "block";
+        });
+      }
+    
+      document.addEventListener("DOMContentLoaded", randomizeBaseofArticles);
+    </script>
+    
+    
+    <script>
+      function toggleSidebarSections() {
+        let trendingSection = document.querySelector('.baseof-trending');
+        let randomSection = document.querySelector('.baseof-random');
+        let screenWidth = window.innerWidth;
+    
+        if (screenWidth >= 1929) {
+          trendingSection.style.display = "none";
+          randomSection.style.display = "none";
+        } else {
+          trendingSection.style.display = "block";
+          randomSection.style.display = "block";
+        }
+      }
+    
+      
+      document.addEventListener("DOMContentLoaded", toggleSidebarSections);
+      window.addEventListener("resize", toggleSidebarSections);
+    </script>
+    
+    
+    <button id="styleToggle" class="style-toggle"></button>
+    <header class="app-header">
+      <a href="/"><img class="app-header-avatar" src="/images/avatar.png" alt="Joshua Parsons" /></a>
+      <span class="app-header-title">Don&#39;t Watch, Listen</span>
+      <p>Don&#39;t Watch, Listen&#39;s Blog details extensive nuance in each discussion. Find a topic of interest to you in our categories below!</p>
+
+      <nav class="category-nav">
+        <h2>Categories</h2>
+        <ul>
+          
+            <li><a href="/categories/3d-modeling/">3D Modeling (1)</a></li>
+          
+            <li><a href="/categories/math/science/">Math/Science (1)</a></li>
+          
+            <li><a href="/categories/politics/">Politics (7)</a></li>
+          
+            <li><a href="/categories/programming/">Programming (12)</a></li>
+          
+            <li><a href="/categories/psychology/">Psychology (1)</a></li>
+          
+        </ul>
+      </nav>
+
+    
+    <div class="sidebar-section baseof-trending">
+      <h2>Trending Articles</h2>
+      <ul>
+        
+          <li><a href="/posts/trumps-third-term-why-the-supreme-court-isnt-a-shield/">Trumps Third Term: Why the Supreme Court Isn&#39;t a Shield</a></li>
+        
+          <li><a href="/posts/setting-up-the-yahoo-finance-api/">Setting Up the Yahoo Finance API</a></li>
+        
+          <li><a href="/posts/the-journalists-mic-a-security-oversight-waiting-for-disaster/">The Journalists Mic a Security Oversight Waiting for Disaster</a></li>
+        
+      </ul>
+    </div>
+
+    
+    <div class="sidebar-section baseof-random">
+      <h2>Random Articles</h2>
+      <ul id="random-articles-baseof">
+        
+          <li class="random-article-baseof" style="display: none;">
+            <a href="/posts/trumps-third-term-why-the-supreme-court-isnt-a-shield/">Trumps Third Term: Why the Supreme Court Isn&#39;t a Shield</a>
+          </li>
+        
+          <li class="random-article-baseof" style="display: none;">
+            <a href="/posts/setting-up-the-yahoo-finance-api/">Setting Up the Yahoo Finance API</a>
+          </li>
+        
+          <li class="random-article-baseof" style="display: none;">
+            <a href="/posts/the-journalists-mic-a-security-oversight-waiting-for-disaster/">The Journalists Mic a Security Oversight Waiting for Disaster</a>
+          </li>
+        
+          <li class="random-article-baseof" style="display: none;">
+            <a href="/posts/the-hidden-cost-of-always-being-right/">The Hidden Cost of Always Being Right</a>
+          </li>
+        
+          <li class="random-article-baseof" style="display: none;">
+            <a href="/posts/the-social-security-fairness-act-was-never-about-fairness/">The Social Security Fairness Act Was Never About Fairness</a>
+          </li>
+        
+          <li class="random-article-baseof" style="display: none;">
+            <a href="/posts/stock-buybacks-are-a-scambut-not-for-the-reason-you-think/">Stock Buybacks Are a Scam—But Not for the Reason You Think</a>
+          </li>
+        
+          <li class="random-article-baseof" style="display: none;">
+            <a href="/posts/panasonics-big-bet-on-kansasa-win-or-a-ticking-time-bomb/">Panasonics Big Bet on Kansas–A Win or a Ticking Time Bomb</a>
+          </li>
+        
+          <li class="random-article-baseof" style="display: none;">
+            <a href="/posts/is-pramila-jayapal-good-for-washington/">Is Pramila Jayapal Good for Washington</a>
+          </li>
+        
+          <li class="random-article-baseof" style="display: none;">
+            <a href="/posts/one-of-the-nine-ways-big-business-avoids-billions-in-taxes-legally/">One of the Nine Ways Big Business Avoids Billions in Taxes Legally</a>
+          </li>
+        
+          <li class="random-article-baseof" style="display: none;">
+            <a href="/posts/mathematics-and-physics-of-light-introduction-to-light/">Mathematics and Physics of Light: Introduction to Light</a>
+          </li>
+        
+          <li class="random-article-baseof" style="display: none;">
+            <a href="/posts/godot-4.3-using-colorrect-for-simple-2d-backgrounds/">Godot 4.3 Using ColorRect for Simple 2D Backgrounds</a>
+          </li>
+        
+          <li class="random-article-baseof" style="display: none;">
+            <a href="/posts/breaking-down-interpolation-lerp/">Breaking Down Interpolation (Lerp)</a>
+          </li>
+        
+          <li class="random-article-baseof" style="display: none;">
+            <a href="/posts/godot-43-creating-ui-elements/">Godot 43 Creating UI Elements</a>
+          </li>
+        
+          <li class="random-article-baseof" style="display: none;">
+            <a href="/posts/godot-43-adding-basic-input/">Godot 4.3 Adding Basic Keyboard Input</a>
+          </li>
+        
+          <li class="random-article-baseof" style="display: none;">
+            <a href="/posts/godot-43-setting-up-a-3d-project-and-skybox-in-visual-studio-code/">Godot 4.3 Set Up a 3D Project, Skybox &amp; Import Your Custom 3d Model from VSC</a>
+          </li>
+        
+          <li class="random-article-baseof" style="display: none;">
+            <a href="/posts/using-python-3-to-convert-webp-to-png/">How to Convert WEBP Files to PNG Using VS Code in Python</a>
+          </li>
+        
+          <li class="random-article-baseof" style="display: none;">
+            <a href="/posts/create-custom-3d-assets-using-ai-mesh-and-blender-for-godot/">Create Custom 3D Assets Using AI Meshy and Blender for Godot</a>
+          </li>
+        
+          <li class="random-article-baseof" style="display: none;">
+            <a href="/posts/godot-43-understanding-parent-and-child-relationships-through-an-entity-system/">Godot 4.3 Understanding Parent and Child Relationships Through an Entity System</a>
+          </li>
+        
+          <li class="random-article-baseof" style="display: none;">
+            <a href="/posts/godot-43-moving-get_properties-to-a-separate-class/">Godot 4.3 Moving Get_properties to a Separate Class</a>
+          </li>
+        
+          <li class="random-article-baseof" style="display: none;">
+            <a href="/posts/godot-43-expanding-object-compatibility-beyond-nodes/">Godot 4.3 Expanding Object Compatibility Beyond Nodes</a>
+          </li>
+        
+          <li class="random-article-baseof" style="display: none;">
+            <a href="/posts/godot-43-basics/">Godot 4.3 Basics</a>
+          </li>
+        
+          <li class="random-article-baseof" style="display: none;">
+            <a href="/posts/setting-up-godot-43-for-visual-studio-code/">Setting up Godot 4.3 for Visual Studio Code</a>
+          </li>
+        
+      </ul>
+    </header>
+    <main class="app-container">
+      
+  <article class="post">
+    <header class="post-header">
+      
+      <h1 class="post-title">Setting Up the Yahoo Finance API</h1>
+    
+      <div class="post-meta">
+        <div>
+          <svg class="icon icon-calendar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><title>calendar</title><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+          Mar 15, 2025
+        </div>
+        <div>
+          <svg class="icon icon-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><title>clock</title><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+          15 min read
+        </div>
+      </div>
+    </header>
+
+    <div class="post-content">
+      
+        <div class="key-takeaways">
+          <h2>Key Takeaways</h2>
+          <ul>
+            
+              <li></li>
+            
+              <li></li>
+            
+              <li></li>
+            
+          </ul>
+        </div>
+      
+
+      
+
+  
+  <p>The Yahoo Finance API, accessed through the <code>yfinance</code> Python library, will serve as the <strong>primary market data provider</strong>. It provides <strong>historical and near-real-time OHLCV data</strong> (open, high, low, close, volume) for stocks, ETFs, and cryptocurrencies. While this API is publicly available, it does not have official documentation on rate limits, requiring <strong>optimization strategies</strong> such as <strong>caching, automated retries, and alternative storage solutions</strong> to ensure reliable data retrieval.</p>
+<p>A key challenge is <strong>long-term data storage</strong>. Since we will collect and store vast amounts of data over time, this section introduces alternative storage options that are <strong>scalable, free, and fast</strong> while ensuring seamless integration with GitHub Actions for <strong>automated updates</strong>.</p>
+<h1 id="phase-1-setting-up-the-environment"><strong>Phase 1: Setting Up the Environment</strong></h1>
+<h2 id="setting-up-the-project-with-a-virtual-environment"><strong>Setting Up the Project with a Virtual Environment</strong></h2>
+<p>To keep dependencies isolated and avoid global installations, it is best practice to create a <strong>Python virtual environment (venv)</strong> for the project. This ensures all installed packages remain contained within the project directory, preventing conflicts with other Python projects on the system.</p>
+<h3 id="create-the-project-directory"><strong>Create the Project Directory</strong></h3>
+<p>Start by setting up a dedicated project folder to organize scripts, data, and configurations.</p>
+<h4 id="for-macoslinux"><strong>For macOS/Linux:</strong></h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>mkdir market_chrono <span style="color:#f92672">&amp;&amp;</span> cd market_chrono
+</span></span><span style="display:flex;"><span>mkdir data  <span style="color:#75715e"># Create a directory for storing JSON data files</span>
+</span></span><span style="display:flex;"><span>touch fetch_data.py  <span style="color:#75715e"># Create the script file</span>
+</span></span></code></pre></div><h4 id="for-windows-command-prompt"><strong>For Windows (Command Prompt):</strong></h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>mkdir market_chrono <span style="color:#f92672">&amp;&amp;</span> cd market_chrono
+</span></span><span style="display:flex;"><span>mkdir data  <span style="color:#75715e"># Create a directory for storing JSON data files</span>
+</span></span><span style="display:flex;"><span>type nul &gt; fetch_data.py  <span style="color:#75715e"># Create an empty script file</span>
+</span></span></code></pre></div><h4 id="for-windows-powershell"><strong>For Windows (PowerShell):</strong></h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>New-Item -ItemType Directory -Path market_chrono
+</span></span><span style="display:flex;"><span>Set-Location market_chrono
+</span></span><span style="display:flex;"><span>New-Item -ItemType Directory -Path data
+</span></span><span style="display:flex;"><span>New-Item -ItemType File -Path fetch_data.py
+</span></span></code></pre></div><hr>
+<h2 id="set-up-a-virtual-environment"><strong>Set Up a Virtual Environment</strong></h2>
+<p>Create and activate a virtual environment within the project directory:</p>
+<h4 id="for-macoslinux-1"><strong>For macOS/Linux:</strong></h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>python3 -m venv venv  <span style="color:#75715e"># Create a virtual environment</span>
+</span></span><span style="display:flex;"><span>source venv/bin/activate  <span style="color:#75715e"># Activate the virtual environment</span>
+</span></span></code></pre></div><h4 id="for-windows-command-prompt-1"><strong>For Windows (Command Prompt):</strong></h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>python -m venv venv  <span style="color:#75715e"># Create a virtual environment</span>
+</span></span><span style="display:flex;"><span>venv<span style="color:#ae81ff">\S</span>cripts<span style="color:#ae81ff">\a</span>ctivate  <span style="color:#75715e"># Activate the virtual environment</span>
+</span></span></code></pre></div><h4 id="for-windows-powershell-1"><strong>For Windows (PowerShell):</strong></h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>python -m venv venv
+</span></span><span style="display:flex;"><span>.<span style="color:#ae81ff">\v</span>env<span style="color:#ae81ff">\S</span>cripts<span style="color:#ae81ff">\a</span>ctivate
+</span></span></code></pre></div><p>When the virtual environment is activated, the terminal prompt may change to include <code>(venv)</code>, indicating that all installed packages will now be contained within the project folder.</p>
+<hr>
+<h2 id="install-required-dependencies"><strong>Install Required Dependencies</strong></h2>
+<p>With the virtual environment activated, install the following required packages:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>pip install yfinance requests ipfshttpclient
+</span></span></code></pre></div><ul>
+<li><strong><code>yfinance</code></strong>: Fetches market data from Yahoo Finance.</li>
+<li><strong><code>requests</code></strong>: Handles HTTP requests (useful for interacting with alternative APIs if needed).</li>
+<li><strong><code>ipfshttpclient</code></strong>: Allows uploading and managing files on <strong>IPFS (InterPlanetary File System)</strong>.</li>
+</ul>
+<p>To confirm installation:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>pip list
+</span></span></code></pre></div><hr>
+<h2 id="fetch-and-store-market-data"><strong>Fetch and Store Market Data</strong></h2>
+<p>This section explains <strong>how to retrieve stock market data</strong> using the Yahoo Finance API and prepare it for storage. We are going to retrieve daily OHLCV (open, high, low, close, volume) data for tracked assets, then <strong>upload the JSON files to IPFS</strong> for decentralized storage.</p>
+<h3 id="what-this-code-does"><strong>What This Code Does</strong></h3>
+<ol>
+<li><strong>Connects to Yahoo Finance</strong> to get stock/crypto price data.</li>
+<li><strong>Gets the last trading day&rsquo;s data</strong> (Open, High, Low, Close, Volume).</li>
+<li><strong>Formats the data into a structured JSON object</strong>.</li>
+<li><strong>Returns the data</strong> (or prints an error if something goes wrong).</li>
+</ol>
+<h3 id="import-required-libraries"><strong>Import Required Libraries</strong></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>import yfinance as yf  <span style="color:#75715e"># Yahoo Finance API wrapper</span>
+</span></span><span style="display:flex;"><span>import json  <span style="color:#75715e"># Handles saving data in JSON format</span>
+</span></span><span style="display:flex;"><span>import ipfshttpclient  <span style="color:#75715e"># Uploads data to IPFS (InterPlanetary File System)</span>
+</span></span><span style="display:flex;"><span>from datetime import datetime  <span style="color:#75715e"># Gets the current date</span>
+</span></span></code></pre></div><ul>
+<li><strong><code>yfinance</code></strong>: Will be used to fetch market data from Yahoo Finance.</li>
+<li><strong><code>json</code></strong>: Converts the data into a structured format for storage.</li>
+<li><strong><code>ipfshttpclient</code></strong>: Uploads the JSON file to IPFS for decentralized storage.</li>
+<li><strong><code>datetime</code></strong>: Gets today’s date so we know when the data was fetched</li>
+</ul>
+<h3 id="define-the-function-to-fetch-data"><strong>Define the Function to Fetch Data</strong></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>def fetch_yahoo_finance_data<span style="color:#f92672">(</span>ticker<span style="color:#f92672">)</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;Fetches OHLCV data for a given stock ticker from Yahoo Finance.&#34;&#34;&#34;</span>
+</span></span></code></pre></div><ul>
+<li><strong>This function takes one input</strong> → <code>ticker</code> (stock symbol like <code>&quot;AAPL&quot;</code> for Apple).</li>
+<li><strong>It will return</strong> the latest market data for that stock.</li>
+</ul>
+<h3 id="connect-to-yahoo-finance"><strong>Connect to Yahoo Finance</strong></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>    try:
+</span></span><span style="display:flex;"><span>        stock <span style="color:#f92672">=</span> yf.Ticker<span style="color:#f92672">(</span>ticker<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>        hist <span style="color:#f92672">=</span> stock.history<span style="color:#f92672">(</span>period<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;1d&#34;</span><span style="color:#f92672">)</span>
+</span></span></code></pre></div><ul>
+<li><strong><code>yf.Ticker(ticker)</code></strong> → Creates a Yahoo Finance object for the given stock.</li>
+<li><strong><code>stock.history(period=&quot;1d&quot;)</code></strong> → Fetches the last available trading day&rsquo;s data.</li>
+</ul>
+<p>❗ <em><strong>Example</strong></em>: If you run <code>fetch_yahoo_finance_data(&quot;AAPL&quot;)</code> on <strong>March 15, 2025</strong>, the function will get <strong>Apple&rsquo;s stock prices from March 14, 2025</strong>.</p>
+<h3 id="check-if-data-exists"><strong>Check if Data Exists</strong></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> hist.empty:
+</span></span><span style="display:flex;"><span>            print<span style="color:#f92672">(</span>f<span style="color:#e6db74">&#34;No data available for {ticker}.&#34;</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> None
+</span></span></code></pre></div><ul>
+<li><strong><code>hist.empty</code> checks if the data is missing</strong>.</li>
+<li><strong>If the data is empty</strong>, print a message and return <code>None</code>.</li>
+</ul>
+<p>🔹 <strong>Why?</strong><br>
+Sometimes, Yahoo Finance may not have data for a stock (e.g., if the market was closed).</p>
+<h3 id="extract-the-latest-market-data"><strong>Extract the Latest Market Data</strong></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>        latest_data <span style="color:#f92672">=</span> hist.iloc<span style="color:#f92672">[</span>-1<span style="color:#f92672">]</span>
+</span></span></code></pre></div><ul>
+<li><strong><code>.iloc[-1]</code></strong> → Gets the last row of the table (which contains yesterday’s stock prices).</li>
+</ul>
+<p>🔹 <strong>Example Output from Yahoo Finance (<code>hist</code> table):</strong></p>
+<table>
+  <thead>
+      <tr>
+          <th>Date</th>
+          <th>Open</th>
+          <th>High</th>
+          <th>Low</th>
+          <th>Close</th>
+          <th>Volume</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>2025-03-14</td>
+          <td>175.2</td>
+          <td>178.9</td>
+          <td>174.5</td>
+          <td>177.6</td>
+          <td>89,000,000</td>
+      </tr>
+  </tbody>
+</table>
+<ul>
+<li>The function <strong>extracts the last row</strong> (2025-03-14) and stores it in <code>latest_data</code>.</li>
+</ul>
+<h3 id="format-the-extracted-data-for-storage"><strong>Format the Extracted Data for Storage</strong></h3>
+<p>Once we have the latest trading day&rsquo;s data, it needs to be structured in a dictionary format so it can be stored and used later.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>		<span style="color:#66d9ef">return</span> {
+</span></span><span style="display:flex;"><span>		    <span style="color:#e6db74">&#34;open&#34;</span>: float(latest_data[<span style="color:#e6db74">&#34;Open&#34;</span>]),
+</span></span><span style="display:flex;"><span>		    <span style="color:#e6db74">&#34;high&#34;</span>: float(latest_data[<span style="color:#e6db74">&#34;High&#34;</span>]),
+</span></span><span style="display:flex;"><span>		    <span style="color:#e6db74">&#34;low&#34;</span>: float(latest_data[<span style="color:#e6db74">&#34;Low&#34;</span>]),
+</span></span><span style="display:flex;"><span>		    <span style="color:#e6db74">&#34;close&#34;</span>: float(latest_data[<span style="color:#e6db74">&#34;Close&#34;</span>]),
+</span></span><span style="display:flex;"><span>		    <span style="color:#e6db74">&#34;volume&#34;</span>: int(latest_data[<span style="color:#e6db74">&#34;Volume&#34;</span>])
+</span></span><span style="display:flex;"><span>		}
+</span></span></code></pre></div><ul>
+<li>The extracted values are <strong>converted into appropriate data types</strong>:
+<ul>
+<li><strong><code>float(latest_data[&quot;Open&quot;])</code></strong> → Ensures stock prices remain decimal values.</li>
+<li><strong><code>int(latest_data[&quot;Volume&quot;])</code></strong> → Volume is stored as an integer since it represents whole shares traded.</li>
+</ul>
+</li>
+<li>This structured dictionary makes it easier to <strong>store and retrieve data efficiently</strong>.</li>
+</ul>
+<p>🔹 <strong>Example Output of the Dictionary Returned by the Function:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;open&#34;</span>: <span style="color:#ae81ff">175.2</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;high&#34;</span>: <span style="color:#ae81ff">178.9</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;low&#34;</span>: <span style="color:#ae81ff">174.5</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;close&#34;</span>: <span style="color:#ae81ff">177.6</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;volume&#34;</span>: <span style="color:#ae81ff">89000000</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h3 id="why-dont-we-just-return-latest_data"><strong>Why Don&rsquo;t We Just Return <code>latest_data</code>?</strong></h3>
+<p>At first glance, returning <code>latest_data</code> directly might seem like a good idea because it already holds the latest stock market data. However, there are several key reasons why we <strong>process and format</strong> the data instead of returning it as-is:</p>
+<ol>
+<li>
+<p><strong>Data Type &amp; Structure Issues</strong></p>
+<ul>
+<li><code>latest_data</code> is a <strong>Pandas Series</strong> object, which is <strong>not inherently JSON-serializable</strong>.</li>
+<li>JSON files can only store <strong>lists, dictionaries, numbers, and strings</strong>, so returning <code>latest_data</code> directly would cause issues when trying to save it.</li>
+</ul>
+</li>
+<li>
+<p><strong>Ensuring Data Consistency</strong></p>
+<ul>
+<li>Pandas Series stores values in <strong>NumPy-specific types</strong> (e.g., <code>numpy.float64</code>, <code>numpy.int64</code>), which are not directly compatible with JSON.</li>
+<li>To prevent serialization errors, we <strong>convert them to Python-native types</strong> (<code>float</code> for prices and <code>int</code> for volume).</li>
+</ul>
+</li>
+<li>
+<p><strong>Removing Unnecessary Metadata</strong></p>
+<ul>
+<li><code>latest_data</code> contains <strong>extra information</strong> such as index labels and other internal Pandas attributes that we don’t need.</li>
+<li>By returning only the key market metrics (<code>open</code>, <code>high</code>, <code>low</code>, <code>close</code>, <code>volume</code>), we streamline storage and retrieval.</li>
+</ul>
+</li>
+</ol>
+<h3 id="what-type-is-latest_data"><strong>What Type is <code>latest_data</code>?</strong></h3>
+<p><code>latest_data</code> is a <strong>Pandas Series</strong> object. A <strong>Series</strong> in Pandas is similar to a dictionary, where each value is labeled by an index.</p>
+<p>To check the type of <code>latest_data</code>, we can add the following line to our function:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>print(type(latest_data))
+</span></span></code></pre></div><p>If we run the function with this, it will print:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">class</span> <span style="color:#e6db74">&#39;pandas.core.series.Series&#39;</span><span style="color:#f92672">&gt;</span>
+</span></span></code></pre></div><p>This confirms that <code>latest_data</code> is a Pandas Series, meaning it needs to be <strong>converted</strong> before being stored in a JSON file.</p>
+<h3 id="how-to-inspect-latest_data"><strong>How to Inspect <code>latest_data</code>?</strong></h3>
+<p>If we want to <strong>see what <code>latest_data</code> contains</strong>, we can print it:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>print(latest_data)
+</span></span></code></pre></div><p>🔹 <strong>Example Output of <code>latest_data</code>:</strong></p>
+<pre tabindex="0"><code class="language-pqsql" data-lang="pqsql">Open      175.2
+High      178.9
+Low       174.5
+Close     177.6
+Volume    89000000
+Name: 2025-03-14 00:00:00, dtype: object
+</code></pre><ul>
+<li>The <strong>index</strong> (<code>Name: 2025-03-14 00:00:00</code>) represents the date.</li>
+<li>The <strong>columns</strong> (<code>Open</code>, <code>High</code>, <code>Low</code>, <code>Close</code>, <code>Volume</code>) contain the stock data.</li>
+<li>The <strong>dtype: object</strong> at the end indicates that the data types might not be fully compatible with JSON.</li>
+</ul>
+<h3 id="now-to-handle-errors-gracefully"><strong>Now to Handle Errors Gracefully</strong></h3>
+<p>Stock data retrieval might fail due to several reasons, such as <strong>network issues</strong>, <strong>invalid tickers</strong>, or <strong>Yahoo Finance API downtimes</strong>. To prevent the script from crashing, we wrap the function in a <code>try-except</code> block:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">except</span> <span style="color:#a6e22e">Exception</span> <span style="color:#66d9ef">as</span> e:
+</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;Error fetching data for </span><span style="color:#e6db74">{</span>ticker<span style="color:#e6db74">}</span><span style="color:#e6db74">: </span><span style="color:#e6db74">{</span>str(e)<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">None</span>
+</span></span></code></pre></div><ul>
+<li>If something goes wrong, the function:
+<ul>
+<li><strong>Prints an error message</strong> to indicate which stock caused the failure.</li>
+<li><strong>Returns <code>None</code></strong>, so the script can skip failed stocks instead of stopping entirely.</li>
+</ul>
+</li>
+</ul>
+<p>🔹 <strong>Example Error Output if the API Fails or the Ticker is Invalid:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span>Error fetching <span style="color:#66d9ef">data</span> <span style="color:#66d9ef">for</span> XYZ123: No <span style="color:#66d9ef">data</span> available <span style="color:#66d9ef">for</span> the given ticker.
+</span></span></code></pre></div><p>Now that we have structured our data properly and included error handling, let&rsquo;s move on to <strong>optimizing how we store and manage stock data efficiently</strong>.</p>
+<h3 id="optimizing-data-storage-for-scalability"><strong>Optimizing Data Storage for Scalability</strong></h3>
+<p>At this point, we have successfully retrieved stock data, but how we store it determines long-term efficiency. Initially, our approach was to save <strong>each stock’s data in a separate file</strong>, leading to excessive storage use and slow data retrieval. Instead, we will consolidate all stock data for a given day into a <strong>single JSON file</strong>, making the system more scalable and organized. Let’s refine how we format and structure this data to ensure it remains efficient as we expand to tracking hundreds or thousands of stocks.</p>
+<h3 id="why-our-original-data-format-was-inefficient-and-how-to-fix-it"><strong>Why Our Original Data Format Was Inefficient and How to Fix It</strong></h3>
+<p>Before we jump into optimizing the way we store stock market data, let&rsquo;s first understand <strong>how our original method worked and why it wasn’t scalable</strong>. Initially, the approach was to <strong>store each stock&rsquo;s data in a separate JSON file</strong>, meaning for every single stock, a new file was created each day.</p>
+<h3 id="the-old-format-one-file-per-stock-per-day"><strong>The Old Format: One File per Stock Per Day</strong></h3>
+<p>Imagine you’re tracking <strong>500 stocks</strong> (which is common for serious traders). If we saved data <strong>one file per stock</strong>, we would have:</p>
+<ul>
+<li><strong>500 separate files per day</strong></li>
+<li><strong>15,000+ files per month</strong></li>
+<li><strong>180,000+ files per year</strong></li>
+</ul>
+<h4 id="example-files-in-the-data-folder-march-15-2025"><strong>Example: Files in the &ldquo;data/&rdquo; Folder (March 15, 2025)</strong></h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span><span style="color:#66d9ef">data</span>/
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">│──</span> AAPL_2025-<span style="color:#ae81ff">03</span>-<span style="color:#ae81ff">15.</span>json
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">│──</span> TSLA_2025-<span style="color:#ae81ff">03</span>-<span style="color:#ae81ff">15.</span>json
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">│──</span> GOOGL_2025-<span style="color:#ae81ff">03</span>-<span style="color:#ae81ff">15.</span>json
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">│──</span> MSFT_2025-<span style="color:#ae81ff">03</span>-<span style="color:#ae81ff">15.</span>json
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">│──</span> AMZN_2025-<span style="color:#ae81ff">03</span>-<span style="color:#ae81ff">15.</span>json
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">│──</span> NVDA_2025-<span style="color:#ae81ff">03</span>-<span style="color:#ae81ff">15.</span>json
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">│──</span> META_2025-<span style="color:#ae81ff">03</span>-<span style="color:#ae81ff">15.</span>json
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">│──</span> <span style="color:#f92672">..</span>.
+</span></span></code></pre></div><h4 id="example-json-for-each-stock"><strong>Example JSON for Each Stock</strong></h4>
+<p>Each stock had its own file with a repeated <code>&quot;date&quot;</code> field:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;date&#34;</span>: <span style="color:#e6db74">&#34;2025-03-15&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;ticker&#34;</span>: <span style="color:#e6db74">&#34;AAPL&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;open&#34;</span>: <span style="color:#ae81ff">175.2</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;high&#34;</span>: <span style="color:#ae81ff">178.9</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;low&#34;</span>: <span style="color:#ae81ff">174.5</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;close&#34;</span>: <span style="color:#ae81ff">177.6</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;volume&#34;</span>: <span style="color:#ae81ff">89000000</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;date&#34;</span>: <span style="color:#e6db74">&#34;2025-03-15&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;ticker&#34;</span>: <span style="color:#e6db74">&#34;TSLA&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;open&#34;</span>: <span style="color:#ae81ff">860.5</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;high&#34;</span>: <span style="color:#ae81ff">875.0</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;low&#34;</span>: <span style="color:#ae81ff">855.2</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;close&#34;</span>: <span style="color:#ae81ff">868.3</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;volume&#34;</span>: <span style="color:#ae81ff">65000000</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h4 id="the-problem"><strong>The Problem</strong></h4>
+<p>📂 <strong>File Bloat:</strong> Too many files, making it hard to manage.<br>
+🚀 <strong>Slow Lookups:</strong> If we need data for multiple stocks, we have to open and parse <strong>hundreds of files</strong>.<br>
+🔄 <strong>Redundant Metadata:</strong> The <code>&quot;date&quot;</code> field is repeated in every file, making storage inefficient.</p>
+<h3 id="the-better-format-a-nested-dictionary-one-file-per-day"><strong>The Better Format: A Nested Dictionary (One File Per Day)</strong></h3>
+<p>Instead of creating separate files for every stock, <strong>we store all stock data for a given day in a single JSON file</strong>. This makes data access <strong>faster, cleaner, and more organized</strong>.</p>
+<p>Example: New File Structure</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-kotlin" data-lang="kotlin"><span style="display:flex;"><span><span style="color:#66d9ef">data</span>/
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">│──</span> market_data_2025-<span style="color:#ae81ff">03</span>-<span style="color:#ae81ff">15.</span>json
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">│──</span> market_data_2025-<span style="color:#ae81ff">03</span>-<span style="color:#ae81ff">16.</span>json
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">│──</span> market_data_2025-<span style="color:#ae81ff">03</span>-<span style="color:#ae81ff">17.</span>json
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">│──</span> <span style="color:#f92672">..</span>.
+</span></span></code></pre></div><p>Example JSON Format (All Stocks in One File)</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;date&#34;</span>: <span style="color:#e6db74">&#34;2025-03-15&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;stocks&#34;</span>: {
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;AAPL&#34;</span>: {
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;open&#34;</span>: <span style="color:#ae81ff">175.2</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;high&#34;</span>: <span style="color:#ae81ff">178.9</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;low&#34;</span>: <span style="color:#ae81ff">174.5</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;close&#34;</span>: <span style="color:#ae81ff">177.6</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;volume&#34;</span>: <span style="color:#ae81ff">89000000</span>
+</span></span><span style="display:flex;"><span>        },
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;TSLA&#34;</span>: {
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;open&#34;</span>: <span style="color:#ae81ff">860.5</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;high&#34;</span>: <span style="color:#ae81ff">875.0</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;low&#34;</span>: <span style="color:#ae81ff">855.2</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;close&#34;</span>: <span style="color:#ae81ff">868.3</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;volume&#34;</span>: <span style="color:#ae81ff">65000000</span>
+</span></span><span style="display:flex;"><span>        },
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;GOOGL&#34;</span>: {
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;open&#34;</span>: <span style="color:#ae81ff">2805.0</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;high&#34;</span>: <span style="color:#ae81ff">2850.4</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;low&#34;</span>: <span style="color:#ae81ff">2788.2</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;close&#34;</span>: <span style="color:#ae81ff">2832.1</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;volume&#34;</span>: <span style="color:#ae81ff">1800000</span>
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h3 id="why-this-format-is-better"><strong>Why This Format is Better</strong></h3>
+<p>✅ <strong>Only One JSON File Per Day</strong> → No more hundreds of files cluttering storage.<br>
+✅ <strong>Fast Lookups</strong> → We can load all stock data at once, reducing file read time.<br>
+✅ <strong>Easier to Expand</strong> → We can add more data fields like <code>&quot;market_cap&quot;</code> or <code>&quot;sector&quot;</code> later.</p>
+<h3 id="updating-the-code-to-use-this-new-format"><strong>Updating the Code to Use This New Format</strong></h3>
+<p>Now that we know why this method is better, let’s update our code to reflect this structure.</p>
+<h4 id="modify-the-data-fetching-function"><strong>Modify the Data Fetching Function</strong></h4>
+<p>Instead of saving individual stock data, we return a <strong>dictionary without the <code>&quot;date&quot;</code> field</strong> (since it&rsquo;s already in the main structure).</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> yfinance <span style="color:#66d9ef">as</span> yf
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> json
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> datetime <span style="color:#f92672">import</span> datetime
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">fetch_yahoo_finance_data</span>(ticker):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;Fetches OHLCV data for a given stock ticker from Yahoo Finance.&#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">try</span>:
+</span></span><span style="display:flex;"><span>        stock <span style="color:#f92672">=</span> yf<span style="color:#f92672">.</span>Ticker(ticker)
+</span></span><span style="display:flex;"><span>        hist <span style="color:#f92672">=</span> stock<span style="color:#f92672">.</span>history(period<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;1d&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> hist<span style="color:#f92672">.</span>empty:
+</span></span><span style="display:flex;"><span>            print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;No data available for </span><span style="color:#e6db74">{</span>ticker<span style="color:#e6db74">}</span><span style="color:#e6db74">.&#34;</span>)
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">None</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        latest_data <span style="color:#f92672">=</span> hist<span style="color:#f92672">.</span>iloc[<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#34;open&#34;</span>: float(latest_data[<span style="color:#e6db74">&#34;Open&#34;</span>]),
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#34;high&#34;</span>: float(latest_data[<span style="color:#e6db74">&#34;High&#34;</span>]),
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#34;low&#34;</span>: float(latest_data[<span style="color:#e6db74">&#34;Low&#34;</span>]),
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#34;close&#34;</span>: float(latest_data[<span style="color:#e6db74">&#34;Close&#34;</span>]),
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#34;volume&#34;</span>: int(latest_data[<span style="color:#e6db74">&#34;Volume&#34;</span>])
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">except</span> <span style="color:#a6e22e">Exception</span> <span style="color:#66d9ef">as</span> e:
+</span></span><span style="display:flex;"><span>        print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;Error fetching data for </span><span style="color:#e6db74">{</span>ticker<span style="color:#e6db74">}</span><span style="color:#e6db74">: </span><span style="color:#e6db74">{</span>str(e)<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">None</span>
+</span></span></code></pre></div><h4 id="fetch-multiple-tickers-and-organize-data"><strong>Fetch Multiple Tickers and Organize Data</strong></h4>
+<p>This function will <strong>fetch data for multiple stocks and store it in a single JSON file</strong> under the <code>&quot;stocks&quot;</code> key.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">fetch_multiple_tickers</span>(tickers):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;Fetches OHLCV data for multiple tickers and stores it in a nested JSON format.&#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    market_data <span style="color:#f92672">=</span> {<span style="color:#e6db74">&#34;date&#34;</span>: datetime<span style="color:#f92672">.</span>now()<span style="color:#f92672">.</span>strftime(<span style="color:#e6db74">&#34;%Y-%m-</span><span style="color:#e6db74">%d</span><span style="color:#e6db74">&#34;</span>), <span style="color:#e6db74">&#34;stocks&#34;</span>: {}}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> ticker <span style="color:#f92672">in</span> tickers:
+</span></span><span style="display:flex;"><span>        stock_data <span style="color:#f92672">=</span> fetch_yahoo_finance_data(ticker)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> stock_data:
+</span></span><span style="display:flex;"><span>            market_data[<span style="color:#e6db74">&#34;stocks&#34;</span>][ticker] <span style="color:#f92672">=</span> stock_data
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> market_data
+</span></span></code></pre></div><h3 id="understanding-market_datastocksticker--stock_data"><strong>Understanding <code>market_data[&quot;stocks&quot;][ticker] = stock_data</code></strong></h3>
+<p>The <strong>assignment statement</strong> inside the loop:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>market_data[<span style="color:#e6db74">&#34;stocks&#34;</span>][ticker] <span style="color:#f92672">=</span> stock_data
+</span></span></code></pre></div><p>is <strong>storing data in a nested dictionary</strong>.</p>
+<h3 id="breaking-down-market_data"><strong>Breaking Down <code>market_data</code></strong></h3>
+<p>At the beginning of the function, <code>market_data</code> is initialized as:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>market_data <span style="color:#f92672">=</span> {<span style="color:#e6db74">&#34;date&#34;</span>: datetime<span style="color:#f92672">.</span>now()<span style="color:#f92672">.</span>strftime(<span style="color:#e6db74">&#34;%Y-%m-</span><span style="color:#e6db74">%d</span><span style="color:#e6db74">&#34;</span>), <span style="color:#e6db74">&#34;stocks&#34;</span>: {}}
+</span></span></code></pre></div><p>This creates a <strong>dictionary</strong> with:</p>
+<ul>
+<li>A <code>&quot;date&quot;</code> key → storing today’s date.</li>
+<li>A <code>&quot;stocks&quot;</code> key → initialized as an <strong>empty dictionary <code>{}</code></strong>, where we will store stock data.</li>
+</ul>
+<h4 id="example-after-initialization"><strong>Example after initialization:</strong></h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;date&#34;</span>: <span style="color:#e6db74">&#34;2025-03-15&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;stocks&#34;</span>: {}
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h3 id="understanding-market_datastocks"><strong>Understanding <code>market_data[&quot;stocks&quot;]</code></strong></h3>
+<ul>
+<li><code>market_data[&quot;stocks&quot;]</code> refers to the <strong>nested dictionary inside <code>market_data</code></strong> that will store stock information.</li>
+<li>Initially, it is empty:</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#e6db74">&#34;stocks&#34;</span>: {}
+</span></span></code></pre></div><p>What Happens Inside the Loop?</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">for</span> ticker <span style="color:#f92672">in</span> tickers:
+</span></span><span style="display:flex;"><span>    stock_data <span style="color:#f92672">=</span> fetch_yahoo_finance_data(ticker)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> stock_data:
+</span></span><span style="display:flex;"><span>        market_data[<span style="color:#e6db74">&#34;stocks&#34;</span>][ticker] <span style="color:#f92672">=</span> stock_data
+</span></span></code></pre></div><ol>
+<li>The loop goes through each stock symbol (<code>ticker</code>) in <code>tickers</code> (e.g., <code>&quot;AAPL&quot;</code>, <code>&quot;TSLA&quot;</code>, <code>&quot;GOOGL&quot;</code>).</li>
+<li>It <strong>fetches data</strong> for that ticker using <code>fetch_yahoo_finance_data(ticker)</code>.</li>
+<li>If valid <code>stock_data</code> is returned, we <strong>store it inside <code>market_data[&quot;stocks&quot;]</code></strong> under its ticker.</li>
+</ol>
+<h4 id="example"><strong>Example:</strong></h4>
+<p>If we run:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>tickers <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#34;AAPL&#34;</span>, <span style="color:#e6db74">&#34;TSLA&#34;</span>]
+</span></span><span style="display:flex;"><span>market_data <span style="color:#f92672">=</span> fetch_multiple_tickers(tickers)
+</span></span></code></pre></div><p>Here’s what happens:
+First loop iteration (<code>ticker = &quot;AAPL&quot;</code>):</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>stock_data <span style="color:#f92672">=</span> { <span style="color:#e6db74">&#34;open&#34;</span>: <span style="color:#ae81ff">175.2</span>, <span style="color:#e6db74">&#34;high&#34;</span>: <span style="color:#ae81ff">178.9</span>, <span style="color:#e6db74">&#34;low&#34;</span>: <span style="color:#ae81ff">174.5</span>, <span style="color:#e6db74">&#34;close&#34;</span>: <span style="color:#ae81ff">177.6</span>, <span style="color:#e6db74">&#34;volume&#34;</span>: <span style="color:#ae81ff">89000000</span> }
+</span></span></code></pre></div><ul>
+<li>This gets stored as:</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>market_data[<span style="color:#e6db74">&#34;stocks&#34;</span>][<span style="color:#e6db74">&#34;AAPL&#34;</span>] <span style="color:#f92672">=</span> stock_data
+</span></span></code></pre></div><p>Second loop iteration (<code>ticker = &quot;TSLA&quot;</code>):</p>
+<ul>
+<li>
+<p><code>stock_data = { &quot;open&quot;: 860.5, &quot;high&quot;: 875.0, &quot;low&quot;: 855.2, &quot;close&quot;: 868.3, &quot;volume&quot;: 65000000 }</code></p>
+</li>
+<li>
+<p>This gets stored as:</p>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>market_data[<span style="color:#e6db74">&#34;stocks&#34;</span>][<span style="color:#e6db74">&#34;TSLA&#34;</span>] <span style="color:#f92672">=</span> stock_data
+</span></span></code></pre></div><p>Now, <code>market_data</code> looks like this:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;date&#34;</span>: <span style="color:#e6db74">&#34;2025-03-15&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;stocks&#34;</span>: {
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;AAPL&#34;</span>: {
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;open&#34;</span>: <span style="color:#ae81ff">175.2</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;high&#34;</span>: <span style="color:#ae81ff">178.9</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;low&#34;</span>: <span style="color:#ae81ff">174.5</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;close&#34;</span>: <span style="color:#ae81ff">177.6</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;volume&#34;</span>: <span style="color:#ae81ff">89000000</span>
+</span></span><span style="display:flex;"><span>        },
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;TSLA&#34;</span>: {
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;open&#34;</span>: <span style="color:#ae81ff">860.5</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;high&#34;</span>: <span style="color:#ae81ff">875.0</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;low&#34;</span>: <span style="color:#ae81ff">855.2</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;close&#34;</span>: <span style="color:#ae81ff">868.3</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&#34;volume&#34;</span>: <span style="color:#ae81ff">65000000</span>
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h3 id="so-what-does-ticker-do"><strong>So What Does <code>[ticker]</code> Do?</strong></h3>
+<p>When we write:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>market_data[<span style="color:#e6db74">&#34;stocks&#34;</span>][ticker] <span style="color:#f92672">=</span> stock_data
+</span></span></code></pre></div><ul>
+<li><code>ticker</code> is the <strong>stock symbol</strong> (e.g., <code>&quot;AAPL&quot;</code>, <code>&quot;TSLA&quot;</code>).</li>
+<li><code>market_data[&quot;stocks&quot;]</code> is <strong>a dictionary of stock data</strong>.</li>
+<li><code>market_data[&quot;stocks&quot;][ticker]</code> creates a <strong>new key-value pair inside <code>stocks</code></strong>, using the ticker as the key.</li>
+</ul>
+<p>Effectively, this <strong>dynamically assigns stock data to its corresponding ticker symbol</strong> in the dictionary.</p>
+<p>Think of <code>market_data[&quot;stocks&quot;]</code> as a <strong>folder</strong> (dictionary) that holds multiple stock records.<br>
+Each <code>ticker</code> (like <code>&quot;AAPL&quot;</code>, <code>&quot;TSLA&quot;</code>) is a <strong>separate file</strong> (another dictionary inside).</p>
+<p>Instead of creating multiple files for each stock, we <strong>organize everything under one structure</strong>, making it easier to store and retrieve.</p>
+<h4 id="save-data-in-a-single-json-file"><strong>Save Data in a Single JSON File</strong></h4>
+<p>Instead of saving <strong>separate files</strong>, we save <strong>one file per day</strong>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">save_to_json</span>(filename, data):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;Saves the nested stock data to a JSON file.&#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">with</span> open(filename, <span style="color:#e6db74">&#34;w&#34;</span>) <span style="color:#66d9ef">as</span> json_file:
+</span></span><span style="display:flex;"><span>        json<span style="color:#f92672">.</span>dump(data, json_file, indent<span style="color:#f92672">=</span><span style="color:#ae81ff">4</span>)
+</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;Market data saved to </span><span style="color:#e6db74">{</span>filename<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
+</span></span></code></pre></div><h4 id="run-the-code"><strong>Run the Code</strong></h4>
+<p>Finally, we <strong>fetch data for multiple stocks</strong> and store it in <strong>one JSON file per day</strong>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;__main__&#34;</span>:
+</span></span><span style="display:flex;"><span>    tickers <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#34;AAPL&#34;</span>, <span style="color:#e6db74">&#34;TSLA&#34;</span>, <span style="color:#e6db74">&#34;GOOGL&#34;</span>, <span style="color:#e6db74">&#34;AMZN&#34;</span>, <span style="color:#e6db74">&#34;MSFT&#34;</span>]
+</span></span><span style="display:flex;"><span>    market_data <span style="color:#f92672">=</span> fetch_multiple_tickers(tickers)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    filename <span style="color:#f92672">=</span> <span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;data/market_data_</span><span style="color:#e6db74">{</span>datetime<span style="color:#f92672">.</span>now()<span style="color:#f92672">.</span>strftime(<span style="color:#e6db74">&#39;%Y-%m-</span><span style="color:#e6db74">%d</span><span style="color:#e6db74">&#39;</span>)<span style="color:#e6db74">}</span><span style="color:#e6db74">.json&#34;</span>
+</span></span><span style="display:flex;"><span>    save_to_json(filename, market_data)
+</span></span></code></pre></div><p><strong>Full code:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>import yfinance as yf			<span style="color:#75715e"># Yahoo Finance API Wrapper</span>
+</span></span><span style="display:flex;"><span>import json						<span style="color:#75715e"># Handles saving data as a JSON</span>
+</span></span><span style="display:flex;"><span>import ipfshttpclient			<span style="color:#75715e"># Uploads data to IPFS (InterPlanetary File System)</span>
+</span></span><span style="display:flex;"><span>from datetime import datetime	<span style="color:#75715e"># Gets the current date</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>class Main:
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	def __init__<span style="color:#f92672">(</span>self<span style="color:#f92672">)</span>:
+</span></span><span style="display:flex;"><span>		ticker_list <span style="color:#f92672">=</span> <span style="color:#f92672">[</span><span style="color:#e6db74">&#34;AAPL&#34;</span>, <span style="color:#e6db74">&#34;TSLA&#34;</span>, <span style="color:#e6db74">&#34;GOOGL&#34;</span>, <span style="color:#e6db74">&#34;AMZN&#34;</span>, <span style="color:#e6db74">&#34;MSFT&#34;</span><span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>		market_data <span style="color:#f92672">=</span> self.fetch_multiple_yahoo_finance_tickers<span style="color:#f92672">(</span>ticker_list<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>		filename <span style="color:#f92672">=</span> f<span style="color:#e6db74">&#34;data/market_data_{datetime.now().strftime(&#39;%Y-%m-%d&#39;)}.json&#34;</span>
+</span></span><span style="display:flex;"><span>		self.save_to_json<span style="color:#f92672">(</span>filename, market_data<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	def fetch_yahoo_finance_ticker_data<span style="color:#f92672">(</span>self, ticker<span style="color:#f92672">)</span>:
+</span></span><span style="display:flex;"><span>		<span style="color:#e6db74">&#34;&#34;&#34;Fetches OHLCV for a given stock ticker from Yahoo Finance&#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>		try:
+</span></span><span style="display:flex;"><span>			stock <span style="color:#f92672">=</span> yf.Ticker<span style="color:#f92672">(</span>ticker<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>			hist <span style="color:#f92672">=</span> stock.history<span style="color:#f92672">(</span>period<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;1d&#34;</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>			<span style="color:#75715e"># check if data exists</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">if</span> hist.empty:
+</span></span><span style="display:flex;"><span>				print<span style="color:#f92672">(</span>f<span style="color:#e6db74">&#34;{ticker} has no history available&#34;</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>				<span style="color:#66d9ef">return</span> None 
+</span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>				latest_data <span style="color:#f92672">=</span> hist.iloc<span style="color:#f92672">[</span>-1<span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">return</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>				<span style="color:#e6db74">&#34;open&#34;</span>: float<span style="color:#f92672">(</span>latest_data<span style="color:#f92672">[</span><span style="color:#e6db74">&#34;Open&#34;</span><span style="color:#f92672">])</span>,
+</span></span><span style="display:flex;"><span>				<span style="color:#e6db74">&#34;high&#34;</span>: float<span style="color:#f92672">(</span>latest_data<span style="color:#f92672">[</span><span style="color:#e6db74">&#34;High&#34;</span><span style="color:#f92672">])</span>,
+</span></span><span style="display:flex;"><span>				<span style="color:#e6db74">&#34;low&#34;</span>:  float<span style="color:#f92672">(</span>latest_data<span style="color:#f92672">[</span><span style="color:#e6db74">&#34;Low&#34;</span><span style="color:#f92672">])</span>,
+</span></span><span style="display:flex;"><span>				<span style="color:#e6db74">&#34;close&#34;</span>: float<span style="color:#f92672">(</span>latest_data<span style="color:#f92672">[</span><span style="color:#e6db74">&#34;Close&#34;</span><span style="color:#f92672">])</span>,
+</span></span><span style="display:flex;"><span>				<span style="color:#e6db74">&#34;volume&#34;</span>: int<span style="color:#f92672">(</span>latest_data<span style="color:#f92672">[</span><span style="color:#e6db74">&#34;Volume&#34;</span><span style="color:#f92672">])</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>		except Exception as e: 
+</span></span><span style="display:flex;"><span>			print<span style="color:#f92672">(</span>f<span style="color:#e6db74">&#34;Error fetching data for {ticker}: str{e}&#34;</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">return</span> None
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	def fetch_multiple_yahoo_finance_tickers<span style="color:#f92672">(</span>self, ticker_list<span style="color:#f92672">)</span>:
+</span></span><span style="display:flex;"><span>		<span style="color:#e6db74">&#34;&#34;&#34;Fetches OHLCV for a passed list of tickers from Yahoo Finance&#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>		<span style="color:#75715e"># Makes the dictionary that will store the pulled market data</span>
+</span></span><span style="display:flex;"><span>		market_data <span style="color:#f92672">=</span> <span style="color:#f92672">{</span><span style="color:#e6db74">&#34;data&#34;</span>: datetime.now<span style="color:#f92672">()</span>.strftime<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;%Y-%m-%d&#34;</span><span style="color:#f92672">)</span>, <span style="color:#e6db74">&#34;stocks&#34;</span>: <span style="color:#f92672">{}}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">for</span> ticker in ticker_list:
+</span></span><span style="display:flex;"><span>			try:
+</span></span><span style="display:flex;"><span>				stock_data <span style="color:#f92672">=</span> self.fetch_yahoo_finance_ticker_data<span style="color:#f92672">(</span>ticker<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>				<span style="color:#66d9ef">if</span> stock_data:
+</span></span><span style="display:flex;"><span>					market_data<span style="color:#f92672">[</span><span style="color:#e6db74">&#34;stocks&#34;</span><span style="color:#f92672">][</span>ticker<span style="color:#f92672">]</span> <span style="color:#f92672">=</span> stock_data
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>			except Exception as e:
+</span></span><span style="display:flex;"><span>				print<span style="color:#f92672">(</span>f<span style="color:#e6db74">&#34;Stock data was not found for {ticker}&#34;</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">return</span> market_data
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	def save_to_json<span style="color:#f92672">(</span>self, filename, data<span style="color:#f92672">)</span>:
+</span></span><span style="display:flex;"><span>		<span style="color:#e6db74">&#34;&#34;&#34;Saves the market data to a JSON file&#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>		with open<span style="color:#f92672">(</span>filename, <span style="color:#e6db74">&#34;w&#34;</span><span style="color:#f92672">)</span> as json_file:
+</span></span><span style="display:flex;"><span>			json.dump<span style="color:#f92672">(</span>data, json_file, indent<span style="color:#f92672">=</span>4<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>		print<span style="color:#f92672">(</span>f<span style="color:#e6db74">&#34;Market data saved to {filename}&#34;</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;__main__&#34;</span>:
+</span></span><span style="display:flex;"><span>	m <span style="color:#f92672">=</span> Main<span style="color:#f92672">()</span>
+</span></span></code></pre></div><p>This function:</p>
+<ul>
+<li>Fetches <strong>the last available trading day’s OHLCV data</strong>.</li>
+<li>Formats it as a <strong>JSON object</strong>.</li>
+<li>Returns the <strong>processed data</strong>, or logs an error if retrieval fails.</li>
+</ul>
+<hr>
+<h1 id="dynamically-handling-ticker-management"><strong>Dynamically Handling Ticker Management</strong></h1>
+<h2 id="how-can-we-retrieve-all-us-ticker-symbols"><strong>How Can We Retrieve All U.S. Ticker Symbols?</strong></h2>
+<p>Instead of relying on APIs with potential rate limits or scraping websites, <strong>NASDAQ provides a public FTP server</strong> where it hosts daily-updated stock listing files. This is a <strong>free, reliable, and legal way</strong> to get all currently active ticker symbols without any API keys or costs.</p>
+<h3 id="understanding-nasdaqs-ftp-data"><strong>Understanding NASDAQ’s FTP Data</strong></h3>
+<p>NASDAQ maintains an FTP server that publicly provides ticker lists. The primary files of interest are:</p>
+<table>
+  <thead>
+      <tr>
+          <th><strong>Exchange</strong></th>
+          <th><strong>File Name</strong></th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>NASDAQ</td>
+          <td><code>nasdaqlisted.txt</code></td>
+      </tr>
+      <tr>
+          <td>NYSE &amp; AMEX</td>
+          <td><code>otherlisted.txt</code></td>
+      </tr>
+  </tbody>
+</table>
+<p>These files contain a list of active ticker symbols along with company names and other metadata.</p>
+<p><strong>Public NASDAQ FTP Server URL:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-arduino" data-lang="arduino"><span style="display:flex;"><span>ftp:<span style="color:#75715e">//ftp.nasdaqtrader.com/SymbolDirectory/
+</span></span></span></code></pre></div><h3 id="download--process-the-nasdaq-ticker-list"><strong>Download &amp; Process the NASDAQ Ticker List</strong></h3>
+<p>To fetch the ticker list, we will download and parse these files using Python’s <code>requests</code> or <code>urllib</code>.</p>
+<h3 id="install-required-libraries"><strong>Install Required Libraries</strong></h3>
+<p>If you haven’t installed <code>pandas</code>, install it first:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>pip install pandas
+</span></span></code></pre></div><h3 id="fetch-and-process-nasdaq-data"><strong>Fetch and Process NASDAQ Data</strong></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> pandas <span style="color:#66d9ef">as</span> pd
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>NASDAQ_TICKER_URL <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;ftp://ftp.nasdaqtrader.com/SymbolDirectory/nasdaqlisted.txt&#34;</span>
+</span></span><span style="display:flex;"><span>OTHER_TICKER_URL <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;ftp://ftp.nasdaqtrader.com/SymbolDirectory/otherlisted.txt&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">fetch_nasdaq_tickers</span>():
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;Fetches all active U.S. stock tickers from NASDAQ&#39;s public FTP server.&#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">try</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># Load NASDAQ tickers</span>
+</span></span><span style="display:flex;"><span>        nasdaq_df <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>read_csv(NASDAQ_TICKER_URL, sep<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;|&#34;</span>)
+</span></span><span style="display:flex;"><span>        nasdaq_tickers <span style="color:#f92672">=</span> nasdaq_df[<span style="color:#e6db74">&#34;Symbol&#34;</span>]<span style="color:#f92672">.</span>tolist()
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># Load NYSE &amp; AMEX tickers</span>
+</span></span><span style="display:flex;"><span>        other_df <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>read_csv(OTHER_TICKER_URL, sep<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;|&#34;</span>)
+</span></span><span style="display:flex;"><span>        other_tickers <span style="color:#f92672">=</span> other_df[<span style="color:#e6db74">&#34;ACT Symbol&#34;</span>]<span style="color:#f92672">.</span>tolist()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># Combine all tickers</span>
+</span></span><span style="display:flex;"><span>        all_tickers <span style="color:#f92672">=</span> nasdaq_tickers <span style="color:#f92672">+</span> other_tickers
+</span></span><span style="display:flex;"><span>        print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;Successfully retrieved </span><span style="color:#e6db74">{</span>len(all_tickers)<span style="color:#e6db74">}</span><span style="color:#e6db74"> tickers.&#34;</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> all_tickers
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">except</span> <span style="color:#a6e22e">Exception</span> <span style="color:#66d9ef">as</span> e:
+</span></span><span style="display:flex;"><span>        print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;Error fetching tickers: </span><span style="color:#e6db74">{</span>str(e)<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">None</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Example Usage</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;__main__&#34;</span>:
+</span></span><span style="display:flex;"><span>    tickers <span style="color:#f92672">=</span> fetch_nasdaq_tickers()
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> tickers:
+</span></span><span style="display:flex;"><span>        print(tickers[:<span style="color:#ae81ff">10</span>])  <span style="color:#75715e"># Display the first 10 tickers</span>
+</span></span></code></pre></div><h3 id="how-this-works"><strong>How This Works</strong></h3>
+<ol>
+<li><strong>We download NASDAQ and NYSE/AMEX ticker files</strong> from NASDAQ’s <strong>public FTP server</strong>.</li>
+<li><strong>Files are stored in a simple text format</strong>, separated by <code>|</code> (pipe symbol).</li>
+<li><strong>Pandas reads the files and extracts only the ticker symbols</strong> from each dataset.</li>
+<li><strong>We combine NASDAQ, NYSE, and AMEX tickers</strong> into one clean list.</li>
+<li><strong>The function returns a full list of stock symbols</strong>, ensuring up-to-date coverage.</li>
+</ol>
+<h3 id="expected-output"><strong>Expected Output</strong></h3>
+<p>When you run the script, it should print:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>Successfully retrieved <span style="color:#ae81ff">7200</span> tickers<span style="color:#f92672">.</span>
+</span></span><span style="display:flex;"><span>[<span style="color:#e6db74">&#39;AAPL&#39;</span>, <span style="color:#e6db74">&#39;MSFT&#39;</span>, <span style="color:#e6db74">&#39;GOOGL&#39;</span>, <span style="color:#e6db74">&#39;AMZN&#39;</span>, <span style="color:#e6db74">&#39;TSLA&#39;</span>, <span style="color:#e6db74">&#39;NVDA&#39;</span>, <span style="color:#e6db74">&#39;META&#39;</span>, <span style="color:#e6db74">&#39;NFLX&#39;</span>, <span style="color:#e6db74">&#39;AMD&#39;</span>, <span style="color:#e6db74">&#39;PYPL&#39;</span>]
+</span></span></code></pre></div><p>You’ll now have <strong>every active stock ticker</strong> from NASDAQ, NYSE, and AMEX <strong>in one list</strong>.</p>
+
+
+    </div>
+
+    <div class="post-footer">
+      
+    </div>
+  </article>
+
+    </main>
+    <script src="/js/theme-toggle.js"></script>
+  </body>
+</html>

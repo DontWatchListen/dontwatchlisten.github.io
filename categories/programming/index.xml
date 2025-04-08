@@ -6,8 +6,15 @@
     <description>Recent content in Programming on Don&#39;t Watch, Listen</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 19 Feb 2025 22:22:35 -0800</lastBuildDate>
+    <lastBuildDate>Sat, 15 Mar 2025 19:49:58 -0700</lastBuildDate>
     <atom:link href="https://dontwatchlisten.github.io/categories/programming/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Setting Up the Yahoo Finance API</title>
+      <link>https://dontwatchlisten.github.io/posts/setting-up-the-yahoo-finance-api/</link>
+      <pubDate>Sat, 15 Mar 2025 19:49:58 -0700</pubDate>
+      <guid>https://dontwatchlisten.github.io/posts/setting-up-the-yahoo-finance-api/</guid>
+      <description>&lt;p&gt;The Yahoo Finance API, accessed through the &lt;code&gt;yfinance&lt;/code&gt; Python library, will serve as the &lt;strong&gt;primary market data provider&lt;/strong&gt;. It provides &lt;strong&gt;historical and near-real-time OHLCV data&lt;/strong&gt; (open, high, low, close, volume) for stocks, ETFs, and cryptocurrencies. While this API is publicly available, it does not have official documentation on rate limits, requiring &lt;strong&gt;optimization strategies&lt;/strong&gt; such as &lt;strong&gt;caching, automated retries, and alternative storage solutions&lt;/strong&gt; to ensure reliable data retrieval.&lt;/p&gt;&#xA;&lt;p&gt;A key challenge is &lt;strong&gt;long-term data storage&lt;/strong&gt;. Since we will collect and store vast amounts of data over time, this section introduces alternative storage options that are &lt;strong&gt;scalable, free, and fast&lt;/strong&gt; while ensuring seamless integration with GitHub Actions for &lt;strong&gt;automated updates&lt;/strong&gt;.&lt;/p&gt;</description>
+    </item>
     <item>
       <title>Godot 4.3 Using ColorRect for Simple 2D Backgrounds</title>
       <link>https://dontwatchlisten.github.io/posts/godot-4.3-using-colorrect-for-simple-2d-backgrounds/</link>

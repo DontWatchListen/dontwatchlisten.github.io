@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>P on Don&#39;t Watch, Listen</title>
+    <link>http://localhost:1313/categories/p/</link>
+    <description>Recent content in P on Don&#39;t Watch, Listen</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 15 Mar 2025 23:46:56 -0700</lastBuildDate>
+    <atom:link href="http://localhost:1313/categories/p/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Optimize Asynchronous Requests Using Asyncio and Aiohttp</title>
+      <link>http://localhost:1313/posts/optimize-asynchronous-requests-using-asyncio-and-aiohttp/</link>
+      <pubDate>Sat, 15 Mar 2025 23:46:56 -0700</pubDate>
+      <guid>http://localhost:1313/posts/optimize-asynchronous-requests-using-asyncio-and-aiohttp/</guid>
+      <description>&lt;p&gt;Imagine you’re a librarian tasked with collecting book details from hundreds of libraries across the country. If you visit each library one by one, waiting for them to hand you the information before moving to the next, it could take days. But what if you could send out assistants to all libraries at once, letting them gather details simultaneously while you sip coffee? That’s the magic of &lt;strong&gt;asynchronous programming&lt;/strong&gt;—doing many things at the same time without waiting around. In this tutorial, we’ll explore how to use Python’s &lt;code&gt;asyncio&lt;/code&gt; and &lt;code&gt;aiohttp&lt;/code&gt; libraries to make fast, efficient web requests, perfect for tasks like fetching stock market data or scraping websites. We’ll build from scratch, explain every concept, and optimize for speed, all while keeping it simple for beginners.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>
