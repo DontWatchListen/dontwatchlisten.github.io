@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en-us">
-  <head>
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
     <title>Godot 4.3 Moving Get_properties to a Separate Class // Don&#39;t Watch, Listen</title>
 
     
@@ -26,7 +26,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="author" content="Joshua Parsons" />
     <meta name="description" content="" />
-    <link rel="stylesheet" href="/css/main.min.c27bdbde9ad2ae9022125bc5e927509b9d793611b5af72ea993b2ffa7ec0b838.css" />
+    <link rel="stylesheet" href="/css/main.min.4418c247daf47db74a6f504ea565b3b169cebedc216d34ea93b2cde552a4e782.css" />
     
 
     
@@ -37,7 +37,7 @@
 To improve code organization, we’ll move the get_properties() function into its own dedicated class. This will:
 Keep main.gd clean and focused on high-level game logic. Make get_properties() reusable across different parts of the project. Encourage modular programming , making it easier to expand in the future. Step 1: Creating a New Script for Object Analysis In Visual Studio Code, we will create a new script to handle object analysis separately.">
 
-    <meta property="og:url" content="https://dontwatchlisten.github.io/posts/godot-43-moving-get_properties-to-a-separate-class/">
+    <meta property="og:url" content="http://localhost:1313/posts/godot-43-moving-get_properties-to-a-separate-class/">
   <meta property="og:site_name" content="Don&#39;t Watch, Listen">
   <meta property="og:title" content="Godot 4.3 Moving Get_properties to a Separate Class">
   <meta property="og:description" content="So far, we’ve implemented a powerful object analysis system that can dynamically inspect and categorize both node-based and non-node objects in Godot. However, keeping all this logic inside main.gd can clutter the script, making it harder to maintain and expand.
@@ -132,7 +132,7 @@ Keep main.gd clean and focused on high-level game logic. Make get_properties() r
           
             <li><a href="/categories/math/science/">Math/Science (1)</a></li>
           
-            <li><a href="/categories/politics/">Politics (8)</a></li>
+            <li><a href="/categories/politics/">Politics (9)</a></li>
           
             <li><a href="/categories/programming/">Programming (12)</a></li>
           
@@ -146,11 +146,11 @@ Keep main.gd clean and focused on high-level game logic. Make get_properties() r
       <h2>Trending Articles</h2>
       <ul>
         
+          <li><a href="/posts/prices-arent-set-by-presidentsbut-they-love-taking-the-credit/">Prices Arent Set by Presidents—But They Love Taking the Credit</a></li>
+        
           <li><a href="/posts/when-the-wealthy-vote-to-tax-themselves-reform-or-reputation/">When the Wealthy Vote to Tax Themselves Reform or Reputation</a></li>
         
           <li><a href="/posts/trumps-third-term-why-the-supreme-court-isnt-a-shield/">Trumps Third Term: Why the Supreme Court Isn&#39;t a Shield</a></li>
-        
-          <li><a href="/posts/setting-up-the-yahoo-finance-api/">Setting Up the Yahoo Finance API</a></li>
         
       </ul>
     </div>
@@ -159,6 +159,10 @@ Keep main.gd clean and focused on high-level game logic. Make get_properties() r
     <div class="sidebar-section baseof-random">
       <h2>Random Articles</h2>
       <ul id="random-articles-baseof">
+        
+          <li class="random-article-baseof" style="display: none;">
+            <a href="/posts/prices-arent-set-by-presidentsbut-they-love-taking-the-credit/">Prices Arent Set by Presidents—But They Love Taking the Credit</a>
+          </li>
         
           <li class="random-article-baseof" style="display: none;">
             <a href="/posts/when-the-wealthy-vote-to-tax-themselves-reform-or-reputation/">When the Wealthy Vote to Tax Themselves Reform or Reputation</a>
