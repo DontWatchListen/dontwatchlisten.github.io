@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Psychology on Don&#39;t Watch, Listen</title>
-    <link>https://dontwatchlisten.github.io/categories/psychology/</link>
+    <link>http://localhost:1313/categories/psychology/</link>
     <description>Recent content in Psychology on Don&#39;t Watch, Listen</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Tue, 11 Mar 2025 11:13:28 -0700</lastBuildDate>
-    <atom:link href="https://dontwatchlisten.github.io/categories/psychology/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/categories/psychology/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>The Hidden Cost of Always Being Right</title>
-      <link>https://dontwatchlisten.github.io/posts/the-hidden-cost-of-always-being-right/</link>
+      <link>http://localhost:1313/posts/the-hidden-cost-of-always-being-right/</link>
       <pubDate>Tue, 11 Mar 2025 11:13:28 -0700</pubDate>
-      <guid>https://dontwatchlisten.github.io/posts/the-hidden-cost-of-always-being-right/</guid>
+      <guid>http://localhost:1313/posts/the-hidden-cost-of-always-being-right/</guid>
       <description>&lt;p&gt;Tonight, it’s not about politics—but, self-reflection. Often in personal life, I find myself overreacting and not truly listening. Even when I ask for nuance, it’s rarely to understand—it’s to prove I’m right, and that narrows my perspective, leaving blind spots that I can’t ignore. If we&amp;rsquo;re always the smartest person in the room, we&amp;rsquo;ll never know true enlightenment. Overconfidence doesn’t just limit you; it cuts you off from what others offer. Shift your focus from winning alone to growing together and listen, really listen, embrace “I don’t know.” Admitting that, isn’t a weakness, it’s courage that shadows pretending you’ve got it all figured out.&lt;/p&gt;</description>
     </item>
   </channel>
