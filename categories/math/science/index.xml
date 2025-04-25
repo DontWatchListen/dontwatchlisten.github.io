@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Math/Science on Don&#39;t Watch, Listen</title>
-    <link>http://localhost:1313/categories/math/science/</link>
+    <link>https://dontwatchlisten.github.io/categories/math/science/</link>
     <description>Recent content in Math/Science on Don&#39;t Watch, Listen</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Wed, 19 Feb 2025 23:22:54 -0800</lastBuildDate>
-    <atom:link href="http://localhost:1313/categories/math/science/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://dontwatchlisten.github.io/categories/math/science/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Mathematics and Physics of Light: Introduction to Light</title>
-      <link>http://localhost:1313/posts/mathematics-and-physics-of-light-introduction-to-light/</link>
+      <link>https://dontwatchlisten.github.io/posts/mathematics-and-physics-of-light-introduction-to-light/</link>
       <pubDate>Wed, 19 Feb 2025 23:22:54 -0800</pubDate>
-      <guid>http://localhost:1313/posts/mathematics-and-physics-of-light-introduction-to-light/</guid>
+      <guid>https://dontwatchlisten.github.io/posts/mathematics-and-physics-of-light-introduction-to-light/</guid>
       <description>&lt;h2 id=&#34;chapter-1-introduction-to-light&#34;&gt;&lt;strong&gt;Chapter 1: Introduction to Light&lt;/strong&gt;&lt;/h2&gt;&#xA;&lt;p&gt;Light is one of the most fundamental and fascinating phenomena in the universe. It is responsible for our ability to see, it fuels life through photosynthesis, and it plays a crucial role in technology, from fiber optic communication to laser surgery. However, despite its everyday presence, light is an incredibly complex and multi-faceted subject that has challenged scientists for centuries.&lt;/p&gt;&#xA;&lt;p&gt;To truly understand light, one must first understand the broader concept it belongs to: &lt;strong&gt;electromagnetic radiation&lt;/strong&gt;. Light is not an isolated phenomenon—it is part of a vast spectrum of energy waves that travel through space, known as the &lt;strong&gt;electromagnetic spectrum&lt;/strong&gt;. This spectrum includes familiar forms of energy like radio waves, microwaves, X-rays, and gamma rays. Each of these, including visible light, consists of &lt;strong&gt;oscillating electric and magnetic fields&lt;/strong&gt; that propagate through space at the speed of light.&lt;/p&gt;</description>
     </item>
   </channel>
